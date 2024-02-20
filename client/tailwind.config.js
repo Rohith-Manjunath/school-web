@@ -27,5 +27,5 @@ export default {
       backgroundColor: ["active"],
     },
   },
-  // plugins: [require("flowbite/plugin")],
+  plugins: [require("flowbite/plugin")],
 };
