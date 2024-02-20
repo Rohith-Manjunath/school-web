@@ -1,3 +1,36 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&family=Poppins:wght@300&family=Roboto:wght@500;700&family=Source+Code+Pro:ital@1&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'myfont';
+  src: url('../src/assets/Font/EBGaramond-VariableFont_wght.ttf') format('woff2'), /* WOFF2 format */
+}
+
+*{
+    font-family: 'Poppins';
+  }
+
+  body,html{
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    scroll-behavior: smooth;
+    background-color: rgb(211, 211, 211);
+  
+  }
+
+
+  .active{
+    border-bottom: 3px solid purple ;
+  }
+  @media (min-width: 768px) {
+    .slick-slide > div {
+      margin: 0 50px;
+    }
+  }
