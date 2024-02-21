@@ -1,6 +1,6 @@
 const AdmissionProcess = () => {
   return (
-    <div className=" p-6 sm:p-12 md:px-20 flex flex-col gap-5 items-start justify-center bg-white text-textSecondary">
+    <div className=" p-6 sm:p-12 md:px-20 flex flex-col gap-5 items-start justify-center text-textSecondary bg-primary">
       <div className="flex flex-col items-start justify-center gap-2">
         <h2 className="text-2xl font-semibold">Admission Process</h2>
         <div className="flex flex-col items-start justify-center gap-3">
@@ -46,12 +46,12 @@ const AdmissionProcess = () => {
             <span>5. Aadhaar copy of parent and child Address proof</span>
           </div>
         </div>
-        <div className="flex flex-col items-start justify-center gap-2 mt-4">
+        <div className="flex flex-col items-start justify-center gap-2 mt-4 ">
           <h2 className="text-2xl">Eligibility : </h2>
           <div className="flex flex-col items-start justify-center gap-3">
             <p>Age criteria for application of admission</p>
-            <table className="w-full border-collapse border">
-              <thead className="bg-gray-200">
+            <table className="w-full border-2 border-secondary rounded-lg">
+              <thead className="bg-gray-200 border-1 border-secondary">
                 <tr>
                   <th className="border p-2">Admission</th>
                   <th className="border p-2">Age by 31st May of the year</th>
