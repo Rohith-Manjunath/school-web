@@ -106,7 +106,7 @@ const Navbar = () => {
           transition={{ duration: 1.8, delay: 0.3 }}
         >
           <NavLink
-            to={"/academics/facilities"}
+            to={"/facilities"}
             className="after:bg-secondary after:scale-0 hover:after:scale-100 after:h-[2px] after:origin-center after:block after:transition-all after:duration-300  after:rounded-lg"
           >
             Facilities
