@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import SidebarAcademics from "../../components/layouts/SidebarAcademics";
 
 const OurPrograms = () => {
+  const [show, setShow] = useState(false);
+
+  const handleOpen = () => {
+    setShow((prev) => !prev);
+  };
+
   const programsData = [
     {
       id: 1,
@@ -29,8 +36,6 @@ const OurPrograms = () => {
     },
   ];
 
-  const [open, setOpen] = useState(false);
-
   return (
     <>
       <div className="flex items-center justify-center flex-col gap-8 p-5 bg-secondary pb-[6rem] tracking-wide py-20">
@@ -47,7 +52,7 @@ const OurPrograms = () => {
           {programsData.map((item) => {
             return (
               <Link
-                onClick={() => setOpen(!open)}
+                onClick={handleOpen}
                 key={item.id}
                 className="block w-full bg-white my-8 md:my-0 rounded-md p-2 text-textSecondary"
               >
@@ -87,6 +92,11 @@ const OurPrograms = () => {
           })}
         </div>
       </div>
+      <SidebarAcademics
+        open={show}
+        setOpen={handleOpen}
+        title={"School Enrollment form"}
+      />
     </>
   );
 };

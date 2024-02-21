@@ -2,7 +2,7 @@ import papertear from "../../assets/Images/Others/papertear2.svg"; // Adjust the
 
 const PaperTear2 = () => {
   return (
-    <div className="mb-[-10px]">
+    <div className="mb-[-10px] md:block hidden">
       <img src={papertear} alt="" className="" />
     </div>
   );

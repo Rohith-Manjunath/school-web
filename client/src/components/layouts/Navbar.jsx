@@ -1,6 +1,6 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GrClose } from "react-icons/gr";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import logo from "../../assets/Images/LogoAndOthers/MIS_Main_logo-b9vQZsOZ.png"; // Adjust the path accordingly
 import { motion } from "framer-motion";
@@ -10,14 +10,20 @@ const Navbar = () => {
   const toggleNavbar = () => {
     setShow(!show);
   };
+  const path = useLocation().pathname.split("/")[1];
 
   return (
     <div className="sticky z-10 top-0 left-0 bg-primary p-5 text-textSecondary lg:relative w-full">
       {!show ? (
-        <RxHamburgerMenu
-          onClick={toggleNavbar}
-          className="text-2xl hover:shadow-cyan-500 block lg:hidden"
-        />
+        <div className="uppercase flex items-center justify-start gap-6">
+          <RxHamburgerMenu
+            onClick={toggleNavbar}
+            className="text-2xl hover:shadow-cyan-500 block lg:hidden"
+          />
+          <span className="font-semibold tracking-wider">
+            {path != "" ? path : "Home"}
+          </span>
+        </div>
       ) : (
         <GrClose
           onClick={toggleNavbar}
@@ -26,7 +32,7 @@ const Navbar = () => {
       )}
 
       <ul
-        className={` font-semibold block z-10 bg-primary lg:hidden absolute top-[4rem] w-[100vw] h-screen space-y-14 text-center transition-all duration-300 ${
+        className={` font-semibold block z-10 bg-primary lg:hidden absolute top-[4rem] w-[100vw] h-screen space-y-20 text-center transition-all duration-300 ${
           !show ? "left-[-100%]" : "left-0"
         }`}
       >
@@ -42,14 +48,9 @@ const Navbar = () => {
         <li onClick={() => setShow(false)}>
           <NavLink to={"our-team"}>Our Team</NavLink>
         </li>
-        <li onClick={() => setShow(false)}>
-          <NavLink to={"about-us"}>About Us</NavLink>
-        </li>
+
         <li onClick={() => setShow(false)}>
           <NavLink to={"contact-us"}>Contact Us</NavLink>
-        </li>
-        <li onClick={() => setShow(false)}>
-          <NavLink to={"link7"}>Link 7</NavLink>
         </li>
       </ul>
 
