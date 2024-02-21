@@ -68,8 +68,10 @@ const WelcomeToMIS = () => {
       <div className="p-6 lg:px-20 lg:py-28 space-y-10 md:space-y-0 bg-secondary text-white md:grid md:grid-cols-2 tracking-wide">
         <motion.div
           initial={{ opacity: 0, x: -200 }}
+          whileInView={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 1  }}
+
           className="col-span-1 space-y-6"
         >
           <h2 className="text-3xl md:text-5xl lg:text-6xl">
@@ -98,7 +100,9 @@ const WelcomeToMIS = () => {
         <motion.div
           initial={{ opacity: 0, x: 200 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+
+          transition={{ duration: 1, delay: 1 }}
+      
           className="col-span-1 flex justify-center md:justify-end items-center"
         >
           <img

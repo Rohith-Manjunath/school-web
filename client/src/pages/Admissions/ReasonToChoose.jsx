@@ -1,6 +1,7 @@
 import { MdLock } from "react-icons/md";
 import { LuClock } from "react-icons/lu";
 import { FaMapMarkedAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ReasonToChoose = () => {
   const data = [
@@ -26,10 +27,20 @@ const ReasonToChoose = () => {
 
   return (
     <div className="text-textSecondary  px-4 py-8  tracking-wide md:py-16 md:px-8">
-      <h2 className="text-center font-semibold text-2xl md:text-3xl capitalize">
+      <motion.h2 
+      initial={{ opacity: 0, y: -100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 1 }}
+      viewport={{ once: true }}
+      className="text-center font-semibold text-2xl md:text-3xl capitalize">
         A few reasons to choose
-      </h2>
-      <div className="text-center space-y-10 md:space-y-0 md:grid grid-cols-3 gap-6 md:p-4">
+      </motion.h2>
+      <motion.div 
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 1 }}
+      viewport={{ once: true }}
+      className="text-center space-y-10 md:space-y-0 md:grid grid-cols-3 gap-6 md:p-4">
         {data.map((item) => {
           return (
             <div key={item.id}>
@@ -43,7 +54,7 @@ const ReasonToChoose = () => {
             </div>
           );
         })}
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -24,7 +24,7 @@ const CarouselSlider = () => {
     <motion.div
       animate={{ y: 0, scale: 1, opacity: 1 }}
       initial={{ y: 0, scale: 0.8, opacity: 0 }}
-      transition={{ duration: 1.8, delay: 2.4 }}
+      transition={{ duration: 1, delay: 2 }}
       viewport={{ once: true }}
       className="slider-container w-[100vw] h-[83vh]"
     >
