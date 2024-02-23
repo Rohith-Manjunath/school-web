@@ -1,5 +1,6 @@
 
 
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&family=Poppins:wght@300&family=Roboto:wght@500;700&family=Source+Code+Pro:ital@1&display=swap');
 
 
@@ -34,3 +35,7 @@
       margin: 0 50px;
     }
   }
+  .custom-font {
+    font-family: 'Arial', sans-serif;
+  }
+  

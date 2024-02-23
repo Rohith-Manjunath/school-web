@@ -1,66 +1,67 @@
-import { motion } from "framer-motion";
-import logo from "../../assets/Images/LogoAndOthers/hori-xnjhSTpu.png"; // Adjust the path accordingly
-import Modal from "react-modal";
-import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { IoMdClose } from "react-icons/io";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
+import { IoMdClose } from 'react-icons/io';
+import { Label, Checkbox } from 'flowbite-react';
+import file from '../../assets/Files/Terms_and_Conditions.pdf';
+import logo from '../../assets/Images/LogoAndOthers/hori-xnjhSTpu.png';
 
 const WelcomeToMIS = () => {
   const [open, setOpen] = useState(false);
+  const [termsChecked, setTermsChecked] = useState(false);
 
   const handleToggleModal = () => {
     setOpen((prev) => !prev);
   };
 
   const initialStudentInfo = {
-    name: "John Doe",
-    dob: "",
-    phone: "",
-    program: "Pre-School",
-    address: "",
-    agree: false,
+    name: 'John Doe',
+    dob: '',
+    phone: '',
+    program: 'Pre-School',
+    address: '',
   };
 
   const [studentInfo, setStudentInfo] = useState(initialStudentInfo);
-  const [termsChecked, setTermsChecked] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Check if terms and conditions are agreed
     if (!termsChecked) {
-      toast.success("Please agree to the terms and conditions.");
+      toast.error('Please agree to the terms and conditions.');
       return;
     }
 
     // Check if all required fields are filled except altPhone
     for (const key in studentInfo) {
-      if (key !== "altPhone" && studentInfo[key] === "") {
+      if (key !== 'altPhone' && studentInfo[key] === '') {
         toast.warn(`Please fill in the ${key} field.`);
         return;
       }
     }
 
+    toast.success('Form submitted successfully');
     setStudentInfo(initialStudentInfo);
     setTermsChecked(false);
     setOpen(false);
   };
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     // Update the studentInfo state based on input changes
     setStudentInfo((prevState) => ({
       ...prevState,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     }));
-    toast.success("Form submitted successfully");
   };
 
   const handleCheckboxChange = (e) => {
     setTermsChecked(e.target.checked);
   };
 
-  Modal.setAppElement("#root");
+  Modal.setAppElement('#root');
 
   return (
     <>
@@ -70,8 +71,7 @@ const WelcomeToMIS = () => {
           initial={{ opacity: 0, x: -200 }}
           whileInView={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 1  }}
-
+          transition={{ duration: 1, delay: 1 }}
           className="col-span-1 space-y-6"
         >
           <h2 className="text-3xl md:text-5xl lg:text-6xl">
@@ -100,9 +100,7 @@ const WelcomeToMIS = () => {
         <motion.div
           initial={{ opacity: 0, x: 200 }}
           animate={{ opacity: 1, x: 0 }}
-
           transition={{ duration: 1, delay: 1 }}
-      
           className="col-span-1 flex justify-center md:justify-end items-center"
         >
           <img
@@ -119,37 +117,49 @@ const WelcomeToMIS = () => {
         className=""
         style={{
           overlay: {
-            zIndex: 9999, // Set a high z-index for the modal overlay
-            backgroundColor: `rgba(0,0,0,0.5)`,
+            zIndex: 9999,
+            backgroundColor: `rgba(0, 0, 0, 0.5)`,
           },
           content: {
-            width: "1000px",
-            height: "580px",
-            margin: "0 auto",
-            color: "#580B57",
-            zIndex: 10000, // Set a high z-index for the modal content
+            width: '90%', // Adjust the width for small screens
+            maxWidth: '600px',
+            height: 'auto', // Set height to auto for responsiveness
+            margin: '0 auto',
+            display: 'flex',
+            flexDirection: 'column',
+            color: '#580B57',
+            overflowY: 'auto', // Enable vertical scrolling
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            borderRadius: '10px',
+            border: 'none',
+            outline: 'none',
           },
         }}
       >
-        <button
-          className="absolute top-5 right-5  cursor-pointer font-semibold text-3xl"
+          <button
+          className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl"
           onClick={() => setOpen(false)}
         >
           <IoMdClose />
         </button>
-        <h2 className="text-3xl mb-5 text-center font-semibold capitalize">
-          Enrollment form
-        </h2>
+        <h2 className="text-3xl mb-5 text-center font-semibold capitalize md:text-base sm:text-sm xs:text-xs" style={{ fontSize: '4vw', maxWidth: '100%' }}>
+  Enrollment form
+</h2>
+
+
+
         <form
           onSubmit={handleSubmit}
           className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6"
         >
           <div className="flex flex-col gap-2">
-            <label className="text-black" htmlFor="name">
-              Student name
+            <label className="text-black font-sans tracking-wide font-semibold" htmlFor="name">
+              Student name*
             </label>
             <input
-              className="rounded-md outline-none border-slate-400"
+              className="rounded-md outline-none border-slate-400 font-serif tracking-wide uppercase text-fuchsia-950 md:text-base"
               onChange={handleChange}
               type="text"
               name="name"
@@ -158,11 +168,11 @@ const WelcomeToMIS = () => {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-black" htmlFor="dob">
-              Date of Birth
+            <label className="text-black font-sans tracking-wide font-semibold" htmlFor="dob">
+              Date of Birth*
             </label>
             <input
-              className="rounded-md outline-none border-slate-400"
+              className="rounded-md outline-none border-slate-400 font-serif tracking-wide uppercase text-fuchsia-950"
               onChange={handleChange}
               type="date"
               name="dob"
@@ -171,11 +181,11 @@ const WelcomeToMIS = () => {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-black" htmlFor="phone">
-              Phone number
+            <label className="text-black font-sans tracking-wide font-semibold" htmlFor="phone">
+              Phone number*
             </label>
             <input
-              className="rounded-md outline-none border-slate-400"
+              className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
               onChange={handleChange}
               type="text"
               name="phone"
@@ -184,11 +194,11 @@ const WelcomeToMIS = () => {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-black" htmlFor="altPhone">
+            <label className="text-black font-sans tracking-wide font-semibold" htmlFor="altPhone">
               Alternative Phone number
             </label>
             <input
-              className="rounded-md outline-none border-slate-400"
+              className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
               onChange={handleChange}
               type="text"
               name="altPhone"
@@ -196,41 +206,48 @@ const WelcomeToMIS = () => {
             />
           </div>
           <div className="flex flex-col gap-2 col-span-2 my-8 md:my-0">
-            <select name="select" id="select" className="rounded-md">
-              <option value="1">Pre-School</option>
+          <label className="text-black font-sans tracking-wide font-semibold" htmlFor="altPhone">
+              Catagory*
+            </label>
+            <select name="select" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
+              <option value="1">Primary-School</option>
               <option value="2">Middle-School</option>
               <option value="3">High-School</option>
             </select>
           </div>
           <div className="flex flex-col gap-2 col-span-2">
-            <label className="text-black" htmlFor="address">
+            <label className="text-black font-sans tracking-wide font-semibold" htmlFor="address">
               Address
             </label>
             <textarea
-              className="rounded-md outline-none border-slate-400 h-[60px]"
+              className="rounded-md outline-none border-slate-400 h-[60px] font-serif tracking-wide uppercase text-fuchsia-950"
               onChange={handleChange}
               name="address"
               value={studentInfo.address}
-              required
             />
           </div>
-          <div className="flex flex-row gap-2 items-center col-span-2 my-6 md:my-0">
-            <input
-              className="rounded-md outline-none border-slate-400"
-              onChange={handleCheckboxChange}
-              type="checkbox"
-              name="agree"
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="agree"
               checked={termsChecked}
-              required
+              onChange={handleCheckboxChange}
             />
-            <label className="text-black" htmlFor="agree">
-              I agree to the terms and conditions
-            </label>
+            <Label htmlFor="agree" className="flex">
+              I agree with the&nbsp;
+              <a
+                href={file}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-600 hover:underline dark:text-cyan-500"
+              >
+                terms and conditions
+              </a>
+            </Label>
           </div>
           <div className="col-span-2 text-center">
             <button
               type="submit"
-              className=" bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
+              className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
             >
               Submit
             </button>

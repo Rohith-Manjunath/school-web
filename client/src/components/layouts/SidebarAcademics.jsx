@@ -5,12 +5,28 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IoMdClose } from "react-icons/io";
 import { Label, Select } from "flowbite-react";
+import file from "../../assets/Files/Terms_and_Conditions.pdf"
+
 
 const SidebarAcademics = ({ open, setOpen, title }) => {
   const [data, setData] = useState({});
 
+
+
+  const initialStudentInfo = {
+    name: 'John Doe',
+    phone: '',
+  };
+
+  const [studentInfo, setStudentInfo] = useState(initialStudentInfo);
+
   const handleChange = (e) => {
-    setData({ ...data, [e.target.id]: e.target.value });
+    const { name, value } = e.target;
+    // Update the studentInfo state based on input changes
+    setStudentInfo((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -24,7 +40,7 @@ const SidebarAcademics = ({ open, setOpen, title }) => {
   return (
     <>
       <div
-        className={`w-screen h-screen absolute top-0 left-0 bg-white text-start p-4 transition-all duration-300 z-10 space-y-3 lg:space-y-6 lg:w-1/3 lg:px-8 ${
+        className={`w-screen h-screen overflow-y-auto absolute top-0 left-0 bg-white text-start p-4 transition-all duration-300 z-10 space-y-3 lg:space-y-6 lg:w-1/3 lg:px-8 ${
           !open ? "-translate-x-full" : "translate-x-0 "
         }`}
       >
@@ -38,57 +54,92 @@ const SidebarAcademics = ({ open, setOpen, title }) => {
         <form className="flex flex-col lg:gap-3" onSubmit={handleSubmit}>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="name" value="Student name" />
+            <label className="text-black font-sans tracking-wide  " htmlFor="name">
+              Student name*
+            </label>
             </div>
-            <TextInput
+            <input
+              className="rounded-md outline-none border-slate-400 w-full font-serif tracking-wide uppercase text-fuchsia-950"
               onChange={handleChange}
-              id="name"
-              type="name"
-              placeholder="John Doe"
+              type="text"
+              name="name"
+              value={studentInfo.name}
               required
             />
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="dob" value="Student DOB" />
+              <label htmlFor="dob" className="text-black font-sans tracking-wide ">
+                Date of birth*
+              </label>
             </div>
-            <TextInput onChange={handleChange} id="dob" type="date" required />
+            <input
+              className="rounded-md outline-none border-slate-400 w-full font-sans tracking-wide uppercase text-fuchsia-950"
+              onChange={handleChange}
+              type="date"
+              name="date"
+              value={studentInfo.date}
+              required
+            />
           </div>
 
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="number" value="Phone number" />
+            <label className="text-black font-sans tracking-wide " htmlFor="phone">
+              Phone number*
+            </label>
             </div>
-            <TextInput onChange={handleChange} id="number" type="text" />
+            <input
+              className="rounded-md w-full outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
+              onChange={handleChange}
+              type="text"
+              name="phone"
+              value={studentInfo.phone}
+              required
+            />
           </div>
 
           <div className="max-w-md">
             <div className="mb-2 block">
-              <Label htmlFor="select" value="Select your program" />
+              <label className="text-black font-sans tracking-wide " htmlFor="phone">
+              Select your program*
+            </label>
             </div>
-            <Select id="select" required onChange={handleChange}>
-              <option value="Pre-School">Pre-School</option>
-              <option value="Mid-School">Mid-School</option>
-              <option value="High-School">High-School</option>
-            </Select>
+            <div>
+            <select name="select" id="select" className="rounded-md w-full font-serif tracking-wide uppercase text-fuchsia-950">
+              <option value="1">Primary-School</option>
+              <option value="2">Middle-School</option>
+              <option value="3">High-School</option>
+            </select>
+          </div>
           </div>
 
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="altnumber" value="Alternative Phone number" />
+            <label className="text-black font-sans tracking-wide " htmlFor="altphone">
+              Alternative phone number
+            </label>
             </div>
-            <TextInput onChange={handleChange} id="altnumber" type="text" />
-          </div>
-
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="address" value="Address" />
-            </div>
-            <TextInput
+            <input
+              className="rounded-md w-full outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
               onChange={handleChange}
-              id="address"
               type="text"
-              required
+              name="phone"
+              value={studentInfo.altphone}
+            />
+          </div>
+
+          <div>
+            <div className="mb-2 block">
+            <label className="text-black font-sans tracking-wide " htmlFor="address">
+              Address
+            </label>
+            </div>
+            <textarea
+              className="rounded-md outline-none border-slate-400 text-sm resize-none w-full font-serif tracking-wide text-fuchsia-950"
+              onChange={handleChange}
+              name="address"
+              value={studentInfo.address}
             />
           </div>
 
@@ -96,13 +147,14 @@ const SidebarAcademics = ({ open, setOpen, title }) => {
             <Checkbox id="agree" />
             <Label htmlFor="agree" className="flex">
               I agree with the&nbsp;
-              <Link
-                onClick={() => setOpen(!open)}
-                href="#"
-                className="text-cyan-600 hover:underline dark:text-cyan-500"
-              >
-                terms and conditions
-              </Link>
+              <a
+          href={file}
+          target="_blank" 
+          rel="noopener noreferrer"  
+          className="text-cyan-600 hover:underline dark:text-cyan-500"
+        >
+          terms and conditions
+        </a>
             </Label>
           </div>
 

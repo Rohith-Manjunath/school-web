@@ -1,14 +1,6 @@
 import Slider from "react-slick";
 
 const Events = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-  };
-
   const data = [
     {
       title: "ES House Event: Yoga",
@@ -36,8 +28,24 @@ const Events = () => {
     },
   ];
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 800,
+    slidesToShow: 3, // Number of slides to show on larger screens
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768, // Breakpoint for smaller screens
+        settings: {
+          slidesToShow: 1, // Number of slides to show on smaller screens
+        },
+      },
+    ],
+  };
+
   return (
-    <div className="w-[90%] py-20 mx-auto tracking-wide font-semibold">
+    <div className="w-[80%] py-20 mx-auto tracking-wide font-semibold">
       <Slider {...settings} className="">
         {data.map((item) => {
           return (

@@ -4,14 +4,6 @@ import Image2 from "../../assets/Images/HomeImages/NewsAndEventsImages/two.jpg";
 import Image3 from "../../assets/Images/HomeImages/NewsAndEventsImages/three.png";
 
 const News = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-  };
-
   const data = [
     {
       title: "Innovation Expo 2023",
@@ -45,8 +37,24 @@ const News = () => {
     },
   ];
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 800,
+    slidesToShow: 3, // Number of slides to show on larger screens
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768, // Breakpoint for smaller screens
+        settings: {
+          slidesToShow: 1, // Number of slides to show on smaller screens
+        },
+      },
+    ],
+  };
+
   return (
-    <div className="w-[100%] lg:w-[90%] py-20 mx-auto ">
+    <div className="w-[80%] lg:w-[90%] py-20 mx-auto ">
       <Slider {...settings} className="">
         {data.map((item) => {
           return (

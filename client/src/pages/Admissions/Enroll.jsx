@@ -1,22 +1,43 @@
+import { motion } from "framer-motion";
+
+
 const Enroll = () => {
   return (
     <div className="p-4 lg:grid grid-cols-2 tracking-wide bg-secondary pt-12">
       <div className=" text-white space-y-6 p-4 ">
-        <h5 className="text-2xl md:text-3xl lg:text-4xl">
+        <motion.h5
+        initial={{ opacity: 0, y: -100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+        viewport={{ once: true }}
+        className="text-2xl md:text-3xl lg:text-4xl">
           Communicate With Us
-        </h5>
-        <h2 className="capitalize text-xl md:text-2xl">How to enroll</h2>
-        <p>
+        </motion.h5>
+        <motion.h2
+        initial={{ opacity: 0, y: -100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2 }}
+        viewport={{ once: true }}
+         className="capitalize text-xl md:text-2xl">How to enroll</motion.h2>
+        <motion.p
+         initial={{ opacity: 0, y: -100 }}
+         whileInView={{ opacity: 1, y: 0 }}
+         transition={{ duration: 1, delay: 2 }}
+         viewport={{ once: true }}>
           Welcome to the enrollment gateway of Mysore International School—a
           place where educational journeys begin. We are thrilled to embark on
           this exciting adventure with you. Please complete the enrollment form
           below to initiate the enrollment process for your child.
-        </p>
-        <p>
+        </motion.p>
+        <motion.p
+         initial={{ opacity: 0, y: -100 }}
+         whileInView={{ opacity: 1, y: 0 }}
+         transition={{ duration: 1, delay: 2 }}
+         viewport={{ once: true }}>
           If you have any questions or need assistance during the enrollment
           process, our friendly admissions team is here to help. Feel free to
           reach out to us.
-        </p>
+        </motion.p>
       </div>
       <div className="text-textSecondary bg-white p-4 space-y-6 rounded-md">
         <h2 className="uppercase text-center font-semibold p-4 text-2xl">

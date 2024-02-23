@@ -46,11 +46,16 @@ const Navbar = () => {
           <NavLink to={"academics"}>Academics</NavLink>
         </li>
         <li onClick={() => setShow(false)}>
+          <NavLink to={"facilities"}>Facility</NavLink>
+        </li>
+        <li onClick={() => setShow(false)}>
           <NavLink to={"our-team"}>Our Team</NavLink>
         </li>
-
         <li onClick={() => setShow(false)}>
           <NavLink to={"contact-us"}>Contact Us</NavLink>
+        </li>
+        <li onClick={() => setShow(false)}>
+          <p className="mt-5">All Rights reserved</p>
         </li>
       </ul>
 
