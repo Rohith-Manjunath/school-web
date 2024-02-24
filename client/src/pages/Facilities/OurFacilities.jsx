@@ -1,9 +1,11 @@
 import Slider from "../../components/layouts/Slider";
-import image1 from "../../assets/Images/FacilitiesImages/FacilityCarousel/download_1.png"; // Adjust the path accordingly
-import image2 from "../../assets/Images/FacilitiesImages/FacilityCarousel/DSC_1109.png"; // Adjust the path accordingly
-import image3 from "../../assets/Images/FacilitiesImages/FacilityCarousel/Field-TripCecri-1-min.jpg"; // Adjust the path accordingly
-import image4 from "../../assets/Images/FacilitiesImages/FacilityCarousel/school7.png"; // Adjust the path accordingly
-import image5 from "../../assets/Images/FacilitiesImages/FacilityCarousel/SchoolEdu.png"; // Adjust the path accordingly
+// Example using absolute path
+import image1 from "../../assets/Images/FacilitiesImages/FacilityCarousel/image1.jpg";
+import image2 from "../../assets/Images/FacilitiesImages/FacilityCarousel/img2.jpg";
+import image3 from "../../assets/Images/FacilitiesImages/FacilityCarousel/img3.jpg";
+import image4 from "../../assets/Images/FacilitiesImages/FacilityCarousel/img4.jpg";
+import image5 from "../../assets/Images/FacilitiesImages/FacilityCarousel/img5.jpg";
+import image6 from "../../assets/Images/FacilitiesImages/FacilityCarousel/img6.jpg";
 
 const slides = [
   {
@@ -26,15 +28,18 @@ const slides = [
     id: 5,
     url: image5,
   },
+  {
+    id: 6,
+    url: image6,
+  }, 
 ];
 
 const OurFacilities = () => {
   return (
-    <div className="slider-container w-[90vw] h-[100vh] mx-auto  rounded-lg flex flex-col tracking-wide">
-      <h2 className="my-8 md:text-center lg:text-4xl font-semibold text-textSecondary text-2xl sm:text-3xl">
-        Facilities
-      </h2>
-      <p className=" text-textSecondary md:text-center font-semibold text-sm md:text-md lg:text-[16px] tracking-wide">
+    <div className="py-10 slider-container w-[100vw] h-[100vh] mx-auto flex flex-col tracking-wide text-white bg-secondary align-center items-center">
+      <h2 className=" md:text-center lg:text-4xl font-semibold text-white  text-2xl sm:text-3xl font-title">
+        FACILITIES   </h2>
+      <p className=" text-white md:text-center w-[80%] font-sans md:text-md lg:text-[16px] tracking-wider">
         Welcome to Mysore International School's state-of-the-art facilities
         designed to enhance the learning experience and provide a safe,
         nurturing environment for our students. Our commitment to excellence
