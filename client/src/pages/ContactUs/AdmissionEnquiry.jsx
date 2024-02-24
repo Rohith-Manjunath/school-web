@@ -24,11 +24,11 @@ const AdmissionEnquiry = () => {
 
   return (
     <div className="w-full max-w-[90%] mx-auto space-y-8 mt-16 text-textSecondary border  py-10 rounded-lg shadow-lg">
-      <h2 className="text-3xl font-semibold text-center text-textSecondary">
+      <h2 className="text-3xl font-semibold text-center text-textSecondary font-title">
         Admission Enquiry
       </h2>
-      <h4 className="text-xl font-semibold text-center text-textSecondary">
-        Student details
+      <h4 className="text-xl font-semibold text-center text-textSecondary font-description">
+        Student Details
       </h4>
       <form
         onSubmit={handleSubmit}

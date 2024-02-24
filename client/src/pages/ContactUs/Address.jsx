@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 const Address = () => {
   return (
     <>
-      <h1 className=" text-2xl sm:text-3xl uppercase text-center text-textSecondary font-semibold mt-16">
+      <h1 className=" text-2xl sm:text-3xl uppercase text-center text-textSecondary font-semibold mt-16 font-title">
         Contact Us
       </h1>
       <div className="md:grid space-y-12 md:space-y-0 grid-cols-2 w-[90%] mx-auto mt-8 text-textSecondary tracking-wide shadow-lg border pb-8 pt-4 rounded-lg">
         <div className="space-y-4 px-2 md:px-10">
-          <h2 className="text-3xl md:text-4xl text-textSecondary  font-semibold">
+          <h2 className="text-3xl md:text-4xl text-textSecondary  font-semibold font-title">
             Mysore international school
           </h2>
           <div className="font-semibold">
-            <p className="lg:text-justify">
+            <p className="lg:text-justify font-description">
               Mount Litera Zee School 92/1-3, HD Kote Road, Rayanakere Post, 5
               Minutes from Srirampura Ring Road, Mysore – 570008.
             </p>

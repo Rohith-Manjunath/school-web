@@ -4,7 +4,7 @@ import OurTeamCard from "../../components/layouts/Cards/OurTeamCard";
 const OurManagement = () => {
   return (
     <div className="mt-14 mx-auto text-textSecondary w-[90%] bg-white">
-      <h2 className="text-2xl font-semibold my-8 uppercase text-center ">
+      <h2 className="text-2xl font-tile font-semibold my-4 uppercase text-center ">
         Our Management
       </h2>
       <OurTeamCard
