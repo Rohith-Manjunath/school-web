@@ -7,7 +7,7 @@ const Footer = () => {
     { title: "Admissions", to: "admissions" },
     { title: "Academics", to: "academics" },
     { title: "Parents Portal", to: "parents-portal" },
-    { title: "Guide", to: "guide" },
+    { title: "Admin login", to: "admin-panel" },
     { title: "Quick Links", to: "quick-links" },
   ];
   const links2 = [
@@ -40,8 +40,11 @@ const Footer = () => {
           <div className="space-y-0">
             <span className="block">PH : 0821 2971010</span>
             <span className="block">Mobile : 8884 300 400</span>
-            <Link className="hover:ml-2 transition-all duration-200" to={""}>
-              Call Us &gt;
+            <Link
+            className="hover:ml-2 transition-all duration-200"
+            to="tel:+918884300400"  
+            >
+             Call Us &gt;
             </Link>
           </div>
         </div>

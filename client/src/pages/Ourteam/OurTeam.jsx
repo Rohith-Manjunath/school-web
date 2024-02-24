@@ -15,8 +15,9 @@ const OurTeam = () => {
     <div className="bg-white">
       <Hero
         image={image}
-        description={`Welcome to Mysore international school, where academic excellence is at the core of our mission. We are committed to providing students with a rigorous and well-rounded education that prepares them for success in a rapidly changing world. Our dedicated faculty and staff are passionate about nurturing the intellectual growth of every student, fostering critical thinking, creativity, and a love for learning.`}
+        description={`Explore the dynamic and dedicated team at Mysore International School. Our educators and staff are committed to fostering a nurturing learning environment, where every student can thrive. With a passion for education, our team brings a wealth of experience and expertise to inspire and guide students on their educational journey. Get to know the individuals who make up our vibrant and collaborative community.`}
         text={`OurTeam`}
+        descriptionClassName="font-serif"
       />
       <BreadCrumb 
       Currentlink={"our-team"}

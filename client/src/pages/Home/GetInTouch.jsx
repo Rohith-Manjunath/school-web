@@ -24,19 +24,19 @@ const GetInTouch = () => {
         </p>
         <form className="flex flex-col w-full gap-4">
           <input
-            className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none"
+            className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wide font-semibold"
             type="text"
             name="name"
             placeholder="Enter your name"
           />
           <input
-            className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none"
+            className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wide font-semibold"
             type="email"
             name="email"
             placeholder="Enter your email"
           />
           <textarea
-            className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none"
+            className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wider font-semibold"
             type="text"
             name="message"
             placeholder="Message"
@@ -45,7 +45,7 @@ const GetInTouch = () => {
               resize: "none",
             }}
           />
-          <button className="bg-ctcSecondary text-ctcPrimary py-2 rounded-sm font-semibold tracking-wider hover:bg-ctcPrimary hover:text-ctcSecondary hover:border hover:scale-95 transition-all duration-400 ">
+          <button className="bg-ctcSecondary text-ctcPrimary py-2 rounded-sm font-semibold tracking-wider hover:bg-ctcPrimary hover:text-ctcSecondary hover:border hover:scale-95 transition-all duration-400">
             Submit
           </button>
         </form>
@@ -82,12 +82,14 @@ const GetInTouch = () => {
         <div className="text-textSecondary">
           <h2 className="text-2xl font-semibold">Social Media</h2>
           <div className="flex gap-3 mt-3">
+          <Link to="https://www.instagram.com/mlzs_mysore/">
             <FaInstagram className="text-4xl hover:cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md instagram-icon"></FaInstagram>
+            </Link>
             <Link to="https://www.facebook.com/mlzsmys/">
               <FaFacebook className="text-4xl hover:cursor-pointer hover:bg-blue-500 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md"></FaFacebook>
             </Link>
 
-            <RiTwitterXLine className="text-4xl hover:cursor-pointer hover:bg-black transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md"></RiTwitterXLine>
+            {/* <RiTwitterXLine className="text-4xl hover:cursor-pointer hover:bg-black transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md"></RiTwitterXLine> */}
             <Link to="">
               <BsYoutube className="text-4xl hover:cursor-pointer hover:bg-red-600 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md"></BsYoutube>
             </Link>

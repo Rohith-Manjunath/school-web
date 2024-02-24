@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/Images/HomeImages/Children-xEslnNLL.jpg"; // Adjust the path accordingly
 import { motion } from "framer-motion";
 
+
 const WhoWeAre = () => {
   return (
     <div className="p-6 space-y-6 md:space-y-0 text-textSecondary md:grid md:grid-cols-2 gap-6 lg:gap-20 lg:px-20 lg:py-20 bg-primary tracking-wide ">

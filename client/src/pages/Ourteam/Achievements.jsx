@@ -26,9 +26,7 @@ const Achievements = () => {
 
   return (
     <div className=" h-[40rem] mx-auto text-textSecondary my-4 space-y-10 py-10 w-[90%] mb-[220px] lg:mb-[150px]">
-      <h2 className="text-3xl font-semibold text-center text-textSecondary my-6">
-        Achievements
-      </h2>
+    
       <Slider slides={slides} />
       <p className="">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas

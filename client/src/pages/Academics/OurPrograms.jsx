@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import SidebarAcademics from "../../components/layouts/SidebarAcademics";
+import { motion } from 'framer-motion';
 
 const OurPrograms = () => {
   const [show, setShow] = useState(false);
@@ -13,7 +14,7 @@ const OurPrograms = () => {
     {
       id: 1,
       imageUrl: "",
-      title: "Pre-school",
+      title: "Primary-school",
       description: "where curiosity and joy meet in a safe, joyful space.",
       age: "4-5 years",
       schedule: " 8:00 AM - 10:00 AM",
@@ -39,16 +40,30 @@ const OurPrograms = () => {
   return (
     <>
       <div className="flex items-center justify-center flex-col gap-8 p-5 bg-secondary pb-[6rem] tracking-wide py-20">
-        <h2 className="font-bold text-xl sm:text-2xl md:text-3xl text-white">
+        <motion.h2 
+        initial={{ opacity: 0, y: -100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+        viewport={{ once: true }}
+        className="font-semibold tracking-wide text-xl sm:text-2xl md:text-3xl text-white font-serif">
           Our Academic Programs
-        </h2>
-        <p className="text-center w-[50%] max-lg:w-[80%] text-white">
+        </motion.h2>
+        <motion.p
+        initial={{ opacity: 0, y: -100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+        viewport={{ once: true }} className="text-center w-[50%] max-lg:w-[80%] text-white font-sans">
           At Mysore International School, our mission is to offer affordable,
           high-quality education and childcare services across all childhood
           stages. Committed to fostering growth and success, we ensure every
           child thrives in a nurturing environment.
-        </p>
-        <div className="md:grid grid-cols-3 md:gap-4 lg:gap-10 xl:gap-20 lg:px-24">
+        </motion.p>
+        <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+        viewport={{ once: true }}
+        className="md:grid grid-cols-3 md:gap-4 lg:gap-10 xl:gap-20 lg:px-24">
           {programsData.map((item) => {
             return (
               <Link
@@ -90,7 +105,7 @@ const OurPrograms = () => {
               </Link>
             );
           })}
-        </div>
+        </motion.div>
       </div>
       <SidebarAcademics
         open={show}
