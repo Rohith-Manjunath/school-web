@@ -62,7 +62,7 @@ const Schedule = () => {
   return (
     <>
       <ToastContainer />
-      <div className="flex-col mt-10 md:flex-row text-center py-10 bg-secondary text-white tracking-wide flex items-start pl-4 md:pl-0 justify-center gap-8 font-semibold shadow-2xl shadow-secondary">
+      <div className="flex-col mt-10 md:flex-row text-center py-10 bg-secondary text-white tracking-wide flex items-center px-2 justify-center gap-8 font-semibold shadow-2xl shadow-secondary ">
         <h4 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl">
           Schedule a visit at Mysore International School
         </h4>
@@ -87,7 +87,7 @@ const Schedule = () => {
           content: {
             width: '90%', // Adjusted width for smaller screens
             maxWidth: '600px', // Max-width for larger screens
-            height: '480px',
+            height: '500px',
             margin: '0 auto',
             display: 'flex',
             alignItems: 'center',
@@ -110,7 +110,7 @@ const Schedule = () => {
         >
           <IoMdClose />
         </button>
-        <h2 className="text-3xl mb-5 text-center font-semibold capitalize">
+        <h2 className="text-3xl md:mt-0 mt-[4rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px]">
           Schedule a Visit
         </h2>
         <form
@@ -183,7 +183,7 @@ const Schedule = () => {
               </Link>
             </Label>
           </div>
-          <div className="col-span-2 text-center">
+          <div className="col-span-2 text-center ">
             <button
               type="submit"
               className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"

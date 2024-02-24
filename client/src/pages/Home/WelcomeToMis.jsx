@@ -123,9 +123,11 @@ const WelcomeToMIS = () => {
           content: {
             width: '90%', // Adjust the width for small screens
             maxWidth: '600px',
-            height: 'auto', // Set height to auto for responsiveness
+            height: '90vh', // Set height to auto for responsiveness
             margin: '0 auto',
             display: 'flex',
+            alignItems: 'center',
+            justifyContent:'center',
             flexDirection: 'column',
             color: '#580B57',
             overflowY: 'auto', // Enable vertical scrolling
@@ -144,9 +146,9 @@ const WelcomeToMIS = () => {
         >
           <IoMdClose />
         </button>
-        <h2 className="text-3xl mb-5 text-center font-semibold capitalize md:text-base sm:text-sm xs:text-xs" style={{ fontSize: '4vw', maxWidth: '100%' }}>
-  Enrollment form
-</h2>
+        <h2 className=" mb-5 md:mt-0 mt-[12rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px] ">
+           Enrollment form
+        </h2>
 
 
 
@@ -226,24 +228,29 @@ const WelcomeToMIS = () => {
               value={studentInfo.address}
             />
           </div>
-          <div className="flex items-center gap-2">
-            <Checkbox
-              id="agree"
-              checked={termsChecked}
-              onChange={handleCheckboxChange}
-            />
-            <Label htmlFor="agree" className="flex">
-              I agree with the&nbsp;
-              <a
-                href={file}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-600 hover:underline dark:text-cyan-500"
-              >
-                terms and conditions
-              </a>
-            </Label>
+          <div className="flex items-center gap-2 justify-between col-span-full">
+  <div>
+    <Checkbox
+      id="agree"
+      checked={termsChecked}
+      onChange={handleCheckboxChange}
+    />
+  </div>
+  <div className="w-full">
+    <Label htmlFor="agree" className="flex">
+      I agree with the&nbsp;
+      <a
+        href={file}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-cyan-600 hover:underline dark:text-cyan-500"
+      >
+        terms and conditions
+      </a>
+    </Label>
+  </div>
           </div>
+
           <div className="col-span-2 text-center">
             <button
               type="submit"

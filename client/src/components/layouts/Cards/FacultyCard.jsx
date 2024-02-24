@@ -49,7 +49,7 @@ const FacultyCard = ({ name, img, designation, quote, education, contact, social
         <h2 className="text-xl mt-3 font-bold border-b border-fuchsia-800 font-sans ">{name}</h2>
         <h3 className="text-md font-serif">{designation}</h3>
         <span className=" mb-3 font-serif">{education}</span>
-        <p className=" mb-4 font-serif">{quote}</p>
+        <p className=" mb-4 font-handwritting font-bold tracking-wider text-xl">{quote}</p>
 
         {/* Check if socialMedia is defined before mapping */}
         <div className="flex items-center mb-2">

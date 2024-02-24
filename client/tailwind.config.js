@@ -19,6 +19,9 @@ export default {
 
       fontFamily: {
         custom: ["Urbanist", "sans-serif"],
+        handwritting: ["Dancing Script"],
+        title:["Annapurna SIL"],
+        description: ['Open Sans Light', 'sans-serif'],
       },
     },
   },
