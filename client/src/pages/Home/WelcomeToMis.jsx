@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Modal from 'react-modal';
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,6 +6,7 @@ import { IoMdClose } from 'react-icons/io';
 import { Label, Checkbox } from 'flowbite-react';
 import file from '../../assets/Files/Terms_and_Conditions.pdf';
 import logo from '../../assets/Images/LogoAndOthers/hori-xnjhSTpu.png';
+import { useEnrollMutation } from '../../../Redux/authApi';
 
 const WelcomeToMIS = () => {
   const [open, setOpen] = useState(false);
@@ -16,16 +17,18 @@ const WelcomeToMIS = () => {
   };
 
   const initialStudentInfo = {
-    name: 'John Doe',
+    name: '',
     dob: '',
     phone: '',
-    program: 'Pre-School',
+    category: 'Pre-School',
     address: '',
   };
 
   const [studentInfo, setStudentInfo] = useState(initialStudentInfo);
+  const [enroll, { isLoading, isError, error }] = useEnrollMutation();
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     // Check if terms and conditions are agreed
@@ -34,13 +37,17 @@ const WelcomeToMIS = () => {
       return;
     }
 
-    // Check if all required fields are filled except altPhone
+    // Check if all  fields are filled except altPhone
     for (const key in studentInfo) {
       if (key !== 'altPhone' && studentInfo[key] === '') {
         toast.warn(`Please fill in the ${key} field.`);
         return;
       }
     }
+
+  await enroll(studentInfo).unwrap();
+
+
 
     toast.success('Form submitted successfully');
     setStudentInfo(initialStudentInfo);
@@ -60,12 +67,17 @@ const WelcomeToMIS = () => {
   const handleCheckboxChange = (e) => {
     setTermsChecked(e.target.checked);
   };
+  useEffect(() => {
+    if (isError) {
+      toast.error(error.data.err);
+    }
+  }, [isError, error]);
 
   Modal.setAppElement('#root');
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer style={{zIndex:99}}/>
       <div className="p-6 lg:px-20 lg:py-28 space-y-10 md:space-y-0 bg-secondary text-white md:grid md:grid-cols-2 tracking-wide">
         <div>
           <motion.div
@@ -124,7 +136,7 @@ const WelcomeToMIS = () => {
         className=""
         style={{
           overlay: {
-            zIndex: 9999,
+            zIndex: 98,
             backgroundColor: `rgba(0, 0, 0, 0.5)`,
           },
           content: {
@@ -172,8 +184,9 @@ const WelcomeToMIS = () => {
               onChange={handleChange}
               type="text"
               name="name"
+              id='name'
               value={studentInfo.name}
-              required
+              
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -185,8 +198,10 @@ const WelcomeToMIS = () => {
               onChange={handleChange}
               type="date"
               name="dob"
+              id='dob'
+
               value={studentInfo.dob}
-              required
+              
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -199,7 +214,9 @@ const WelcomeToMIS = () => {
               type="text"
               name="phone"
               value={studentInfo.phone}
-              required
+              id='phone'
+
+              
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -211,14 +228,15 @@ const WelcomeToMIS = () => {
               onChange={handleChange}
               type="text"
               name="altPhone"
+              id='altPhone'
               value={studentInfo.altPhone}
             />
           </div>
           <div className="flex flex-col gap-2 col-span-2 my-8 md:my-0">
-          <label className="text-black font-sans tracking-wide font-semibold" htmlFor="altPhone">
+          <label className="text-black font-sans tracking-wide font-semibold" htmlFor="category">
               Catagory*
             </label>
-            <select name="select" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
+            <select name="category" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
               <option value="1">Primary-School</option>
               <option value="2">Middle-School</option>
               <option value="3">High-School</option>
@@ -233,6 +251,7 @@ const WelcomeToMIS = () => {
               onChange={handleChange}
               name="address"
               value={studentInfo.address}
+              id='address'
             />
           </div>
           <div className="flex items-center gap-2 justify-between col-span-full">
@@ -260,10 +279,11 @@ const WelcomeToMIS = () => {
 
           <div className="col-span-2 text-center">
             <button
+            disabled={isLoading}
               type="submit"
               className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
             >
-              Submit
+              {isLoading?"loading...":"Submit"}
             </button>
           </div>
         </form>
