@@ -22,6 +22,7 @@ export default {
         handwritting: ["Dancing Script"],
         title:["Annapurna SIL"],
         description: ['Open Sans Light', 'sans-serif'],
+        subtext: ['EB Garamond'],
       },
     },
   },

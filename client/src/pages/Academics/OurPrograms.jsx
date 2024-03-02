@@ -39,13 +39,13 @@ const OurPrograms = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center flex-col gap-8 p-5 bg-secondary pb-[6rem] tracking-wide py-20">
+      <div className="flex items-center justify-center flex-col gap-5 p-5 bg-secondary pb-[6rem] tracking-wide py-20">
         <motion.h2 
         initial={{ opacity: 0, y: -100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
         viewport={{ once: true }}
-        className="font-semibold tracking-wide text-xl sm:text-2xl md:text-3xl text-white font-serif">
+        className="font-semibold tracking-wide text-3xl sm:text-2xl md:text-5xl text-white font-title">
           Our Academic Programs
         </motion.h2>
         <motion.p

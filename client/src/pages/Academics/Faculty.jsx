@@ -82,7 +82,7 @@ const Faculty = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 1 }}
       viewport={{ once: true }}
-      className="text-start font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase lg:text-center ">
+      className="text-start font-semibold font-title text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase lg:text-center ">
         Faculty and staff
       </motion.h2>
       <motion.p
@@ -90,7 +90,7 @@ const Faculty = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 1 }}
       viewport={{ once: true }}
-       className="text-start lg:text-center pb-10">
+       className="text-start lg:text-center pb-10 py-5">
         Meet the passionate educators and staff who are the heart of Mysore
         international school. Our experienced and dedicated professionals are
         committed to providing a nurturing and supportive learning environment

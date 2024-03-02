@@ -1,39 +1,34 @@
-import Slider from "../../components/layouts/Slider";
+import React from 'react';
+import Slider from '../../components/layouts/Slider';
+import LazyLoadImage from '../../components/layouts/Common/LazyLoader';
+import image1 from '../../assets/Images/Ourteamslide/ourteam3.jpg';
+import image2 from '../../assets/Images/Ourteamslide/ourteam3.jpg';
+import image3 from '../../assets/Images/Ourteamslide/ourteam4.jpg';
+import image4 from '../../assets/Images/Ourteamslide/ourteam5.jpg';
+
+const slides = [
+  {
+    id: 1,
+    url: image1,
+  },
+  {
+    id: 2,
+    url: image2,
+  },
+  {
+    id: 3,
+    url: image3,
+  },
+  {
+    id: 4,
+    url: image4,
+  },
+];
 
 const Achievements = () => {
-  const slides = [
-    {
-      id: 1,
-      url: "https://source.unsplash.com/random/300×300/?achievement",
-    },
-    {
-      id: 2,
-      url: "https://source.unsplash.com/random/300×300/?achievement",
-    },
-    {
-      id: 3,
-      url: "https://source.unsplash.com/random/300×300/?game",
-    },
-    {
-      id: 4,
-      url: "https://source.unsplash.com/random/300×300/?win",
-    },
-    {
-      id: 5,
-      url: "https://source.unsplash.com/random/300×300/?fruit",
-    },
-  ];
-
   return (
-    <div className=" h-[40rem] mx-auto text-textSecondary my-4 space-y-10 py-10 w-[90%] mb-[220px] lg:mb-[150px]">
-    
-      <Slider slides={slides} />
-      <p className="">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-        consequatur perferendis reprehenderit. Quod in, dolore eveniet harum qui
-        nesciunt voluptatum molestiae inventore reiciendis alias pariatur iste
-        incidunt id, ipsam omnis.
-      </p>
+    <div className="h-[40rem] mx-auto text-textSecondary my-5 w-[90%] lg:mb-[150px]">
+      <Slider slides={slides} imageComponent={LazyLoadImage} />
     </div>
   );
 };

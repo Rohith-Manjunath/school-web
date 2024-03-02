@@ -67,20 +67,22 @@ const WelcomeToMIS = () => {
     <>
       <ToastContainer />
       <div className="p-6 lg:px-20 lg:py-28 space-y-10 md:space-y-0 bg-secondary text-white md:grid md:grid-cols-2 tracking-wide">
-        <motion.div
-          initial={{ opacity: 0, x: -200 }}
+        <div>
+          <motion.div
+          initial={{ opacity: 0, y: -100 }}
           whileInView={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="col-span-1 space-y-6"
-        >
-          <h2 className="text-3xl md:text-5xl lg:text-6xl">
-            Welcome to <span className="font-myfont">MIS</span>
+          transition={{ duration: 1, delay: 0 }}
+          viewport={{ once: true }}
+          className="col-span-1 pb-5">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-title">
+            Welcome to <span className="font-subtext">MIS</span>
           </h2>
-          <h3 className="text-xl md:text-2xl lg:text-3xl">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-serif mt-[-8px]">
             Empower. Excel. Educate
           </h3>
-          <p className="text-justify">
+          </motion.div>
+          <p className="text-justify font-sans tracking-wide font-normal mb-3">
             Welcome to Mysore International School, a place where every
             student's journey is crafted with care and purpose. Here, education
             goes beyond textbooks, shaping young minds into confident, curious
@@ -90,13 +92,18 @@ const WelcomeToMIS = () => {
             a supportive family, dedicated to unlocking the full potential of
             each individual.
           </p>
-          <button
+          <motion.button
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0 }}
+            viewport={{ once: true }}
             onClick={handleToggleModal}
-            className="md:w-1/3 rounded-md shadow-sm border p-2 font-semibold tracking-widest bg-ctcPrimary text-white"
+            className="md:w-1/3 rounded-md mt-5 shadow-sm border p-2 font-semibold tracking-widest bg-ctcPrimary text-white"
           >
             Enroll Today
-          </button>
-        </motion.div>
+          </motion.button>
+        </div>
         <motion.div
           initial={{ opacity: 0, x: 200 }}
           animate={{ opacity: 1, x: 0 }}

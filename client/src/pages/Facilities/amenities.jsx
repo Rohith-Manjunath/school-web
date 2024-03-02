@@ -62,7 +62,7 @@ const FacilityCard = () => {
       image: 'https://placekitten.com/300/208',
       description: 'Unveil your artistic talents and express yourself in our vibrant art studio.',
     },
-    // Add more facilities as needed
+
   ];
 
   return (

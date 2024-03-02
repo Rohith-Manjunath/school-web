@@ -17,8 +17,8 @@ const OurTeamCard = ({ name, education, position, quote, image }) => {
       </div>
       <div className="col-span-1 space-y-10 px-4 md:px-0">
         <div className="space-y-2 md:space-y-1">
-          <h2 className="font-semibold text-xl  md:text-2xl">{name}</h2>
-          <p className="font-semibold text-sm">{position}</p>
+          <h2 className="font-semibold text-xl  md:text-2xl font-title">{name}</h2>
+          <p className="font-semibold text-sm font-serif tracking-wider">{position}</p>
           <h3 className="font-semibold text-[13px]  md:text-[15px]">
             {education}
           </h3>
