@@ -1,23 +1,24 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/Images/LogoAndOthers/logo-2-v2-6Ot8O22k.png"; // Adjust the path accordingly
 
 const Footer = () => {
   const links = [
-    { title: "About Us", to: "about-us" },
-    { title: "Admissions", to: "admissions" },
-    { title: "Academics", to: "academics" },
-    { title: "Parents Portal", to: "parents-portal" },
-    { title: "Admin login", to: "admin-panel" },
-    { title: "Quick Links", to: "quick-links" },
+    { title: "About Us", to: "/about-us" },
+    { title: "Admissions", to: "/admissions" },
+    { title: "Academics", to: "/academics" },
+    { title: "Parents Portal", to: "/parents-portal" },
+    { title: "Admin login", to: "/admin-login" },  // Updated path to /login
+    { title: "Quick Links", to: "/quick-links" },
   ];
   const links2 = [
-    { title: "Calender & Schedules", to: "calendar" },
-    { title: "Carrier", to: "carrier" },
-    { title: "Digital Library", to: "library" },
+    { title: "Calender & Schedules", to: "/calendar" },
+    { title: "Carrier", to: "/carrier" },
+    { title: "Digital Library", to: "/library" },
   ];
 
   return (
-    <div className="bg-secondary p-4 md:p-10  text-[12px] text-white lg:py-10 tracking-wide">
+    <div className="bg-secondary p-4 md:p-10 text-[12px] text-white lg:py-10 tracking-wide">
       <div className="lg:grid grid-cols-4 md:gap-20 space-y-10 md:space-y-0">
         <div className="mb-10 md:mb-0 lg:flex items-center justify-start">
           <img src={logo} className="w-[300px]" alt="" />
@@ -55,7 +56,7 @@ const Footer = () => {
                 {typeof link === "object" ? (
                   <Link
                     to={link.to}
-                    className="after:bg-white after:scale-0 hover:after:scale-100 after:h-[2px] after:origin-center after:block after:transition-all after:duration-300  after:rounded-lg inline-block"
+                    className="after:bg-white after:scale-0 hover:after:scale-100 after:h-[2px] after:origin-center after:block after:transition-all after:duration-300 after:rounded-lg inline-block"
                   >
                     {link.title}
                   </Link>
@@ -73,7 +74,7 @@ const Footer = () => {
                 {typeof link === "object" ? (
                   <Link
                     to={link.to}
-                    className="after:bg-white after:scale-0 hover:after:scale-100 after:h-[2px] after:origin-center after:block after:transition-all after:duration-300  after:rounded-lg inline-block"
+                    className="after:bg-white after:scale-0 hover:after:scale-100 after:h-[2px] after:origin-center after:block after:transition-all after:duration-300 after:rounded-lg inline-block"
                   >
                     {link.title}
                   </Link>
@@ -88,8 +89,7 @@ const Footer = () => {
 
       <div className="space-y-2 md:flex items-center justify-between mt-5">
         <p>
-          &copy; Mysore International School 2023 | All rights reserved | Legal
-          Notice.
+          &copy; Mysore International School 2023 | All rights reserved | Legal Notice.
         </p>
         <p>Developed by webstor labs.</p>
       </div>

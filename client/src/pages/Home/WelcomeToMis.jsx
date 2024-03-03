@@ -234,7 +234,7 @@ const WelcomeToMIS = () => {
           </div>
           <div className="flex flex-col gap-2 col-span-2 my-8 md:my-0">
           <label className="text-black font-sans tracking-wide font-semibold" htmlFor="category">
-              Catagory*
+              Category*
             </label>
             <select name="category" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
               <option value="1">Primary-School</option>
