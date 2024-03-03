@@ -1,4 +1,4 @@
-import coreValues from "../../assets/Images/OutTeamImages/core_values_new_page-0001.jpg";
+import coreValues from "../../assets/Images/OutTeamImages/coreValues.jpg";
 
 const OurValues = () => {
   return (
