@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+
+import { useState } from "react";
 import image from "../../assets/Images/AdminPaneImages/TVSchool.jpg";
 import Login from './Login'; // Import the Login component
 import Register from './Register'; // Import the Register component
 
 const AuthContainer = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const history = useHistory();
 
   const handleToggleAuth = () => {
     setIsLogin((prevIsLogin) => !prevIsLogin);

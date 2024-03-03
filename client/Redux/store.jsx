@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { authApi } from "./authApi";
 import UserSlice from "./UserSlice";
+import { userAuth } from "./UserAuth";
 
 
 // Persist configuration
@@ -19,6 +20,7 @@ const persistedReducer = persistReducer(
   combineReducers({
     user: UserSlice,
     [authApi.reducerPath]: authApi.reducer,
+    [userAuth.reducerPath]:userAuth.reducer
   })
 );
 
@@ -27,7 +29,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(authApi.middleware)
+      .concat(authApi.middleware).concat(userAuth.middleware)
 });
 
 setupListeners(store.dispatch);

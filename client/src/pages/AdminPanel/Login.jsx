@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import image from "../../assets/Images/AdminPaneImages/TVSchool.jpg";
 
@@ -12,7 +11,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="Username"
-              className="w-full h-full bg-transparent border-white  border-2 border-white rounded-full text-white pl-8 text-base"
+              className="w-full h-full bg-transparent border-white  border-2 rounded-full text-white pl-8 text-base placeholder:text-white"
               required
             />
             <i className='bx bxs-user absolute right-8 top-1/2 transform -translate-y-1/2 text-2xl text-white'></i>
@@ -21,7 +20,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="Password"
-              className="w-full h-full bg-transparent border border-white  border-2 border-white rounded-full text-white pl-8 text-base"
+              className="w-full h-full bg-transparent  border-2 border-white rounded-full text-white pl-8 text-base placeholder:text-white"
               required
             />
             <i className='bx bxs-lock-alt absolute right-8 top-1/2 transform -translate-y-1/2 text-2xl text-white'></i>

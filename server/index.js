@@ -8,6 +8,7 @@ const corsOptions = {
 };
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
+const Enrollment = require("./routes/Enrollment");
 const UserRoute = require("./routes/UserRoute");
 const { dbConnection } = require("./config/dbConnections");
 const error = require("./middlewares/error");
@@ -27,6 +28,7 @@ app.use(fileUpload());
 app.use(express.json());
 app.use(cookie());
 app.use(cors(corsOptions));
+app.use("/api", Enrollment);
 app.use("/api", UserRoute);
 app.use(error);
 

@@ -1,8 +1,6 @@
-const express = require("express");
-const { Home, FormController } = require("../controllers/UserController");
-const router = express.Router();
+const express=require('express');
+const { registerUser } = require('../controllers/UserController');
+const router=express.Router();
 
-router.route("/").get(Home);
-router.route("/enroll").post(FormController);
-
-module.exports = router;
+router.route("/register").post(registerUser)
+module.exports=router

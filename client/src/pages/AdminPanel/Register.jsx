@@ -1,87 +1,73 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import  { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdEmail, MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FaUser } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import image from '../../assets/Images/AdminPaneImages/TVSchool.jpg';
+import { useRegisterMutation } from '../../../Redux/UserAuth';
+import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { setUser as setUserAction } from '../../../Redux/UserSlice'; // Rename setUser to setUserAction
+
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [reenterPassword, setReenterPassword] = useState('');
-  const [passwordMatchError, setPasswordMatchError] = useState(false);
-  const [passwordStrengthError, setPasswordStrengthError] = useState(false);
+  // const [passwordStrengthError, setPasswordStrengthError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showReenterPassword, setShowReenterPassword] = useState(false);
+  const [form,setForm]=useState({
+    name:"",
+    email:"",
+    password:"",
+    confirmPassword:""
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+  })
+  const [register,{isLoading,isError,error}]=useRegisterMutation()
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    if (passwordMatchError) {
-      setPasswordMatchError(false);
+  
+  useEffect(()=>{
+    if(isError){
+      toast.error(error.data.err)
     }
-    if (passwordStrengthError) {
-      setPasswordStrengthError(false);
-    }
-  };
+  },[error,isError])
 
-  const handleReenterPasswordChange = (e) => {
-    setReenterPassword(e.target.value);
-    if (passwordMatchError) {
-      setPasswordMatchError(false);
-    }
-  };
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  const handleInputChange=(e)=>{
+    const {name,value}=e.target
+setForm({...form,[name]:value})
+  }
 
-  const toggleShowReenterPassword = () => {
-    setShowReenterPassword(!showReenterPassword);
-  };
-
-  const isStrongPassword = (value) => {
-    // Password strength requirements
-    const capitalRegex = /[A-Z]/;
-    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
-
-    return capitalRegex.test(value) && specialCharRegex.test(value) && value.length >= 8;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      // Call the registerUser mutation with form data
+      const data = await register(form).unwrap();
+      dispatch(setUserAction(data.newUser));
 
-    if (password !== reenterPassword) {
-      setPasswordMatchError(true);
-    } else if (!isStrongPassword(password)) {
-      setPasswordStrengthError(true);
-    } else {
-      // Your registration logic goes here
-      console.log('Registration Successful!');
+      // Registration successful, navigate to login page
+      toast.success("Registration successful");
+      navigate("/login");
+    } catch (error) {
+      // Display error alert if registration fails
+      toast.error(error.message);
     }
   };
 
   return (
+  <>
+      <ToastContainer/>
     <div className="flex items-center justify-center h-screen bg-cover" style={{ backgroundImage: `url(${image})` }}>
-      <div className="w-96 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-lg p-8 border border-white">
+      <div className="w-96 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-lg p-8 border   ">
         <form className="flex flex-col items-center space-y-6" onSubmit={handleSubmit}>
-          <h1 className="text-3xl text-white text-base">Register</h1>
+          <h1 className="text-3xl text-white ">Register</h1>
           <div className="input-box relative w-full h-16">
             <input
               type="email"
               placeholder="Email"
-              className="w-full h-full bg-transparent border-white border-2 border-white rounded-full text-white pl-8 text-base"
-              onChange={handleEmailChange}
-              value={email}
-              required
+              className="w-full h-full bg-transparent    border-2 border-white rounded-full text-white pl-8 text-base placeholder:text-white  focus:border-none  "
+              onChange={handleInputChange}
+              name='email'
             />
             <MdEmail className="absolute right-8 top-1/2 transform -translate-y-1/2 text-2xl text-white" />
           </div>
@@ -89,10 +75,10 @@ const Register = () => {
             <input
               type="text"
               placeholder="Username"
-              className="w-full h-full bg-transparent border-white  border-2 border-white rounded-full text-white pl-8 text-base"
-              onChange={handleUsernameChange}
-              value={username}
-              required
+              className="w-full h-full bg-transparent     border-2 border-white rounded-full text-white pl-8 text-base placeholder:text-white  focus:border-none  "
+              onChange={handleInputChange}
+              name='name'
+
             />
             <FaUser className="bx bxs-user absolute right-8 top-1/2 transform -translate-y-1/2 text-2xl text-white"></FaUser>
           </div>
@@ -100,55 +86,45 @@ const Register = () => {
             <input
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
-              className={`w-full h-full bg-transparent border ${
-                passwordStrengthError ? 'border-red-500' : 'border-white'
-              } border-2 border-white rounded-full text-white pl-8 text-base`}
-              onChange={handlePasswordChange}
-              value={password}
-              required
-            />
+              className={`w-full h-full bg-transparent  '  '
+              border-2 border-white    rounded-full text-white pl-8 text-base placeholder:text-white  focus:border-none  `}
+              onChange={handleInputChange}
+              name='password'
+
+
+/>
             <RiLockPasswordFill
-              className={`bx bxs-lock-alt absolute right-8 top-1/2 transform -translate-y-1/2 text-2xl ${
-                passwordStrengthError ? 'text-red-500' : 'text-white'
+              className={`bx bxs-lock-alt absolute right-8 top-1/2 transform -translate-y-1/2 text-2xl text-white placeholder:text-white  focus:border-none  
               }`}
             />
-            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={toggleShowPassword}>
-              {showPassword ? <MdVisibilityOff className="text-white" /> : <MdVisibility className="text-white" />}
+            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer">
+              {showPassword ? <MdVisibilityOff onClick={()=>setShowPassword(!showPassword)}  className="text-white" /> : <MdVisibility onClick={()=>setShowPassword(!showPassword)} className="text-white" />}
             </span>
           </div>
           <div className="input-box relative w-full h-16">
             <input
               type={showReenterPassword ? 'text' : 'password'}
-              placeholder="Re-enter Password"
-              className={`w-full h-full bg-transparent border ${
-                passwordMatchError ? 'border-red-500' : 'border-white'
-              } border-2 border-white rounded-full text-white pl-8 text-base`}
-              onChange={handleReenterPasswordChange}
-              value={reenterPassword}
-              required
+              placeholder="Confirm Password"
+              className={`w-full h-full bg-transparent border-2 border-white   rounded-full text-white pl-8 text-base placeholder:text-white  focus:border-none  `}
+              onChange={handleInputChange}
+              name='confirmPassword'
+
             />
             <RiLockPasswordFill
-              className={`bx bxs-lock-alt absolute right-8 top-1/2 transform -translate-y-1/2 text-2xl ${
-                passwordMatchError ? 'text-red-500' : 'text-white'
+              className={`bx bxs-lock-alt absolute right-8 top-1/2 transform -translate-y-1/2 text-2xl text-white
               }`}
             />
-            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={toggleShowReenterPassword}>
-              {showReenterPassword ? <MdVisibilityOff className="text-white" /> : <MdVisibility className="text-white" />}
+            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" >
+              {showReenterPassword ? <MdVisibilityOff onClick={()=>setShowReenterPassword(!showReenterPassword)} className="text-white" /> : <MdVisibility onClick={()=>setShowReenterPassword(!showReenterPassword)} className="text-white" />}
             </span>
           </div>
-          {passwordMatchError && (
-            <p className="text-red-500 text-sm text-left mb-2">Passwords do not match. Please try again.</p>
-          )}
-          {passwordStrengthError && (
-            <p className="text-red-500 text-sm text-left mb-4">
-              Password must contain a capital letter, a special character, and be at least 8 characters long.
-            </p>
-          )}
+        
+         
           <button
             type="submit"
             className="btn w-full h-12 bg-white text-gray-800 rounded-full transition-all duration-300 ease-in-out hover:bg-secondary hover:text-white"
           >
-            Register
+            {isLoading?"Registering...":"Register"}
           </button>
           <div className="flex justify-between w-[100%] text-base text-center">
             <p className="text-white">Already have an account? </p>
@@ -159,6 +135,8 @@ const Register = () => {
         </form>
       </div>
     </div>
+
+  </>
   );
 };
 
