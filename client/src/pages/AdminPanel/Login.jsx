@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import image from "../../assets/Images/AdminPaneImages/TVSchool.jpg";
 
 const Login = () => {
@@ -43,9 +44,9 @@ const Login = () => {
             <p className="text-white">
               Don't have an account?{' '}
             </p>
-            <a href="#" className="text-white hover:underline">
-            Register
-            </a>
+            <Link to="/Register"className="text-white hover:underline">
+              Register
+            </Link>
           </div>
         </form>
       </div>
