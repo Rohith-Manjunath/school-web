@@ -56,13 +56,13 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
 });
 
-// userSchema.methods.getJwtToken = async function () {
-//   return jwt.sign({ id: this._id }, process.env.SECRET, { expiresIn: "24h" });
-// };
+userSchema.methods.getJwtToken = async function () {
+  return jwt.sign({ id: this._id }, process.env.SECRET, { expiresIn: "24h" });
+};
 
-// userSchema.methods.comparePassword = async function (password) {
-//   return await bcrypt.compare(password, this.password);
-// };
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 // userSchema.methods.getResetPasswordToken = function () {
 //   const resetToken = crypto.randomBytes(32).toString("hex");
 //   this.resetPasswordToken = crypto

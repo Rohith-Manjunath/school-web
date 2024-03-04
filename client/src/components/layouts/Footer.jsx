@@ -1,8 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/Images/LogoAndOthers/logo-2-v2-6Ot8O22k.png"; // Adjust the path accordingly
 
 const Footer = () => {
+
+ 
+
   const links = [
     { title: "About Us", to: "/about-us" },
     { title: "Admissions", to: "/admissions" },

@@ -1,12 +1,8 @@
-import Login from "./Login";
 
+const AdminPanel = () => {
+  return (
+    <div>AdminPanel</div>
+  )
+}
 
-const Admissions = () => {
-    return (
-      <div>
-        <Login />
-        <footer />
-      </div>
-    );
-  };
-  
+export default AdminPanel

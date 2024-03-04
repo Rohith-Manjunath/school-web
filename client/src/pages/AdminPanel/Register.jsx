@@ -63,7 +63,7 @@ setForm({...form,[name]:value})
           <h1 className="text-3xl text-white ">Register</h1>
           <div className="input-box relative w-full h-16">
             <input
-              type="email"
+              type="text"
               placeholder="Email"
               className="w-full h-full bg-transparent    border-2 border-white rounded-full text-white pl-8 text-base placeholder:text-white  focus:border-none  "
               onChange={handleInputChange}

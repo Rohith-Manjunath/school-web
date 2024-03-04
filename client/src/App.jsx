@@ -8,6 +8,8 @@ import OurTeam from "./pages/Ourteam/OurTeam";
 import Facilities from "./pages/Facilities/Facilities";
 import Login from "./pages/AdminPanel/Login";
 import Register from "./pages/AdminPanel/Register";
+import AdminPanel from "./pages/AdminPanel/AdminPanel";
+import ProtectedRoute from "./components/layouts/ProtectedRoute";
 
 const App = () => {
   return (
@@ -23,6 +25,12 @@ const App = () => {
         <Route path="/admin-login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoute />} >
+
+<Route path="/admin-panel" element={<AdminPanel/>}/>
+
+        </Route>
+        
       </Routes>
     </Router>
   );
