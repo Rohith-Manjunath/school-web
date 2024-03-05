@@ -1,3 +1,4 @@
+const Query = require("../models/GetInTouchSchema");
 const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
@@ -47,3 +48,17 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
 
     jwtToken("Login successful", 200, user, res);
 });
+
+exports.userQuery=catchAsyncError(async(req,res,next)=>{
+
+    const {name,email,message}=req.body;
+
+    
+
+    await Query.create(req.body);
+    res.status(200).json({
+        success:true,
+        message:"Query submitted successfully"
+    })
+
+})

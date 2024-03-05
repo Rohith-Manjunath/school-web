@@ -19,6 +19,13 @@ export const userAuth = createApi({
         credentials:"include"
       }),
     }),
+    query: builder.mutation({
+      query: (form) => ({
+        url: "query",
+        method: "POST",
+        body: form,
+      }),
+    }),
     
 
    
@@ -27,6 +34,7 @@ export const userAuth = createApi({
 
 export const {
   useRegisterMutation,
-  useLoginMutation
+  useLoginMutation,
+  useQueryMutation
   
 } = userAuth;
