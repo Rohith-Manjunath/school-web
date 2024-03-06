@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+
 export const userAuth = createApi({
   reducerPath: "userAuth",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/api/" }),
@@ -16,7 +17,7 @@ export const userAuth = createApi({
         url: "login",
         method: "POST",
         body: form,
-        credentials:"include"
+        credentials: "include"
       }),
     }),
     query: builder.mutation({
@@ -26,15 +27,19 @@ export const userAuth = createApi({
         body: form,
       }),
     }),
-    
-
-   
+    parentsQuery: builder.mutation({
+      query: (form) => ({
+        url: "parentsenroll",
+        method: "POST",
+        body: form,
+      }),
+    }),
   }),
 });
 
 export const {
   useRegisterMutation,
   useLoginMutation,
-  useQueryMutation
-  
+  useQueryMutation,
+  useParentsQueryMutation
 } = userAuth;
