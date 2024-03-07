@@ -34,6 +34,13 @@ export const userAuth = createApi({
         body: form,
       }),
     }),
+    admissionQuery: builder.mutation({
+      query: (form) => ({
+        url: "admissionquery",
+        method: "POST",
+        body: form,
+      }),
+    }),
   }),
 });
 
@@ -41,5 +48,6 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useQueryMutation,
-  useParentsQueryMutation
+  useParentsQueryMutation,
+  useAdmissionQueryMutation
 } = userAuth;

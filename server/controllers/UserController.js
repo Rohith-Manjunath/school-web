@@ -1,3 +1,4 @@
+const AdmissionQuery = require("../models/AdmissionEnquiry");
 const Query = require("../models/GetInTouchSchema");
 const ParentsEnrollment = require("../models/ParentsEnrollment");
 const User = require("../models/UserSchema");
@@ -74,6 +75,24 @@ exports.parentsEnroll=catchAsyncError(async(req,res,next)=>{
     res.status(200).json({
         success:true,
         message:"Query submitted successfully"
+    })
+
+})
+
+exports.admissionEnquiry=catchAsyncError(async(req,res,next)=>{
+
+    const {firstname,lastname,email,phone,altPhone,dob,Class,place,previousSchool}=req.body;
+
+    const user = await AdmissionQuery.findOne({ email });
+
+    if (user) {
+        return next(new ErrorHandler("We have already received information for this email", 400));
+    }
+
+    await AdmissionQuery.create(req.body)
+    res.status(200).json({
+        success:true,
+        message:"Query submitted successfully",
     })
 
 })

@@ -1,28 +1,51 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAdmissionQueryMutation } from "../../../Redux/UserAuth";
+import { ToastContainer, toast } from "react-toastify";
 
 const AdmissionEnquiry = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     dob: "",
-    selectedClass: "",
-    previousSchoolName: "",
+    class: "",
+    previousSchool: "",
     place: "",
-    phoneNumber: "",
-    altPhoneNumber: "",
+    phone: "",
+    altPhone: "",
     email: "",
   });
+  const [query,{isError,error,isLoading}]=useAdmissionQueryMutation()
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
+    console.log(formData)
+
+    try {
+      const data = await query(formData).unwrap();
+      toast.success(data.message);
+       
+      setFormData({})
+       
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
+  useEffect(()=>{
+    if(isError){
+      toast.error(error.data.err)
+    }
+      },[isError,error])
+
   return (
+    <>
     <div className="w-full max-w-[90%] mx-auto space-y-8 mt-16 text-textSecondary border  py-10 rounded-lg shadow-lg">
       <h2 className="text-3xl font-semibold text-center text-textSecondary font-title">
         Admission Enquiry
@@ -43,13 +66,13 @@ const AdmissionEnquiry = () => {
               First Name
             </label>
             <input
-              required
+              
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="firstName"
               type="text"
-              name="firstName"
+              name="firstname"
               placeholder="First Name"
-              value={formData.firstName}
+              value={formData.firstname}
               onChange={handleChange}
             />
           </div>
@@ -58,13 +81,13 @@ const AdmissionEnquiry = () => {
               Last Name
             </label>
             <input
-              required
+              
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="lastName"
               type="text"
-              name="lastName"
+              name="lastname"
               placeholder="Last Name"
-              value={formData.lastName}
+              value={formData.lastname}
               onChange={handleChange}
             />
           </div>
@@ -73,10 +96,10 @@ const AdmissionEnquiry = () => {
               Date of Birth
             </label>
             <input
-              required
+              
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="dob"
-              type="text"
+              type="date"
               name="dob"
               placeholder="Date of Birth"
               value={formData.dob}
@@ -93,7 +116,7 @@ const AdmissionEnquiry = () => {
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="selectedClass"
-              name="selectedClass"
+              name="class"
               value={formData.selectedClass}
               onChange={handleChange}
             >
@@ -111,11 +134,11 @@ const AdmissionEnquiry = () => {
               Previous School Name
             </label>
             <input
-              required
+              
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="previousSchoolName"
               type="text"
-              name="previousSchoolName"
+              name="previousSchool"
               placeholder="Previous School Name"
               value={formData.previousSchoolName}
               onChange={handleChange}
@@ -126,7 +149,7 @@ const AdmissionEnquiry = () => {
               Place
             </label>
             <input
-              required
+              
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="place"
               type="text"
@@ -144,11 +167,11 @@ const AdmissionEnquiry = () => {
               Phone Number
             </label>
             <input
-              required
+              
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="phoneNumber"
               type="text"
-              name="phoneNumber"
+              name="phone"
               placeholder="Phone Number"
               value={formData.phoneNumber}
               onChange={handleChange}
@@ -165,7 +188,7 @@ const AdmissionEnquiry = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="altPhoneNumber"
               type="text"
-              name="altPhoneNumber"
+              name="altPhone"
               placeholder="Alternative Phone Number"
               value={formData.altPhoneNumber}
               onChange={handleChange}
@@ -176,7 +199,7 @@ const AdmissionEnquiry = () => {
               Email
             </label>
             <input
-              required
+              
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
@@ -192,11 +215,13 @@ const AdmissionEnquiry = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Submit
+            {isLoading ? "Submitting...":"Submit"}
           </button>
         </div>
       </form>
     </div>
+    <ToastContainer/>
+    </>
   );
 };
 
