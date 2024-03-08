@@ -34,6 +34,15 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
     });
 });
 
+exports.logout=catchAsyncError(async(req,res,next)=>{
+
+    res.clearCookie("token").status(200).json({
+        success:true,
+        message:"Logged out successfully"
+    })
+
+})
+
 exports.loginUser = catchAsyncError(async (req, res, next) => {
     const { password, email } = req.body;
 
@@ -50,6 +59,19 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
 
     jwtToken("Login successful", 200, user, res);
 });
+
+exports.me=catchAsyncError(async(req,res,next)=>{
+
+    const{user}=req;
+    if(!user){
+        return next(new ErrorHandler("Please login", 401));
+    }
+    res.status(200).json({
+        success:true,
+        user
+    })
+
+})
 
 exports.userQuery=catchAsyncError(async(req,res,next)=>{
 
