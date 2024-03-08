@@ -11,6 +11,7 @@ const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 const Enrollment = require("./routes/Enrollment");
 const UserRoute = require("./routes/UserRoute");
+const AdminRoute = require("./routes/adminRoutes");
 const { dbConnection } = require("./config/dbConnections");
 const error = require("./middlewares/error");
 
@@ -31,6 +32,7 @@ app.use(cookie());
 app.use(cors(corsOptions));
 app.use("/api", Enrollment);
 app.use("/api", UserRoute);
+app.use("/api/admin", AdminRoute);
 app.use(error);
 
 // Database connection
