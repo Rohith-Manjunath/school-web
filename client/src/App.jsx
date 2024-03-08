@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import Home from "./pages/Home/Home";
 import Academics from "./pages/Academics/Academics";
@@ -11,7 +11,11 @@ import Register from "./pages/AdminPanel/Register";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import ProtectedRoute from "./components/layouts/ProtectedRoute";
 
+
+
 const App = () => {
+
+
   return (
     <Router>
       <Navbar />

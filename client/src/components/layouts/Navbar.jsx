@@ -4,8 +4,11 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import logo from "../../assets/Images/LogoAndOthers/MIS_Main_logo-b9vQZsOZ.png"; // Adjust the path accordingly
 import { motion } from "framer-motion";
+import UserOptions from "./UserOptions";
+import { useSelector } from "react-redux";
 const Navbar = () => {
   const [show, setShow] = useState(false);
+  const {user}=useSelector(state=>state.user)
 
   const toggleNavbar = () => {
     setShow(!show);
@@ -13,7 +16,8 @@ const Navbar = () => {
   const path = useLocation().pathname.split("/")[1];
 
   return (
-    <div className="sticky z-10 top-0 left-0 bg-primary p-5 text-textSecondary lg:relative w-full">
+<>
+<div className="sticky z-10 top-0 left-0 bg-primary p-5 text-textSecondary lg:relative w-full">
       {!show ? (
         <div className="uppercase flex items-center justify-start gap-6">
           <RxHamburgerMenu
@@ -145,6 +149,10 @@ const Navbar = () => {
         </motion.li>
       </ul>
     </div>
+    <div>
+   {user &&  <UserOptions user={{...user,avatar:{url:"https://assets.vogue.in/photos/6544d4422e0410ae2777ca31/3:4/w_2560%2Cc_limit/GettyImages-1395062633.jpg"}}} />}
+    </div>
+</>
   );
 };
 
