@@ -27,13 +27,6 @@ export const userAuth = createApi({
         credentials: "include"
       }),
     }),
-    me: builder.mutation({
-      query: () => ({
-        url: "me",
-        method: "GET",
-        credentials: "include"
-      }),
-    }),
     query: builder.mutation({
       query: (form) => ({
         url: "query",
@@ -55,6 +48,19 @@ export const userAuth = createApi({
         body: form,
       }),
     }),
+    me: builder.mutation({
+      query: () => ({
+        url: "me",
+        method: "GET",
+        credentials:"include"
+      }),
+    }),
+    events: builder.query({
+      query: () => ({
+        url: "events",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -65,5 +71,7 @@ export const {
   useParentsQueryMutation,
   useAdmissionQueryMutation,
   useLogoutMutation,
+  useEventsQuery,
+  useEventsMutation,
   useMeMutation
 } = userAuth;

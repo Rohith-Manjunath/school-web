@@ -37,3 +37,16 @@ exports.deleteEvent=catchAsyncError(async(req,res,next)=>{
 
 
 })
+
+exports.getAllEvents=catchAsyncError(async(req,res,next)=>{
+
+    const events=await Events.find();
+    const totalEvents=await Events.countDocuments()
+    res.status(200).json({
+        success:true,
+        events,
+        totalEvents
+    })
+
+
+})

@@ -40,11 +40,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Call the registerUser mutation with form data
-    const data = await loginUser(form).unwrap();
-    console.log(data)
+    await loginUser(form).unwrap();
     toast.success("Login successful");
     navigate("/");
     const userData=await me().unwrap();
+    console.log(userData)
     dispatch(setUser(userData.user))
     
 

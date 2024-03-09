@@ -18,13 +18,15 @@
     font-family: 'Poppins';
   }
 
-  body,html{
+  body,
+  html {
     overflow-x: hidden;
     height: 100%;
     width: 100%;
     scroll-behavior: smooth;
     background-color: rgb(211, 211, 211);
-  
+    max-width: 1600px; /* Adjust the value according to the laptop width */
+    margin: 0 auto; /* Center align the content */
   }
 
 
