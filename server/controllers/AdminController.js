@@ -1,4 +1,5 @@
 const Events = require("../models/EventsSchema");
+const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
 
@@ -48,5 +49,93 @@ exports.getAllEvents=catchAsyncError(async(req,res,next)=>{
         totalEvents
     })
 
+})
+
+exports.getAllUsers=catchAsyncError(async(req,res,next)=>{
+
+    const users=await User.find();
+    const totalUsers=await User.countDocuments()
+
+
+    res.status(200).json({
+        success:true,
+        users,
+        totalUsers
+    })
 
 })
+
+exports.getUserDetails=catchAsyncError(async(req,res,next)=>{
+
+    const {userId}=req.params;
+    if(!userId){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const user=await User.findById({_id:userId});
+
+    if(!user){
+        return next(new ErrorHandler("No user found",404));
+    }
+
+    res.status(200).json({
+        success:true,
+        user
+        
+    })
+
+})
+
+exports.updateUser=catchAsyncError(async(req,res,next)=>{
+
+    const {userId}=req.params;
+    if(!userId){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const user=await User.findById({_id:userId});
+
+    if(!user){
+        return next(new ErrorHandler("No user found",404));
+    }
+
+    if(!req.body.isAdmin){
+        return next(new ErrorHandler("You must specify a role",400))
+    }
+
+    user.isAdmin= req.body.isAdmin
+    await user.save()
+
+    res.status(200).json({
+        success:true,
+        message:"User role updated successfully",
+        user
+        
+    })
+
+})
+
+exports.deleteUser=catchAsyncError(async(req,res,next)=>{
+
+    const {userId}=req.params;
+    if(!userId){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const user=await User.findById({_id:userId});
+
+    if(!user){
+        return next(new ErrorHandler("No user found",404));
+    }
+
+  await User.deleteOne({_id:userId})
+
+    res.status(200).json({
+        success:true,
+        message:"User deleted successfully",
+     
+        
+    })
+
+})
+
