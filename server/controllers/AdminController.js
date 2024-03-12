@@ -19,14 +19,14 @@ exports.deleteEvent=catchAsyncError(async(req,res,next)=>{
 
     const {id}=req.params;
 
+    if(!id){
+        return next(new ErrorHandler("Invalid id",401));
+    }
+
     const findId=await Events.findById({_id:id})
 
     if(!findId){
         return next(new ErrorHandler("Id not found",404));
-    }
-
-    if(!id){
-        return next(new ErrorHandler("Invalid id",401));
     }
 
     await Events.deleteOne({_id:id});
@@ -36,6 +36,61 @@ exports.deleteEvent=catchAsyncError(async(req,res,next)=>{
         message:"Event deleted successfully"
     })
 
+
+})
+
+exports.updateEvent=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+    if(!id){
+        return next(new ErrorHandler("Invalid id",401));
+    }
+
+    const event=await Events.findById({_id:id})
+
+    
+
+    if(!event){
+        return next(new ErrorHandler("Id not found",404));
+    }
+
+    const {title,duration,date,days}=req.body;
+
+
+    event.date=date;
+    event.title=title;
+    event.duration=duration;
+    event.days=days;
+
+    await event.save()
+    
+    res.status(200).json({
+        success: true,
+        message:"Event updated successfully"
+    })
+
+
+})
+
+exports.getSingleEvent=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+    if(!id){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const event=await Events.findById({_id:id});
+
+    if(!event){
+        return next(new ErrorHandler("No event found",404));
+    }
+
+    res.status(200).json({
+        success:true,
+        event
+        
+    })
 
 })
 
