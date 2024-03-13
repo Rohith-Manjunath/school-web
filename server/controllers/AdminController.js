@@ -194,3 +194,16 @@ exports.deleteUser=catchAsyncError(async(req,res,next)=>{
 
 })
 
+
+exports.getAllAdmissionQueries=catchAsyncError(async(req,res,next)=>{
+
+    const queries=await AdmissionQuery.find();
+    const totalQueries=await AdmissionQuery.countDocuments()
+    res.status(200).json({
+        success:true,
+        queries,
+        totalQueries
+    })
+
+
+})
