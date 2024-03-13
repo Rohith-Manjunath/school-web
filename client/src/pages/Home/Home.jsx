@@ -2,6 +2,8 @@ import Footer from "../../components/layouts/Footer";
 import PaperTear1 from "../../components/layouts/PaperTear1";
 import PaperTear2 from "../../components/layouts/PaperTear2";
 import ReasonToPursue from "../ReasonToPursue";
+import CardComponent from "./CardComponent";
+import CardListComponent from "./CardListComponent";
 import CarouselSlider from "./CarouselSlider";
 import GetInTouch from "./GetInTouch";
 import NewsAndEvents from "./NewsAndEvents";
@@ -16,6 +18,7 @@ const Home = () => {
       <CarouselSlider />
       <WelcomeToMIS />
       <PaperTear1 />
+      <CardListComponent />
       <WhoWeAre />
       <VirtualTour />
       <PaperTear2 />

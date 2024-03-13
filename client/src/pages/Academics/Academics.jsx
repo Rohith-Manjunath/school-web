@@ -8,6 +8,7 @@ import Resource from "./Resource";
 import image from "../../assets/Images/AcademicsImages/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg";
 import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
 import PaperTear2 from "../../components/layouts/PaperTear2";
+import OurVision from "./OurVision";
 const Academics = () => {
   return (
     <div className="">
@@ -22,6 +23,8 @@ const Academics = () => {
       <OurPrograms />
       <PaperTear1 />
       <Faculty />
+      <PaperTear2 />
+      <OurVision />
       <AdmissionInfo />
       <Resource />
       <PaperTear2 />

@@ -1,4 +1,5 @@
 import image1 from "../../assets/Images/HomeImages/CarouselImages/children_outing.jpg"; // Adjust the path accordingly
+// import image6 from "../../assets/Images/HomeImages/CarouselImages/achievement.jpg"; // Adjust the path accordingly
 import image3 from "../../assets/Images/HomeImages/CarouselImages/children_kannada_rajostsava.jpg"; // Adjust the path accordingly
 import image4 from "../../assets/Images/HomeImages/CarouselImages/school1.jpg";
 import image5 from "../../assets/Images/HomeImages/CarouselImages/school2.jpg";
@@ -22,6 +23,10 @@ const slides = [
     id: 4,
     url: image3,
   },
+  // {
+  //   id: 6,
+  //   url: image6,
+  // },
 ];
 
 const CarouselSlider = () => {

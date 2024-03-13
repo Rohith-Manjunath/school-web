@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/Images/HomeImages/Children-xEslnNLL.jpg"; // Adjust the path accordingly
+import logo from "../../assets/Images/HomeImages/WhoWeAre.jpg"; // Adjust the path accordingly
 import { motion } from "framer-motion";
 
 
