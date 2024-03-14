@@ -26,6 +26,7 @@
     scroll-behavior: smooth;
     background-color: rgb(211, 211, 211);
     max-width: 1600px; /* Adjust the value according to the laptop width */
+    
     margin: 0 auto; /* Center align the content */
   }
 
