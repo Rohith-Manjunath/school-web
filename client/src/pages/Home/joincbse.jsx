@@ -52,7 +52,7 @@ const JoinCbse = () => {
   return (
     <div ref={elementRef} className="py-16 px-0">
       <div className="container mx-auto">
-        <div className="flex flex-col lg:flex-row justify-between">
+        <div className="flex flex-col lg:flex-row justify-between p-10 gap-[10px] lg:gap-[110px]">
           <motion.div
           initial={{ opacity: 0, x: -200 }}
           whileInView={{ opacity: 1, x: 0 }}

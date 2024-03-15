@@ -4,7 +4,7 @@ import PaperTear1 from "../../components/layouts/PaperTear1";
 import PaperTear2 from "../../components/layouts/PaperTear2";
 import AdmissionProcess from "./AdmissionProcess";
 import Enroll from "./Enroll";
-import Marquee from "./Marquee";
+// import Marquee from "./Marquee";
 import RaiseATicket from "./RaiseATicket";
 import ReasonToChoose from "./ReasonToChoose";
 import image from "../../assets/Images/AcademicsImages/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg";
@@ -15,21 +15,27 @@ const Admissions = () => {
   return (
     <div>
       <Hero
-        text={"Online Fee Payment"}
+        text={"ADMISSION INFO"}
         image={image}
-        description={`At Mysore International School, we prioritize a seamless and hassle-free school experience for parents. Our secure Online Fees Payments system simplifies the entire process, offering a range of benefits at your fingertips. Opt for the convenience of online transactions to make fee payments efficiently, ensuring a smoother journey for both you and your child at MIS`}
+        description={`A warm welcome to the Mysore international School! We are excited to extend an invitation
+        to students to join India;s top-rated international school and embark on an extraordinary and
+        memorable educational journey. Our commitment to excellence is underscored by our
+        impressive ranking in the education world. The dedicated admission team at MIS is here to
+        ensure a seamless transition for prospective students, making our institution accessible to
+        students from around the globe.`}
         
       />
       <BreadCrumb 
       Currentpage={"Admissions"}
       Currentlink={"admissions"}/>
+      <AdmissionProcess />
       <ReasonToChoose />
       <RaiseATicket />
-      <AdmissionProcess />
+      
       <Enroll />
-      <PaperTear1 />
-      <Marquee />
-      <PaperTear2 />
+      {/* <PaperTear1 />
+      {/* <Marquee /> */}
+      {/* <PaperTear2 /> */} 
       <Footer />
     </div>
   );

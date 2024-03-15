@@ -35,6 +35,14 @@ const OurPrograms = () => {
       age: "16-18 years",
       schedule: " 8:00 AM - 5:00 PM",
     },
+    {
+      id: 3,
+      imageUrl: "",
+      title: "High-school",
+      description: `Cultivating minds, fostering growth in a secure, dynamic atmosphere.`,
+      age: "16-18 years",
+      schedule: " 8:00 AM - 5:00 PM",
+    },
   ];
 
   return (

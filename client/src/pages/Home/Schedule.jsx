@@ -148,9 +148,10 @@ const Schedule = () => {
               Catagory
             </label>
             <select name="select" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
-              <option value="1">Primary-School</option>
-              <option value="2">Middle-School</option>
-              <option value="3">High-School</option>
+            <option value="1">Pre-Primary-School</option>
+              <option value="2">Primary-School</option>
+              <option value="3">Middle-School</option>
+              <option value="4">High-School</option>
             </select>
           </div>
           <div className="flex flex-col gap-2 col-span-2">

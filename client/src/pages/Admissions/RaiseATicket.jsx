@@ -7,7 +7,7 @@ const RaiseATicket = () => {
     const formattedDateTime = currentDateTime.toLocaleString();
 
     // Construct the Gmail compose URL with the timestamp and the new email address
-    const gmailComposeURL = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=zeeschoolmysore@gmail.com&su=Ticket%20Submission&body=Hello,%0A%0AI%20am%20encountering%20an%20issue%20with%20the%20online%20payment%20process.%20Please%20assist%20me.%0A%0AThank%20you.%0A%0A${formattedDateTime}`;
+    const gmailComposeURL = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=accounts@mysoreinternationalschool.com&su=Ticket%20Submission&body=Hello,%0A%0AI%20am%20encountering%20an%20issue%20with%20the%20online%20payment%20process.%20Please%20assist%20me.%0A%0AThank%20you.%0A%0A${formattedDateTime}`;
 
     // Open the Gmail compose URL in a new tab
     window.open(gmailComposeURL, '_blank');

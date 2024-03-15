@@ -17,8 +17,8 @@ const VirtualTour = () => {
             Virtual School Tour
           </h2>
           <h5 className="text-[15px] md:text-[18px] lg:text-xl font-semibold">
-            Your window to the exterior beauty and architectural grace of Mysore
-            International School.
+          Visit the Mysore International School, virtually! Now take a sneak peek inside our
+          campus through our exclusive campus virtual tour.
           </h5>
         </div>
         <p className="text-left md:text-justify">

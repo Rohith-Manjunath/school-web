@@ -11,12 +11,12 @@ const CardListComponent = () => {
       link: '',
       imageSrc: image1,
       title: 'Curriculum Overview',
-      description: 'Learners are given the right to arrange and customize their study schedule and timetable based on preferences.',
+      description: 'MIS offers a flexible curriculum embracing new trends and a holistic program including academics, arts, technology, and sports.',
     },
     {
       link: '',
       imageSrc: image2,
-      title: 'Beyond the Classrooms',
+      title: 'Nurturing Tomorrows Leaders',
       description: 'You can store online lessons via online cloud or download to your device and revise lessons on the way.',
     },
     {

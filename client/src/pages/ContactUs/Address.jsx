@@ -28,15 +28,15 @@ const Address = () => {
           <div className="space-y-8">
             <h4 className="font-semibold ">
               Email Address :{" "}
-              <span className="font-normal">zeeschoolmysore@gmail.com</span>
+              <span className="font-normal">admissions@mysoreinternationalschool.com</span>
             </h4>
             <h4 className="font-semibold ">
               Telephone Number :{" "}
-              <span className="font-normal">0821 2971010</span>
+              <span className="font-normal">0821 2971010 / 8884300400</span>
             </h4>
             <h4 className="font-semibold ">
               Admission Officer Name :{" "}
-              <span className="font-normal">Someone</span>
+              <span className="font-normal">Ms. Ranjitha</span>
             </h4>
             <h4 className="font-semibold ">
               Admission Officer E-mail address :{" "}
@@ -44,7 +44,7 @@ const Address = () => {
             </h4>
             <h4 className="font-semibold ">
               Admission Officer Mobile No :{" "}
-              <span className="font-normal">+91 8277 237 785</span>
+              <span className="font-normal">+91 888 4300 400 / +91 8277 237 785</span>
             </h4>
           </div>
         </div>

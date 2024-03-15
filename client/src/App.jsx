@@ -10,8 +10,7 @@ import Login from "./pages/AdminPanel/Login";
 import Register from "./pages/AdminPanel/Register";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import ProtectedRoute from "./components/layouts/ProtectedRoute";
-
-
+import TransportPage from "./pages/Facilities/TransportPage";
 
 const App = () => {
 
@@ -30,7 +29,8 @@ const App = () => {
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />} >
-
+        <Route exact path="/TransportPage" component={TransportPage} />
+      
 <Route path="/admin-panel" element={<AdminPanel/>}/>
 
         </Route>

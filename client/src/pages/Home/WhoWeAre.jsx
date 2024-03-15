@@ -11,9 +11,9 @@ const WhoWeAre = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
         viewport={{ once: true }}
-        className="col-span-1 md:flex items-center justify-center "
+        className="col-span-1 md:flex  "
       >
-        <img src={logo} alt="" className="rounded-md w-full md:w-[550px]" />
+        <img src={logo} alt="" className="rounded-md w-full " />
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
