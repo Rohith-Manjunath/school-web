@@ -1,14 +1,14 @@
 import React from 'react';
 import HeroImage from '../../assets/Images/FacilitiesImages/Amenities/transport.jpg';
-import TrackingImage from '../../assets/Images/FacilitiesImages/Amenities/GPS.jpg';
-import EmergencyAlert from '../../assets/Images/FacilitiesImages/Amenities/emergency.jpg';
-import communication from '../../assets/Images/FacilitiesImages/Amenities/communication.jpg';
-import monitoring from '../../assets/Images/FacilitiesImages/Amenities/monitoring.jpg';
+import Tech from '../../assets/Images/FacilitiesImages/Amenities/tech.jpg';
+import Learning from '../../assets/Images/FacilitiesImages/Amenities/learning.jpg';
+import Solving from '../../assets/Images/FacilitiesImages/Amenities/solving.jpg';
+import Resources from '../../assets/Images/FacilitiesImages/Amenities/resources.jpg';
 import Footer from "../../components/layouts/Footer";
 
 
 
-const TransportPage = () => {
+const Sports = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
@@ -21,10 +21,10 @@ const TransportPage = () => {
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="max-w-4xl mx-4 px-3 text-center bg-white p-10   rounded-md bg-opacity-70">
             <h1 className="text-2xl md:text-4xl font-bold font-title tracking-wide text-secondary mb-2">
-              Transportation
+            Sports Activity 
             </h1>
             <p className="text-sm md:text-lg max-w-3xl text-secondary font-description pb-6 tracking-wide">
-              Ensuring your child's safety is our top priority, with state-of-the-art GPS tracking systems and driver behavior monitoring technology
+            Mysore International School offers state-of-the-art sports facilities to support students' physical fitness and athletic development.
             </p>
             <a
               href="#features"
@@ -40,67 +40,67 @@ const TransportPage = () => {
       <div className="py-8 md:py-16 bg-gray-100" id="features">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold font-title tracking-wide text-secondary mb-10 text-center">
-            Key Features of Our Transportation Services
+          State-of-the-Art Sports Facilities which includes
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <li className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
               <img
-                src={TrackingImage}
+                src={Tech}
                 alt="Tracking"
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                  GPS Tracking and Driver Behavior Monitoring
+                Diverse Sports Offerings
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                  Our entire transportation fleet is equipped with state-of-the-art GPS tracking systems and driver behavior monitoring technology, ensuring real-time monitoring of vehicle locations and driving patterns.
+                Our school provides a wide range of sports activities, including throwball, basketball, golf, tennis, and more, catering to diverse interests and skill levels.
                 </p>
               </div>
             </li>
-            <li className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
             <img
-                src={EmergencyAlert}
+                src={Learning}
                 alt="Tracking"
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 md:p-6">
                 
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                  Emergency Alerts and Safety Drills
+                Professional Coaching
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                  In case of emergencies, our school management system allows for immediate communication between drivers, school authorities, and parents. Regular safety drills are conducted to educate students on proper behavior during transportation and emergency procedures.
+                Experienced and qualified coaches lead our sports programs, providing professional training, guidance, and support to students in developing their skills and techniques.
                 </p>
               </div>
             </li>
-            <li className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
             <img
-                src={communication}
+                src={Solving}
                 alt="Tracking"
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                  Transparency and Open Communication
+                Fitness and Wellness
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                  We believe in transparency and open communication. Any concerns or inquiries related to transportation can be easily addressed through the enquiry form on our school website, ensuring a smooth and responsive communication channel between parents and school authorities.
+                In addition to sports training, we prioritize fitness and wellness with dedicated facilities for gym workouts, yoga sessions, and wellness programs to promote overall well-being among students.
                 </p>
               </div>
             </li>
-            <li className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
             <img
-                src={monitoring}
+                src={Resources}
                 alt="Tracking"
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                    Driver Behavior Monitoring
+                Competitive Opportunities
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                Our tracking system also monitors driver behavior. This includes monitoring speed, sudden stops,and other driving patterns. Any deviations from safe driving practices are flagged for immediate attention and corrective action.
+                Students have the opportunity to participate in inter-school and regional sports competitions, fostering sportsmanship, teamwork, and leadership skills.
                 </p>
               </div>
             </li>
@@ -109,7 +109,6 @@ const TransportPage = () => {
       </div>
 
       {/* Closing Section */}
-      
       <div className="py-16 bg-white">
   <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     {/* <h2 className="text-3xl font-semibold text-gray-800 mb-6">
@@ -119,7 +118,7 @@ const TransportPage = () => {
       Our transportation services with tracking facilities are designed to provide the utmost safety and convenience to both students and their families. We understand that trust and peace of mind are essential when it comes to your child's transportation, and our commitment to these values is reflected in our advanced tracking technology.
     </p> */}
     <p className="text-gray-600 text-lg mb-10 ">
-    Join us in ensuring your child's safe and secure journey to and from Mysore International School.
+    Join us in Improving athletic abilities, fosters teamwork and leadership skills, and prepares students for competitive sports events.
     </p>
     <a
       href="#"
@@ -135,4 +134,4 @@ const TransportPage = () => {
   );
 };
 
-export default TransportPage;
+export default Sports;

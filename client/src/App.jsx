@@ -11,6 +11,9 @@ import Register from "./pages/AdminPanel/Register";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import ProtectedRoute from "./components/layouts/ProtectedRoute";
 import TransportPage from "./pages/Facilities/TransportPage";
+import ComputerPage from "./pages/Facilities/ComputerPage";
+import Sports from "./pages/Facilities/Sports";
+import Houses from "./pages/Facilities/Houses";
 
 const App = () => {
 
@@ -29,12 +32,12 @@ const App = () => {
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />} >
-        <Route exact path="/TransportPage" component={TransportPage} />
-      
-<Route path="/admin-panel" element={<AdminPanel/>}/>
-
+        <Route path="/admin-panel" element={<AdminPanel/>}/>
         </Route>
-        
+        <Route path="/TransportPage" element={<TransportPage />} />
+        <Route path="/ComputerPage" element={<ComputerPage />} />
+        <Route path="/Sports" element={<Sports />} />
+        <Route path="/Houses" element={<Houses />} />
       </Routes>
     </Router>
   );

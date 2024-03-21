@@ -22,8 +22,7 @@ const Admissions = () => {
         memorable educational journey. Our commitment to excellence is underscored by our
         impressive ranking in the education world. The dedicated admission team at MIS is here to
         ensure a seamless transition for prospective students, making our institution accessible to
-        students from around the globe.`}
-        
+        students from around the globe.`} 
       />
       <BreadCrumb 
       Currentpage={"Admissions"}
@@ -31,7 +30,6 @@ const Admissions = () => {
       <AdmissionProcess />
       <ReasonToChoose />
       <RaiseATicket />
-      
       <Enroll />
       {/* <PaperTear1 />
       {/* <Marquee /> */}

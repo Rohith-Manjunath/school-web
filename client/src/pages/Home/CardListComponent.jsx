@@ -11,12 +11,12 @@ const CardListComponent = () => {
       link: '',
       imageSrc: image1,
       title: 'Curriculum Overview',
-      description: 'MIS offers a flexible curriculum embracing new trends and a holistic program including academics, arts, technology, and sports.',
+      description: 'MIS offers a flexible curriculum  and a holistic program including academics, arts, technology, and sports.',
     },
     {
       link: '',
       imageSrc: image2,
-      title: 'Nurturing Tomorrows Leaders',
+      title: 'Holistic Education',
       description: 'You can store online lessons via online cloud or download to your device and revise lessons on the way.',
     },
     {
