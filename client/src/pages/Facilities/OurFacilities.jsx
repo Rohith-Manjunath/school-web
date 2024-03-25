@@ -36,7 +36,7 @@ const slides = [
 
 const OurFacilities = () => {
   return (
-    <div className="py-10 slider-container w-[100vw] h-[100vh] mx-auto flex flex-col tracking-wide text-white bg-secondary align-center items-center">
+    <div className="py-5 slider-container w-[100vw] h-[750px] object-cover mx-auto flex flex-col tracking-wide text-white bg-secondary align-center items-center">
       <h2 className=" md:text-center lg:text-4xl font-semibold text-white  text-2xl sm:text-3xl font-title">
         FACILITIES   </h2>
       <p className=" text-white md:text-center w-[80%] font-sans md:text-md lg:text-[16px] tracking-wider">
@@ -47,7 +47,7 @@ const OurFacilities = () => {
         dedication. Explore our campus and discover the resources that make
         Mysore International School a unique place of learning.{" "}
       </p>
-      <div className="w-[60%] h-[100%]  self-center my-10">
+      <div className="w-[70%] h-[90%]  self-center object-cover my-10">
         <Slider slides={slides} />
       </div>
     </div>

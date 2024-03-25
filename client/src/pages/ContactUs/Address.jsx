@@ -9,7 +9,7 @@ const Address = () => {
       <div className="md:grid space-y-12 md:space-y-0 grid-cols-2 w-[90%] mx-auto mt-8 text-textSecondary tracking-wide shadow-lg border pb-8 pt-4 rounded-lg">
         <div className="space-y-4 px-2 md:px-10">
           <h2 className="text-3xl md:text-4xl text-textSecondary  font-semibold font-title">
-            Mysore international school
+            Mysore International School
           </h2>
           <div className="font-semibold">
             <p className="lg:text-justify font-description">

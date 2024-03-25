@@ -6,7 +6,12 @@ import image3 from "../../assets/Images/FacilitiesImages/Amenities/SportsGround.
 import image4 from "../../assets/Images/FacilitiesImages/Amenities/chemistrylab.jpg";
 import image5 from "../../assets/Images/FacilitiesImages/Amenities/sportsarea.jpg";
 import image6 from "../../assets/Images/FacilitiesImages/Amenities/ComputerLab.jpg"
-import image7 from "../../assets/Images/FacilitiesImages/Amenities/Classroom.jpg"
+import image7 from "../../assets/Images/FacilitiesImages/Amenities/Classroom.jpg";
+import image8 from "../../assets/Images/FacilitiesImages/Amenities/security.jpg";
+import image9 from "../../assets/Images/FacilitiesImages/Amenities/music.jpg";
+import image10 from "../../assets/Images/FacilitiesImages/Amenities/art.jpg";
+import image11 from "../../assets/Images/FacilitiesImages/Amenities/math.jpg";
+import image12 from "../../assets/Images/FacilitiesImages/Amenities/scouts.jpg";
 import { Link } from "react-router-dom";
 
 const FacilityCard = () => {
@@ -37,6 +42,7 @@ const FacilityCard = () => {
       title: 'Classroom',
       image: image7,
       description: 'Experience interactive learning and a conducive environment in our classrooms.',
+      link: '/Classroom',
     },
     {
       id: 11,
@@ -50,42 +56,48 @@ const FacilityCard = () => {
       title: 'Science Laboratory',
       image: image4,
       description: 'Conduct experiments and explore the world of chemistry in our well-equipped laboratory.',
+      link: '/ScienceLab',
     },
     {
       id: 6,
       title: 'Student Safety',
-      image: 'https://placekitten.com/300/205',
+      image: image8,
       description: 'Unleash your musical talents and creativity in our dedicated music classroom.',
+      link: '/Security',
     },
     {
       id: 7,
       title: 'Library',
       image: image2,
       description: 'Immerse yourself in a world of knowledge and literature in our spacious library.',
+      link: '/Library',
     },
     {
       id: 8,
       title: 'Music',
-      image: image5,
+      image: image9,
       description: 'Experience the thrill of sports competitions in our modern sports arena.',
+      link: '/Music',
     },
     {
       id: 9,
       title: 'Art',
-      image: 'https://placekitten.com/300/208',
+      image: image10,
       description: 'Unveil your artistic talents and express yourself in our vibrant art studio.',
+      link: '/Art',
     },
     {
       id: 10,
       title: 'Scout and Guide',
-      image: image2,
+      image: image12,
       description: 'Immerse yourself in a world of knowledge and literature in our spacious library.',
+      link: '/ScoutsAndGuide',
     },
     
     {
       id: 12,
       title: 'MATH LAB',
-      image: 'https://placekitten.com/300/208',
+      image: image11,
       description: 'Unveil your artistic talents and express yourself in our vibrant art studio.',
     },
   ];
@@ -110,7 +122,7 @@ const FacilityCard = () => {
       >
         Explore our exceptional amenities at Mysore International School, enhancing student life with a modern swimming pool for relaxation and fitness, and a state-of-the-art sports arena for diverse activities.
       </motion.p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-10 lg:px-[150px]">
         {facilities.map((facility) => (
           <div
             key={facility.id}
@@ -121,7 +133,7 @@ const FacilityCard = () => {
               <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
                 <Link
                   to={facility.link || '#'}
-                  className="text-white font-semibold py-2 px-4 rounded-md bg-indigo-500 hover:bg-indigo-600 transition duration-300"
+                  className="text-white font-semibold py-2 px-4 rounded-md bg-secondary hover:bg-indigo-600 transition duration-300"
                 >
                   Know More
                 </Link>

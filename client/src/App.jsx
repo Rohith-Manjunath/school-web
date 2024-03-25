@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import Home from "./pages/Home/Home";
 import Academics from "./pages/Academics/Academics";
@@ -14,10 +14,15 @@ import TransportPage from "./pages/Facilities/TransportPage";
 import ComputerPage from "./pages/Facilities/ComputerPage";
 import Sports from "./pages/Facilities/Sports";
 import Houses from "./pages/Facilities/Houses";
+import Classroom from "./pages/Facilities/Classroom";
+import ScienceLab from "./pages/Facilities/ScienceLab";
+import Security from "./pages/Facilities/Security";
+import Library from "./pages/Facilities/Library";
+import Music from "./pages/Facilities/Music";
+import Art from "./pages/Facilities/art";
+import ScoutsAndGuide from "./pages/Facilities/ScoutsAndGuide";
 
 const App = () => {
-
-
   return (
     <Router>
       <Navbar />
@@ -31,13 +36,20 @@ const App = () => {
         <Route path="/admin-login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route element={<ProtectedRoute />} >
-        <Route path="/admin-panel" element={<AdminPanel/>}/>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/admin-panel" element={<AdminPanel />} />
         </Route>
         <Route path="/TransportPage" element={<TransportPage />} />
         <Route path="/ComputerPage" element={<ComputerPage />} />
         <Route path="/Sports" element={<Sports />} />
         <Route path="/Houses" element={<Houses />} />
+        <Route path="/Classroom" element={<Classroom />} />
+        <Route path="/ScienceLab" element={<ScienceLab />} />
+        <Route path="/Security" element={<Security />} />
+        <Route path="/Library" element={<Library />} />
+        <Route path="/Music" element={<Music />} />
+        <Route path="/Art" element={<Art />} />
+        <Route path="/ScoutsAndGuide" element={<ScoutsAndGuide />} />
       </Routes>
     </Router>
   );

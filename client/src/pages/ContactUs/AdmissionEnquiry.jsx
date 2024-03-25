@@ -121,8 +121,10 @@ const AdmissionEnquiry = () => {
               onChange={handleChange}
             >
               <option value="">Select Class</option>
-              <option value="prekg">Pre-KG</option>
-              <option value="ukg">UKG</option>
+              <option value="kindergarten">Kindergarten</option>
+              <option value="primary">Primary-School</option>
+              <option value="middleschool">Middle-School</option>
+              <option value="highschool">High-School</option>
               {/* Add other class options */}
             </select>
           </div>

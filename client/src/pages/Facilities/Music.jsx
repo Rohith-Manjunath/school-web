@@ -1,5 +1,5 @@
 import React from 'react';
-import HeroImage from '../../assets/Images/FacilitiesImages/Amenities/transport.jpg';
+import HeroImage from '../../assets/Images/FacilitiesImages/Amenities/ComputerLab.jpg';
 import Tech from '../../assets/Images/FacilitiesImages/Amenities/tech.jpg';
 import Learning from '../../assets/Images/FacilitiesImages/Amenities/learning.jpg';
 import Solving from '../../assets/Images/FacilitiesImages/Amenities/solving.jpg';
@@ -8,7 +8,7 @@ import Footer from "../../components/layouts/Footer";
 
 
 
-const Sports = () => {
+const Music = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
@@ -21,10 +21,10 @@ const Sports = () => {
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="max-w-4xl mx-4 px-3 text-center bg-white p-10   rounded-md bg-opacity-70">
             <h1 className="text-2xl md:text-4xl font-bold font-title tracking-wide text-secondary mb-2">
-            Sports Activity 
+            Music Program
             </h1>
             <p className="text-sm md:text-lg max-w-3xl text-secondary font-description pb-6 tracking-wide">
-            Mysore International School offers state-of-the-art sports facilities to support students' physical fitness and athletic development.
+            The music program at Mysore International School is designed to ignite a passion for music, nurture artistic talents, and cultivate a deep appreciation for musical expression among our students. 
             </p>
             <a
               href="#features"
@@ -40,7 +40,7 @@ const Sports = () => {
       <div className="py-8 md:py-16 bg-gray-100" id="features">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold font-title tracking-wide text-secondary mb-10 text-center">
-          State-of-the-Art Sports Facilities which includes
+            Key Features of Our Musical classroom
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
@@ -51,10 +51,10 @@ const Sports = () => {
               />
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                Diverse Sports Offerings
+                Artistic Expression
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                Our school provides a wide range of sports activities, including throwball, basketball, golf, tennis, and more, catering to diverse interests and skill levels.
+                Our music program encourages students to explore their creativity and express themselves artistically through various musical genres, instruments, and vocal performances. We provide opportunities for students to develop their musical talents and showcase their skills through concerts, recitals, and performances.
                 </p>
               </div>
             </li>
@@ -67,10 +67,10 @@ const Sports = () => {
               <div className="p-4 md:p-6">
                 
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                Professional Coaching
+                Musical Education
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                Experienced and qualified coaches lead our sports programs, providing professional training, guidance, and support to students in developing their skills and techniques.
+                We offer comprehensive musical education that covers theoretical knowledge, practical skills, music history, and appreciation. Students learn about musical concepts, notation, rhythm, melody, harmony, and ensemble playing, enhancing their understanding and proficiency in music.
                 </p>
               </div>
             </li>
@@ -82,10 +82,10 @@ const Sports = () => {
               />
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                Fitness and Wellness
+                Instrumental Training
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                In addition to sports training, we prioritize fitness and wellness with dedicated facilities for gym workouts, yoga sessions, and wellness programs to promote overall well-being among students.
+                Our school provides access to a wide range of musical instruments, including piano, guitar, violin, drums, flute, and more. Students receive expert guidance and training in playing their chosen instruments, allowing them to develop technical skills, musicality, and confidence in their musical abilities.
                 </p>
               </div>
             </li>
@@ -97,10 +97,10 @@ const Sports = () => {
               />
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                Competitive Opportunities
+                Vocal Training and Choir
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                Students have the opportunity to participate in inter-school and regional sports competitions, fostering sportsmanship, teamwork, and leadership skills.
+                Our vocal training programs focus on developing students' singing abilities, vocal techniques, and performance skills. We also have a school choir where students can participate, learn harmonization, teamwork, and stage presence while enjoying the joy of singing together.
                 </p>
               </div>
             </li>
@@ -109,15 +109,20 @@ const Sports = () => {
       </div>
 
       {/* Closing Section */}
-      <div className="py-16 bg-white">
+      <div className="py-16 bg-primary">
   <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    
-    <p className="text-gray-600 text-lg mb-10 ">
-    Join us in Improving athletic abilities, fosters teamwork and leadership skills, and prepares students for competitive sports events.
+    {/* <h2 className="text-3xl font-semibold text-gray-800 mb-6">
+      Experience Safe and Secure Transportation
+    </h2>
+    <p className="text-gray-600 text-lg mb-8">
+      Our transportation services with tracking facilities are designed to provide the utmost safety and convenience to both students and their families. We understand that trust and peace of mind are essential when it comes to your child's transportation, and our commitment to these values is reflected in our advanced tracking technology.
+    </p> */}
+    <p className="text-secondary tracking-wider text-lg font-semibold mb-10">
+    Join us at Mysore International School and discover the joy of music, creativity, and artistic expression. Experience the power of music in shaping minds, touching hearts, and creating unforgettable memories.
     </p>
     <a
       href="#"
-      className="bg-secondary text-white font-semibold py-3 px-10 rounded-md hover:bg-primary hover:text-secondary transition duration-300"
+      className="bg-secondary text-white font-semibold py-3 px-10 rounded-md hover:bg-primary border  hover:border-secondary hover:text-secondary transition duration-300"
     >
       Enroll Now
     </a>
@@ -129,4 +134,4 @@ const Sports = () => {
   );
 };
 
-export default Sports;
+export default Music;

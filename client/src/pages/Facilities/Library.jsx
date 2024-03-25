@@ -1,14 +1,14 @@
 import React from 'react';
 import HeroImage from '../../assets/Images/FacilitiesImages/Amenities/transport.jpg';
-import Tech from '../../assets/Images/FacilitiesImages/Amenities/tech.jpg';
-import Learning from '../../assets/Images/FacilitiesImages/Amenities/learning.jpg';
-import Solving from '../../assets/Images/FacilitiesImages/Amenities/solving.jpg';
-import Resources from '../../assets/Images/FacilitiesImages/Amenities/resources.jpg';
+import Spacious from '../../assets/Images/FacilitiesImages/Amenities/Classroom.jpg';
+import Learning from '../../assets/Images/FacilitiesImages/Amenities/HandsOn.jpg';
+import SmartClass from '../../assets/Images/FacilitiesImages/Amenities/SmartClass.jpg';
+import Environment from '../../assets/Images/FacilitiesImages/Amenities/Environment.jpg';
 import Footer from "../../components/layouts/Footer";
 
 
 
-const Sports = () => {
+const Library = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
@@ -21,10 +21,10 @@ const Sports = () => {
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="max-w-4xl mx-4 px-3 text-center bg-white p-10   rounded-md bg-opacity-70">
             <h1 className="text-2xl md:text-4xl font-bold font-title tracking-wide text-secondary mb-2">
-            Sports Activity 
+            Library Services 
             </h1>
-            <p className="text-sm md:text-lg max-w-3xl text-secondary font-description pb-6 tracking-wide">
-            Mysore International School offers state-of-the-art sports facilities to support students' physical fitness and athletic development.
+            <p className="text-sm md:text-lg max-w-3xl lg:px-5 text-secondary font-description pb-6 tracking-wide">
+            The library at Mysore International School is a cornerstone of knowledge and learning for our students. 
             </p>
             <a
               href="#features"
@@ -40,21 +40,21 @@ const Sports = () => {
       <div className="py-8 md:py-16 bg-gray-100" id="features">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold font-title tracking-wide text-secondary mb-10 text-center">
-          State-of-the-Art Sports Facilities which includes
+          Key Features of Our Library
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
               <img
-                src={Tech}
+                src={Spacious}
                 alt="Tracking"
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                Diverse Sports Offerings
+                An Abode of Knowledge
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                Our school provides a wide range of sports activities, including throwball, basketball, golf, tennis, and more, catering to diverse interests and skill levels.
+                Our library is a treasure trove of books, resources, and information that enriches the minds of our students. It serves as a vital source of knowledge and encourages a love for reading among students.
                 </p>
               </div>
             </li>
@@ -67,40 +67,40 @@ const Sports = () => {
               <div className="p-4 md:p-6">
                 
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                Professional Coaching
+                Academic Excellence
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                Experienced and qualified coaches lead our sports programs, providing professional training, guidance, and support to students in developing their skills and techniques.
+                The library plays a crucial role in positively impacting the academic achievement of our students. By providing access to a wide range of books, journals, and reference materials, students can enhance their understanding of various subjects and perform better during examinations.
                 </p>
               </div>
             </li>
             <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
             <img
-                src={Solving}
+                src={SmartClass}
                 alt="Tracking"
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                Fitness and Wellness
+                Curiosity and Innovation
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                In addition to sports training, we prioritize fitness and wellness with dedicated facilities for gym workouts, yoga sessions, and wellness programs to promote overall well-being among students.
+                We believe that libraries are catalysts for curiosity, innovation, and problem-solving. Our library spaces are designed to inspire creativity and critical thinking, encouraging students to explore new ideas, conduct research, and develop innovative solutions to real-world challenges.
                 </p>
               </div>
             </li>
             <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
             <img
-                src={Resources}
+                src={Environment}
                 alt="Tracking"
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
-                Competitive Opportunities
+                Cultural and Social Hub
                 </h3>
                 <p className="text-gray-600 text-sm md:text-base">
-                Students have the opportunity to participate in inter-school and regional sports competitions, fostering sportsmanship, teamwork, and leadership skills.
+                The library is an integral part of the cultural and social life of our school community. It serves as a central point for reading, cultural activities, access to information, knowledge building, deep thinking, and lively discussions. Students and staff alike benefit from the rich resources and collaborative learning environment that the library provides.
                 </p>
               </div>
             </li>
@@ -113,7 +113,7 @@ const Sports = () => {
   <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     
     <p className="text-gray-600 text-lg mb-10 ">
-    Join us in Improving athletic abilities, fosters teamwork and leadership skills, and prepares students for competitive sports events.
+    Join us at Mysore International School and immerse yourself in a world of knowledge, curiosity, and innovation through our vibrant library services. Unlock the doors to a brighter future filled with endless possibilities.
     </p>
     <a
       href="#"
@@ -129,4 +129,4 @@ const Sports = () => {
   );
 };
 
-export default Sports;
+export default Library;
