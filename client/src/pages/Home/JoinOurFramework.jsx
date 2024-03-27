@@ -13,11 +13,10 @@ const JoinOurFramework = () => {
           <p className="text-center pb-5 font-subtext tracking-wider text-white font-semibold tracking-wider text-l">Explore our comprehensive programme offerings designed to nurture your child's growth and development.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 pt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-[110px] pt-8 px-8 lg:px-0">
 
           {/* Card 1 */}
-          <div className="  border border-grey-300 bg-white rounded-md overflow-hidden hover:shadow-lg hover:shadow-primary">
-            <div>
+          <div className="grid border border-grey-300 bg-white rounded-md overflow-hidden hover:shadow-lg hover:shadow-primary ">
               <div>
                 <a >
                   <img src={EarlyYearsImage} alt="Course Image" className="w-full h-[250px] object-cover" />
@@ -27,7 +26,6 @@ const JoinOurFramework = () => {
                 <span className="font-title text-3xl font-bold tracking-wider text-secondary">Early Years</span>
                 <h3 className="font-subtext font-bold tracking-wider text-xl text-white bg-secondary py-2 px-4 rounded-md">The Early Years Programme</h3>
               </div>
-            </div>
           </div>
 
           {/* Card 2 */}
@@ -46,7 +44,7 @@ const JoinOurFramework = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="border border-grey-300 rounded-md overflow-hidden hover:shadow-lg hover:shadow-primary bg-white">
+          {/* <div className="border border-grey-300 rounded-md overflow-hidden hover:shadow-lg hover:shadow-primary bg-white">
             <div>
               <div>
                 <a >
@@ -58,7 +56,7 @@ const JoinOurFramework = () => {
                 <h3 className="font-subtext font-bold tracking-wider text-xl text-white bg-secondary py-2 px-4 rounded-md">The CBSE NIOS Programme</h3>
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
 

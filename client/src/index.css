@@ -34,7 +34,7 @@
   .active{
     border-bottom: 3px solid purple ;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     .slick-slide > div {
       margin: 0 50px;
     }

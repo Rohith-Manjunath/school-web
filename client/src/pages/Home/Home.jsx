@@ -12,6 +12,7 @@ import VirtualTour from "./VIrtualTour";
 import WelcomeToMIS from "./WelcomeToMis";
 import WhoWeAre from "./WhoWeAre";
 import JoinCbse from "./joincbse";
+import Marquee from "./marquee2";
 
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
       <PaperTear1 />
       <CardListComponent />
       <WhoWeAre />
+      <Marquee />
       <VirtualTour />
       <PaperTear2 />
       <JoinOurFramerwork />
@@ -29,6 +31,7 @@ const Home = () => {
       <JoinCbse />
       <PaperTear2 />
       <ReasonToPursue />
+      <PaperTear1 />
       <NewsAndEvents />
       <Schedule />
       <GetInTouch />

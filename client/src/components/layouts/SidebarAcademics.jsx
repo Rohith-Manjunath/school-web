@@ -102,14 +102,15 @@ const SidebarAcademics = ({ open, setOpen, title }) => {
           <div className="max-w-md">
             <div className="mb-2 block">
               <label className="text-black font-sans tracking-wide " htmlFor="phone">
-              Select your program*
+              Select your Grade*
             </label>
             </div>
             <div>
             <select name="select" id="select" className="rounded-md w-full font-serif tracking-wide uppercase text-fuchsia-950">
-              <option value="1">Primary-School</option>
-              <option value="2">Middle-School</option>
-              <option value="3">High-School</option>
+            <option value="1">Pre-Primary-School</option>
+              <option value="2">Primary-School</option>
+              <option value="3">Middle-School</option>
+              <option value="4">High-School</option>
             </select>
           </div>
           </div>

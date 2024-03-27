@@ -1,13 +1,22 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import SidebarAcademics from "../../components/layouts/SidebarAcademics";
 import { motion } from 'framer-motion';
 
 const OurPrograms = () => {
   const [show, setShow] = useState(false);
+  const cardsRef = useRef(null);
 
   const handleOpen = () => {
     setShow((prev) => !prev);
+  };
+
+  const handleScrollLeft = () => {
+    cardsRef.current.scrollLeft -= 300;
+  };
+
+  const handleScrollRight = () => {
+    cardsRef.current.scrollLeft += 300;
   };
 
   const programsData = [
@@ -29,6 +38,14 @@ const OurPrograms = () => {
     },
     {
       id: 3,
+      imageUrl: "",
+      title: "High-school",
+      description: `Cultivating minds, fostering growth in a secure, dynamic atmosphere.`,
+      age: "16-18 years",
+      schedule: " 8:00 AM - 5:00 PM",
+    },
+    {
+      id: 4,
       imageUrl: "",
       title: "High-school",
       description: `Cultivating minds, fostering growth in a secure, dynamic atmosphere.`,
@@ -58,54 +75,67 @@ const OurPrograms = () => {
           stages. Committed to fostering growth and success, we ensure every
           child thrives in a nurturing environment.
         </motion.p>
-        <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 1 }}
-        viewport={{ once: true }}
-        className="md:grid grid-cols-3 md:gap-4 lg:gap-10 xl:gap-20 lg:px-24">
-          {programsData.map((item) => {
-            return (
-              <Link
-                onClick={handleOpen}
-                key={item.id}
-                className="block w-full bg-white my-8 md:my-0 rounded-md p-2 text-textSecondary"
-              >
-                <div className="w-full">
-                  <img
-                    src="https://assets.telegraphindia.com/telegraph/2022/Dec/1670380679_new-project-2022-12-07t080748-004.jpg"
-                    alt=""
-                    className="w-full rounded"
-                  />
-                </div>
-                <div className="flex flex-col items-center justify-center p-3 ">
-                  <div className="w-full flex  flex-col gap-4 p-2 border-b-2">
-                    <h2 className="font-bold ">{item.title}</h2>
-                    <p className="max-md:text-[14px]">{item.description}</p>
+        <div className="relative w-[80%]">
+          <button
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-l-md"
+            onClick={handleScrollLeft}
+          >
+            &lt;
+          </button>
+          <div
+            ref={cardsRef}
+            className="flex gap-[200px] w-[100%] items-center h-auto overflow-x-auto scroll-smooth scrollbar-hide"
+          >
+            
+            {programsData.map((item) => {
+              return (
+                <Link
+                  onClick={handleOpen}
+                  key={item.id}
+                  className="block w-full bg-white rounded-md p-2 text-textSecondary shrink-0"
+                >
+                  <div className="w-full">
+                    <img
+                      src="https://assets.telegraphindia.com/telegraph/2022/Dec/1670380679_new-project-2022-12-07t080748-004.jpg"
+                      alt=""
+                      className="w-full rounded"
+                    />
                   </div>
-                  <div className="flex items-center justify-between w-full p-2 ">
-                    <div className="w-1/2 flex flex-col gap-2">
-                      <span className=" flex items-center justify-center font-semibold">
-                        Age
-                      </span>
-                      <span className="flex items-center justify-center text-red-600 text-[13px] max-md:text-[12px]">
-                        {item.age}
-                      </span>
+                  <div className="flex flex-col items-center justify-center p-3 ">
+                    <div className="w-full flex  flex-col gap-4 p-2 border-b-2">
+                      <h2 className="font-bold ">{item.title}</h2>
+                      <p className="max-md:text-[14px]">{item.description}</p>
                     </div>
-                    <div className="w-1/2  flex flex-col gap-2">
-                      <span className=" flex items-center justify-center font-semibold ">
-                        Schedule
-                      </span>
-                      <span className=" flex items-center justify-center text-red-600 text-[13px] max-md:text-[12px]">
-                        {item.schedule}
-                      </span>
+                    <div className="flex items-center justify-between w-full p-2 ">
+                      <div className="w-1/2 flex flex-col gap-2">
+                        <span className=" flex items-center justify-center font-semibold">
+                          Age
+                        </span>
+                        <span className="flex items-center justify-center text-red-600 text-[13px] max-md:text-[12px]">
+                          {item.age}
+                        </span>
+                      </div>
+                      <div className="w-1/2  flex flex-col gap-2">
+                        <span className=" flex items-center justify-center font-semibold ">
+                          Schedule
+                        </span>
+                        <span className=" flex items-center justify-center text-red-600 text-[13px] max-md:text-[12px]">
+                          {item.schedule}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            );
-          })}
-        </motion.div>
+                </Link>
+              );
+            })}
+          </div>
+          <button
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-r-md"
+            onClick={handleScrollRight}
+          >
+            &gt;
+          </button>
+        </div>
       </div>
       <SidebarAcademics
         open={show}

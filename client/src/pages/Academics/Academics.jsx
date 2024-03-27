@@ -4,7 +4,7 @@ import PaperTear1 from "../../components/layouts/PaperTear1";
 import AdmissionInfo from "./AdmissionInfo";
 import Faculty from "./Faculty";
 import OurPrograms from "./OurPrograms";
-import Resource from "./Resource";
+// import Resource from "./Resource";
 import image from "../../assets/Images/AcademicsImages/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg";
 import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
 import PaperTear2 from "../../components/layouts/PaperTear2";
@@ -26,7 +26,7 @@ const Academics = () => {
       <PaperTear2 />
       <OurVision />
       <AdmissionInfo />
-      <Resource />
+      {/* <Resource /> */}
       <PaperTear2 />
       <Footer />
     </div>

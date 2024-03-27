@@ -7,28 +7,28 @@ import trustee from '../../assets/Images/AcademicsImages/FacultyImages/trustee.j
 
 const Faculty = () => {
   const data = [
-    {
-      name: "Dr. Joseph K Thomas",
-      designation: "Founder & Chairman",
-      education: "MA., MBA., MDBA., MRICS (London) Ph.D (Management)",
-      img: chairman,
-      quote:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nisi exercitationem modi aspernatur quia, sed error similique dolor tempore optio blanditiis, cumque corporis sit provident facilis in rerum necessitatibus praesentium.",
-      contact: "rohith@test.com",
-      socialMedia: [
-        {
-          platform: "Instagram",
-          link: "https://www.instagram.com/mlzs_mysore/",
-          icon: <FaInstagram className="text-4xl hover:cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md instagram-icon" />,
-        },
-        {
-          platform: "Facebook",
-          link: "https://www.facebook.com/mlzsmys/",
-          icon: <FaFacebook className="text-4xl hover:cursor-pointer hover:bg-blue-500 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md" />,
-        },
-        /* Add more social media objects here if needed */
-      ],
-    },
+    // {
+    //   name: "Dr. Joseph K Thomas",
+    //   designation: "Founder & Chairman",
+    //   education: "MA., MBA., MDBA., MRICS (London) Ph.D (Management)",
+    //   img: chairman,
+    //   quote:
+    //     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nisi exercitationem modi aspernatur quia, sed error similique dolor tempore optio blanditiis, cumque corporis sit provident facilis in rerum necessitatibus praesentium.",
+    //   contact: "rohith@test.com",
+    //   socialMedia: [
+    //     {
+    //       platform: "Instagram",
+    //       link: "https://www.instagram.com/mlzs_mysore/",
+    //       icon: <FaInstagram className="text-4xl hover:cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md instagram-icon" />,
+    //     },
+    //     {
+    //       platform: "Facebook",
+    //       link: "https://www.facebook.com/mlzsmys/",
+    //       icon: <FaFacebook className="text-4xl hover:cursor-pointer hover:bg-blue-500 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md" />,
+    //     },
+    //     /* Add more social media objects here if needed */
+    //   ],
+    // },
     {
       name: "Helena Joseph",
       designation: "Trustee/Secretary",
@@ -82,8 +82,8 @@ const Faculty = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 1 }}
       viewport={{ once: true }}
-      className="text-start font-semibold font-title text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase lg:text-center ">
-        Faculty and staff
+      className="text-start font-semibold font-title text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase lg:text-center tracking-wider">
+        OUR MANAGMENT 
       </motion.h2>
       <motion.p
       initial={{ opacity: 0, y: -50 }}
