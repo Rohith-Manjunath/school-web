@@ -144,7 +144,7 @@ if(isLoading){
             </Link>
 
             {/* <RiTwitterXLine className="text-4xl hover:cursor-pointer hover:bg-black transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md"></RiTwitterXLine> */}
-            <Link to="">
+            <Link to="https://www.youtube.com/@mlzsmysuru3833">
               <BsYoutube className="text-4xl hover:cursor-pointer hover:bg-red-600 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md"></BsYoutube>
             </Link>
           </div>
