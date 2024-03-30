@@ -15,6 +15,15 @@ export const adminAuth = createApi({
       }),
       providesTags: ["event"],
     }),
+    getSingleEvent:builder.query({
+
+     query:(id)=>({
+      url: `event/${id}`,
+      method: "GET",
+      credentials: "include",
+     })
+
+    }),
     deleteEvent: builder.mutation({
       query: (id) => ({
         url: `event/${id}`,
@@ -26,4 +35,4 @@ export const adminAuth = createApi({
   }),
 });
 
-export const { useDeleteEventMutation, useGetAllEventsQuery } = adminAuth;
+export const { useDeleteEventMutation, useGetAllEventsQuery, useGetSingleEventQuery } = adminAuth;
