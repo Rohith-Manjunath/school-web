@@ -21,6 +21,10 @@ import Library from "./pages/Facilities/Library";
 import Music from "./pages/Facilities/Music";
 import Art from "./pages/Facilities/art";
 import ScoutsAndGuide from "./pages/Facilities/ScoutsAndGuide";
+import CbseCurriculum from "./pages/Home/CbseCurriculum";
+import HolisticEdu from "./pages/Home/HolisticEdu";
+import Awards from "./pages/Home/Awards";
+import CBSEProg from "./pages/Home/CBSEProg";
 
 const App = () => {
   return (
@@ -49,7 +53,11 @@ const App = () => {
         <Route path="/Library" element={<Library />} />
         <Route path="/Music" element={<Music />} />
         <Route path="/Art" element={<Art />} />
+        <Route path="/CbseCurriculum" element={<CbseCurriculum />} />
+        <Route path="/HolisticEdu" element={<HolisticEdu />} />
         <Route path="/ScoutsAndGuide" element={<ScoutsAndGuide />} />
+        <Route path="/Awards" element={<Awards />} />
+        <Route path="/CBSEProg" element={<CBSEProg />} />
       </Routes>
     </Router>
   );

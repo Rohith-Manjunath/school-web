@@ -62,7 +62,6 @@ const Navbar = () => {
           <p className="mt-5">All Rights reserved</p>
         </li>
       </ul>
-
       <ul className="hidden bg-primary lg:flex p-4 z-10 fixed top-0 left-0 items-center justify-around font-semibold tracking-wider w-full">
         <motion.li
           animate={{ y: 0, opacity: 1 }}

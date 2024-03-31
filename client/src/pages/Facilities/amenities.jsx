@@ -48,7 +48,7 @@ const FacilityCard = () => {
       id: 11,
       title: 'Houses',
       image: image5,
-      description: 'Experience the thrill of sports competitions in our modern sports arena.',
+      description: 'Promote healthy competition to learn and dream big.',
       link: '/Houses',
     },
     {
@@ -62,7 +62,7 @@ const FacilityCard = () => {
       id: 6,
       title: 'Student Safety',
       image: image8,
-      description: 'Unleash your musical talents and creativity in our dedicated music classroom.',
+      description: 'Students behavior not in the moments of comfort and convenient but to stand at times of  challenges.',
       link: '/Security',
     },
     {
@@ -76,7 +76,7 @@ const FacilityCard = () => {
       id: 8,
       title: 'Music',
       image: image9,
-      description: 'Experience the thrill of sports competitions in our modern sports arena.',
+      description: 'Unleash your musical talents and creativity in our dedicated music classroom',
       link: '/Music',
     },
     {
