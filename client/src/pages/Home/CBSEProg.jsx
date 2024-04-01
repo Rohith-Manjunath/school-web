@@ -66,7 +66,7 @@ const CBSEProg = () => {
        </div>
      </section>
 
-     {/* 5 E's of Enhanced Learning Experience */}
+     
      <section>
        <h2 className="text-3xl font-bold text-primary mb-4 text-center">5 E's of Enhanced Learning Experience at MIS</h2>
        {/* Each E Section Cards... */}
