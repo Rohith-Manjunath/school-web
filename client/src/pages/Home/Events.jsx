@@ -3,16 +3,35 @@ import { MdDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { useDeleteEventMutation, useGetAllEventsQuery } from "../../../Redux/adminAuth";
+import { useDeleteEventMutation, useGetAllEventsQuery, useGetSingleEventQuery } from "../../../Redux/adminAuth";
 import Modal from "react-modal";
+import { FaPen } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
+
+
 
 const Events = () => {
   const { user } = useSelector((state) => state.user);
   const { isAdmin } = user;
-  const { data, isLoading: isEventsLoading, isError: isEventsError, error: eventsError } = useGetAllEventsQuery();
+  const { data,isLoading: isEventsLoading, isError: isEventsError, error: eventsError } = useGetAllEventsQuery();
   const [openModal, setOpenModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [eventIdToDelete, setEventIdToDelete] = useState(null);
+  const [eventIdToEdit, setEventIdToEdit] = useState(null);
+  const { data: event, isLoading: isGetEventLoading, isError: isGetEventError, error: getEventError } = useGetSingleEventQuery(eventIdToEdit);
   const [deleteEvent, { isLoading: isDeleting, isError: deleteError, error: deleteEventError }] = useDeleteEventMutation();
+  const [eventDetails,setEventDetails] = useState({
+    title:event?.event?.title,
+    days:event?.event?.days,
+    duration:event?.event?.duration,
+    date:event?.event?.date
+  })
+
+  useEffect(()=>{
+    setEventDetails(event?.event)
+  },[event])
+
+  console.log(eventDetails)
 
   const settings = {
     dots: data?.events?.length > 3,
@@ -43,12 +62,42 @@ const Events = () => {
       }
     }
   };
+
+
+  const handleConfirmEdit = async (id) => {
+  
+    try{
+
+      console.log(eventDetails)
+
+    }catch(e){
+      toast.error(e.message);
+
+    }
+
+   
+  };
   
 
   const handleCancelDelete = () => {
     setOpenModal(false);
     setEventIdToDelete(null);
   };
+
+  const handleCancelEdit = () => {
+    setOpenEditModal(false);
+    setEventIdToEdit(null);
+  };
+
+  const handleEventChange = (e) => {
+    const { name, value } = e.target;  
+  
+    setEventDetails(prevEventDetails => ({
+      ...prevEventDetails,
+      [name]: value,
+    }));
+  };
+  
 
   const DeleteModal = ({ onConfirm, onCancel }) => {
     return (
@@ -86,6 +135,48 @@ const Events = () => {
     );
   };
 
+  const EditModal = ({ onConfirm, onCancel }) => {
+    return (
+      <Modal  isOpen={openEditModal}
+      shouldCloseOnOverlayClick={true}
+      onRequestClose={() => setOpenEditModal(false)} // Change setOpenModal to setOpenEditModal
+      style={{
+        overlay: {
+          zIndex: 9999,
+          backgroundColor: `rgba(0, 0, 0, 0.5)`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+      
+        content: {
+          width: "80%",
+          maxWidth: "600px",
+          height: "auto",
+          margin: "0 auto",
+          padding: "20px",
+          color: "#580B57",
+          background: "#fff",
+          borderRadius: "8px",
+          
+        },
+      }}
+      className="flex flex-col items-center justify-center text-center">
+
+       <IoMdClose className="font-semibold" onClick={()=>setOpenEditModal(false)}/>
+
+        <h2 className="mb-4 text-2xl font-semibold tracking-wider">Edit Event Details</h2>
+        <div className="flex items-center justify-center flex-col gap-4">
+         <input type="text" className="rounded-md border-gray-300 " name="title" value={eventDetails?.title}  onChange={handleEventChange}/>
+         <input type="text" className="rounded-md border-gray-300 " name="days" value={eventDetails?.days}  onChange={handleEventChange}/>
+         <input type="text" className="rounded-md border-gray-300 " name="date" value={eventDetails?.date}  onChange={handleEventChange}/>
+         <input type="text" className="rounded-md border-gray-300 " name="duration" value={eventDetails?.duration}  onChange={handleEventChange}/>
+         <button onClick={handleConfirmEdit}  className="btn font-semibold bg-blue-600 p-2 text-white rounded-md tracking-widest text-[15px] hover:bg-blue-500 ">Submit</button>
+        </div>
+      </Modal>
+    );
+  };
+
   useEffect(() => {
     if (isEventsError) {
       toast.error(eventsError.data.err);
@@ -98,7 +189,13 @@ const Events = () => {
     }
   }, [deleteError, deleteEventError]);
 
-  if (isEventsLoading || isDeleting) {
+  useEffect(() => {
+    if (isGetEventError) {
+      toast.error(getEventError.data.err);
+    }
+  }, [isGetEventError, getEventError]);
+
+  if (isEventsLoading || isDeleting || isGetEventLoading) {
     return <h2>Loading...</h2>;
   }
 
@@ -106,8 +203,8 @@ const Events = () => {
     <>
       <ToastContainer />
       <DeleteModal {...settings} onCancel={handleCancelDelete} onConfirm={()=>handleConfirmDelete(eventIdToDelete)}/>
+      <EditModal {...settings} onCancel={handleCancelEdit} onConfirm={()=>handleConfirmEdit(eventIdToEdit)}/>
        
-   
       <div className="w-[80%] py-20 mx-auto tracking-wide font-semibold relative">
         <Slider {...settings} className="">
           {data?.events.map((item) => (
@@ -120,6 +217,7 @@ const Events = () => {
               </div>
               <div className="p-6 bg-white">Duration: {item.duration}</div>
               {isAdmin && (
+                <>
                 <MdDelete
                   onClick={() => {
                     setOpenModal(true);
@@ -127,6 +225,14 @@ const Events = () => {
                   }}
                   className="text-red-600 absolute top-0 text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
                 />
+                <FaPen
+                  onClick={()=>{
+                    setOpenEditModal(true)
+                    setEventIdToEdit(item._id)
+                  }}
+                  className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500"
+                />
+                </>
               )}
             </div>
           ))}
