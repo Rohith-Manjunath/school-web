@@ -48,7 +48,11 @@ const FacilityCard = () => {
       id: 11,
       title: 'Houses',
       image: image5,
+<<<<<<< Updated upstream
       description: 'Promote healthy competition to learn and dream big.',
+=======
+      description: 'Promote healthy competition to learn and dream big',
+>>>>>>> Stashed changes
       link: '/Houses',
     },
     {
@@ -76,7 +80,11 @@ const FacilityCard = () => {
       id: 8,
       title: 'Music',
       image: image9,
+<<<<<<< Updated upstream
       description: 'Unleash your musical talents and creativity in our dedicated music classroom',
+=======
+      description: 'Unleash your musical talents and creativity in our dedicated music classroom.',
+>>>>>>> Stashed changes
       link: '/Music',
     },
     {
@@ -90,7 +98,7 @@ const FacilityCard = () => {
       id: 10,
       title: 'Scout and Guide',
       image: image12,
-      description: 'Immerse yourself in a world of knowledge and literature in our spacious library.',
+      description: 'Teaches the students to take care of themselves and stand on their own feet',
       link: '/ScoutsAndGuide',
     },
     
@@ -98,7 +106,7 @@ const FacilityCard = () => {
       id: 12,
       title: 'MATH LAB',
       image: image11,
-      description: 'Unveil your artistic talents and express yourself in our vibrant art studio.',
+      description: 'Teaching  equations to acquire more concepts and converse with the cosmos.',
     },
   ];
 

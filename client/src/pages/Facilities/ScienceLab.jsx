@@ -74,7 +74,7 @@ const ScienceLab = () => {
                 </p>
               </div>
             </li>
-            <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
+            {/* <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
             <img
                 src={Solving}
                 alt="Tracking"
@@ -88,8 +88,8 @@ const ScienceLab = () => {
                 The chemistry laboratory is where the magic of discovery happens. Students delve into the fascinating world of chemical reactions and processes through hands-on experimentation. From designing experiments to observing reactions firsthand, students develop a deeper understanding of chemical principles and improve their practical skills in handling apparatus and chemicals safely.
                 </p>
               </div>
-            </li>
-            <li className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
+            </li> */}
+            <li className="bg-white rounded-lg shadow-lg overflow-hidden items-center cursor-pointer">
             <img
                 src={Resources}
                 alt="Tracking"

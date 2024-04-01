@@ -9,6 +9,8 @@ import image from "../../assets/Images/AcademicsImages/patrick-tomasso-Oaqk7qqNh
 import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
 import PaperTear2 from "../../components/layouts/PaperTear2";
 import OurVision from "./OurVision";
+import Testimonials from "./Testimonials";
+import Timelines  from "./Timelines";
 const Academics = () => {
   return (
     <div className="">
@@ -22,10 +24,16 @@ const Academics = () => {
       Currentpage={"Academics"}/>
       <OurPrograms />
       <PaperTear1 />
-      <Faculty />
+      <Testimonials />
+      {/* <Faculty /> */}
       <PaperTear2 />
-      <OurVision />
+      <PaperTear1 />
+      <Timelines />
+      <PaperTear2 />
+      {/* <OurVision /> */}
+      <PaperTear1 />
       <AdmissionInfo />
+      
       {/* <Resource /> */}
       <PaperTear2 />
       <Footer />
