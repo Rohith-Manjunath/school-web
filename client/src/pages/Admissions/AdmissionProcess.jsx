@@ -1,29 +1,7 @@
 const AdmissionProcess = () => {
   return (
     <div className=" p-6 sm:p-12 md:px-20 flex flex-col gap-5 items-start justify-center text-textSecondary bg-primary">
-      <div className="flex flex-col items-start justify-center gap-2">
-        <h2 className="text-2xl font-semibold">Admission Process</h2>
-        <div className="flex flex-col items-start justify-center gap-3">
-          <p>
-            Admissions at Mysore international School is as per the following
-            procedure.
-          </p>
-          <div className="flex flex-col items-start justify-center gap-2">
-            <span>1. Filling Application Form @ Campus</span>
-            <span>2. Attend Counselling @ Campus</span>
-            <span>3. Confirmation of Admission</span>
-            <ul className="ml-10 ">
-              <li className="list-disc mt-1">Campus Tour</li>
-              <li className="list-disc mt-1">Online Test</li>
-              <li className="list-disc mt-1">Parents & Students Interaction</li>
-            </ul>
-            <span>4. Registration of Admission</span>
-            <span>
-              5. Congratulations! Your ward is in Mysore international school!
-            </span>
-          </div>
-        </div>
-      </div>
+     
       <div className="flex flex-col items-start justify-center gap-2">
         <h2 className="text-2xl font-semibold">
           Documents Required at the time of Admission

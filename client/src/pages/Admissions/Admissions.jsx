@@ -9,12 +9,14 @@ import RaiseATicket from "./RaiseATicket";
 import ReasonToChoose from "./ReasonToChoose";
 import image from "../../assets/Images/AcademicsImages/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg";
 import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
-
+import PayNow from "./PayNow";
+import AdmissionProces from "./AdmissionProces";
+import Marquee from "./Marquee";
 
 const Admissions = () => {
   return (
-    <div>
-      <Hero
+    <div className="h-[10vh]">
+      <Hero 
         text={"ADMISSION INFO"}
         image={image}
         description={`A warm welcome to the Mysore international School! We are excited to extend an invitation
@@ -28,12 +30,12 @@ const Admissions = () => {
       Currentpage={"Admissions"}
       Currentlink={"admissions"}/>
       <AdmissionProcess />
+      <PayNow />
       <ReasonToChoose />
       <RaiseATicket />
+      <AdmissionProces />
       <Enroll />
-      {/* <PaperTear1 />
-      {/* <Marquee /> */}
-      {/* <PaperTear2 /> */} 
+      <Marquee />
       <Footer />
     </div>
   );

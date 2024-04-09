@@ -2,27 +2,24 @@ import React from 'react';
 import HeroImage from '../../assets/Images/HomeImages/Holistic/image/5.jpg'; // Import your hero image
 import Footer from "../../components/layouts/Footer";
 
+import CarouselSliderCBSE from './CarouselSliderCBSE';
+
 const CBSEProg = () => {
  return (
-   <div className="container mx-auto px-4 pt-8">
+   <div className=" w-[100%]  pt-8 flex  flex-col">
      {/* Hero Image */}
 
       {/* Hero Section */}
-      <div className="w-full h-[500px] bg-cover bg-center mb-8">
-        <img
-          className="w-full h-full object-cover"
-          src={HeroImage}
-          alt="Hero Section Image"
-        />
-      </div>
+        <CarouselSliderCBSE />
+      
 
      {/* CBSE Program Overview */}
-     <section className="mb-12 text-center">
+     <section className="mb-12  mt-[2rem] text-center">
        <h2 className="text-3xl font-bold text-secondary font-tile mb-4">CBSE Program Overview</h2>
-       <p className="text-lg text-secondary mb-4">
+       <p className="text-lg text-secondary mb-4 px-10">
          The CBSE curriculum at Mysore International School is designed to provide a comprehensive learning experience across various disciplines.
        </p>
-       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+       <div className="grid grid-cols-1 sm:grid-cols-2 p-10 lg:grid-cols-3 gap-6">
          {/* Learning Area Cards... */}
          {/* Card 1 */}
          <div className="bg-white rounded-lg shadow-md p-6 transition-transform hover:-translate-y-2 border-2 border-secondary shadow-secondary cursor-pointer">
@@ -67,7 +64,7 @@ const CBSEProg = () => {
      </section>
 
      
-     <section>
+     <section className='p-10'>
        <h2 className="text-3xl font-bold text-primary mb-4 text-center">5 E's of Enhanced Learning Experience at MIS</h2>
        {/* Each E Section Cards... */}
        {/* Card 1 - ENGAGE */}

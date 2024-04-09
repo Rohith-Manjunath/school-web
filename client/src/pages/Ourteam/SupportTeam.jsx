@@ -8,26 +8,7 @@ const SupportTeam = () => {
         Support Team
       </h2>
 
-      <div className="space-y-6">
-        <OurTeamCard
-          name="Dr. Joseph K Thomas"
-          position={"Founder & Chairman"}
-          quote={
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nisi exercitationem modi aspernatur quia, sed error similique dolor tempore optio blanditiis, cumque corporis sit provident facilis in rerum necessitatibus praesentium."
-          }
-          education={"MA., MBA., MDBA., MRICS (London) Ph.D (Management)"}
-          image={chairman}
-        />
-        <OurTeamCard
-          name="Dr. Joseph K Thomas"
-          position={"Founder & Chairman"}
-          quote={
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nisi exercitationem modi aspernatur quia, sed error similique dolor tempore optio blanditiis, cumque corporis sit provident facilis in rerum necessitatibus praesentium."
-          }
-          education={"MA., MBA., MDBA., MRICS (London) Ph.D (Management)"}
-          image={chairman}
-        />
-      </div>
+      <img />
     </div>
   );
 };

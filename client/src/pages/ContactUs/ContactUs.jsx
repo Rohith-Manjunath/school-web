@@ -9,7 +9,7 @@ import PaperTear2 from "../../components/layouts/PaperTear2";
 
 const ContactUs = () => {
   return (
-    <div className="mt-20 bg-white">
+    <div >
       <Hero
         text={`Contact Us`}
         image={image}

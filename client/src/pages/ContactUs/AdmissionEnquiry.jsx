@@ -46,7 +46,7 @@ const AdmissionEnquiry = () => {
 
   return (
     <>
-    <div className="w-full max-w-[90%] mx-auto space-y-8 mt-16 text-textSecondary border  py-10 rounded-lg shadow-lg">
+    <div className="w-full max-w-[90%] mx-auto  mt-16 pt-10 text-textSecondary border bg-white mb-[5rem] rounded-lg shadow-lg">
       <h2 className="text-3xl font-semibold text-center text-textSecondary font-title">
         Admission Enquiry
       </h2>
@@ -55,7 +55,7 @@ const AdmissionEnquiry = () => {
       </h4>
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-5"
       >
         <div className="mb-4 flex flex-wrap -mx-2">
           <div className="w-full md:w-1/2 px-2 mb-4">

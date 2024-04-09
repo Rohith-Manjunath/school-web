@@ -5,7 +5,7 @@ import fac1 from '../../assets/Images/AcademicsImages/FacultyImages/fac1.jpg';
 import chairman from '../../assets/Images/AcademicsImages/FacultyImages/chairman.jpg';
 import trustee from '../../assets/Images/AcademicsImages/FacultyImages/trustee.jpg';
 
-const Faculty = () => {
+const OurManagementPeople = () => {
   const data = [
     // {
     //   name: "Dr. Joseph K Thomas",
@@ -76,7 +76,7 @@ const Faculty = () => {
   ];
 
   return (
-    <div className="mt-[-55px] pt-[100px] pb-[100px] bg-white my-[-59px] py-10 p-6 space-y-4  text-textSecondary">
+    <div className=" pt-[100px] pb-[100px] bg-white  py-10 p-6 space-y-4  text-textSecondary">
       <motion.h2 
       initial={{ opacity: 0, y: -50 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -116,4 +116,4 @@ const Faculty = () => {
   );
 };
 
-export default Faculty;
+export default OurManagementPeople;

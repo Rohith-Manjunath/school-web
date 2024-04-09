@@ -25,6 +25,7 @@ import CbseCurriculum from "./pages/Home/CbseCurriculum";
 import HolisticEdu from "./pages/Home/HolisticEdu";
 import Awards from "./pages/Home/Awards";
 import CBSEProg from "./pages/Home/CBSEProg";
+import EarlyProgram from "./pages/Home/EarlyProgram";
 
 const App = () => {
   return (
@@ -58,6 +59,7 @@ const App = () => {
         <Route path="/ScoutsAndGuide" element={<ScoutsAndGuide />} />
         <Route path="/Awards" element={<Awards />} />
         <Route path="/CBSEProg" element={<CBSEProg />} />
+        <Route path="/EarlyProgram" element={<EarlyProgram />} />
       </Routes>
     </Router>
   );

@@ -48,11 +48,9 @@ const FacilityCard = () => {
       id: 11,
       title: 'Houses',
       image: image5,
-<<<<<<< Updated upstream
-      description: 'Promote healthy competition to learn and dream big.',
-=======
+
       description: 'Promote healthy competition to learn and dream big',
->>>>>>> Stashed changes
+
       link: '/Houses',
     },
     {
@@ -80,11 +78,10 @@ const FacilityCard = () => {
       id: 8,
       title: 'Music',
       image: image9,
-<<<<<<< Updated upstream
-      description: 'Unleash your musical talents and creativity in our dedicated music classroom',
-=======
+
+
       description: 'Unleash your musical talents and creativity in our dedicated music classroom.',
->>>>>>> Stashed changes
+
       link: '/Music',
     },
     {

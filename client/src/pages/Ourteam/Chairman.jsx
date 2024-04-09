@@ -1,9 +1,9 @@
 import chairman from "../../assets/Images/AcademicsImages/FacultyImages/chairman.jpg";
 import OurTeamCard from "../../components/layouts/Cards/OurTeamCard";
 
-const OurManagement = () => {
+const Chairman = () => {
   return (
-    <div className="mt-14 mx-auto text-textSecondary w-[90%] bg-white">
+    <div className="mt-14  text-textSecondary w-[90%] bg-white">
       <h2 className="text-2xl font-tile font-semibold my-4 uppercase text-center ">
         Founder & Chairman
       </h2>
@@ -20,4 +20,4 @@ const OurManagement = () => {
   );
 };
 
-export default OurManagement;
+export default Chairman;

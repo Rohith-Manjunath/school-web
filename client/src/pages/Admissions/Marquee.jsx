@@ -3,7 +3,7 @@ const Marquee = () => {
     <div className="py-10">
       <marquee>
         <span className="text-textSecondary font-semibold text-3xl">
-          Admission open for 2024!
+          Enroll Today!
         </span>
       </marquee>
     </div>

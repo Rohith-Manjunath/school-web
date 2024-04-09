@@ -14,19 +14,19 @@ const CardListComponent = () => {
       link: 'CbseCurriculum',
       imageSrc: image1,
       title: 'Curriculum Overview',
-      description: 'MIS offers a flexible curriculum  and a holistic program including academics, arts, technology, and sports.',
+      description: ' MIS curriculum blends academics, hands-on learning, and innovative teaching.',
     },
     {
       link: 'HolisticEdu',
       imageSrc: image2,
       title: 'Holistic Education',
-      description: 'You can store online lessons via online cloud or download to your device and revise lessons on the way.',
+      description: 'It integrates academics with social, emotional, and physical development, fostering critical thinking and creativity.',
     },
     {
       link: 'awards',
       imageSrc: image3,
       title: 'Awards and Achievements',
-      description: 'We provide study materials with various formats: video, audio, slides, doc, prints, books and applications.',
+      description: 'MIS shines with awards across academics, sports, and activities, commitment to excellence.',
     },
   ];
 

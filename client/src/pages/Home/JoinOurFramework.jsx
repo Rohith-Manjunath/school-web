@@ -24,7 +24,7 @@ const JoinOurFramework = () => {
             </div>
             <div className="flex flex-col justify-center bg-white items-center gap-y-4 p-4">
               <span className="font-title text-3xl font-bold tracking-wider text-secondary">Early Years</span>
-              <Link to="/early-years" className="btn-primary"> {/* Use Link with 'to' prop */}
+              <Link to="./EarlyProgram" className="btn-primary"> {/* Use Link with 'to' prop */}
                 <h3 className="font-subtext font-bold tracking-wider text-xl text-white bg-secondary py-2 px-4 rounded-md">The Early Years Programme</h3>
               </Link>
             </div>

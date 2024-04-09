@@ -5,7 +5,7 @@ import image2 from "../../assets/Images/HomeImages/CarouselImages/school1.jpg"
 import image3 from "../../assets/Images/HomeImages/CarouselImages/school2.jpg"
 import image4 from "../../assets/Images/HomeImages/CarouselImages/children_kannada_rajostsava.jpg"
 import image5 from "../../assets/Images/HomeImages/CarouselImages/principle_and_children.jpg"
-const CarouselSlider = () => {
+const CarouselSliderCBSE = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const slides = [
@@ -59,7 +59,7 @@ const CarouselSlider = () => {
   }, [currentSlideIndex]);
 
   return (
-    <div className="relative h-[50vh] md:h-[70vh] overflow-hidden mt-[-5rem] md:mt-[-2rem]">
+    <div className="relative h-[50vh] overflow-hidden">
       <div className="slider-container h-full relative">
         {slides.map((slide, index) => (
           <div
@@ -114,4 +114,4 @@ const CarouselSlider = () => {
   );
 };
 
-export default CarouselSlider;
+export default CarouselSliderCBSE;

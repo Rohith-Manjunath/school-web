@@ -33,7 +33,7 @@ const ReasonToChoose = () => {
       transition={{ duration: 1, delay: 1 }}
       viewport={{ once: true }}
       className="text-center font-semibold text-2xl md:text-3xl capitalize">
-        A few reasons to choose
+        A few reasons to choose Online Payment Method
       </motion.h2>
       <motion.div 
       initial={{ opacity: 0, y: 100 }}
