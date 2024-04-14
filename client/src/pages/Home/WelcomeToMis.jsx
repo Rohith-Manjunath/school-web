@@ -6,10 +6,51 @@ import { IoMdClose } from 'react-icons/io';
 import { Label, Checkbox } from 'flowbite-react';
 import file from '../../assets/Files/Terms_and_Conditions.pdf';
 import logo from '../../assets/Images/LogoAndOthers/hori-xnjhSTpu.png';
+import { useEnrollMutation } from '../../../Redux/authApi';
+import { useAlert } from 'react-alert';
+
 
 const WelcomeToMIS = () => {
 
+  const [name,setName]=useState("")
+  const [dob,setDob]=useState("")
+  const [category,setCategory]=useState("")
+  const [phone,setPhone]=useState("")
+  const [altPhone,setAltPhone]=useState("")
+  const [address,setAddress]=useState("")
+  const [isModalOpen,setIsModalOpen]=useState(false)
+
+  const [enroll,{isLoading}]=useEnrollMutation()
+  const alert=useAlert()
+
+
+ const handleSubmit=async(e)=>{
+  e.preventDefault()
+
+  try{
+
+    await enroll({name,dob,category,phone,altPhone,address}).unwrap()
+    setIsModalOpen(false)
+    alert.success("Query submitted successfully")
+    setAddress("")
+    setAltPhone("")
+    setCategory("")
+    setName("")
+    setDob("")
+    setAddress("")
+
+  }catch(e){
+
+    alert.error(e?.data?.err)
+
+  }
+
+ }
+
+
   Modal.setAppElement('#root');
+
+
 
   return (
     <>
@@ -46,6 +87,7 @@ const WelcomeToMIS = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0 }}
             viewport={{ once: true }}
+            onClick={()=>setIsModalOpen(true)}
             className="md:w-1/3 rounded-md mt-5 shadow-sm border p-2 font-semibold tracking-widest bg-ctcPrimary text-white"
           >
             Enroll Today
@@ -65,7 +107,7 @@ const WelcomeToMIS = () => {
         </motion.div>
       </div>
       <Modal
-        isOpen={!open}
+        isOpen={isModalOpen}
         shouldCloseOnOverlayClick={true}
         className=""
         style={{
@@ -95,6 +137,7 @@ const WelcomeToMIS = () => {
       >
           <button
           className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl"
+          onClick={() => setIsModalOpen(false)}
         >
           <IoMdClose />
         </button>
@@ -105,7 +148,7 @@ const WelcomeToMIS = () => {
 
 
         <form
-          className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6"
+          className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6" onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-2">
             <label className="text-black font-sans tracking-wide font-semibold" htmlFor="name">
@@ -116,6 +159,7 @@ const WelcomeToMIS = () => {
               type="text"
               name="name"
               id='name'
+              onChange={(e)=>setName(e.target.value)}
               
             />
           </div>
@@ -128,6 +172,8 @@ const WelcomeToMIS = () => {
               type="date"
               name="dob"
               id='dob'
+              onChange={(e)=>setDob(e.target.value)}
+
 
               
             />
@@ -141,6 +187,8 @@ const WelcomeToMIS = () => {
               type="text"
               name="phone"
               id='phone'
+              onChange={(e)=>setPhone(e.target.value)}
+
 
               
             />
@@ -154,13 +202,15 @@ const WelcomeToMIS = () => {
               type="text"
               name="altPhone"
               id='altPhone'
+              onChange={(e)=>setAltPhone(e.target.value)}
+
             />
           </div>
           <div className="flex flex-col gap-2 col-span-2 my-8 md:my-0">
           <label className="text-black font-sans tracking-wide font-semibold" htmlFor="category">
               Category*
             </label>
-            <select name="category" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
+            <select onChange={(e)=>setCategory(e.target.value)} name="category" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
               <option value="1">Pre-Primary-School</option>
               <option value="2">Primary-School</option>
               <option value="3">Middle-School</option>
@@ -175,6 +225,8 @@ const WelcomeToMIS = () => {
               className="rounded-md outline-none border-slate-400 h-[60px] font-serif tracking-wide uppercase text-fuchsia-950"
               name="address"
               id='address'
+              onChange={(e)=>setAddress(e.target.value)}
+
             />
           </div>
           <div className="flex items-center gap-2 justify-between col-span-full">
@@ -200,10 +252,11 @@ const WelcomeToMIS = () => {
 
           <div className="col-span-2 text-center">
             <button
+            disabled={isLoading}
               type="submit"
               className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
             >
-             Submit
+             {isLoading ? "Submitting...":"Submit"}
             </button>
           </div>
         </form>

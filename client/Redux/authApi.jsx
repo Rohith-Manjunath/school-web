@@ -35,12 +35,20 @@ export const myApi = createApi({
       }),
     //   invalidatesTags: ["Posts"],
     }),
-  }),
+    enroll: builder.mutation({
+      query: (data) => ({
+        url: "enroll",
+        method: "POST",
+        body: data,
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),  }),
   
 });
 
 export const {
 useLoginMutation,
 useLogoutMutation,
-useRegisterMutation
+useRegisterMutation,
+useEnrollMutation
 } = myApi;
