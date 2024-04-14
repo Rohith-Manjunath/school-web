@@ -4,8 +4,37 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useQueryMutation } from "../../../Redux/authApi";
+import {useAlert} from 'react-alert'
 
 const GetInTouch = () => {
+
+  const [name,setName]=useState("");
+  const [email,setEmail]=useState("");
+  const [message,setMessage]=useState("")
+
+  const [query,{isLoading}] =useQueryMutation()
+  const alert=useAlert()
+
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+
+    try{
+
+      const data=await query({name,email,message}).unwrap()
+      alert.success(data?.message)
+
+      setName("")
+      setEmail("")
+      setMessage("")
+    }catch(e){
+
+      console.log(e)
+       alert.error(e?.data?.err)
+
+    }
+  }
 
 
   return (
@@ -26,31 +55,35 @@ const GetInTouch = () => {
           is seamless. Reach out today and let&#39;s start a conversation
           towards academic excellence and a promising future.
         </p>
-        <form className="flex flex-col w-full gap-4">
+        <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
           <input
             className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wide font-semibold"
             type="text"
             name="name"
             placeholder="Enter your name"
+            onChange={(e)=>setName(e.target.value)}
           />
           <input
             className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wide font-semibold"
             type="email"
             name="email"
             placeholder="Enter your email"
+            onChange={(e)=>setEmail(e.target.value)}
+
           />
           <textarea
             className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wider font-semibold"
             type="text"
             name="message"
             placeholder="Message"
+            onChange={(e)=>setMessage(e.target.value)}
             rows={5}
             style={{
               resize: "none",
             }}
           />
-          <button type="submit" className="bg-ctcSecondary text-ctcPrimary py-2 rounded-sm font-semibold tracking-wider hover:bg-ctcPrimary hover:text-ctcSecondary hover:border hover:scale-95 transition-all duration-400">
-            Submit
+          <button disabled={isLoading} type="submit" className="bg-ctcSecondary text-ctcPrimary py-2 rounded-sm font-semibold tracking-wider hover:bg-ctcPrimary hover:text-ctcSecondary hover:border hover:scale-95 transition-all duration-400">
+            {isLoading?"Submitting...":"Submit"}
           </button>
         </form>
       </motion.div>
