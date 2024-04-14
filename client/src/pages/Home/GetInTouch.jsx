@@ -2,56 +2,10 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { BsYoutube } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useQueryMutation } from "../../../Redux/UserAuth";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 const GetInTouch = () => {
-
-  const [query,{error,isError,isLoading}]=useQueryMutation()
-  const [form,setForm]=useState({
-    name:"",
-    email:"",
-    message:""
-  })
-
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const data = await query(form).unwrap();
-      toast.success(data.message);
-       
-          setForm({name:"",
-          email:"",
-          message:""})
-       
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-
- 
-useEffect(()=>{
-if(isError){
-  toast.error(error.data.err)
-}
-},[error,isError])
-
-if(isLoading){
-  return <h2>Loading...</h2>
-}
-
-
 
 
   return (
@@ -72,24 +26,20 @@ if(isLoading){
           is seamless. Reach out today and let&#39;s start a conversation
           towards academic excellence and a promising future.
         </p>
-        <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col w-full gap-4">
           <input
-          onChange={handleChange}
             className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wide font-semibold"
             type="text"
             name="name"
             placeholder="Enter your name"
           />
           <input
-          onChange={handleChange}
             className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wide font-semibold"
             type="email"
             name="email"
             placeholder="Enter your email"
           />
           <textarea
-                    onChange={handleChange}
-
             className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wider font-semibold"
             type="text"
             name="message"
@@ -99,8 +49,8 @@ if(isLoading){
               resize: "none",
             }}
           />
-          <button disabled={isLoading} type="submit" className="bg-ctcSecondary text-ctcPrimary py-2 rounded-sm font-semibold tracking-wider hover:bg-ctcPrimary hover:text-ctcSecondary hover:border hover:scale-95 transition-all duration-400">
-            {isLoading?"Submitting":"Submit"}
+          <button type="submit" className="bg-ctcSecondary text-ctcPrimary py-2 rounded-sm font-semibold tracking-wider hover:bg-ctcPrimary hover:text-ctcSecondary hover:border hover:scale-95 transition-all duration-400">
+            Submit
           </button>
         </form>
       </motion.div>

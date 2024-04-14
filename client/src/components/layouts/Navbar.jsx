@@ -8,12 +8,14 @@ import UserOptions from "./UserOptions";
 import { useSelector } from "react-redux";
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const {user}=useSelector(state=>state.user)
 
   const toggleNavbar = () => {
     setShow(!show);
   };
   const path = useLocation().pathname.split("/")[1];
+
+  const {user}=useSelector(state=>state?.user)
+
 
   return (
 <>
@@ -150,7 +152,8 @@ const Navbar = () => {
       </ul>
     </div>
     <div>
-   {user &&  <UserOptions user={{...user,avatar:{url:"https://assets.vogue.in/photos/6544d4422e0410ae2777ca31/3:4/w_2560%2Cc_limit/GettyImages-1395062633.jpg"}}} />}
+{user &&    <UserOptions user={{...user,avatar:{url:"https://assets.vogue.in/photos/6544d4422e0410ae2777ca31/3:4/w_2560%2Cc_limit/GettyImages-1395062633.jpg"}}} />
+}
     </div>
 </>
   );

@@ -1,48 +1,8 @@
 import { useEffect, useState } from "react";
-import { useAdmissionQueryMutation } from "../../../Redux/UserAuth";
 import { ToastContainer, toast } from "react-toastify";
 
 const AdmissionEnquiry = () => {
-  const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    dob: "",
-    class: "",
-    previousSchool: "",
-    place: "",
-    phone: "",
-    altPhone: "",
-    email: "",
-  });
-  const [query,{isError,error,isLoading}]=useAdmissionQueryMutation()
-
-
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit =async (e) => {
-    e.preventDefault();
-    console.log(formData)
-
-    try {
-      const data = await query(formData).unwrap();
-      toast.success(data.message);
-       
-      setFormData({})
-       
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-  useEffect(()=>{
-    if(isError){
-      toast.error(error.data.err)
-    }
-      },[isError,error])
+ 
 
   return (
     <>
@@ -54,7 +14,6 @@ const AdmissionEnquiry = () => {
         Student Details
       </h4>
       <form
-        onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
         <div className="mb-4 flex flex-wrap -mx-2">
@@ -72,8 +31,6 @@ const AdmissionEnquiry = () => {
               type="text"
               name="firstname"
               placeholder="First Name"
-              value={formData.firstname}
-              onChange={handleChange}
             />
           </div>
           <div className="w-full md:w-1/2 px-2 mb-4">
@@ -87,8 +44,7 @@ const AdmissionEnquiry = () => {
               type="text"
               name="lastname"
               placeholder="Last Name"
-              value={formData.lastname}
-              onChange={handleChange}
+
             />
           </div>
           <div className="w-full md:w-1/2 px-2 mb-4">
@@ -102,8 +58,7 @@ const AdmissionEnquiry = () => {
               type="date"
               name="dob"
               placeholder="Date of Birth"
-              value={formData.dob}
-              onChange={handleChange}
+      
             />
           </div>
           <div className="w-full md:w-1/2 px-2 mb-4">
@@ -117,8 +72,7 @@ const AdmissionEnquiry = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="selectedClass"
               name="class"
-              value={formData.selectedClass}
-              onChange={handleChange}
+    
             >
               <option value="">Select Class</option>
               <option value="kindergarten">Kindergarten</option>
@@ -142,8 +96,7 @@ const AdmissionEnquiry = () => {
               type="text"
               name="previousSchool"
               placeholder="Previous School Name"
-              value={formData.previousSchoolName}
-              onChange={handleChange}
+              
             />
           </div>
           <div className="w-full md:w-1/2 px-2 mb-4">
@@ -157,8 +110,7 @@ const AdmissionEnquiry = () => {
               type="text"
               name="place"
               placeholder="Place"
-              value={formData.place}
-              onChange={handleChange}
+
             />
           </div>
           <div className="w-full md:w-1/2 px-2 mb-4">
@@ -175,8 +127,6 @@ const AdmissionEnquiry = () => {
               type="text"
               name="phone"
               placeholder="Phone Number"
-              value={formData.phoneNumber}
-              onChange={handleChange}
             />
           </div>
           <div className="w-full md:w-1/2 px-2 mb-4">
@@ -192,8 +142,7 @@ const AdmissionEnquiry = () => {
               type="text"
               name="altPhone"
               placeholder="Alternative Phone Number"
-              value={formData.altPhoneNumber}
-              onChange={handleChange}
+      
             />
           </div>
           <div className="w-full md:w-1/2 px-2 mb-4">
@@ -207,8 +156,6 @@ const AdmissionEnquiry = () => {
               type="email"
               name="email"
               placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
             />
           </div>
         </div>
@@ -217,7 +164,7 @@ const AdmissionEnquiry = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            {isLoading ? "Submitting...":"Submit"}
+Submit
           </button>
         </div>
       </form>
