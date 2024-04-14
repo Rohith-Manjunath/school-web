@@ -25,10 +25,22 @@ export const myApi = createApi({
 
       }),
     }),
+    register: builder.mutation({
+      query: (credentials) => ({
+        url: "register",
+        method: "POST",
+        body: credentials,
+        credentials:"include"
+
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
   }),
+  
 });
 
 export const {
 useLoginMutation,
-useLogoutMutation
+useLogoutMutation,
+useRegisterMutation
 } = myApi;

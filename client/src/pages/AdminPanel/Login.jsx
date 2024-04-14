@@ -10,19 +10,12 @@ import { useAlert } from 'react-alert';
 
 const Login = () => {
 
-  const [login,{isLoading,isError,error,isSuccess}] =useLoginMutation();
+  const [login,{isLoading}] =useLoginMutation();
   const [password,setPassword]=useState("")
   const [email,setEmail]=useState("")
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const alert=useAlert()
-
-  useEffect(() => {
-    if (isError) {
-      toast.error(error?.data?.err);
-    }
-  }, [isError, error]);
-
 
   const handleSubmit=async(e)=>{
     e.preventDefault();
@@ -36,7 +29,7 @@ navigate("/")
 
     }
     catch(e){
-      toast.error(e.message)
+      alert.error(e?.data?.err)
       return;
     }
 

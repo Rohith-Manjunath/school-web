@@ -56,7 +56,7 @@ export default function UserOptions({ user }) {
 
 
     }catch(e){
-      toast.error(e.message);
+      toast.error(e?.data?.err);
       return;
     }
 
