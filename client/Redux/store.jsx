@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import userSlice from "./userSlice";
 import { myApi } from "./authApi";
+import { adminApi } from "./adminAuth";
 
 
 
@@ -11,7 +12,7 @@ import { myApi } from "./authApi";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user"],
+  whitelist: ["user","admin"],
 };
 
 // Persisted reducer
@@ -20,6 +21,7 @@ const persistedReducer = persistReducer(
   combineReducers({
     user: userSlice,
     [myApi.reducerPath]: myApi.reducer,
+    [adminApi.reducerPath]: adminApi.reducer,
   })
 );
 
@@ -28,7 +30,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(myApi.middleware)
+      .concat(myApi.middleware).concat(adminApi.middleware)
 });
 
 setupListeners(store.dispatch);
