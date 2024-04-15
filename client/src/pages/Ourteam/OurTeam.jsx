@@ -1,15 +1,17 @@
 import Hero from "../../components/layouts/Common/Hero";
 import Footer from "../../components/layouts/Footer";
-import Faculty from "../Academics/Faculty";
 import Achievements from "./Achievements";
 import JoinOurTeam from "./JoinOurTeam";
-import OurManagement from "./OurManagement";
+import OurManagement from "./Chairman";
 import OurTeamDes from "./OurTeamDes";
 import OurValues from "./OurValues";
 import SupportTeam from "./SupportTeam";
 import PaperTear2 from "../../components/layouts/PaperTear2";
 import image from "../../assets/Images/OutTeamImages/jason-goodman-Oalh2MojUuk-unsplash.jpg";
 import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
+import Chairman from "./Chairman";
+import OurManagementPeople from "./OurManagment";
+
 
 const OurTeam = () => {
   return (
@@ -25,8 +27,8 @@ const OurTeam = () => {
       Currentpage={"Our Team"}/>
       <OurTeamDes />
       <Achievements />
-      <OurManagement />
-      <Faculty />
+      <Chairman />
+      <OurManagementPeople />
       <SupportTeam />
       <OurValues />
       <JoinOurTeam />

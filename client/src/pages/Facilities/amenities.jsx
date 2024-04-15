@@ -48,7 +48,9 @@ const FacilityCard = () => {
       id: 11,
       title: 'Houses',
       image: image5,
-      description: 'Experience the thrill of sports competitions in our modern sports arena.',
+
+      description: 'Promote healthy competition to learn and dream big',
+
       link: '/Houses',
     },
     {
@@ -62,7 +64,7 @@ const FacilityCard = () => {
       id: 6,
       title: 'Student Safety',
       image: image8,
-      description: 'Unleash your musical talents and creativity in our dedicated music classroom.',
+      description: 'Students behavior not in the moments of comfort and convenient but to stand at times of  challenges.',
       link: '/Security',
     },
     {
@@ -76,7 +78,10 @@ const FacilityCard = () => {
       id: 8,
       title: 'Music',
       image: image9,
-      description: 'Experience the thrill of sports competitions in our modern sports arena.',
+
+
+      description: 'Unleash your musical talents and creativity in our dedicated music classroom.',
+
       link: '/Music',
     },
     {
@@ -90,7 +95,7 @@ const FacilityCard = () => {
       id: 10,
       title: 'Scout and Guide',
       image: image12,
-      description: 'Immerse yourself in a world of knowledge and literature in our spacious library.',
+      description: 'Teaches the students to take care of themselves and stand on their own feet',
       link: '/ScoutsAndGuide',
     },
     
@@ -98,7 +103,7 @@ const FacilityCard = () => {
       id: 12,
       title: 'MATH LAB',
       image: image11,
-      description: 'Unveil your artistic talents and express yourself in our vibrant art studio.',
+      description: 'Teaching  equations to acquire more concepts and converse with the cosmos.',
     },
   ];
 

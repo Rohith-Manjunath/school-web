@@ -2,13 +2,15 @@ import Hero from "../../components/layouts/Common/Hero";
 import Footer from "../../components/layouts/Footer";
 import PaperTear1 from "../../components/layouts/PaperTear1";
 import AdmissionInfo from "./AdmissionInfo";
-import Faculty from "./Faculty";
+// import Faculty from "./Faculty";
 import OurPrograms from "./OurPrograms";
 // import Resource from "./Resource";
 import image from "../../assets/Images/AcademicsImages/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg";
 import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
 import PaperTear2 from "../../components/layouts/PaperTear2";
 import OurVision from "./OurVision";
+import Testimonials from "./Testimonials";
+import Timelines  from "./Timelines";
 const Academics = () => {
   return (
     <div className="">
@@ -22,10 +24,16 @@ const Academics = () => {
       Currentpage={"Academics"}/>
       <OurPrograms />
       <PaperTear1 />
-      <Faculty />
+      <Testimonials />
+      {/* <Faculty /> */}
       <PaperTear2 />
-      <OurVision />
+      <PaperTear1 />
+      <Timelines />
+      <PaperTear2 />
+      {/* <OurVision /> */}
+      <PaperTear1 />
       <AdmissionInfo />
+      
       {/* <Resource /> */}
       <PaperTear2 />
       <Footer />
