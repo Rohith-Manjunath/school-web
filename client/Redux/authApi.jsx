@@ -51,7 +51,16 @@ export const myApi = createApi({
         body: data,
       }),
     //   invalidatesTags: ["Posts"],
-    }), 
+    }),
+    
+    parentsenroll: builder.mutation({
+      query: (credentials) => ({
+        url: "parentsEnroll",
+        method: "POST",
+        body: credentials,
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
   
   }),
   
@@ -62,5 +71,6 @@ useLoginMutation,
 useLogoutMutation,
 useRegisterMutation,
 useEnrollMutation,
-useQueryMutation
+useQueryMutation,
+useParentsenrollMutation
 } = myApi;

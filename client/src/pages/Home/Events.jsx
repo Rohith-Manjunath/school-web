@@ -63,38 +63,42 @@ const Events = () => {
 
   return (
     <div className="w-[80%] py-20 mx-auto tracking-wide font-semibold relative">
-      {
-        isLoading ? <h2>Loading...</h2> :<>
-        <button  ><LuRefreshCcw onClick={fetchData} className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 absolute top-0 right-[-500px]" /></button>
-        <Slider {...settings} className="">
+      <button onClick={fetchData}>
+        <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 absolute top-0 right-[-500px] animate-spin " />
+      </button>
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <>
           {data?.events?.length > 0 ? (
-            data.events.map((item) => (
-              <div className="text-center text-textSecondary rounded-md border m-auto mr-10 relative" key={item._id}>
-                <div className="bg-white underline underline-offset-4 p-8">{item.title}</div>
-                <div className="py-14 bg-secondary text-white space-y-2">
-                  <span className="font-semibold">{item.days}</span>
-                  <h2 className="font-semibold text-8xl">{item.date}</h2>
+            <Slider {...settings} className="">
+              {data.events.map((item) => (
+                <div className="text-center text-textSecondary rounded-md border m-auto mr-10 relative" key={item._id}>
+                  <div className="bg-white underline underline-offset-4 p-8">{item.title}</div>
+                  <div className="py-14 bg-secondary text-white space-y-2">
+                    <span className="font-semibold">{item.days}</span>
+                    <h2 className="font-semibold text-8xl">{item.date}</h2>
+                  </div>
+                  <div className="p-6 bg-white">Duration: {item.duration}</div>
+                  {isAdmin && (
+                    <>
+                      <MdDelete
+                        onClick={() => handleDelete(item?._id)}
+                        className="text-red-600 absolute top-0 text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
+                      />
+                      <FaPen
+                        className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500"
+                      />
+                    </>
+                  )}
                 </div>
-                <div className="p-6 bg-white">Duration: {item.duration}</div>
-                {isAdmin && (
-                  <>
-                    <MdDelete
-                      onClick={() => handleDelete(item?._id)}
-                      className="text-red-600 absolute top-0 text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
-                    />
-                    <FaPen
-                      className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500"
-                    />
-                  </>
-                )}
-              </div>
-            ))
+              ))}
+            </Slider>
           ) : (
-            <h2>No data yet</h2>
+            <h2 className="text-center font-semibold tracking-wider text-[25px] text-gray-500 animate-bounce">No data yet &#58; &#40; </h2>
           )}
-        </Slider>
         </>
-      }
+      )}
     </div>
   );
 }
