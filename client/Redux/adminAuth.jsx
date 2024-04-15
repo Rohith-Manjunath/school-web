@@ -27,13 +27,30 @@ export const adminApi = createApi({
 invalidatesTags:["Events"]
 
    
-    })
+    }),
+
+    postNewEvent: builder.mutation({
+      query: (event) => ({
+        url:`postEvent`,
+        method: "POST",
+        credentials:"include",
+        body:event
+
+      }),
+invalidatesTags:["Events"]
+
+ 
   }),
+
+  }),
+
+  
   
   
 });
 
 export const {
 useEventsQuery,
-useDeleteEventByIdMutation
+useDeleteEventByIdMutation,
+usePostNewEventMutation
 } = adminApi;
