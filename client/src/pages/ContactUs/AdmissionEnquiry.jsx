@@ -1,8 +1,47 @@
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useAdmissionQueryMutation } from "../../../Redux/authApi";
+import {useAlert} from 'react-alert'
 
 const AdmissionEnquiry = () => {
- 
+
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [dob, setDob] = useState('');
+  const [previousSchool, setPreviousSchool] = useState('');
+  const [phone, setPhone] = useState('');
+  const [altPhone, setAltPhone] = useState('');
+  const [selectedClass, setSelectedClass] = useState('');
+  const [place, setPlace] = useState('');
+  const [email, setEmail] = useState(''); 
+  const [admission,{isLoading}]=useAdmissionQueryMutation()
+  const alert=useAlert()
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    try{
+    
+   const data=await admission({firstname,lastname,dob,previousSchool,phone,altPhone,class:selectedClass,place,email}).unwrap()
+   alert.success(data?.message)
+   setAltPhone("")
+   setDob("")
+   setFirstName("")
+   setLastName("")
+   setPhone("")
+   setPreviousSchool("")
+   setSelectedClass("")
+   setPlace("")
+   setEmail("")
+
+
+
+    }catch(e){
+
+
+      alert.error(e?.data?.err)
+      return;
+
+    }  }
 
   return (
     <>
@@ -15,12 +54,14 @@ const AdmissionEnquiry = () => {
       </h4>
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        onSubmit={handleSubmit}
       >
         <div className="mb-4 flex flex-wrap -mx-2">
           <div className="w-full md:w-1/2 px-2 mb-4">
             <label
               className="block  text-sm font-bold mb-2"
               htmlFor="firstName"
+              
             >
               First Name
             </label>
@@ -31,6 +72,7 @@ const AdmissionEnquiry = () => {
               type="text"
               name="firstname"
               placeholder="First Name"
+              onChange={(e)=>setFirstName(e.target.value)}
             />
           </div>
           <div className="w-full md:w-1/2 px-2 mb-4">
@@ -44,6 +86,8 @@ const AdmissionEnquiry = () => {
               type="text"
               name="lastname"
               placeholder="Last Name"
+              onChange={(e)=>setLastName(e.target.value)}
+
 
             />
           </div>
@@ -58,6 +102,8 @@ const AdmissionEnquiry = () => {
               type="date"
               name="dob"
               placeholder="Date of Birth"
+              onChange={(e)=>setDob(e.target.value)}
+
       
             />
           </div>
@@ -72,7 +118,7 @@ const AdmissionEnquiry = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               id="selectedClass"
               name="class"
-    
+              onChange={(e)=>setSelectedClass(e.target.value)}
             >
               <option value="">Select Class</option>
               <option value="kindergarten">Kindergarten</option>
@@ -86,6 +132,7 @@ const AdmissionEnquiry = () => {
             <label
               className="block  text-sm font-bold mb-2"
               htmlFor="previousSchoolName"
+
             >
               Previous School Name
             </label>
@@ -96,6 +143,8 @@ const AdmissionEnquiry = () => {
               type="text"
               name="previousSchool"
               placeholder="Previous School Name"
+              onChange={(e)=>setPreviousSchool(e.target.value)}
+
               
             />
           </div>
@@ -110,6 +159,8 @@ const AdmissionEnquiry = () => {
               type="text"
               name="place"
               placeholder="Place"
+              onChange={(e)=>setPlace(e.target.value)}
+
 
             />
           </div>
@@ -127,6 +178,8 @@ const AdmissionEnquiry = () => {
               type="text"
               name="phone"
               placeholder="Phone Number"
+              onChange={(e)=>setPhone(e.target.value)}
+
             />
           </div>
           <div className="w-full md:w-1/2 px-2 mb-4">
@@ -142,6 +195,8 @@ const AdmissionEnquiry = () => {
               type="text"
               name="altPhone"
               placeholder="Alternative Phone Number"
+              onChange={(e)=>setAltPhone(e.target.value)}
+
       
             />
           </div>
@@ -156,6 +211,8 @@ const AdmissionEnquiry = () => {
               type="email"
               name="email"
               placeholder="Email"
+              onChange={(e)=>setEmail(e.target.value)}
+
             />
           </div>
         </div>
@@ -164,7 +221,7 @@ const AdmissionEnquiry = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-Submit
+{isLoading ? "Submitting..." : "Submit"}
           </button>
         </div>
       </form>

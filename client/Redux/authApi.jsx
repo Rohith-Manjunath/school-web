@@ -61,6 +61,14 @@ export const myApi = createApi({
       }),
     //   invalidatesTags: ["Posts"],
     }),
+    admissionQuery: builder.mutation({
+      query: (data) => ({
+        url: "admissionquery",
+        method: "POST",
+        body: data,
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
   
   }),
   
@@ -72,5 +80,6 @@ useLogoutMutation,
 useRegisterMutation,
 useEnrollMutation,
 useQueryMutation,
-useParentsenrollMutation
+useParentsenrollMutation,
+useAdmissionQueryMutation
 } = myApi;
