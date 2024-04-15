@@ -1,44 +1,60 @@
 import Slider from "react-slick";
 import { MdDelete } from "react-icons/md";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { useDeleteEventMutation, useGetAllEventsQuery, useGetSingleEventQuery } from "../../../Redux/adminAuth";
 import Modal from "react-modal";
 import { FaPen } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import { useDeleteEventByIdMutation, useEventsQuery, usePostNewEventMutation } from "../../../Redux/adminAuth";
+import { useAlert } from 'react-alert';
+import { LuRefreshCcw } from "react-icons/lu";
+import { IoAddOutline } from "react-icons/io5";
+
 
 
 
 const Events = () => {
-  const { user } = useSelector((state) => state.user);
-  const { isAdmin } = user;
-  const { data,isLoading: isEventsLoading, isError: isEventsError, error: eventsError } = useGetAllEventsQuery();
-  const [openModal, setOpenModal] = useState(false);
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const [eventIdToDelete, setEventIdToDelete] = useState(null);
-  const [eventIdToEdit, setEventIdToEdit] = useState(null);
-  const { data: event, isLoading: isGetEventLoading, isError: isGetEventError, error: getEventError } = useGetSingleEventQuery(eventIdToEdit);
-  const [deleteEvent, { isLoading: isDeleting, isError: deleteError, error: deleteEventError }] = useDeleteEventMutation();
-  const [eventDetails,setEventDetails] = useState({
-    title:event?.event?.title,
-    days:event?.event?.days,
-    duration:event?.event?.duration,
-    date:event?.event?.date
-  })
+  const [isAdmin, setIsAdmin] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(null);
+  const { isLoading: queryLoading, data: queryData ,refetch} = useEventsQuery();
+  const [deletePostMutation] = useDeleteEventByIdMutation();
+  const [postEvent]=usePostNewEventMutation()
+  const alert = useAlert();
+  const [isModalOpen,setIsModalOpen]=useState(false)
+  const [days,setDays]=useState("")
+  const[title,setTitle]=useState("");
+  const [duration,setDuration]=useState("");
+  const [date,setDate]=useState("");
 
-  useEffect(()=>{
-    setEventDetails(event?.event)
-  },[event])
+  useEffect(() => {
+    setIsLoading(queryLoading);
+    setData(queryData);
+  }, [queryLoading, queryData]);
 
-  console.log(eventDetails)
+  const handleDelete = async (id) => {
+    try {
+      if (window.confirm("Are you sure you want to delete this post?")) {
+        const data = await deletePostMutation(id).unwrap();
+        alert.success(data?.message);
+        console.log(data);
+        return;
+      }
+    } catch (e) {
+      alert.error(e?.data?.err);
+      return;
+    }
+  };
+
+  if (isLoading) {
+    return <h2>Loading....</h2>;
+  }
 
   const settings = {
     dots: data?.events?.length > 3,
-    arrows: data?.events?.length > 3 && true,
+    arrows: true,
     infinite: true,
     speed: 800,
-    slidesToShow: Math.min(data?.events?.length, 3), // Show a maximum of 3 slides or the actual number of events, whichever is smaller
+    slidesToShow: Math.min(data?.events?.length, 3),
     slidesToScroll: 1,
     responsive: [
       {
@@ -50,196 +66,189 @@ const Events = () => {
     ],
   };
 
-  const handleConfirmDelete = async (id) => {
-    if (id) {
-      try {
-        await deleteEvent(id)
-        toast.success("Event deleted successfully");
-        setOpenModal(false); // Close the modal
-        setEventIdToDelete(null); // Reset eventIdToDelete
-      } catch (error) {
-        toast.error(error.message);
-      }
-    }
-  };
+  const fetchData=async()=>{
+    await refetch()
+  }
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
 
 
-  const handleConfirmEdit = async (id) => {
-  
     try{
 
-      console.log(eventDetails)
+      const data=await postEvent({days,date,duration,title}).unwrap()
+      alert.success(data?.message)
+      setIsModalOpen(false)
 
     }catch(e){
-      toast.error(e.message);
-
+      alert.error(e?.data?.err)
+      return;
     }
 
-   
-  };
-  
-
-  const handleCancelDelete = () => {
-    setOpenModal(false);
-    setEventIdToDelete(null);
-  };
-
-  const handleCancelEdit = () => {
-    setOpenEditModal(false);
-    setEventIdToEdit(null);
-  };
-
-  const handleEventChange = (e) => {
-    const { name, value } = e.target;  
-  
-    setEventDetails(prevEventDetails => ({
-      ...prevEventDetails,
-      [name]: value,
-    }));
-  };
-  
-
-  const DeleteModal = ({ onConfirm, onCancel }) => {
-    return (
-      <Modal  isOpen={openModal}
-      shouldCloseOnOverlayClick={true}
-      onRequestClose={() => setOpenModal(false)}
-      style={{
-        overlay: {
-          zIndex: 9999,
-          backgroundColor: `rgba(0, 0, 0, 0.5)`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        content: {
-          width: "80%",
-          maxWidth: "600px",
-          height: "auto",
-          margin: "0 auto",
-          padding: "20px",
-          color: "#580B57",
-          background: "#fff",
-          borderRadius: "8px",
-        },
-      }}
-      className="flex flex-col items-center justify-center text-center">
-        <div className="flex items-center justify-center flex-col gap-4">
-          <p className="text-[18px] font-semibold">Are you sure you want to delete this event?</p>
-          <div className="flex items-center justify-center gap-6">
-            <button onClick={onConfirm} className="font-semibold bg-red-600 p-2 text-white rounded-md tracking-widest text-[15px] hover:bg-red-500">Confirm</button>
-            <button onClick={onCancel} className="btn font-semibold bg-blue-600 p-2 text-white rounded-md tracking-widest text-[15px] hover:bg-blue-500 ">Cancel</button>
-          </div>
-        </div>
-      </Modal>
-    );
-  };
-
-  const EditModal = ({ onConfirm, onCancel }) => {
-    return (
-      <Modal  isOpen={openEditModal}
-      shouldCloseOnOverlayClick={true}
-      onRequestClose={() => setOpenEditModal(false)} // Change setOpenModal to setOpenEditModal
-      style={{
-        overlay: {
-          zIndex: 9999,
-          backgroundColor: `rgba(0, 0, 0, 0.5)`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-      
-        content: {
-          width: "80%",
-          maxWidth: "600px",
-          height: "auto",
-          margin: "0 auto",
-          padding: "20px",
-          color: "#580B57",
-          background: "#fff",
-          borderRadius: "8px",
-          
-        },
-      }}
-      className="flex flex-col items-center justify-center text-center">
-
-       <IoMdClose className="font-semibold" onClick={()=>setOpenEditModal(false)}/>
-
-        <h2 className="mb-4 text-2xl font-semibold tracking-wider">Edit Event Details</h2>
-        <div className="flex items-center justify-center flex-col gap-4">
-         <input type="text" className="rounded-md border-gray-300 " name="title" value={eventDetails?.title}  onChange={handleEventChange}/>
-         <input type="text" className="rounded-md border-gray-300 " name="days" value={eventDetails?.days}  onChange={handleEventChange}/>
-         <input type="text" className="rounded-md border-gray-300 " name="date" value={eventDetails?.date}  onChange={handleEventChange}/>
-         <input type="text" className="rounded-md border-gray-300 " name="duration" value={eventDetails?.duration}  onChange={handleEventChange}/>
-         <button onClick={handleConfirmEdit}  className="btn font-semibold bg-blue-600 p-2 text-white rounded-md tracking-widest text-[15px] hover:bg-blue-500 ">Submit</button>
-        </div>
-      </Modal>
-    );
-  };
-
-  useEffect(() => {
-    if (isEventsError) {
-      toast.error(eventsError.data.err);
-    }
-  }, [isEventsError, eventsError]);
-
-  useEffect(() => {
-    if (deleteError) {
-      toast.error(deleteEventError.data.err);
-    }
-  }, [deleteError, deleteEventError]);
-
-  useEffect(() => {
-    if (isGetEventError) {
-      toast.error(getEventError.data.err);
-    }
-  }, [isGetEventError, getEventError]);
-
-  if (isEventsLoading || isDeleting || isGetEventLoading) {
-    return <h2>Loading...</h2>;
   }
 
   return (
     <>
-      <ToastContainer />
-      <DeleteModal {...settings} onCancel={handleCancelDelete} onConfirm={()=>handleConfirmDelete(eventIdToDelete)}/>
-      <EditModal {...settings} onCancel={handleCancelEdit} onConfirm={()=>handleConfirmEdit(eventIdToEdit)}/>
-       
-      <div className="w-[80%] py-20 mx-auto tracking-wide font-semibold relative">
-        <Slider {...settings} className="">
-          {data?.events.map((item) => (
-            <div className="text-center text-textSecondary rounded-md border m-auto mr-10 relative" key={item._id}>
-              <div className="bg-white underline underline-offset-4 p-8">{item.title}</div>
-              <div className="py-14 bg-secondary text-white space-y-2">
-                <span className="font-semibold">{item.days}</span>
-                <span className="font-semibold">{data?.totalEvents}</span>
-                <h2 className="font-semibold text-8xl">{item.date}</h2>
-              </div>
-              <div className="p-6 bg-white">Duration: {item.duration}</div>
-              {isAdmin && (
-                <>
-                <MdDelete
-                  onClick={() => {
-                    setOpenModal(true);
-                    setEventIdToDelete(item._id);
-                  }}
-                  className="text-red-600 absolute top-0 text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
-                />
-                <FaPen
-                  onClick={()=>{
-                    setOpenEditModal(true)
-                    setEventIdToEdit(item._id)
-                  }}
-                  className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500"
-                />
-                </>
-              )}
-            </div>
-          ))}
-        </Slider>
+    <div className="w-[80%] py-20 mx-auto tracking-wide font-semibold relative">
+      <div className="flex items-center justify-center gap-4 absolute top-0 right-0">
+      <button onClick={fetchData}>
+        <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
+      </button>
+      <button>
+       <IoAddOutline className="w-full font-semibold my-4 text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
+      </button>
       </div>
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <>
+          {data?.events?.length > 0 ? (
+            <Slider {...settings} className="">
+              {data?.events?.map((item) => (
+                <div className="text-center text-textSecondary rounded-md border m-auto mr-10 relative" key={item?._id}>
+                  <div className="bg-white underline underline-offset-4 p-8">{item?.title}</div>
+                  <div className="py-14 bg-secondary text-white space-y-2">
+                    <span className="font-semibold">{item?.days}</span>
+                    <h2 className="font-semibold text-3xl md:text-4xl">{item?.date}</h2>
+                  </div>
+                  <div className="p-6 bg-white">Duration: {item?.duration}</div>
+                  {isAdmin && (
+                    <>
+                      <MdDelete
+                        onClick={() => handleDelete(item?._id)}
+                        className="text-red-600 absolute top-0 text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
+                      />
+                      <FaPen
+                        className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500"
+                      />
+                    </>
+                  )}
+                </div>
+              ))}
+            </Slider>
+          ) : (
+            <h2 className="text-center font-semibold tracking-wider text-[25px] text-gray-500 animate-bounce">No data yet &#58; &#40; </h2>
+          )}
+        </>
+      )}
+    </div>
+    <Modal
+    isOpen={isModalOpen}
+    shouldCloseOnOverlayClick={true}
+    className=""
+    style={{
+      overlay: {
+        zIndex: 98,
+        backgroundColor: `rgba(0, 0, 0, 0.5)`,
+      },
+      content: {
+        width: '90%', // Adjust the width for small screens
+        maxWidth: '600px',
+        height: '50vh', // Set height to auto for responsiveness
+        margin: '0 auto',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'center',
+        flexDirection: 'column',
+        color: '#580B57',
+        overflowY: 'auto', // Enable vertical scrolling
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '10px',
+        border: 'none',
+        outline: 'none',
+      },
+    }}
+  >
+      <button
+      className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl"
+      onClick={() => setIsModalOpen(false)}
+    >
+      <IoMdClose />
+    </button>
+    <h2 className=" mb-5 md:mt-0 mt-[12rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px] tracking-wide ">
+       Add Event
+    </h2>
+
+
+
+    <form
+      className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6" onSubmit={handleSubmit}
+    >
+      <div className="flex flex-col gap-2">
+        <label className="text-black font-sans tracking-wide font-semibold" htmlFor="duration">
+          Duration
+        </label>
+        <input
+          className="rounded-md outline-none border-slate-400 font-serif tracking-wide uppercase text-fuchsia-950 md:text-base"
+          type="text"
+          name="duration"
+          id='duration'
+          onChange={(e)=>setDuration(e.target.value)}
+          placeholder="Ex : All day"
+          
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label className="text-black font-sans tracking-wide font-semibold" htmlFor="date">
+          Date
+        </label>
+        <input
+          className="rounded-md outline-none border-slate-400 font-serif tracking-wide uppercase text-fuchsia-950"
+          type="date"
+          name="date"
+          id='date'
+          onChange={(e)=>setDate(e.target.value)}
+
+
+          
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label className="text-black font-sans tracking-wide font-semibold" htmlFor="title">
+          Title
+        </label>
+        <input
+          className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
+          type="text"
+          name="title"
+          id='title'
+          onChange={(e)=>setTitle(e.target.value)}
+          placeholder="Ex : Cultural Event"
+
+
+          
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label className="text-black font-sans tracking-wide font-semibold" htmlFor="days">
+          Days
+        </label>
+        <input
+          className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
+          type="text"
+          name="days"
+          id='days'
+          onChange={(e)=>setDays(e.target.value)}
+          placeholder="Ex : Mon - Fri"
+
+        />
+      </div>
+
+      <div className="col-span-2 text-center">
+        <button
+        disabled={isLoading}
+          type="submit"
+          className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
+        >
+         {isLoading ? "Submitting...":"Submit"}
+        </button>
+      </div>
+    </form>
+  </Modal>
     </>
   );
-};
+}
 
 export default Events;

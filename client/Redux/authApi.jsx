@@ -1,23 +1,85 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const authApi = createApi({
-  reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/api/" }),
+export const myApi = createApi({
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:4000/api/",
+  }),
+//   tagTypes: ["Posts"],
   endpoints: (builder) => ({
-    enroll: builder.mutation({
-      query: (formData) => ({
-        url: "enroll",
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "login",
         method: "POST",
-        body: formData,
+        body: credentials,
+        credentials:"include"
+
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "logout",
+        method: "POST",
+        credentials:"include"
+
       }),
     }),
-    
+    register: builder.mutation({
+      query: (credentials) => ({
+        url: "register",
+        method: "POST",
+        body: credentials,
+        credentials:"include"
 
-   
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
+    enroll: builder.mutation({
+      query: (data) => ({
+        url: "enroll",
+        method: "POST",
+        body: data,
+      }),
+    //   invalidatesTags: ["Posts"],
+    }), 
+  
+    query: builder.mutation({
+      query: (data) => ({
+        url: "query",
+        method: "POST",
+        body: data,
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
+    
+    parentsenroll: builder.mutation({
+      query: (credentials) => ({
+        url: "parentsEnroll",
+        method: "POST",
+        body: credentials,
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
+    admissionQuery: builder.mutation({
+      query: (data) => ({
+        url: "admissionquery",
+        method: "POST",
+        body: data,
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
+  
   }),
+  
 });
 
 export const {
-  useEnrollMutation,
-  
-} = authApi;
+useLoginMutation,
+useLogoutMutation,
+useRegisterMutation,
+useEnrollMutation,
+useQueryMutation,
+useParentsenrollMutation,
+useAdmissionQueryMutation
+} = myApi;

@@ -57,6 +57,7 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler("Invalid credentials", 401));
     }
 
+    
     jwtToken("Login successful", 200, user, res);
 });
 

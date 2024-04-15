@@ -2,56 +2,39 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { BsYoutube } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useQueryMutation } from "../../../Redux/UserAuth";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useQueryMutation } from "../../../Redux/authApi";
+import {useAlert} from 'react-alert'
 
 const GetInTouch = () => {
 
-  const [query,{error,isError,isLoading}]=useQueryMutation()
-  const [form,setForm]=useState({
-    name:"",
-    email:"",
-    message:""
-  })
+  const [name,setName]=useState("");
+  const [email,setEmail]=useState("");
+  const [message,setMessage]=useState("")
+
+  const [query,{isLoading}] =useQueryMutation()
+  const alert=useAlert()
 
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit=async(e)=>{
     e.preventDefault();
-    try {
-      const data = await query(form).unwrap();
-      toast.success(data.message);
-       
-          setForm({name:"",
-          email:"",
-          message:""})
-       
-    } catch (error) {
-      toast.error(error.message);
+
+    try{
+
+      const data=await query({name,email,message}).unwrap()
+      alert.success(data?.message)
+
+      setName("")
+      setEmail("")
+      setMessage("")
+    }catch(e){
+
+      console.log(e)
+       alert.error(e?.data?.err)
+
     }
-  };
-
-
- 
-useEffect(()=>{
-if(isError){
-  toast.error(error.data.err)
-}
-},[error,isError])
-
-if(isLoading){
-  return <h2>Loading...</h2>
-}
-
-
+  }
 
 
   return (
@@ -74,33 +57,33 @@ if(isLoading){
         </p>
         <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
           <input
-          onChange={handleChange}
             className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wide font-semibold"
             type="text"
             name="name"
             placeholder="Enter your name"
+            onChange={(e)=>setName(e.target.value)}
           />
           <input
-          onChange={handleChange}
             className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wide font-semibold"
             type="email"
             name="email"
             placeholder="Enter your email"
+            onChange={(e)=>setEmail(e.target.value)}
+
           />
           <textarea
-                    onChange={handleChange}
-
             className="p-2 pl-3 rounded-md text-black bg-tertiary outline-none font-serif tracking-wider font-semibold"
             type="text"
             name="message"
             placeholder="Message"
+            onChange={(e)=>setMessage(e.target.value)}
             rows={5}
             style={{
               resize: "none",
             }}
           />
           <button disabled={isLoading} type="submit" className="bg-ctcSecondary text-ctcPrimary py-2 rounded-sm font-semibold tracking-wider hover:bg-ctcPrimary hover:text-ctcSecondary hover:border hover:scale-95 transition-all duration-400">
-            {isLoading?"Submitting":"Submit"}
+            {isLoading?"Submitting...":"Submit"}
           </button>
         </form>
       </motion.div>

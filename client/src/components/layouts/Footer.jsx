@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/Images/LogoAndOthers/logo-2-v2-6Ot8O22k.png"; // Adjust the path accordingly
+import { useState } from "react";
+import Modal from 'react-modal';
+import { useAlert } from "react-alert";
+import { FaEye } from "react-icons/fa";
+import { RiEyeCloseFill } from "react-icons/ri";
+
+
+
 
 const Footer = () => {
 
- 
 
   const links = [
     { title: "About Us", to: "/about-us" },
@@ -19,8 +26,37 @@ const Footer = () => {
     { title: "Digital Library", to: "/library" },
   ];
 
+  const [isModalOpen,setIsModalOpen]=useState(false)
+  const [secretKey,setSecretKey]=useState("")
+  const navigate=useNavigate()
+  const alert=useAlert()
+  const [isSecretKeyVisible,setIsSecretKeyVisible]=useState(false)
+
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+
+    console.log(secretKey.toLocaleLowerCase() === process.env.AdminSecretKey.toLocaleLowerCase())
+
+    console.log(secretKey.toLocaleLowerCase())
+    console.log(process.env.AdminSecretKey.toLocaleLowerCase())
+
+    if(secretKey.toLocaleLowerCase() === process.env.AdminSecretKey.toLocaleLowerCase()){
+
+      alert.success(`Admin access granted`)
+      setIsModalOpen(false);
+      setSecretKey("")
+      navigate("/login")
+    }else{
+      alert.error(`Admin access denied`)
+      setIsModalOpen(false)
+    }
+
+  }
+
   return (
-    <div className="bg-secondary p-4 md:p-10 text-[12px] text-white lg:py-10 tracking-wide">
+  <>
+  
+  <div className="bg-secondary p-4 md:p-10 text-[12px] text-white lg:py-10 tracking-wide">
       <div className="lg:grid grid-cols-4 md:gap-20 space-y-10 md:space-y-0">
         <div className="mb-10 md:mb-0 lg:flex items-center justify-start">
           <img src={logo} className="w-[300px]" alt="" />
@@ -56,12 +92,14 @@ const Footer = () => {
             {links.map((link, index) => (
               <li key={index} className="text-start">
                 {typeof link === "object" ? (
-                  <Link
-                    to={link.to}
-                    className="after:bg-white after:scale-0 hover:after:scale-100 after:h-[2px] after:origin-center after:block after:transition-all after:duration-300 after:rounded-lg inline-block"
-                  >
-                    {link.title}
-                  </Link>
+                <Link
+                to={link.title !== "Admin login" && link.to}
+                onClick={link.title === "Admin login" ? () => setIsModalOpen(true) : undefined}
+                className="after:bg-white after:scale-0 hover:after:scale-100 after:h-[2px] after:origin-center after:block after:transition-all after:duration-300 after:rounded-lg inline-block"
+              >
+
+{link.title}                  
+</Link>
                 ) : (
                   <span>{link}</span>
                 )}
@@ -96,6 +134,60 @@ const Footer = () => {
         <p>Developed by webstor labs.</p>
       </div>
     </div>
+
+    <Modal 
+    
+    isOpen={isModalOpen}
+    shouldCloseOnOverlayClick={true}
+    style={{
+      overlay: {
+        zIndex: 98,
+        backgroundColor: `rgba(0, 0, 0, 0.5)`,
+      },
+      content: {
+        width: '90%', // Adjust the width for small screens
+        maxWidth: '600px',
+        height: '40vh', // Set height to auto for responsiveness
+        margin: '0 auto',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'center',
+        flexDirection: 'column',
+        color: '#580B57',
+        overflowY: 'auto', // Enable vertical scrolling
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '10px',
+        border: 'none',
+        outline: 'none',
+        backgroundColor:`rgba(255,255,255,0.2)`,
+      },
+    }}
+
+    >
+
+<form action="" onSubmit={handleSubmit} className="flex items-center justify-center flex-col gap-5">
+<h2 className="font-semibold tracking-wider text-white underline underline-offset-4 text-2xl">Admin Login</h2>
+<div className="flex items-center justify-center bg-white py-1 px-4 rounded-md">
+<input
+  type={isSecretKeyVisible ? "text" : "password"}
+  placeholder="Enter secret key"
+  className="rounded-md border-none outline-none"
+  style={{   
+    backgroundColor: "transparent",
+    border:"0px solid"
+  }} 
+  onChange={(e) => setSecretKey(e.target.value)}
+/>
+{!isSecretKeyVisible ? <RiEyeCloseFill onClick={()=>setIsSecretKeyVisible(!isSecretKeyVisible)} className="hover:cursor-pointer"/> :<FaEye onClick={()=>setIsSecretKeyVisible(!isSecretKeyVisible)} className="hover:cursor-pointer"/>}
+</div>
+<button className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800" type="submit">Submit</button>
+
+</form>
+
+    </Modal>
+  </>
   );
 };
 

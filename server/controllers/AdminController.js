@@ -1,7 +1,10 @@
 const Events = require("../models/EventsSchema");
+const News = require("../models/NewsSchema");
 const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
+const cloudinary = require("cloudinary");
+
 
 exports.postEvent=catchAsyncError(async(req,res,next)=>{
 
@@ -203,6 +206,159 @@ exports.getAllAdmissionQueries=catchAsyncError(async(req,res,next)=>{
         success:true,
         queries,
         totalQueries
+    })
+
+
+})
+
+exports.postNews=catchAsyncError(async(req,res,next)=>{
+
+   try{
+    const {time,date,image,title}=req.body;
+
+    const myCloud = await cloudinary.v2.uploader.upload(image, {
+        folder: "school/newsImages",
+        width: 250,
+        height: 250,
+        crop: "scale",
+      });
+
+      const isNewsExists=await News.findOne({title})
+
+      if(isNewsExists){
+        return next (new ErrorHandler(`News already exists with this title : ${title}`, 409))
+      }
+
+       await News.create({
+        title,
+        time,
+        date,
+        avatar: {
+          public_id: myCloud?.public_id,
+          url: myCloud?.secure_url,
+        },
+      });
+
+      res.status(201).json({
+        success:true,
+        message:"New news created successfully"
+
+      })
+
+
+   }catch(e){
+    return next(new ErrorHandler(e.message,500))
+   }
+
+})
+
+exports.getAllNews=catchAsyncError(async(req,res,next)=>{
+
+    const news=await News.find();
+
+    const totalNews = await News.countDocuments();
+
+    res.status(200).json({
+        success:true,
+        news,
+        totalNews
+    })
+
+
+
+})
+
+exports.deleteNews=catchAsyncError(async(req,res,next)=>{
+    const {newsId}=req.params;
+    if(!newsId){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const news=await News.findById(newsId);
+
+    if(!news){
+        return next(new ErrorHandler("No news found",404));
+    }
+
+    const {public_id}=news.avatar
+    cloudinary.v2.uploader.destroy(public_id);
+
+
+  await News.deleteOne({_id:newsId})
+
+    res.status(200).json({
+        success:true,
+        message:"News deleted successfully",
+     
+        
+    })
+})
+
+
+exports.getSingleNews=catchAsyncError(async(req,res,next)=>{
+
+    const {newsId}=req.params;
+    if(!newsId){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const news=await News.findById(newsId);
+
+    if(!news){
+        return next(new ErrorHandler("No news found",404));
+    }
+
+    res.status(200).json({
+        success:true,
+        news
+        
+    })
+
+})
+
+
+exports.updateNews=catchAsyncError(async(req,res,next)=>{
+
+    const {newsId}=req.params;
+
+    if(!newsId){
+        return next(new ErrorHandler("Invalid id",401));
+    }
+
+    const news=await News.findById(newsId)
+
+    
+
+    if(!news){
+        return next(new ErrorHandler("News not found",404));
+    }
+
+    const {title,date,time,image}=req.body;
+
+
+    const {public_id}=news.avatar
+    cloudinary.v2.uploader.destroy(public_id);
+
+    const myCloud = await cloudinary.v2.uploader.upload(image, {
+        folder: "school/newsImages",
+        width: 250,
+        height: 250,
+        crop: "scale",
+      });
+
+
+
+    news.title=title;
+    news.date=date;
+    news.time=time;
+    news.avatar.public_id=myCloud?.public_id
+    news.avatar.url=myCloud?.secure_url
+
+    await news.save()
+    
+    res.status(200).json({
+        success: true,
+        message:"News updated successfully"
     })
 
 

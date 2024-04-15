@@ -6,18 +6,20 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { useLogoutMutation } from "../../../Redux/UserAuth";
 import { ToastContainer, toast } from "react-toastify";
+import { useLogoutMutation } from "../../../Redux/authApi";
 import { useDispatch } from "react-redux";
-import { clearUser } from "../../../Redux/UserSlice";
+import { LogoutUser } from "../../../Redux/userSlice";
+import { useAlert } from "react-alert";
 
 
 export default function UserOptions({ user }) {
   const [open, setOpen] = React.useState(false);
   const [backdropOpen, setBackdropOpen] = React.useState(false); // Manage backdrop state
   const navigate = useNavigate();
-  const [logout,{isError,isLoading,error}]=useLogoutMutation()
+  const [logout,{isLoading,isError,error,data,isSuccess}]=useLogoutMutation()
   const dispatch=useDispatch()
+  const alert=useAlert()
 
   const handleOpen = () => {
     setOpen(true);
@@ -29,16 +31,7 @@ export default function UserOptions({ user }) {
     setBackdropOpen(false); // Close backdrop when SpeedDial closes
   };
 
-  React.useEffect(()=>{
-
-
-    if(isError && error.data.err.trim()==="jwt expired"){
-      toast.error(error.data.err)
-      navigate("/login");
-
-    }
-
-  },[isError,error,navigate])
+ 
 
   const handleBackdropClick = () => {
     setOpen(false);
@@ -52,23 +45,23 @@ export default function UserOptions({ user }) {
     navigate("/profile");
   };
 
-  const logoutUser = async() => {
+  const logoutUser=async()=>{
 
     try{
-const data=await logout();
-toast.success(data.message)
-navigate("/login");
-dispatch(clearUser())
+
+      const data=await logout().unwrap();
+      alert.success(data?.message)
+      dispatch(LogoutUser())
+      navigate("/login")
+
 
     }catch(e){
-      toast.error(e.message)
+      toast.error(e?.data?.err);
+      return;
     }
 
-  };
-
-  if(isLoading){
-    return <h2>Loading...</h2>
   }
+
 
   const actions = [
     { icon: <PersonIcon />, name: "Profile", func: profile },
@@ -76,7 +69,9 @@ dispatch(clearUser())
 
   ];
 
-  if (user.isAdmin) {
+  const isAdmin=true;
+
+  if (isAdmin) {
     actions.unshift({
       icon: <DashboardIcon />,
       name: "Dashboard",
@@ -98,7 +93,7 @@ dispatch(clearUser())
       {backdropOpen && <div className="backdrop" onClick={handleBackdropClick} />} {/* Render backdrop if open */}
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
-        icon={<img src={user.avatar.url} alt="" className="rounded-full w-full h-full" />}
+        icon={<img src={user?.avatar?.url} alt="" className="rounded-full w-full h-full" />}
         onClose={handleClose}
         onOpen={handleOpen}
         open={open}
@@ -116,7 +111,6 @@ dispatch(clearUser())
         ))}
       </SpeedDial>
     </Box>
-    <ToastContainer/>
   </>
   );
 }

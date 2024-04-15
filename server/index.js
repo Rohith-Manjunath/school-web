@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cookie = require("cookie-parser");
 const cors = require("cors");
+const cloudinary=require("cloudinary")
 const corsOptions = {
   origin: ["http://localhost:5173"],
   credentials:true
@@ -25,6 +26,8 @@ app.use(
   })
 );
 
+
+
 // File upload middleware
 app.use(fileUpload());
 app.use(express.json());
@@ -34,6 +37,12 @@ app.use("/api", Enrollment);
 app.use("/api", UserRoute);
 app.use("/api/admin", AdminRoute);
 app.use(error);
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // Database connection
 dbConnection(process.env.URI);

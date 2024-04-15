@@ -7,73 +7,50 @@ import { Label, Checkbox } from 'flowbite-react';
 import file from '../../assets/Files/Terms_and_Conditions.pdf';
 import logo from '../../assets/Images/LogoAndOthers/hori-xnjhSTpu.png';
 import { useEnrollMutation } from '../../../Redux/authApi';
+import { useAlert } from 'react-alert';
+
 
 const WelcomeToMIS = () => {
-  const [open, setOpen] = useState(false);
-  const [termsChecked, setTermsChecked] = useState(false);
 
-  const handleToggleModal = () => {
-    setOpen((prev) => !prev);
-  };
+  const [name,setName]=useState("")
+  const [dob,setDob]=useState("")
+  const [category,setCategory]=useState("")
+  const [phone,setPhone]=useState("")
+  const [altPhone,setAltPhone]=useState("")
+  const [address,setAddress]=useState("")
+  const [isModalOpen,setIsModalOpen]=useState(false)
 
-  const initialStudentInfo = {
-    name: '',
-    dob: '',
-    phone: '',
-    category: 'Pre-School',
-    address: '',
-  };
-
-  const [studentInfo, setStudentInfo] = useState(initialStudentInfo);
-  const [enroll, { isLoading, isError, error }] = useEnrollMutation();
+  const [enroll,{isLoading}]=useEnrollMutation()
+  const alert=useAlert()
 
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+ const handleSubmit=async(e)=>{
+  e.preventDefault()
 
-    // Check if terms and conditions are agreed
-    if (!termsChecked) {
-      toast.error('Please agree to the terms and conditions.');
-      return;
-    }
+  try{
 
-    // Check if all  fields are filled except altPhone
-    for (const key in studentInfo) {
-      if (key !== 'altPhone' && studentInfo[key] === '') {
-        toast.warn(`Please fill in the ${key} field.`);
-        return;
-      }
-    }
+    await enroll({name,dob,category,phone,altPhone,address}).unwrap()
+    setIsModalOpen(false)
+    alert.success("Query submitted successfully")
+    setAddress("")
+    setAltPhone("")
+    setCategory("")
+    setName("")
+    setDob("")
+    setAddress("")
 
-  await enroll(studentInfo).unwrap();
+  }catch(e){
 
+    alert.error(e?.data?.err)
 
+  }
 
-    toast.success('Form submitted successfully');
-    setStudentInfo(initialStudentInfo);
-    setTermsChecked(false);
-    setOpen(false);
-  };
+ }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    // Update the studentInfo state based on input changes
-    setStudentInfo((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleCheckboxChange = (e) => {
-    setTermsChecked(e.target.checked);
-  };
-  useEffect(() => {
-    if (isError) {
-      toast.error(error.data.err);
-    }
-  }, [isError, error]);
 
   Modal.setAppElement('#root');
+
+
 
   return (
     <>
@@ -110,7 +87,7 @@ const WelcomeToMIS = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0 }}
             viewport={{ once: true }}
-            onClick={handleToggleModal}
+            onClick={()=>setIsModalOpen(true)}
             className="md:w-1/3 rounded-md mt-5 shadow-sm border p-2 font-semibold tracking-widest bg-ctcPrimary text-white"
           >
             Enroll Today
@@ -130,9 +107,8 @@ const WelcomeToMIS = () => {
         </motion.div>
       </div>
       <Modal
-        isOpen={open}
+        isOpen={isModalOpen}
         shouldCloseOnOverlayClick={true}
-        onRequestClose={() => setOpen(false)}
         className=""
         style={{
           overlay: {
@@ -161,7 +137,7 @@ const WelcomeToMIS = () => {
       >
           <button
           className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl"
-          onClick={() => setOpen(false)}
+          onClick={() => setIsModalOpen(false)}
         >
           <IoMdClose />
         </button>
@@ -172,8 +148,7 @@ const WelcomeToMIS = () => {
 
 
         <form
-          onSubmit={handleSubmit}
-          className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6"
+          className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6" onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-2">
             <label className="text-black font-sans tracking-wide font-semibold" htmlFor="name">
@@ -181,11 +156,10 @@ const WelcomeToMIS = () => {
             </label>
             <input
               className="rounded-md outline-none border-slate-400 font-serif tracking-wide uppercase text-fuchsia-950 md:text-base"
-              onChange={handleChange}
               type="text"
               name="name"
               id='name'
-              value={studentInfo.name}
+              onChange={(e)=>setName(e.target.value)}
               
             />
           </div>
@@ -195,12 +169,12 @@ const WelcomeToMIS = () => {
             </label>
             <input
               className="rounded-md outline-none border-slate-400 font-serif tracking-wide uppercase text-fuchsia-950"
-              onChange={handleChange}
               type="date"
               name="dob"
               id='dob'
+              onChange={(e)=>setDob(e.target.value)}
 
-              value={studentInfo.dob}
+
               
             />
           </div>
@@ -210,11 +184,11 @@ const WelcomeToMIS = () => {
             </label>
             <input
               className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
-              onChange={handleChange}
               type="text"
               name="phone"
-              value={studentInfo.phone}
               id='phone'
+              onChange={(e)=>setPhone(e.target.value)}
+
 
               
             />
@@ -225,18 +199,18 @@ const WelcomeToMIS = () => {
             </label>
             <input
               className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
-              onChange={handleChange}
               type="text"
               name="altPhone"
               id='altPhone'
-              value={studentInfo.altPhone}
+              onChange={(e)=>setAltPhone(e.target.value)}
+
             />
           </div>
           <div className="flex flex-col gap-2 col-span-2 my-8 md:my-0">
           <label className="text-black font-sans tracking-wide font-semibold" htmlFor="category">
               Category*
             </label>
-            <select name="category" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
+            <select onChange={(e)=>setCategory(e.target.value)} name="category" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
               <option value="1">Pre-Primary-School</option>
               <option value="2">Primary-School</option>
               <option value="3">Middle-School</option>
@@ -249,18 +223,16 @@ const WelcomeToMIS = () => {
             </label>
             <textarea
               className="rounded-md outline-none border-slate-400 h-[60px] font-serif tracking-wide uppercase text-fuchsia-950"
-              onChange={handleChange}
               name="address"
-              value={studentInfo.address}
               id='address'
+              onChange={(e)=>setAddress(e.target.value)}
+
             />
           </div>
           <div className="flex items-center gap-2 justify-between col-span-full">
   <div>
     <Checkbox
       id="agree"
-      checked={termsChecked}
-      onChange={handleCheckboxChange}
     />
   </div>
   <div className="w-full">
@@ -284,7 +256,7 @@ const WelcomeToMIS = () => {
               type="submit"
               className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
             >
-              {isLoading?"loading...":"Submit"}
+             {isLoading ? "Submitting...":"Submit"}
             </button>
           </div>
         </form>
