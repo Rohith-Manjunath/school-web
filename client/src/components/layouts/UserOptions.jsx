@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useLogoutMutation } from "../../../Redux/authApi";
 import { useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
-import { LogoutUser } from "../../../Redux/UserSlice";
+import { LogoutUser } from "../../../Redux/userSlice";
 
 
 export default function UserOptions({ user }) {

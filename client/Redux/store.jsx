@@ -4,7 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { myApi } from "./authApi";
 import { adminApi } from "./adminAuth";
-import UserSlice from "./UserSlice";
+import UserSlice from "./userSlice";
 
 
 
