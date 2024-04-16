@@ -35,11 +35,6 @@ const Footer = () => {
   const handleSubmit=(e)=>{
     e.preventDefault()
 
-    console.log(secretKey.toLocaleLowerCase() === process.env.AdminSecretKey.toLocaleLowerCase())
-
-    console.log(secretKey.toLocaleLowerCase())
-    console.log(process.env.AdminSecretKey.toLocaleLowerCase())
-
     if(secretKey.toLocaleLowerCase() === process.env.AdminSecretKey.toLocaleLowerCase()){
 
       alert.success(`Admin access granted`)

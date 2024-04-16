@@ -5,7 +5,7 @@ export const adminApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:4000/api/admin/",
   }),
-  tagTypes: ["Events"],
+  tagTypes: ["Events","News"],
   endpoints: (builder) => ({
     events: builder.query({
       query: () => ({
@@ -41,7 +41,41 @@ invalidatesTags:["Events"]
 
  
   }),
+    getAllNews: builder.query({
+      query: () => ({
+        url:`news`,
+        method: "GET",
+        credentials:"include",
 
+      }),
+
+      providesTags:["News"]
+ 
+  }),
+
+  deleteNews: builder.mutation({
+    query: (newsId) => ({
+      url:`news/${newsId}`,
+      method: "DELETE",
+      credentials:"include",
+
+    }),
+
+    invalidatesTags:["News"]
+
+}),
+  postNews: builder.mutation({
+    query: (data) => ({
+      url:`postNews`,
+      method: "POST",
+      credentials:"include",
+      body:data
+
+    }),
+
+    invalidatesTags:["News"]
+
+}),
   }),
 
   
@@ -52,5 +86,8 @@ invalidatesTags:["Events"]
 export const {
 useEventsQuery,
 useDeleteEventByIdMutation,
-usePostNewEventMutation
+usePostNewEventMutation,
+useGetAllNewsQuery,
+useDeleteNewsMutation,
+usePostNewsMutation
 } = adminApi;

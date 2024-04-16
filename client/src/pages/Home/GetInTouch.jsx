@@ -30,7 +30,6 @@ const GetInTouch = () => {
       setMessage("")
     }catch(e){
 
-      console.log(e)
        alert.error(e?.data?.err)
 
     }

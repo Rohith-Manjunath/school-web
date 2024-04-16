@@ -36,7 +36,6 @@ const Events = () => {
       if (window.confirm("Are you sure you want to delete this post?")) {
         const data = await deletePostMutation(id).unwrap();
         alert.success(data?.message);
-        console.log(data);
         return;
       }
     } catch (e) {

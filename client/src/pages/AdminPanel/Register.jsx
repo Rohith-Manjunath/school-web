@@ -19,7 +19,6 @@ const Register = () => {
   const navigate=useNavigate()
   const alert=useAlert()
 
-  console.log(error)
 
 
   const handleSubmit=async(e)=>{

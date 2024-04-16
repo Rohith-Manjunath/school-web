@@ -34,7 +34,6 @@ const SidebarAcademics = ({ open, setOpen, title }) => {
     toast.success("Form Submitted successfully");
     setOpen(false);
     setData({});
-    console.log(data);
   };
 
   return (
