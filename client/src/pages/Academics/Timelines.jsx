@@ -11,11 +11,10 @@ function Timelines() {
       <Timeline.Item>
         <Timeline.Point />
         <Timeline.Content className="w-[80%]">
-          <Timeline.Time className="font-title text-2xl font-semibold text-secondary tracking-wider">February 2022</Timeline.Time>
-          <Timeline.Title>Application UI code in Tailwind CSS</Timeline.Title>
+          <Timeline.Time className="font-title text-2xl font-semibold text-secondary tracking-wider">April 2013</Timeline.Time>
+          <Timeline.Title>Phase - 01</Timeline.Title>
           <Timeline.Body>
-            Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order
-            E-commerce & Marketing pages.
+          The gates of Knowledge of Mysore International School (earlier known as MLZS) was opened to the students. It was an amazing journey of catering  wisdom to students to excel in all walks of life.
           </Timeline.Body>
           {/* <Button color="gray">
             Learn More
@@ -26,21 +25,20 @@ function Timelines() {
       <Timeline.Item>
       <Timeline.Point />
         <Timeline.Content className="w-[80%]">
-          <Timeline.Time className="font-title text-2xl font-semibold text-secondary tracking-wider">March 2022</Timeline.Time>
-          <Timeline.Title>Marketing UI design in Figma</Timeline.Title>
+          <Timeline.Time className="font-title text-2xl font-semibold text-secondary tracking-wider">March 2018</Timeline.Time>
+          <Timeline.Title>Phase - 02</Timeline.Title>
           <Timeline.Body>
-            All of the pages and components are first designed in Figma and we keep a parity between the two versions
-            even as we update the project.
+          The school crossed all hurdles and it's first 10th batch passed out in 2018 with flying colours. Our young minds have kept our name high with excellent results in every board exams.
           </Timeline.Body>
         </Timeline.Content>
       </Timeline.Item>
       <Timeline.Item>
         <Timeline.Point />
         <Timeline.Content className="w-[80%]">
-          <Timeline.Time className="font-title text-2xl font-semibold text-secondary tracking-wider">April 2022</Timeline.Time>
-          <Timeline.Title >E-Commerce UI code in Tailwind CSS</Timeline.Title>
+          <Timeline.Time className="font-title text-2xl font-semibold text-secondary tracking-wider"> 2020-2023</Timeline.Time>
+          <Timeline.Title >Phase - 03</Timeline.Title>
           <Timeline.Body>
-            Get started with dozens of web components and interactive elements built on top of Tailwind CSS.
+          The School achieved many milestones on the way. The most important amongst them being the ISA (INTERNATIONAL SCHOOL AWARD) 2016-19 and the INTERNATIONAL DIMENSIONS IN SCHOOL.
           </Timeline.Body>
         </Timeline.Content>
       </Timeline.Item>

@@ -11,6 +11,7 @@ import image from "../../assets/Images/OutTeamImages/jason-goodman-Oalh2MojUuk-u
 import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
 import Chairman from "./Chairman";
 import OurManagementPeople from "./OurManagment";
+import PrincipalMessage from "./PrincipalMessage";
 
 
 const OurTeam = () => {
@@ -29,6 +30,7 @@ const OurTeam = () => {
       <Achievements />
       <Chairman />
       <OurManagementPeople />
+      <PrincipalMessage />
       <SupportTeam />
       <OurValues />
       <JoinOurTeam />
