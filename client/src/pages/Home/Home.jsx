@@ -4,6 +4,7 @@ import PaperTear2 from "../../components/layouts/PaperTear2";
 import ReasonToPursue from "../ReasonToPursue";
 import CardListComponent from "./CardListComponent";
 import CarouselSlider from "./CarouselSlider";
+import Gallery from "./Gallery";
 import GetInTouch from "./GetInTouch";
 import JoinOurFramerwork from "./JoinOurFramework";
 import NewsAndEvents from "./NewsAndEvents";
@@ -21,9 +22,12 @@ const Home = () => {
       <CarouselSlider />
       <WelcomeToMIS />
       <PaperTear1 />
+      <Marquee />
       <CardListComponent />
       <WhoWeAre />
-      <Marquee />
+      <PaperTear2 />
+      <Gallery />
+      <PaperTear1 />
       <VirtualTour />
       <PaperTear2 />
       <JoinOurFramerwork />
