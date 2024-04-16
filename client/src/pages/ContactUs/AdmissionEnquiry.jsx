@@ -45,11 +45,11 @@ const AdmissionEnquiry = () => {
 
   return (
     <>
-    <div className="w-full max-w-[90%] mx-auto  mt-16 pt-10 text-textSecondary border bg-white mb-[5rem] rounded-lg shadow-lg">
-      <h2 className="text-3xl font-semibold text-center text-textSecondary font-title">
+    <div className="w-full max-w-[90%] mx-auto  mt-16 pt-10 text-textSecondary  mb-[5rem] rounded-lg shadow-lg ">
+      <h2 className="text-3xl font-semibold text-center text-textSecondary font-title bg-white pt-8 rounded-lg">
         Admission Enquiry
       </h2>
-      <h4 className="text-xl font-semibold text-center text-textSecondary font-description">
+      <h4 className="text-xl font-semibold text-center text-textSecondary font-description bg-white">
         Student Details
       </h4>
       <form

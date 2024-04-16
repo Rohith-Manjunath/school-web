@@ -26,6 +26,8 @@ import HolisticEdu from "./pages/Home/HolisticEdu";
 import Awards from "./pages/Home/Awards";
 import CBSEProg from "./pages/Home/CBSEProg";
 import EarlyProgram from "./pages/Home/EarlyProgram";
+import KnowMore from "./pages/Home/KnowMore";
+import JoinOurTeam from "./pages/Ourteam/JoinOurTeam";
 
 const App = () => {
   return (
@@ -36,11 +38,12 @@ const App = () => {
         <Route path="/academics" element={<Academics />} />
         <Route path="/admissions" element={<Admissions />} />
         <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/our-team" element={<OurTeam />} />
+        <Route path="/OurTeam" element={<OurTeam />} />
         <Route path="/facilities" element={<Facilities />} />
         <Route path="/admin-login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/Career" element={<JoinOurTeam />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/admin-panel" element={<AdminPanel />} />
         </Route>
@@ -60,6 +63,7 @@ const App = () => {
         <Route path="/Awards" element={<Awards />} />
         <Route path="/CBSEProg" element={<CBSEProg />} />
         <Route path="/EarlyProgram" element={<EarlyProgram />} />
+        <Route path="/KnowMore" element={<KnowMore />} />
       </Routes>
     </Router>
   );

@@ -42,7 +42,7 @@ const WhoWeAre = () => {
         </p>
         <div className="">
           <Link
-            to={"/our-team"}
+            to={"/KnowMore"}
             className="w-full px-20 rounded-md shadow-sm shadow-white border p-2 font-semibold tracking-widest active:shadow-none active:translate-x-1 active:translate-y-1 transition-all duration-200 hover:scale-105 bg-ctcPrimary text-white"
           >
             Know More

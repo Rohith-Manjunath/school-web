@@ -13,7 +13,7 @@ const Footer = () => {
 
 
   const links = [
-    { title: "About Us", to: "/about-us" },
+    { title: "About Us", to: "/OurTeam" },
     { title: "Admissions", to: "/admissions" },
     { title: "Academics", to: "/academics" },
     { title: "Parents Portal", to: "/parents-portal" },
@@ -22,7 +22,7 @@ const Footer = () => {
   ];
   const links2 = [
     { title: "Calender & Schedules", to: "/calendar" },
-    { title: "Carrier", to: "/carrier" },
+    { title: "Career", to: "/career" },
     { title: "Digital Library", to: "/library" },
   ];
 

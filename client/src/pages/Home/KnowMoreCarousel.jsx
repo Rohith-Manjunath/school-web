@@ -6,7 +6,7 @@ import image3 from "../../assets/Images/HomeImages/WhoWeAre/Carousel/image3.jpg"
 // import image4 from "../../assets/Images/HomeImages/CarouselImages/children_kannada_rajostsava.jpg"
 // import image5 from "../../assets/Images/HomeImages/CarouselImages/principle_and_children.jpg"
 
-const CarouselSliderCBSE = () => {
+const KnowMoreCarousel = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const slides = [
@@ -58,7 +58,7 @@ const CarouselSliderCBSE = () => {
 
   return (
     <div className="relative h-[50vh] md:h-[70vh] overflow-hidden mt-[-5rem] md:mt-[-2rem]">
-      <div className="slider-container h-full relative border-2">
+      <div className="slider-container h-full relative border-2 border-secondary rounded-lg shadow-lg shadow-secondary bg-secondary">
         {slides.map((slide, index) => (
           <div
           key={index}
@@ -80,13 +80,13 @@ const CarouselSliderCBSE = () => {
 
       <div className="slider-nav absolute top-1/2 transform -translate-y-1/2 flex justify-between w-full px-4">
   <button
-    className="slider-nav-btn  bg-gray-200 bg-opacity-20 text-white p-2 mt-5 rounded-full flex items-center justify-center transition-colors duration-300 hover:bg-opacity-50"
+    className="slider-nav-btn bg-white text-secondary p-2 mt-5 rounded-full flex items-center justify-center transition-colors duration-300 hover:bg-opacity-50"
     onClick={() => handleSlideChange(-1)}
   >
     <FaCaretLeft />
   </button>
   <button
-    className="slider-nav-btn  bg-gray-200 bg-opacity-20 text-white p-2 mt-5 rounded-full flex items-center justify-center transition-colors duration-300 hover:bg-opacity-50"
+    className="slider-nav-btn bg-white text-secondary p-2 mt-5 rounded-full flex items-center justify-center transition-colors duration-300 hover:bg-opacity-50"
     onClick={() => handleSlideChange(1)}
   >
     <FaCaretRight />
@@ -108,4 +108,4 @@ const CarouselSliderCBSE = () => {
   );
 };
 
-export default CarouselSliderCBSE;
+export default KnowMoreCarousel;

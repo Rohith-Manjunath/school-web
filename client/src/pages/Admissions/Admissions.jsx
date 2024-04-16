@@ -35,7 +35,9 @@ const Admissions = () => {
       <RaiseATicket />
       <AdmissionProces />
       <Enroll />
+      <PaperTear1 />
       <Marquee />
+      <PaperTear2 />
       <Footer />
     </div>
   );

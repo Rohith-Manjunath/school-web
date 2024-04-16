@@ -9,8 +9,8 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { ToastContainer, toast } from "react-toastify";
 import { useLogoutMutation } from "../../../Redux/authApi";
 import { useDispatch } from "react-redux";
-import { LogoutUser } from "../../../Redux/userSlice";
 import { useAlert } from "react-alert";
+import { LogoutUser } from "../../../Redux/UserSlice";
 
 
 export default function UserOptions({ user }) {
