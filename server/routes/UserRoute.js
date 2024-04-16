@@ -1,5 +1,5 @@
 const express=require('express');
-const { registerUser, loginUser, userQuery, admissionEnquiry, me, logout, parentsEnroll } = require('../controllers/UserController');
+const { registerUser, loginUser, userQuery, admissionEnquiry, me, logout, parentsEnroll, scheduleVisit } = require('../controllers/UserController');
 const { isAuthenticatedUser } = require('../middlewares/isAuthenticated');
 const { getAllEvents } = require('../controllers/AdminController');
 const router=express.Router();
@@ -12,6 +12,7 @@ router.route("/query").post(userQuery)
 router.route("/parentsEnroll").post(parentsEnroll)
 router.route("/admissionquery").post(admissionEnquiry)
 router.route("/events").get(getAllEvents);
+router.route("/schedule").post(scheduleVisit);
 
 
 module.exports=router

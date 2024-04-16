@@ -69,6 +69,14 @@ export const myApi = createApi({
       }),
     //   invalidatesTags: ["Posts"],
     }),
+    schedule: builder.mutation({
+      query: (data) => ({
+        url: "schedule",
+        method: "POST",
+        body: data,
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
   
   }),
   
@@ -81,5 +89,6 @@ useRegisterMutation,
 useEnrollMutation,
 useQueryMutation,
 useParentsenrollMutation,
-useAdmissionQueryMutation
+useAdmissionQueryMutation,
+useScheduleMutation
 } = myApi;

@@ -5,43 +5,52 @@ import { IoMdClose } from 'react-icons/io';
 import { Label, Checkbox } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import file from '../../assets/Files/Terms_and_Conditions.pdf';
+import { useAlert } from 'react-alert';
+import { useScheduleMutation } from '../../../Redux/authApi';
 
 const Schedule = () => {
   const [open, setOpen] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
+  const alert=useAlert()
+  const [schedule,{isLoading}]=useScheduleMutation()
 
   const handleToggleModal = () => {
     setOpen((prev) => !prev);
   };
 
   const initialStudentInfo = {
-    name: 'John Doe',
+    name: '',
     phone: '',
+    class:"",
+    date:""
   };
 
   const [studentInfo, setStudentInfo] = useState(initialStudentInfo);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
-    // Check if terms and conditions are agreed
     if (!termsChecked) {
-      toast.error('Please agree to the terms and conditions.');
+      alert.error('Please agree to the terms and conditions.');
       return;
     }
 
-    // Check if all required fields are filled
-    for (const key in studentInfo) {
-      if (studentInfo[key] === '') {
-        toast.warn(`Please fill in the ${key} field.`);
-        return;
-      }
+    try{
+console.log(studentInfo)
+ const data=await schedule(studentInfo).unwrap()
+ alert.success(`${data?.message}, Thank you!`)
+
+      setTermsChecked(false);
+      setOpen(false);
+      setStudentInfo(initialStudentInfo)
+    }catch(e){
+      alert.error(e?.data?.err)
+      return;
     }
 
-    toast.success('Form submitted successfully');
-    setStudentInfo(initialStudentInfo);
-    setTermsChecked(false);
-    setOpen(false);
+   
+
+  
   };
 
   const handleChange = (e) => {
@@ -81,26 +90,26 @@ const Schedule = () => {
         onRequestClose={() => setOpen(false)}
         style={{
           overlay: {
-            zIndex: 9999,
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            zIndex: 98,
+            backgroundColor: `rgba(0, 0, 0, 0.5)`,
           },
           content: {
-            width: '90%', // Adjusted width for smaller screens
-            maxWidth: '600px', // Max-width for larger screens
-            height: '500px',
+            width: '90%', // Adjust the width for small screens
+            maxWidth: '600px',
+            height: '80vh', // Set height to auto for responsiveness
             margin: '0 auto',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent:'center',
             flexDirection: 'column',
+            color: '#580B57',
+            overflowY: 'auto', // Enable vertical scrolling
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             borderRadius: '10px',
             border: 'none',
             outline: 'none',
-            color: '#580B57',
-            zIndex: 10000,
           },
         }}
       >
@@ -110,7 +119,7 @@ const Schedule = () => {
         >
           <IoMdClose />
         </button>
-        <h2 className="text-3xl md:mt-0 mt-[4rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px]">
+        <h2 className="text-3xl md:mt-0 mt-[4rem] mb-6 text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px]">
           Schedule a Visit
         </h2>
         <form
@@ -127,7 +136,7 @@ const Schedule = () => {
               type="text"
               name="name"
               value={studentInfo.name}
-              required
+              
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -140,14 +149,14 @@ const Schedule = () => {
               type="text"
               name="phone"
               value={studentInfo.phone}
-              required
+              
             />
           </div>
           <div className="flex flex-col gap-2 col-span-2 my-8 md:my-0">
-            <label className="text-black font-sans tracking-wide font-semibold" htmlFor="altPhone">
-              Catagory
+            <label className="text-black font-sans tracking-wide font-semibold" htmlFor="class">
+              Category
             </label>
-            <select name="select" id="select" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950">
+            <select name="class" id="class" className="rounded-md font-serif tracking-wide uppercase text-fuchsia-950"   onChange={handleChange}  >
             <option value="1">Pre-Primary-School</option>
               <option value="2">Primary-School</option>
               <option value="3">Middle-School</option>
@@ -163,10 +172,10 @@ const Schedule = () => {
               type="date"
               name="date"
               onChange={handleChange}
-              required
+              
             />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ">
             <Checkbox
               id="agree"
               checked={termsChecked}
@@ -189,7 +198,7 @@ const Schedule = () => {
               type="submit"
               className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
             >
-              Submit
+              {isLoading?"Submitting...":"Submit"}
             </button>
           </div>
         </form>

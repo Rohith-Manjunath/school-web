@@ -108,12 +108,14 @@ const News = () => {
 
   return (
     <div className="w-[80%] lg:w-[90%] py-20 mx-auto ">
+      <div className="flex items-center justify-end gap-2">
       <button onClick={fetchData} className="">
         <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
       </button>
-      <button>
+      <button>s
        <IoAddOutline className="w-full  font-semibold my-4 mx-1  text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
       </button>
+      </div>
       <Slider {...settings} className="">
         {data?.news?.map((item) => {
           return (

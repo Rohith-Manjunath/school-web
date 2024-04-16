@@ -1,6 +1,7 @@
 const AdmissionQuery = require("../models/AdmissionEnquiry");
 const Query = require("../models/GetInTouchSchema");
 const ParentsEnrollment = require("../models/ParentsEnrollment");
+const ScheduleVisit = require("../models/ScheduleVisit");
 const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
@@ -116,6 +117,17 @@ exports.admissionEnquiry=catchAsyncError(async(req,res,next)=>{
     res.status(200).json({
         success:true,
         message:"Query submitted successfully",
+    })
+
+})
+
+exports.scheduleVisit=catchAsyncError(async(req,res,next)=>{
+
+    await ScheduleVisit.create(req.body)
+
+    res.status(201).json({
+        success:true,
+        message:"Your visit has been scheduled successfully",
     })
 
 })
