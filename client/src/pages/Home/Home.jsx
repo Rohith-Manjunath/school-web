@@ -10,6 +10,7 @@ import JoinOurFramerwork from "./JoinOurFramework";
 import NewsAndEvents from "./NewsAndEvents";
 import Schedule from "./Schedule";
 import VirtualTour from "./VIrtualTour";
+import WelcomeModal from "./WelcomeModal";
 import WelcomeToMIS from "./WelcomeToMis";
 import WhoWeAre from "./WhoWeAre";
 import JoinCbse from "./joincbse";
@@ -19,6 +20,7 @@ import Marquee from "./marquee2";
 const Home = () => {
   return (
     <div className="mt-20">
+      <WelcomeModal />
       <CarouselSlider />
       <WelcomeToMIS />
       <PaperTear1 />
