@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
 import { LogoutUser } from "../../../Redux/userSlice";
 
-
 export default function UserOptions({ user }) {
   const [open, setOpen] = React.useState(false);
   const [backdropOpen, setBackdropOpen] = React.useState(false); // Manage backdrop state

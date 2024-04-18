@@ -12,6 +12,7 @@ import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
 import Chairman from "./Chairman";
 import OurManagementPeople from "./OurManagment";
 import PrincipalMessage from "./PrincipalMessage";
+import Coordinators from "./Coordinators";
 
 
 const OurTeam = () => {
@@ -31,7 +32,8 @@ const OurTeam = () => {
       <Chairman />
       <OurManagementPeople />
       <PrincipalMessage />
-      <SupportTeam />
+      <SupportTeam /> 
+      <Coordinators />
       <OurValues />
       <JoinOurTeam />
       <PaperTear2 />

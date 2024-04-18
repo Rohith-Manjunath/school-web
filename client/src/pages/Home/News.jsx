@@ -112,7 +112,7 @@ const News = () => {
       <button onClick={fetchData} className="">
         <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
       </button>
-      <button>s
+      <button>
        <IoAddOutline className="w-full  font-semibold my-4 mx-1  text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
       </button>
       </div>
