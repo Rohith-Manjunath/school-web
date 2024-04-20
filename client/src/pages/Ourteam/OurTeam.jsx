@@ -13,6 +13,9 @@ import Chairman from "./Chairman";
 import OurManagementPeople from "./OurManagment";
 import PrincipalMessage from "./PrincipalMessage";
 import Coordinators from "./Coordinators";
+import HOD from "./HOD";
+import PaperTear1 from "../../components/layouts/PaperTear1";
+import TeamCarousel from "./TeamCarousel";
 
 
 const OurTeam = () => {
@@ -29,11 +32,17 @@ const OurTeam = () => {
       Currentpage={"Our Team"}/>
       <OurTeamDes />
       <Achievements />
+      <PaperTear2 />
       <Chairman />
+      <PaperTear1 />
       <OurManagementPeople />
+      <PaperTear2/>
       <PrincipalMessage />
+      <PaperTear1 />
+      <TeamCarousel />
+      {/* <HOD />
       <SupportTeam /> 
-      <Coordinators />
+      <Coordinators /> */}
       <OurValues />
       <JoinOurTeam />
       <PaperTear2 />

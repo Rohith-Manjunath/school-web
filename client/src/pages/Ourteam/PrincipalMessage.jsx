@@ -2,18 +2,18 @@ import React from 'react';
 
 const PrincipalMessage = () => {
   return (
-    <div className="bg-gray-100 py-12">
+    <div className="bg-secondary py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-secondary font-title sm:text-4xl">
+          <h2 className="text-3xl font-extrabold text-primary font-title sm:text-4xl">
             Principal's Message
           </h2>
-          <p className="mt-4 text-xl text-secondary">
+          <p className="mt-4 text-xl text-primary">
             "Education is not the learning of facts but the training of the mind to think"
           </p>
-          <p className="mt-4 text-xl text-secondary">- Albert Einstein</p>
+          <p className="mt-4 text-xl text-primary">- Albert Einstein</p>
         </div>
-        <div className="mt-10 text-secondary space-y-6">
+        <div className="mt-10 text-primary space-y-6">
           <p>
             It is with immense pleasure and pride that I extend my warmest greetings to each member of our school community. We are stepping in to another academic year filled with achievements, growth and memorable moments. I am reminded of the incredible journey we have embarked upon together. As a teacher—leader at MIS, it is my motto to create a pool of Educators who are "Empowered to Excel and Educate.
           </p>

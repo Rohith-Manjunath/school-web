@@ -6,6 +6,7 @@ import logo from "../../assets/Images/LogoAndOthers/MIS_Main_logo-b9vQZsOZ.png";
 import { motion } from "framer-motion";
 import UserOptions from "./UserOptions";
 import { useSelector } from "react-redux";
+import Links from "./Common/Links";
 const Navbar = () => {
   const [show, setShow] = useState(false);
 
@@ -19,26 +20,27 @@ const Navbar = () => {
 
   return (
 <>
-<div className="sticky z-10 top-0 left-0 bg-primary p-5 text-textSecondary lg:relative w-full">
+<div className="md:relative md:z-40 fixed top-0 left-0 right-0 z-30 bg-primary p-5 text-textSecondary w-full border-b-2 border-secondary shadow-lg shadow-secondary">
       {!show ? (
         <div className="uppercase flex items-center justify-start gap-6">
           <RxHamburgerMenu
             onClick={toggleNavbar}
             className="text-2xl hover:shadow-cyan-500 block lg:hidden"
           />
-          <span className="font-semibold tracking-wider">
+          <span className="font-semibold tracking-wider ">
             {path != "" ? path : "Home"}
           </span>
+        
         </div>
       ) : (
         <GrClose
           onClick={toggleNavbar}
-          className="text-2xl hover:shadow-cyan-500 block lg:hidden"
+          className="text-2xl hover:shadow-cyan-500 block lg:hidden "
         />
       )}
 
       <ul
-        className={` font-semibold block z-10 bg-primary lg:hidden absolute top-[4rem] w-[100vw] h-screen space-y-20 text-center transition-all duration-300 ${
+        className={` font-semibold block z-auto bg-primary  lg:hidden absolute top-[4rem] w-[100vw] h-screen  space-y-20 text-center transition-all duration-300 ${
           !show ? "left-[-100%]" : "left-0"
         }`}
       >
@@ -61,10 +63,16 @@ const Navbar = () => {
           <NavLink to={"contact-us"}>Contact Us</NavLink>
         </li>
         <li onClick={() => setShow(false)}>
+          <link rel="stylesheet" href="cbse" />
+        </li>
+        <li onClick={() => setShow(false)}>
+        <link rel="stylesheet" href="others" />
+        </li>
+        <li onClick={() => setShow(false)}>
           <p className="mt-5">All Rights reserved</p>
         </li>
       </ul>
-      <ul className="hidden bg-primary lg:flex p-4 z-10 fixed top-0 left-0 items-center justify-around font-semibold tracking-wider w-full">
+      <ul className="hidden bg-primary lg:flex p-4 z-50 fixed top-0 left-0 items-center justify-around font-semibold tracking-wider w-full border-2 border-b-secondary shadow-lg shadow-secondary ">
         <motion.li
           animate={{ y: 0, opacity: 1 }}
           initial={{ y: -100, opacity: 0 }}
@@ -154,6 +162,11 @@ const Navbar = () => {
 {user &&    <UserOptions user={{...user,avatar:{url:"https://assets.vogue.in/photos/6544d4422e0410ae2777ca31/3:4/w_2560%2Cc_limit/GettyImages-1395062633.jpg"}}} />
 }
     </div>
+    
+    {
+      !show && <Links/>
+    }
+
 </>
   );
 };

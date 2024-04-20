@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import image1 from "../../assets/Images/HomeImages/Gallery/AnnualDay2023.jpg";
-import image2 from "../../assets/Images/HomeImages/CarouselImages/school1.jpg";
-import image3 from "../../assets/Images/HomeImages/CarouselImages/school2.jpg";
+import image1 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_1.jpg";
+import image2 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_2.jpeg";
+import image3 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_3.jpeg";
 
 const WelcomeModal = () => {
   const [showModal, setShowModal] = useState(false);
@@ -70,11 +70,11 @@ const WelcomeModal = () => {
               </button>
             </div>
             <div className="relative h-96 w-full">
-              <div className="absolute top-0 left-0 w-full h-full">
+              <div className="absolute pt-14 left-0 w-full h-full ">
                 <img
                   src={images[currentImageIndex]}
                   alt={`Slide ${currentImageIndex + 1}`}
-                  className="object-cover w-full h-full"
+                  className="object-scale-down w-full h-full"
                   loading="lazy"
                 />
               </div>

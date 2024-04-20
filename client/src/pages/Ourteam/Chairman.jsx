@@ -3,7 +3,7 @@ import OurTeamCard from "../../components/layouts/Cards/OurTeamCard";
 
 const Chairman = () => {
   return (
-    <div className="mt-14 text-textSecondary bg-white flex justify-center">
+    <div className=" text-secondary bg-secondary flex justify-center pb-10">
       <div className="w-[90%]">
         <h2 className="text-2xl font-tile font-semibold my-4 uppercase text-center">
           Founder & Chairman
