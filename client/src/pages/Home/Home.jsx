@@ -16,7 +16,6 @@ import WhoWeAre from "./WhoWeAre";
 import JoinCbse from "./joincbse";
 import Marquee from "./marquee2";
 
-
 const Home = () => {
   return (
     <div className="mt-20">

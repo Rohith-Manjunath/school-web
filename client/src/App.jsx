@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import Home from "./pages/Home/Home";
 import Academics from "./pages/Academics/Academics";
@@ -28,6 +28,7 @@ import CBSEProg from "./pages/Home/CBSEProg";
 import EarlyProgram from "./pages/Home/EarlyProgram";
 import KnowMore from "./pages/Home/KnowMore";
 import JoinOurTeam from "./pages/Ourteam/JoinOurTeam";
+
 
 const App = () => {
   return (

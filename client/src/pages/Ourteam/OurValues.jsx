@@ -9,7 +9,7 @@ const OurValues = () => {
       <img
         src={coreValues}
         alt=""
-        className="w-full md:w-[80%] lg:w-[70%] mx-auto"
+        className="w-full md:w-[70%] lg:w-[60%] mx-auto"
       />
     </div>
   );

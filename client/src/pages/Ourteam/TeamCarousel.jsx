@@ -1,39 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
-import image1 from "../../assets/Images/HomeImages/CarouselImages/children_outing.jpg"
-import image2 from "../../assets/Images/HomeImages/CarouselImages/school1.jpg"
-import image3 from "../../assets/Images/HomeImages/CarouselImages/school2.jpg"
-import image4 from "../../assets/Images/HomeImages/CarouselImages/children_kannada_rajostsava.jpg"
-import image5 from "../../assets/Images/HomeImages/CarouselImages/principle_and_children.jpg"
-const CarouselSlider = () => {
+import image1 from "../../assets/Images/OutTeamImages/HOD.jpeg"
+import image2 from "../../assets/Images/OutTeamImages/SupportTeam.jpg"
+import image3 from "../../assets/Images/OutTeamImages/Coordinators.jpg"
+
+const TeamCarousel = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const slides = [
     {
       image: image1,
-      title: 'Unveiling Brilliance',
-      description: ' Ignite potential, shape futures. At Mysore International School , we nurture brilliance, empowering confident leaders',
+      title: "HOD's of various departments",
+      description: ' Meet our dedicated HODs, leading their departments with expertise and passion. They guide our faculty and students, fostering innovation and academic excellence.',
     },
     {
       image: image2,
-      title: 'Beyond Boundaries',
-      description: 'Expand horizons, embrace diversity. Join us to cultivate global citizens ready to thrive',
+      title: 'Support Team',
+      description: 'Meet our dedicated Support Team, committed to providing exceptional service and assistance to our community.',
     },
     {
       image: image3,
-      title: 'Innovate. Inspire. Ignite.',
-      description: 'Ignite imagination, foster innovation. Join Mysore International School to inspire lifelong learners.',
+      title: 'Our Coordinators Team',
+      description: 'Meet the dedicated coordinators who play a pivotal role in ensuring a smooth and enriching educational experience. From curriculum planning to extracurricular activities.',
     },
-    {
-      image: image4,
-      title: 'Elevating Excellence',
-      description: 'Tradition meets innovation. Join Mysore International School to elevate excellence for tomorrow.',
-    },
-    {
-      image: image5,
-      title: 'Beyond Education',
-      description: 'Holistic education, meaningful lives. Join Mysore International School to nurture heart, mind, and soul.',
-    },
+   
   ];
 
   const handleSlideChange = (n) => {
@@ -59,7 +49,7 @@ const CarouselSlider = () => {
   }, [currentSlideIndex]);
 
   return (
-    <div className="relative h-[50vh] md:h-[70vh] mt-[-5.1rem] md:mt-[-2rem] overflow-hidden  ">
+    <div className="relative h-[50vh] md:h-[80vh] mx-[1rem] my-[3rem] md:mx-[8rem] md:my-[3rem] overflow-hidden rounded-2xl md:rounded-2xl shadow-2xl shadow-secondary ">
       <div className="slider-container h-full relative">
         {slides.map((slide, index) => (
           <div
@@ -69,7 +59,7 @@ const CarouselSlider = () => {
           }`}
         >
           <img className="slide-image w-full h-full object-cover brightness-50" src={slide.image} alt={`Slide ${index + 1}`} />
-          <div className="flex flex-col slide-content items-center justify-center absolute mt-2 p-4 md:p-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%]   text-center bg-white bg-opacity-70 rounded-xl ">
+          <div className="flex flex-col slide-content items-center justify-center absolute mt-2 p-4 md:p-10 bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%]   text-center bg-white bg-opacity-70 rounded-xl ">
             <h3 className="text-secondary text-xl md:text-2xl font-bold font-title tracking-wide  capitalize mb-0 md:mb-3">{slide.title}</h3>
             <p className="text-secondary  font-medium tracking-wide text-l md:text-xl font-subtext ">{slide.description}</p>
           </div>
@@ -114,4 +104,4 @@ const CarouselSlider = () => {
   );
 };
 
-export default CarouselSlider;
+export default TeamCarousel;
