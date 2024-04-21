@@ -59,7 +59,7 @@ const Footer = () => {
         <div className="space-y-4">
           <div className="">
             <p className="lg:text-justify">
-              Mount Litera Zee School 92/1-3, HD Kote Road, Rayanakere Post, 5
+              Mysore International School 92/1-3, HD Kote Road, Rayanakere Post, 5
               Minutes from Srirampura Ring Road, Mysore – 570008.
             </p>
             <Link
