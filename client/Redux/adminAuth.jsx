@@ -4,7 +4,7 @@ export const adminApi = createApi({
 
   reducerPath: "admin",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/api/admin/",
+    baseUrl: "https://school-web-50fi.onrender.com/api/admin/",
   }),
   tagTypes: ["Events","News"],
   endpoints: (builder) => ({
