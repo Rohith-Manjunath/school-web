@@ -9,6 +9,7 @@ import { LuRefreshCcw } from "react-icons/lu";
 import { IoAddOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import Modal from "react-modal";
+import { useNewsUsersQuery } from "../../../Redux/authApi";
 
 
 const News = () => {
@@ -25,13 +26,14 @@ const News = () => {
   const [title,setTitle]=useState("")
   const [image,setImage]=useState("")
   const [postNews,{isLoading:postLoading}]=usePostNewsMutation()
+  const { data: usersNews } = useNewsUsersQuery();
+
 
   
   useEffect(() => {
     setIsLoading(queryLoading);
-    setData(queryData);
-  }, [queryLoading, queryData]);
-
+    setData(isAdmin ? queryData : usersNews);
+  }, [queryLoading, queryData, usersNews , isAdmin]);
 
 
   const settings = {
@@ -105,10 +107,9 @@ const News = () => {
   }
 
 
-
   return (
     <div className="w-[80%] lg:w-[90%] py-20 mx-auto ">
-      <div className="flex items-center justify-end gap-2">
+     { isAdmin && <div className="flex items-center justify-end gap-2">
       <button onClick={fetchData} className="">
         <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
       </button>
@@ -116,6 +117,7 @@ const News = () => {
        <IoAddOutline className="w-full  font-semibold my-4 mx-1  text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
       </button>
       </div>
+}
       <Slider {...settings} className="">
         {data?.news?.map((item) => {
           return (

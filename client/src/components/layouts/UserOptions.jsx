@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { ToastContainer, toast } from "react-toastify";
 import { useLogoutMutation } from "../../../Redux/authApi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { LogoutUser } from "../../../Redux/userSlice";
 
@@ -68,7 +68,7 @@ export default function UserOptions({ user }) {
 
   ];
 
-  const isAdmin=true;
+  const isAdmin=useSelector(state=>state?.user?.user?.isAdmin ?? false);
 
   if (isAdmin) {
     actions.unshift({

@@ -1,5 +1,7 @@
 const AdmissionQuery = require("../models/AdmissionEnquiry");
+const Events = require("../models/EventsSchema");
 const Query = require("../models/GetInTouchSchema");
+const News = require("../models/NewsSchema");
 const ParentsEnrollment = require("../models/ParentsEnrollment");
 const ScheduleVisit = require("../models/ScheduleVisit");
 const User = require("../models/UserSchema");
@@ -128,6 +130,35 @@ exports.scheduleVisit=catchAsyncError(async(req,res,next)=>{
     res.status(201).json({
         success:true,
         message:"Your visit has been scheduled successfully",
+    })
+
+})
+
+exports.getAllNewsForUsers=catchAsyncError(async(req,res,next)=>{
+
+    const news=await News.find()
+    const newsCount=await News.countDocuments()
+
+    res.status(200).json({
+        success:true,
+        news,
+        newsCount
+
+    })
+
+})
+
+
+exports.getAllEventsForUsers=catchAsyncError(async(req,res,next)=>{
+
+    const events=await Events.find()
+    const eventsCount=await Events.countDocuments()
+
+    res.status(200).json({
+        success:true,
+        events,
+        eventsCount
+
     })
 
 })

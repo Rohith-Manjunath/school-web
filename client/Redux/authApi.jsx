@@ -77,6 +77,27 @@ export const myApi = createApi({
       }),
     //   invalidatesTags: ["Posts"],
     }),
+
+    newsUsers: builder.query({
+      query: () => ({
+        url: "news",
+        method: "GET",
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
+
+ 
+    eventsUsers: builder.query({
+      query: () => ({
+        url: "events",
+        method: "GET",
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
+
+ 
+ 
+
   
   }),
   
@@ -90,5 +111,7 @@ useEnrollMutation,
 useQueryMutation,
 useParentsenrollMutation,
 useAdmissionQueryMutation,
-useScheduleMutation
+useScheduleMutation,
+useEventsUsersQuery,
+useNewsUsersQuery
 } = myApi;

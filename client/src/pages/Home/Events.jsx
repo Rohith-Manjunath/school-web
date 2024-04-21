@@ -10,6 +10,7 @@ import { LuRefreshCcw } from "react-icons/lu";
 import { IoAddOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { useEventsUsersQuery, useNewsUsersQuery } from "../../../Redux/authApi";
 
 
 
@@ -19,6 +20,7 @@ const Events = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const { isLoading: queryLoading, data: queryData ,refetch} = useEventsQuery();
+  const { data: usersEvents } = useEventsUsersQuery();
   const [deletePostMutation] = useDeleteEventByIdMutation();
   const [postEvent,{isLoading:addNewEventLoading}]=usePostNewEventMutation()
   const alert = useAlert();
@@ -40,8 +42,8 @@ const Events = () => {
 
   useEffect(() => {
     setIsLoading(queryLoading);
-    setData(queryData);
-  }, [queryLoading, queryData]);
+    setData(isAdmin ? queryData : usersEvents);
+  }, [queryLoading, queryData,usersEvents,isAdmin]);
 
   useEffect(() => {
     setEvent(eventsData?.event);
@@ -64,6 +66,7 @@ const Events = () => {
   if (isLoading) {
     return <h2>Loading....</h2>;
   }
+
 
   const settings = {
     dots: data?.events?.length > 3,
@@ -139,14 +142,16 @@ e.preventDefault()
   return (
     <>
     <div className="w-[80%] py-20 mx-auto tracking-wide font-semibold relative">
-      <div className="flex items-center justify-center gap-4 absolute top-0 right-0">
-      <button onClick={fetchData}>
-        <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
-      </button>
-      <button>
-       <IoAddOutline className="w-full font-semibold my-4 text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
-      </button>
+      {
+        isAdmin && <div className="flex items-center justify-center gap-4 absolute top-0 right-0">
+        <button onClick={fetchData}>
+          <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
+        </button>
+        <button>
+         <IoAddOutline className="w-full font-semibold my-4 text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
+        </button>
       </div>
+      }
       {isLoading ? (
         <h2>Loading...</h2>
       ) : (

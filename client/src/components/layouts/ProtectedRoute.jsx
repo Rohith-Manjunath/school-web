@@ -2,11 +2,10 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
-    const { user } = useSelector(state => state.user);
-    const { isAdmin } = user;
-
+    const isAdmin = useSelector(state => state?.user?.user?.isAdmin ?? false);
+    
     return (
-        <>
+        <>a
             {isAdmin ? <Outlet /> : <Navigate to="/" />}
         </>
     );
