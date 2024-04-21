@@ -16,8 +16,8 @@ const News = () => {
   const { isLoading: queryLoading, data: queryData ,refetch}=useGetAllNewsQuery()
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(true);
-  const [deleteNewsMutation] = useDeleteNewsMutation();
+  const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
+    const [deleteNewsMutation] = useDeleteNewsMutation();
   const alert = useAlert();
   const [isModalOpen,setIsModalOpen]=useState(false)
   const [date,setDate]=useState("")

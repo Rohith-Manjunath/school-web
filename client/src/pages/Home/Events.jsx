@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 
 
 const Events = () => {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const { isLoading: queryLoading, data: queryData ,refetch} = useEventsQuery();
