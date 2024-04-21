@@ -5,7 +5,7 @@ const cookie = require("cookie-parser");
 const cors = require("cors");
 const cloudinary=require("cloudinary")
 const corsOptions = {
-  origin: ["http://localhost:5173","https://6625761f49e12ffaad2d1ee1--spontaneous-cendol-578421.netlify.app"],
+  origin: ["http://localhost:5173","https://spontaneous-cendol-578421.netlify.app/"],
   credentials:true
 };
 const fileUpload = require("express-fileupload");
