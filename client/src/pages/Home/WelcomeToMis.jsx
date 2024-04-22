@@ -8,7 +8,7 @@ import file from '../../assets/Files/Terms_and_Conditions.pdf';
 import logo from '../../assets/Images/LogoAndOthers/hori-xnjhSTpu.png';
 import { useEnrollMutation } from '../../../Redux/authApi';
 import { useAlert } from 'react-alert';
-import background from '../../assets/Images/HomeImages/Background/ContourLine_Bg.jpg';
+
 
 Modal.setAppElement('#root');
 
@@ -46,12 +46,7 @@ const WelcomeToMIS = () => {
     <>
       <ToastContainer style={{ zIndex: 99 }} />
       <div
-  className={`p-6 lg:px-20 lg:py-28 space-y-10 md:space-y-0 text-white md:grid md:grid-cols-2 tracking-wide`}
-  style={{
-    backgroundImage: `url(${background})`,
-    backgroundSize: 'contain',
-  }}
->
+  className={`p-6 lg:px-20 lg:py-28 space-y-10 md:space-y-0 bg-secondary text-white md:grid md:grid-cols-2 tracking-wide`}>
         <div>
           <motion.div
             initial={{ opacity: 0, y: -100 }}
