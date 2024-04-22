@@ -5,7 +5,7 @@ const cookie = require("cookie-parser");
 const cors = require("cors");
 const cloudinary=require("cloudinary")
 const corsOptions = {
-  origin: ["http://localhost:5173","https://school-website-12.netlify.app"],
+  origin: ["http://localhost:5173","https://school-website-12.netlify.app","https://visionary-dieffenbachia-ee8240.netlify.app"],
   credentials:true
 };
 const fileUpload = require("express-fileupload");
