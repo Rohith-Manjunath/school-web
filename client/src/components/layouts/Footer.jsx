@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import { useAlert } from "react-alert";
 import { FaEye } from "react-icons/fa";
 import { RiEyeCloseFill } from "react-icons/ri";
-
+import Partner from "../../assets/Images/Fotter/Partner1.jpg"
 
 
 
@@ -23,7 +23,6 @@ const Footer = () => {
   const links2 = [
     { title: "Calender & Schedules", to: "/calendar" },
     { title: "Career", to: "/career" },
-    { title: "Digital Library", to: "/library" },
   ];
 
   const [isModalOpen,setIsModalOpen]=useState(false)
@@ -118,15 +117,23 @@ const Footer = () => {
                 )}
               </li>
             ))}
+            <img src={Partner} alt="" className="w-[8rem]"/>
           </ul>
         </div>
       </div>
-
+          
       <div className="space-y-2 md:flex items-center justify-between mt-5">
         <p>
           &copy; Mysore International School 2023 | All rights reserved | Legal Notice.
         </p>
-        <p>Developed by webstor labs.</p>
+        <p>Developed by <a
+            href="https://webstorlabs.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-all duration-200"
+          >
+            WebstorLabs
+          </a></p>
       </div>
     </div>
 

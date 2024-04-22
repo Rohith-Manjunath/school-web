@@ -11,6 +11,7 @@ import { useLogoutMutation } from "../../../Redux/authApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { LogoutUser } from "../../../Redux/userSlice";
+import avatar from "../../assets/Images/Server/Admin/Avatar.png"
 
 export default function UserOptions({ user }) {
   const [open, setOpen] = React.useState(false);
@@ -92,7 +93,7 @@ export default function UserOptions({ user }) {
       {backdropOpen && <div className="backdrop" onClick={handleBackdropClick} />} {/* Render backdrop if open */}
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
-        icon={<img src={user?.avatar?.url} alt="" className="rounded-full w-full h-full" />}
+        icon={<img src={avatar} alt="" className="rounded-full w-full h-full" />}
         onClose={handleClose}
         onOpen={handleOpen}
         open={open}

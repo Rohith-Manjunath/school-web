@@ -13,7 +13,7 @@ const Address = () => {
           </h2>
           <div className="font-semibold">
             <p className="lg:text-justify font-description">
-              Mount Litera Zee School 92/1-3, HD Kote Road, Rayanakere Post, 5
+              Mysore International School 92/1-3, HD Kote Road, Rayanakere Post, 5
               Minutes from Srirampura Ring Road, Mysore – 570008.
             </p>
             <Link
@@ -28,19 +28,19 @@ const Address = () => {
           <div className="space-y-8 w-[90%]">
             <h4 className="font-semibold ">
               Email Address :{" "}
-              <span className="font-normal">admissions@mysoreinternationalschool.com</span>
+              <span className="font-normal">accounts@mysoreinternationalschool.com</span>
             </h4>
             <h4 className="font-semibold ">
               Telephone Number :{" "}
               <span className="font-normal">0821 2971010 / 8884300400</span>
             </h4>
             <h4 className="font-semibold ">
-              Admission Officer Name :{" "}
-              <span className="font-normal">Ms. Ranjitha</span>
+              Admission Officer Name :
+              <span className="font-normal ">  Ms. Ranjitha</span>
             </h4>
             <h4 className="font-semibold ">
               Admission Officer E-mail address :{" "}
-              <span className="font-normal">zeeschoolmysore@gmail.com</span>
+              <span className="font-normal"> admissions@mysoreinternationalschool.com </span>
             </h4>
             <h4 className="font-semibold ">
               Admission Officer Mobile No :{" "}

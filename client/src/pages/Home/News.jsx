@@ -147,11 +147,7 @@ const News = () => {
                   )}
                 <div>
                   <h4>{item?.title}</h4>
-                  <p>Author</p>
                 </div>
-                <button className="tracking-wider text-[12px]">
-                  Read More
-                </button>
               </div>
             </div>
           );
