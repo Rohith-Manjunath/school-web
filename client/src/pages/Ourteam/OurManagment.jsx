@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
 import FacultyCard from '../../components/layouts/Cards/FacultyCard';
-import fac1 from '../../assets/Images/AcademicsImages/FacultyImages/fac1.jpg';
+import fac1 from '../../assets/Images/OutTeamImages/PrincipalImage.jpeg';
 import chairman from '../../assets/Images/AcademicsImages/FacultyImages/chairman.jpg';
 import trustee from '../../assets/Images/AcademicsImages/FacultyImages/trustee.jpg';
 

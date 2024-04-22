@@ -3,8 +3,7 @@ import Slider from '../../components/layouts/Slider';
 import LazyLoadImage from '../../components/layouts/Common/LazyLoader';
 import image1 from '../../assets/Images/Ourteamslide/ourteam3.jpg';
 import image2 from '../../assets/Images/Ourteamslide/ourteam3.jpg';
-import image3 from '../../assets/Images/Ourteamslide/ourteam4.jpg';
-import image4 from '../../assets/Images/Ourteamslide/ourteam5.jpg';
+import image4 from '../../assets/Images/Ourteamslide/image4.jpg';
 
 const slides = [
   {
@@ -17,10 +16,6 @@ const slides = [
   },
   {
     id: 3,
-    url: image3,
-  },
-  {
-    id: 4,
     url: image4,
   },
 ];
