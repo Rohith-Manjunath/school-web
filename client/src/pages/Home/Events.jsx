@@ -59,12 +59,7 @@ const Events = () => {
       alert.error(e?.data?.err);
       return;
     }
-  };
-
-  if (queryLoading) {
-    return <h2>Loading....</h2>;
   }
-
 
   const settings = {
     dots: data?.events?.length > 3,
