@@ -150,9 +150,7 @@ e.preventDefault()
         </button>
       </div>
       }
-      {queryLoading ? (
-        <h2>Loading...</h2>
-      ) : (
+
         <>
           {data?.events?.length > 0 ? (
             <Slider {...settings} className="">
@@ -183,7 +181,7 @@ e.preventDefault()
             <h2 className="text-center font-semibold tracking-wider text-[25px] text-gray-500 animate-bounce">No data yet &#58; &#40; </h2>
           )}
         </>
-      )}
+      
     </div>
     <Modal
     isOpen={isModalOpen}
