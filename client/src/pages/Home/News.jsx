@@ -15,7 +15,6 @@ import { useNewsUsersQuery } from "../../../Redux/authApi";
 const News = () => {
 
   const { isLoading: queryLoading, data: queryData ,refetch}=useGetAllNewsQuery()
-  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
     const [deleteNewsMutation] = useDeleteNewsMutation();
@@ -31,9 +30,8 @@ const News = () => {
 
   
   useEffect(() => {
-    setIsLoading(queryLoading);
     setData(isAdmin ? queryData : usersNews);
-  }, [queryLoading, queryData, usersNews , isAdmin]);
+  }, [queryData, usersNews , isAdmin]);
 
 
   const settings = {

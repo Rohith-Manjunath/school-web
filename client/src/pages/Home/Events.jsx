@@ -17,7 +17,6 @@ import { useEventsUsersQuery, useNewsUsersQuery } from "../../../Redux/authApi";
 
 const Events = () => {
   const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
-  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const { isLoading: queryLoading, data: queryData ,refetch} = useEventsQuery();
   const { data: usersEvents } = useEventsUsersQuery();
@@ -41,9 +40,8 @@ const Events = () => {
   const [updateEvent,{isLoading:updateLoading}]=useUpdateEventMutation()
 
   useEffect(() => {
-    setIsLoading(queryLoading);
     setData(isAdmin ? queryData : usersEvents);
-  }, [queryLoading, queryData,usersEvents,isAdmin]);
+  }, [queryData,usersEvents,isAdmin]);
 
   useEffect(() => {
     setEvent(eventsData?.event);
@@ -63,7 +61,7 @@ const Events = () => {
     }
   };
 
-  if (isLoading) {
+  if (queryLoading) {
     return <h2>Loading....</h2>;
   }
 
@@ -152,7 +150,7 @@ e.preventDefault()
         </button>
       </div>
       }
-      {isLoading ? (
+      {queryLoading ? (
         <h2>Loading...</h2>
       ) : (
         <>
