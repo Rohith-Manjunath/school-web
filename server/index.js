@@ -3,10 +3,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const cookie = require("cookie-parser");
 const cors = require("cors");
-const cloudinary=require("cloudinary")
+const cloudinary = require("cloudinary");
 const corsOptions = {
-  origin: ["http://localhost:5173","https://mysoreinternationalschool.com"],
-  credentials:true
+  origin: /^(https?:\/\/(www\.)?mysoreinternationalschool\.com|http:\/\/localhost:5173|https:\/\/school-website-12\.netlify\.app|https:\/\/visionary-dieffenbachia-ee8240\.netlify\.app)$/,
+  credentials: true
 };
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
@@ -26,13 +26,12 @@ app.use(
   })
 );
 
-
-
 // File upload middleware
 app.use(fileUpload());
 app.use(express.json());
 app.use(cookie());
 app.use(cors(corsOptions));
+
 app.use("/api", Enrollment);
 app.use("/api", UserRoute);
 app.use("/api/admin", AdminRoute);
@@ -46,6 +45,7 @@ cloudinary.config({
 
 // Database connection
 dbConnection(process.env.URI);
+
 // Start the server
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {
@@ -55,7 +55,6 @@ const server = app.listen(PORT, () => {
 // Handle unhandled rejections
 process.on("unhandledRejection", (promise, e, reason) => {
   console.error("Unhandled Rejection at:", promise, "reason:", reason);
-
   console.log(`Shutting down server due to unhandledRejection`);
   console.log(`${e.message}`);
   server.close(() => {
