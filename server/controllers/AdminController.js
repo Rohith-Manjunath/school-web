@@ -318,6 +318,8 @@ exports.getSingleNews=catchAsyncError(async(req,res,next)=>{
 })
 
 
+
+
 exports.updateNews=catchAsyncError(async(req,res,next)=>{
 
     const {newsId}=req.params;
@@ -401,4 +403,113 @@ res.status(201).json({
 
 
 
+})
+
+exports.deleteGallery=catchAsyncError(async(req,res,next)=>{
+    const {id}=req.params;
+    if(!id){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const content=await Gallery.findById(id);
+
+    if(!content){
+        return next(new ErrorHandler("No content found",404));
+    }
+
+    const {public_id}=content.avatar
+    await cloudinary.v2.uploader.destroy(public_id);
+
+
+  await Gallery.deleteOne({_id:id})
+
+    res.status(200).json({
+        success:true,
+        message:"Content deleted successfully",
+     
+        
+    })
+})
+
+
+exports.updateGallery=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+    if(!id){
+        return next(new ErrorHandler("Invalid id",401));
+    }
+
+    const content=await Gallery.findById(id)
+
+    
+
+    if(!content){
+        return next(new ErrorHandler("Content not found",404));
+    }
+
+    const {title,image}=req.body;
+
+
+    const {public_id}=content.avatar
+    cloudinary.v2.uploader.destroy(public_id);
+
+    const myCloud = await cloudinary.v2.uploader.upload(image, {
+        folder: "school/gallery",
+        width: 250,
+        height: 250,
+        crop: "scale",
+      });
+
+
+
+    content.title=title;
+    content.avatar.public_id=myCloud?.public_id
+    content.avatar.url=myCloud?.secure_url
+
+    await content.save()
+    
+    res.status(200).json({
+        success: true,
+        message:"Content updated successfully"
+    })
+
+
+})
+
+
+exports.getAllGallery=catchAsyncError(async(req,res,next)=>{
+
+    const content=await Gallery.find()
+    const totalContent=await Gallery.countDocuments()
+
+    res.status(200).json({
+
+        success:true,
+        content,
+        totalContent
+
+    })
+
+})
+
+
+exports.getSingleGalleryContent=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+    if(!id){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const content=await Gallery.findById(id);
+
+    if(!content){
+        return next(new ErrorHandler("No content found",404));
+    }
+
+    res.status(200).json({
+        success:true,
+        content
+        
+    })
 })
