@@ -1,4 +1,5 @@
 const Events = require("../models/EventsSchema");
+const Gallery = require("../models/GalleryModel");
 const News = require("../models/NewsSchema");
 const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
@@ -360,6 +361,44 @@ exports.updateNews=catchAsyncError(async(req,res,next)=>{
         success: true,
         message:"News updated successfully"
     })
+
+
+})
+
+
+exports.uploadGalleryImages=catchAsyncError(async(req,res,next)=>{
+
+const {title,image}=req.body;
+
+const myCloud = await cloudinary.v2.uploader.upload(image, {
+    folder: "school/gallery",
+    width: 250,
+    height: 250,
+    crop: "scale",
+  });
+
+  const isTitleExists=await Gallery.findOne({title})
+
+  if(isTitleExists){
+    return next (new ErrorHandler(`Content already exists with this title : ${title}`, 409))
+  }
+
+
+
+await Gallery.create({
+    title,
+    avatar:{
+        public_id:myCloud.public_id,
+        url:myCloud.secure_url
+    }
+});
+
+res.status(201).json({
+    success:true,
+    message:"Gallery content addedd successfully"
+})
+
+
 
 
 })
