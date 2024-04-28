@@ -6,7 +6,7 @@ export const adminApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://school-web-50fi.onrender.com/api/admin/",
   }),
-  tagTypes: ["Events","News"],
+  tagTypes: ["Events","News","Gallery"],
   endpoints: (builder) => ({
     events: builder.query({
       query: () => ({
@@ -112,6 +112,65 @@ invalidatesTags:["Events"]
     invalidatesTags:["News"]
 
 }),
+
+getAllGallery: builder.query({
+  query: () => ({
+    url:`gallery`,
+    method: "GET",
+    credentials:"include",
+  }),
+
+  providesTags:["Gallery"]
+
+}),
+
+
+  postGallery: builder.mutation({
+    query: (data) => ({
+      url:`gallery/addContent`,
+      method: "POST",
+      credentials:"include",
+      body:data
+
+    }),
+
+    invalidatesTags:["Gallery"]
+
+}),
+
+  deleteGallery: builder.mutation({
+    query: (id) => ({
+      url:`gallery/${id}`,
+      method: "DELETE",
+      credentials:"include",
+    }),
+
+    invalidatesTags:["Gallery"]
+
+}),
+
+  updateGallery: builder.mutation({
+    query: ({id,data}) => ({
+      url:`gallery/${id}`,
+      method: "PUT",
+      credentials:"include",
+      body:data
+    }),
+
+    invalidatesTags:["Gallery"]
+
+}),
+
+  getSingleGallery: builder.query({
+    query: (id) => ({
+      url:`gallery/${id}`,
+      method: "GET",
+      credentials:"include",
+    }),
+
+}),
+
+
   }),
 
   
@@ -128,5 +187,11 @@ useDeleteNewsMutation,
 usePostNewsMutation,
 useUpdateEventMutation,
 useUpdateNewsMutation,
-useGetSingleEventQuery
+useGetSingleEventQuery,
+useDeleteGalleryMutation,
+useUpdateGalleryMutation,
+useGetSingleGalleryQuery,
+usePostGalleryMutation,
+useGetAllGalleryQuery
+
 } = adminApi;

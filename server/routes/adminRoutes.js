@@ -12,7 +12,7 @@ router.route("/queries").get(isAuthenticatedUser,isAdmin, getAllAdmissionQueries
 router.route("/postNews").post(isAuthenticatedUser,isAdmin,postNews)
 router.route("/news").get(isAuthenticatedUser,isAdmin,getAllNews)
 router.route("/news/:newsId").delete(isAuthenticatedUser,isAdmin, deleteNews).get(isAuthenticatedUser,isAdmin, getSingleNews).put(isAuthenticatedUser,isAdmin, updateNews)
-router.route("/gallery").get(isAuthenticatedUser,getAllGallery)
+router.route("/gallery").get(getAllGallery)
 router.route("/gallery/addContent").post(isAuthenticatedUser,isAdmin, uploadGalleryImages)
 router.route("/gallery/:id").delete(isAuthenticatedUser,isAdmin, deleteGallery).put(isAuthenticatedUser,isAdmin, updateGallery).get(isAuthenticatedUser,isAdmin, getSingleGalleryContent)
 
