@@ -131,7 +131,6 @@ e.preventDefault()
   }
 
 
-
   return (
     <>
     <div className="w-[80%] py-20 mx-auto tracking-wide font-semibold relative">
@@ -158,7 +157,7 @@ e.preventDefault()
                   </div>
                   <div className="p-6 bg-white">Duration: {item?.duration}</div>
                   {isAdmin && (
-                    <>
+                   <>
                       <MdDelete
                         onClick={() => handleDelete(item?._id)}
                         className="text-red-600 absolute top-0 text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"

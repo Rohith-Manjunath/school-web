@@ -557,7 +557,7 @@ exports.getSingleAward=catchAsyncError(async(req,res,next)=>{
 exports.postAward=catchAsyncError(async(req,res,next)=>{
 
     try{
-     const {image,description,title}=req.body;
+     const {image}=req.body;
  
      const myCloud = await cloudinary.v2.uploader.upload(image, {
          folder: "school/awards",
@@ -566,15 +566,7 @@ exports.postAward=catchAsyncError(async(req,res,next)=>{
          crop: "scale",
        });
  
-       const isNewsExists=await Awards.findOne({title})
- 
-       if(isNewsExists){
-         return next (new ErrorHandler(`Award already exists with this title : ${title}`, 409))
-       }
- 
         await Awards.create({
-         title,
-         description,
          avatar: {
            public_id: myCloud?.public_id,
            url: myCloud?.secure_url,

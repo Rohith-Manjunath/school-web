@@ -1,12 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+const productionUrl="https://school-web-50fi.onrender.com/api/admin/"
+const devUrl="http://localhost:4000/api/admin/"
+
 export const adminApi = createApi({
 
 
   reducerPath: "admin",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://school-web-50fi.onrender.com/api/admin/",
+    baseUrl: productionUrl,
   }),
-  tagTypes: ["Events","News","Gallery"],
+  tagTypes: ["Events","News","Gallery","Awards"],
   endpoints: (builder) => ({
     events: builder.query({
       query: () => ({
@@ -117,7 +121,6 @@ getAllGallery: builder.query({
   query: () => ({
     url:`gallery`,
     method: "GET",
-    credentials:"include",
   }),
 
   providesTags:["Gallery"]
@@ -166,9 +169,71 @@ getAllGallery: builder.query({
       url:`gallery/${id}`,
       method: "GET",
       credentials:"include",
+
     }),
 
 }),
+
+getAllAwards: builder.query({
+  query: () => ({
+    url:`awards`,
+    method: "GET",
+    
+  }),
+
+  providesTags:["Awards"]
+
+}),
+
+
+postAward: builder.mutation({
+  query: (data) => ({
+    url:`awards/addAward`,
+    method: "POST",
+    credentials:"include",
+    body:data
+
+  }),
+
+  invalidatesTags:["Awards"]
+
+}),
+
+deleteAward: builder.mutation({
+  query: (id) => ({
+    url:`awards/${id}`,
+    method: "DELETE",
+    credentials:"include",
+  }),
+
+  invalidatesTags:["Awards"]
+
+}),
+
+
+updateAward: builder.mutation({
+  query: ({id,data}) => ({
+    url:`awards/${id}`,
+    method: "PUT",
+    credentials:"include",
+    body:data
+  }),
+
+  invalidatesTags:["Awards"]
+
+}),
+
+getSingleAward:builder.query({
+  query:(id)=>({
+
+    url:`awards/${id}`,
+    method: "GET",
+    credentials:"include",
+
+
+  })
+}),
+
 
 
   }),
@@ -192,6 +257,11 @@ useDeleteGalleryMutation,
 useUpdateGalleryMutation,
 useGetSingleGalleryQuery,
 usePostGalleryMutation,
-useGetAllGalleryQuery
+useGetAllGalleryQuery,
+useGetAllAwardsQuery,
+useDeleteAwardMutation,
+useUpdateAwardMutation,
+useGetSingleAwardQuery,
+usePostAwardMutation
 
 } = adminApi;
