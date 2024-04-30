@@ -1,3 +1,4 @@
+const Awards = require("../models/AwardsSchema");
 const Events = require("../models/EventsSchema");
 const Gallery = require("../models/GalleryModel");
 const News = require("../models/NewsSchema");
@@ -272,7 +273,7 @@ exports.getAllNews=catchAsyncError(async(req,res,next)=>{
 exports.deleteNews=catchAsyncError(async(req,res,next)=>{
     const {newsId}=req.params;
     if(!newsId){
-        return next(new ErrorHandler("Invalid id / id must be provided"))
+        return next(new ErrorHandler("Invalid id / id must be provided",404))
     }
 
     const news=await News.findById(newsId);
@@ -512,4 +513,159 @@ exports.getSingleGalleryContent=catchAsyncError(async(req,res,next)=>{
         content
         
     })
+})
+
+exports.getAllAwards=catchAsyncError(async(req,res,next)=>{
+
+const awards=await Awards.find();
+
+const totalAwards=await Awards.countDocuments()
+
+res.status(200).json({
+    success:true,
+    awards,
+    totalAwards
+})
+
+
+})
+
+exports.getSingleAward=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+    if(!id){
+
+        return next(new ErrorHandler("Invalid id / id must be provided",404));
+
+    }
+
+    const award=await Awards.findById(id)
+
+    if(!award){
+        return next(new ErrorHandler("No data found for this id",404));
+
+    }
+
+    res.status(200).json({
+        success:true,
+        award
+    })
+
+})
+
+exports.postAward=catchAsyncError(async(req,res,next)=>{
+
+    try{
+     const {image,description,title}=req.body;
+ 
+     const myCloud = await cloudinary.v2.uploader.upload(image, {
+         folder: "school/awards",
+         width: 250,
+         height: 250,
+         crop: "scale",
+       });
+ 
+       const isNewsExists=await Awards.findOne({title})
+ 
+       if(isNewsExists){
+         return next (new ErrorHandler(`Award already exists with this title : ${title}`, 409))
+       }
+ 
+        await Awards.create({
+         title,
+         description,
+         avatar: {
+           public_id: myCloud?.public_id,
+           url: myCloud?.secure_url,
+         },
+
+       });
+ 
+       res.status(201).json({
+         success:true,
+         message:"New Award created successfully"
+ 
+       })
+ 
+ 
+    }catch(e){
+     return next(new ErrorHandler(e.message,500))
+    }
+ 
+ })
+ 
+
+
+ exports.deleteAward=catchAsyncError(async(req,res,next)=>{
+    const {id}=req.params;
+    if(!id){
+        return next(new ErrorHandler("Invalid id / id must be provided",404))
+    }
+
+    const award=await Awards.findById(id);
+
+    if(!award){
+        return next(new ErrorHandler("No award found",404));
+    }
+
+    const {public_id}=award.avatar
+    cloudinary.v2.uploader.destroy(public_id);
+
+
+  await Awards.deleteOne({_id:id})
+
+    res.status(200).json({
+        success:true,
+        message:"Award deleted successfully",
+     
+        
+    })
+})
+
+
+exports.updateAward=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+    if(!id){
+        return next(new ErrorHandler("Invalid id",401));
+    }
+
+    const award=await Awards.findById(id)
+
+    
+
+    if(!award){
+        return next(new ErrorHandler("News not found",404));
+    }
+
+    const {title,description,image}=req.body;
+
+
+    const {public_id}=award.avatar
+    cloudinary.v2.uploader.destroy(public_id);
+
+    const myCloud = await cloudinary.v2.uploader.upload(image, {
+        folder: "school/awards",
+        width: 250,
+        height: 250,
+        crop: "scale",
+      });
+
+
+
+    award.title=title;
+    award.description=description;
+    award.avatar.public_id=myCloud?.public_id
+    award.avatar.url=myCloud?.secure_url
+
+    await award.save()
+    
+    res.status(200).json({
+        success: true,
+        message:"Award updated successfully"
+    })
+
+
 })
