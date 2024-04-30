@@ -11,8 +11,7 @@ import Modal from 'react-modal'
 import { IoMdClose } from "react-icons/io";
 
 const Awards = () => {
-  const {user}=useSelector(state=>state.user);
-  const {isAdmin}=user
+  const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
   const alert=useAlert()
   const {data,isLoading,refetch}= useGetAllAwardsQuery()
   const {awards}=data;
