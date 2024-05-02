@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import Home from "./pages/Home/Home";
 import Academics from "./pages/Academics/Academics";
@@ -28,12 +28,14 @@ import CBSEProg from "./pages/Home/CBSEProg";
 import EarlyProgram from "./pages/Home/EarlyProgram";
 import KnowMore from "./pages/Home/KnowMore";
 import JoinOurTeam from "./pages/Ourteam/JoinOurTeam";
+import ScrollToTop from "./components/layouts/Common/ScrollToTop";
 
 
 const App = () => {
   return (
     <Router>
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/academics" element={<Academics />} />
@@ -44,9 +46,9 @@ const App = () => {
         <Route path="/Career" element={<JoinOurTeam />} />
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />}>
-             <Route path="/admin-login" element={<Login />} />
-             <Route path="/Register" element={<Register />} />
-             <Route path="/admin-panel" element={<AdminPanel />} />
+          <Route path="/admin-login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/admin-panel" element={<AdminPanel />} />
         </Route>
         <Route path="/TransportPage" element={<TransportPage />} />
         <Route path="/ComputerPage" element={<ComputerPage />} />

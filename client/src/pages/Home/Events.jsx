@@ -219,8 +219,8 @@ e.preventDefault()
 
 
     <form
-      className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6" onSubmit={handleSubmit}
-    >
+          className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6" onSubmit={handleSubmit}
+        >
       <div className="flex flex-col gap-2">
         <label className="text-black font-sans tracking-wide font-semibold" htmlFor="duration">
           Duration
@@ -418,12 +418,6 @@ e.preventDefault()
       </div>
     </form>
   </Modal>
-
-
-
-
-
-
     </>
   );
 }

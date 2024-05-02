@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com</loc>
+    <lastmod>2024-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Admissions Page -->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/admissions</loc>
+    <lastmod>2024-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Academics Page -->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/academics</loc>
+    <lastmod>2024-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Facilities Page -->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/facilities</loc>
+    <lastmod>2024-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+   <!-- OurTeam Page -->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/OurTeam</loc>
+    <lastmod>2024-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Contact Us Page -->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/contact-us</loc>
+    <lastmod>2024-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+   <!-- SubPage Page 1 -->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/CbseCurriculum</loc>
+    <lastmod>2024-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+    <!-- SubPage Page 2-->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/HolisticEdu</loc>
+    <lastmod>2024-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+    <!-- SubPage Page 3-->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/awards</loc>
+    <lastmod>2024-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+    <!-- SubPage Page 4 -->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/EarlyProgram</loc>
+    <lastmod>2024-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+    <!-- SubPage Page 5 -->
+  <url>
+    <loc>https://www.mysoreinternationalschool.com/CBSEProg</loc>
+    <lastmod>2024-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- Add more URLs as needed -->
+</urlset>

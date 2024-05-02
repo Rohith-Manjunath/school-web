@@ -58,8 +58,7 @@ const Footer = () => {
         <div className="space-y-4">
           <div className="">
             <p className="lg:text-justify">
-              Mysore International School 92/1-3, HD Kote Road, Rayanakere Post, 5
-              Minutes from Srirampura Ring Road, Mysore – 570008.
+              Mysore International School # 92/1-5, HD Kote Road, Rayanakere Post, SH 33, Karnataka 570008
             </p>
             <Link
               className="hover:ml-2 transition-all duration-200"
@@ -124,7 +123,7 @@ const Footer = () => {
           
       <div className="space-y-2 md:flex items-center justify-between mt-5">
         <p>
-          &copy; Mysore International School 2023 | All rights reserved | Legal Notice.
+          &copy; Mysore International School 2024 | All rights reserved | Legal Notice.
         </p>
         <p>Developed by <a
             href="https://webstorlabs.com"

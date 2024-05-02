@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeroImage from '../../assets/Images/HomeImages/Holistic/image/5.jpg'; // Import your hero image
 import Footer from "../../components/layouts/Footer";
 
 import CarouselSliderCBSE from './CarouselSliderCBSE';
 
 const CBSEProg = () => {
+  useEffect(() => {
+    // Update document head with meta tags
+    const metaTitle = document.createElement('meta');
+    metaTitle.setAttribute('name', 'title');
+    metaTitle.content = 'CBSE Program Overview - Mysore International School';
+    document.head.appendChild(metaTitle);
+
+    const metaDescription = document.createElement('meta');
+    metaDescription.setAttribute('name', 'description');
+    metaDescription.content = 'Explore the CBSE program overview at Mysore International School, focusing on comprehensive learning across various disciplines.';
+    document.head.appendChild(metaDescription);
+
+    return () => {
+      // Clean up added meta tags when component unmounts
+      document.head.removeChild(metaTitle);
+      document.head.removeChild(metaDescription);
+    };
+  }, []); // Run this effect only once on mount
+
  return (
    <div className=" w-[100%]  pt-8 flex  flex-col">
      {/* Hero Image */}

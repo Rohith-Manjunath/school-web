@@ -1,50 +1,81 @@
 import { Link } from "react-router-dom";
 
 const Address = () => {
+  const handleEmailClick = (emailAddress) => {
+    const gmailComposeURL = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${emailAddress}`;
+    window.open(gmailComposeURL, '_blank');
+  };
+
   return (
     <>
       <h1 className=" text-2xl sm:text-3xl uppercase text-center text-textSecondary font-semibold mt-16 font-title">
         Contact Us
       </h1>
-      <div className="md:grid space-y-12 md:space-y-0 grid-cols-2 w-[90%] mx-auto mt-8  text-textSecondary tracking-wide shadow-lg border-secondary shadow-secondary border pb-8 pt-4 rounded-lg bg-white">
+      <div className="md:grid space-y-12 md:space-y-0 grid-cols-2 w-[90%] mx-auto mt-8 text-textSecondary tracking-wide shadow-lg border-secondary shadow-secondary border pb-8 pt-4 rounded-lg bg-white">
         <div className="space-y-4 px-2 md:px-10 md:py-10">
-          <h2 className="text-3xl md:text-4xl text-textSecondary  font-semibold font-title">
+          <h2 className="text-3xl md:text-4xl text-textSecondary font-semibold font-title">
             Mysore International School
           </h2>
           <div className="font-semibold">
             <p className="lg:text-justify font-description">
-              Mysore International School 92/1-3, HD Kote Road, Rayanakere Post, 5
-              Minutes from Srirampura Ring Road, Mysore – 570008.
+              Mysore International School 92/1-3, HD Kote Road, Rayanakere Post, 5 Minutes from Srirampura Ring Road, Mysore – 570008.
             </p>
             <Link
               className="hover:ml-2 transition-all duration-200"
-              to={
-                "https://www.google.com/maps/place/Mount+Litera+Zee+School/@12.2293831,76.5867438,17z/data=!3m1!4b1!4m6!3m5!1s0x3baf644f7358cc0d:0xe4fb32672e467b68!8m2!3d12.2293831!4d76.5867438!16s%2Fg%2F1yfh_kjjj?entry=ttu"
-              }
+              to={"https://www.google.com/maps/place/Mount+Litera+Zee+School/@12.2293831,76.5867438,17z/data=!3m1!4b1!4m6!3m5!1s0x3baf644f7358cc0d:0xe4fb32672e467b68!8m2!3d12.2293831!4d76.5867438!16s%2Fg%2F1yfh_kjjj?entry=ttu"}
             >
               Direction &gt;
             </Link>
           </div>
           <div className="space-y-8 w-[90%]">
-            <h4 className="font-semibold ">
-              Email Address :{" "}
-              <span className="font-normal">accounts@mysoreinternationalschool.com</span>
+            <h4 className="font-semibold">
+              Email Address :
+              <br />
+              <span
+                onClick={() => handleEmailClick('accounts@mysoreinternationalschool.com')}
+                className="font-normal break-words text-sm md:text-lg tracking-wider cursor-pointer"
+              >
+                accounts@mysoreinternationalschool.com
+              </span>
             </h4>
-            <h4 className="font-semibold ">
-              Telephone Number :{" "}
-              <span className="font-normal">0821 2971010 / 8884300400</span>
+            <h4 className="font-semibold">
+              Telephone Number :
+              <br />
+              <a href="tel:08212971010" className="font-normal break-words text-sm md:text-lg">
+                0821 2971010
+              </a>{' '}
+              /{' '}
+              <a href="tel:8884300400" className="font-normal break-words text-sm md:text-lg">
+                8884300400
+              </a>
             </h4>
-            <h4 className="font-semibold ">
+            <h4 className="font-semibold">
               Admission Officer Name :
-              <span className="font-normal ">  Ms. Ranjitha</span>
+              <br />
+              <span className="font-normal break-words text-sm md:text-lg tracking-wider">
+                Ms. Ranjitha
+              </span>
             </h4>
-            <h4 className="font-semibold ">
-              Admission Officer E-mail address :{" "}
-              <span className="font-normal"> admissions@mysoreinternationalschool.com </span>
+            <h4 className="font-semibold">
+              Admission Officer E-mail address :
+              <br />
+              <span
+                onClick={() => handleEmailClick('admissions@mysoreinternationalschool.com')}
+                className="font-normal break-words text-sm md:text-lg tracking-wide cursor-pointer"
+              >
+                admissions@mysoreinternationalschool.com
+              </span>
             </h4>
-            <h4 className="font-semibold ">
-              Admission Officer Mobile No :{" "}
-              <span className="font-normal">+91 888 4300 400 / +91 8277 237 785</span>
+            <h4 className="font-semibold">
+              Admission Officer Mobile No :
+              <br />
+              <a href="tel:918884300400" className="font-normal break-words text-sm md:text-lg">
+                +91 888 4300 400
+              </a>{' '}
+              /{' '}
+              <a href="tel:918277237785" className="font-normal break-words text-sm md:text-lg">
+                +91 8277 237 785
+              </a>
             </h4>
           </div>
         </div>

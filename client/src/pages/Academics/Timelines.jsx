@@ -7,7 +7,7 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 function Timelines() {
   return (
     <Timeline className=" flex flex-col  w-[100%] lg:m-10 ml-7 ">
-      <h1 className="items-center text-center pb-10 mr-14   font-title text-2xl font-semibold text-secondary tracking-wider">OUR TIMELINE</h1>
+      <h1 className="items-center text-center pb-10 mr-14   font-title text-2xl font-semibold text-secondary tracking-wider">OUR JOURNEY</h1>
       <Timeline.Item>
         <Timeline.Point />
         <Timeline.Content className="w-[80%]">
@@ -39,6 +39,16 @@ function Timelines() {
           <Timeline.Title >Phase - 03</Timeline.Title>
           <Timeline.Body>
           The School achieved many milestones on the way. The most important amongst them being the ISA (INTERNATIONAL SCHOOL AWARD) 2016-19 and the INTERNATIONAL DIMENSIONS IN SCHOOL.
+          </Timeline.Body>
+        </Timeline.Content>
+      </Timeline.Item>
+      <Timeline.Item>
+        <Timeline.Point />
+        <Timeline.Content className="w-[80%]">
+          <Timeline.Time className="font-title text-2xl font-semibold text-secondary tracking-wider"> 2024</Timeline.Time>
+          <Timeline.Title >Phase - 04</Timeline.Title>
+          <Timeline.Body>
+           We underwent a significant transformation and rebranded our school from Mount Litera Zee School to Mysore International School
           </Timeline.Body>
         </Timeline.Content>
       </Timeline.Item>
