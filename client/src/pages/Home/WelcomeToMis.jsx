@@ -99,48 +99,49 @@ const WelcomeToMIS = () => {
         </motion.div>
       </div>
       <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        shouldCloseOnOverlayClick={true}
-        className=""
-        style={{
-          overlay: {
-            zIndex: 98,
-            backgroundColor: `rgba(0, 0, 0, 0.5)`,
-          },
-          content: {
-            width: '90%',
-            maxWidth: '600px',
-            height: 'auto',
-            maxHeight: '90vh',
-            margin: '0 auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            color: '#580B57',
-            overflowY: 'auto',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            borderRadius: '10px',
-            border: 'none',
-            outline: 'none',
-          },
-        }}
-      >
+      isOpen={isModalOpen}
+      onRequestClose={() => setIsModalOpen(false)}
+      shouldCloseOnOverlayClick={true}
+      className=""
+      style={{
+        overlay: {
+          zIndex: 98,
+          backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        },
+        content: {
+          width: '90%',
+          maxWidth: '600px', // Adjust as needed
+          height: '90vh',
+          maxHeight: '90vh',
+          margin: '0 auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          color: '#580B57',
+          overflowY: 'auto',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          borderRadius: '10px',
+          border: 'none',
+          outline: 'none',
+          padding: '20px', // Add padding for spacing
+        },
+      }}
+    >
         <button
           className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl"
           onClick={() => setIsModalOpen(false)}
         >
           <IoMdClose />
         </button>
-        <h2 className="mb-5 md:mt-0 mt-[2rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px]">
+        <h2 className="mb-5 md:mt-0 mt-[18rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px] ">
           Enrollment form
         </h2>
 
         <form
-          className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6"
+          className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6 "
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-2">

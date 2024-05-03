@@ -16,6 +16,7 @@ import Coordinators from "./Coordinators";
 import HOD from "./HOD";
 import PaperTear1 from "../../components/layouts/PaperTear1";
 import TeamCarousel from "./TeamCarousel";
+import SecretaryMessage from "./SecretaryMessage";
 
 
 const OurTeam = () => {
@@ -38,6 +39,7 @@ const OurTeam = () => {
       <OurManagementPeople />
       <PaperTear2/>
       <PrincipalMessage />
+      <SecretaryMessage />
       <PaperTear1 />
       <TeamCarousel />
       {/* <HOD />

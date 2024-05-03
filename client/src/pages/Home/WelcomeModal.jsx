@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import image1 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_1.jpg";
-import image2 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_2.jpeg";
-import image3 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_3.jpeg";
+import image1 from "../../assets/Images/HomeImages/WelcomeModal/AdmissionOpen.jpg";
+import image2 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_1.jpg";
+import image3 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_2.jpeg";
+import image4 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_3.jpeg";
 
 const WelcomeModal = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [image1, image2, image3];
+  const images = [image1, image2, image3, image4]; // Include the fourth image
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -52,12 +53,16 @@ const WelcomeModal = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
+  const handleImageClick = () => {
+    window.open(images[currentImageIndex], '_blank');
+  };
+
   return (
     <>
       {showModal && (
         <div className="fixed z-50 inset-0 flex items-center justify-center">
           <div className="absolute inset-0 bg-black bg-opacity-75 backdrop-blur-sm"></div>
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 sm:mx-0 relative z-10" ref={modalRef}>
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 sm:mx-0 relative z-10 modal-container" ref={modalRef}>
             <div className="absolute top-2 right-2 z-10">
               <button
                 className="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -69,13 +74,14 @@ const WelcomeModal = () => {
                 </svg>
               </button>
             </div>
-            <div className="relative h-96 w-full">
+            <div className="relative h-96 w-full modal-image-container">
               <div className="absolute pt-14 left-0 w-full h-full ">
                 <img
                   src={images[currentImageIndex]}
                   alt={`Slide ${currentImageIndex + 1}`}
-                  className="object-scale-down w-full h-full"
+                  className="object-scale-down w-full h-full cursor-pointer"
                   loading="lazy"
+                  onClick={handleImageClick}
                 />
               </div>
               <button
@@ -112,6 +118,22 @@ const WelcomeModal = () => {
           </div>
         </div>
       )}
+
+      <style>{`
+        .modal-container {
+          max-width: 2xl;
+        }
+
+        @media (min-width: 1024px) {
+          .modal-container {
+            max-width: 4xl;
+          }
+
+          .modal-image-container {
+            height: 600px;
+          }
+        }
+      `}</style>
     </>
   );
 };

@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import Hero from "../../components/layouts/Common/Hero";
 import Footer from "../../components/layouts/Footer";
 import PaperTear1 from "../../components/layouts/PaperTear1";
@@ -12,6 +13,24 @@ import OurVision from "./OurVision";
 import Testimonials from "./Testimonials";
 import Timelines  from "./Timelines";
 const Academics = () => {
+  useEffect(() => {
+    // Update document head with meta tags
+    const metaTitle = document.createElement('meta');
+    metaTitle.setAttribute('name', 'title');
+    metaTitle.content = 'Academics - Mysore International School';
+    document.head.appendChild(metaTitle);
+
+    const metaDescription = document.createElement('meta');
+    metaDescription.setAttribute('name', 'description');
+    metaDescription.content = 'Explore the academic programs at Mysore International School, focusing on holistic education and comprehensive learning experiences.';
+    document.head.appendChild(metaDescription);
+
+    return () => {
+      // Clean up added meta tags when component unmounts
+      document.head.removeChild(metaTitle);
+      document.head.removeChild(metaDescription);
+    };
+  }, []);
   return (
     <div className="">
       <Hero
@@ -33,7 +52,6 @@ const Academics = () => {
       {/* <OurVision /> */}
       <PaperTear1 />
       <AdmissionInfo />
-      
       {/* <Resource /> */}
       <PaperTear2 />
       <Footer />
