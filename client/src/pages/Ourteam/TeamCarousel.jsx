@@ -11,17 +11,17 @@ const TeamCarousel = () => {
     {
       image: image1,
       title: "HOD's of various departments",
-      description: ' Meet our dedicated HODs, leading their departments with expertise and passion. They guide our faculty and students, fostering innovation and academic excellence.',
+
     },
     {
       image: image2,
-      title: 'Support Team',
-      description: 'Meet our dedicated Support Team, committed to providing exceptional service and assistance to our community.',
+      title: 'Team MIS',
+
     },
     {
       image: image3,
       title: 'Our Coordinators Team',
-      description: 'Meet the dedicated coordinators who play a pivotal role in ensuring a smooth and enriching educational experience. From curriculum planning to extracurricular activities.',
+
     },
    
   ];
