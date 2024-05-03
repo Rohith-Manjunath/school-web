@@ -120,7 +120,7 @@ const News = () => {
         {data?.news?.map((item) => {
           return (
             <div
-              className="p-6 bg-white rounded-md space-y-4 text-textSecondary font-semibold tracking-wide"
+              className="p-6 bg-white rounded-md space-y-4 text-textSecondary font-semibold tracking-wide h-[400px]"
               key={item?.title}
             >
               <div>

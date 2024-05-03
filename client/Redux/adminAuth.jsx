@@ -8,7 +8,7 @@ export const adminApi = createApi({
 
   reducerPath: "admin",
   baseQuery: fetchBaseQuery({
-    baseUrl: productionUrl,
+    baseUrl: devUrl,
   }),
   tagTypes: ["Events","News","Gallery","Awards"],
   endpoints: (builder) => ({

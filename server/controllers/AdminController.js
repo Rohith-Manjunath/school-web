@@ -220,8 +220,8 @@ exports.postNews=catchAsyncError(async(req,res,next)=>{
 
     const myCloud = await cloudinary.v2.uploader.upload(image, {
         folder: "school/newsImages",
-        width: 250,
-        height: 250,
+        width: 700,
+        height: 700,
         crop: "scale",
       });
 
@@ -345,8 +345,8 @@ exports.updateNews=catchAsyncError(async(req,res,next)=>{
 
     const myCloud = await cloudinary.v2.uploader.upload(image, {
         folder: "school/newsImages",
-        width: 250,
-        height: 250,
+        width: 700,
+        height: 700,
         crop: "scale",
       });
 
@@ -375,8 +375,8 @@ const {title,image}=req.body;
 
 const myCloud = await cloudinary.v2.uploader.upload(image, {
     folder: "school/gallery",
-    width: 250,
-    height: 250,
+    width: 700,
+    height: 700,
     crop: "scale",
   });
 
@@ -457,8 +457,8 @@ exports.updateGallery=catchAsyncError(async(req,res,next)=>{
 
     const myCloud = await cloudinary.v2.uploader.upload(image, {
         folder: "school/gallery",
-        width: 250,
-        height: 250,
+        width: 700,
+        height: 700,
         crop: "scale",
       });
 
@@ -561,8 +561,8 @@ exports.postAward=catchAsyncError(async(req,res,next)=>{
  
      const myCloud = await cloudinary.v2.uploader.upload(image, {
          folder: "school/awards",
-         width: 250,
-         height: 250,
+         width: 700,
+         height: 700,
          crop: "scale",
        });
  
@@ -640,8 +640,8 @@ exports.updateAward=catchAsyncError(async(req,res,next)=>{
 
     const myCloud = await cloudinary.v2.uploader.upload(image, {
         folder: "school/awards",
-        width: 250,
-        height: 250,
+        width: 700,
+        height: 700,
         crop: "scale",
       });
 

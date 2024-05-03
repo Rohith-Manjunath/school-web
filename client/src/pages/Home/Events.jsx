@@ -149,13 +149,13 @@ e.preventDefault()
           {data?.events?.length > 0 ? (
             <Slider {...settings} className="">
               {data?.events?.map((item) => (
-                <div className="text-center text-textSecondary rounded-md border m-auto mr-10 relative" key={item?._id}>
-                  <div className="bg-white underline underline-offset-4 p-8 capitalize tracking-wider" >{item?.title}</div>
-                  <div className="py-14 bg-secondary text-white space-y-2">
+                <div className="text-center text-textSecondary rounded-md border m-auto mr-10 relative h-[400px]" key={item?._id}>
+                  <div className="bg-white underline underline-offset-4 p-8 capitalize tracking-wider h-1/3" >{item?.title}</div>
+                  <div className="py-14 bg-secondary text-white space-y-2 h-1/2">
                     <span className="font-semibold uppercase">{item?.days}</span>
                     <h2 className="font-semibold text-3xl md:text-4xl">{item?.date}</h2>
                   </div>
-                  <div className="p-6 bg-white">Duration: {item?.duration}</div>
+                  <div className="p-6 bg-white h-1/3">Duration: {item?.duration}</div>
                   {isAdmin && (
                    <>
                       <MdDelete

@@ -7,7 +7,7 @@ const devUrl="http://localhost:4000/api/"
 export const myApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: productionUrl,
+    baseUrl: devUrl,
   }),
 //   tagTypes: ["Posts"],
   endpoints: (builder) => ({

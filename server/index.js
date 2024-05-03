@@ -30,7 +30,9 @@ app.use(
 
 // File upload middleware
 app.use(fileUpload());
-app.use(express.json());
+app.use(express.json({
+  limit: '50mb'
+}));
 app.use(cookie());
 app.use(cors(corsOptions));
 app.use("/api", Enrollment);

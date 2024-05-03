@@ -71,6 +71,7 @@ const Gallery = () => {
       const data=await postGallery({title,image}).unwrap()
       alert.success(data?.message)
       setIsModalOpen(false)
+      refetch()
 
     }catch(e){
       alert.error(e?.data?.err)
