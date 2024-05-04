@@ -14,7 +14,6 @@ const Awards = () => {
   const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
   const alert=useAlert()
   const {data,isLoading,refetch}= useGetAllAwardsQuery()
-  const {awards}=data;
   const [deleteAward]=useDeleteAwardMutation()
   const [image,setImage]=useState("")
   const navigate=useNavigate()
@@ -144,7 +143,7 @@ const Awards = () => {
         <p className="text-white mb-8">Explore stunning collection of images of our Awards and Achievements</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {awards?.length>0 ? awards?.map((data, index) => (
+          {data?.awards?.length>0 ? data?.awards?.map((data, index) => (
             <div
               key={index}
               className={`relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:cursor-pointer`}
