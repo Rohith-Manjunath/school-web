@@ -26,7 +26,6 @@ export const myApi = createApi({
         url: "logout",
         method: "POST",
         credentials:"include"
-
       }),
     }),
     register: builder.mutation({

@@ -118,15 +118,15 @@ const GetInTouch = () => {
         <div className="text-textSecondary">
           <h2 className="text-2xl font-semibold">Social Media</h2>
           <div className="flex gap-3 mt-3">
-          <Link to="https://www.instagram.com/mlzs_mysore/">
+          <Link to="instagram.com/mys_intl_school">
             <FaInstagram className="text-4xl hover:cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md instagram-icon"></FaInstagram>
             </Link>
-            <Link to="https://www.facebook.com/mlzsmys/">
+            <Link to="facebook.com/Mysore.Intl.School">
               <FaFacebook className="text-4xl hover:cursor-pointer hover:bg-blue-500 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md"></FaFacebook>
             </Link>
 
             {/* <RiTwitterXLine className="text-4xl hover:cursor-pointer hover:bg-black transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md"></RiTwitterXLine> */}
-            <Link to="https://www.youtube.com/@mlzsmysuru3833">
+            <Link to="www.youtube.com/@mysoreinternationalschool">
               <BsYoutube className="text-4xl hover:cursor-pointer hover:bg-red-600 transition-all duration-300 hover:scale-110 hover:text-white p-2 rounded-md"></BsYoutube>
             </Link>
           </div>

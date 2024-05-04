@@ -28,34 +28,14 @@ const Address = () => {
             </Link>
           </div>
           <div className="space-y-8 w-[90%]">
-            <h4 className="font-semibold">
-              Email Address :
-              <br />
-              <span
-                onClick={() => handleEmailClick('accounts@mysoreinternationalschool.com')}
-                className="font-normal break-words text-sm md:text-lg tracking-wider cursor-pointer"
-              >
-                accounts@mysoreinternationalschool.com
-              </span>
-            </h4>
-            <h4 className="font-semibold">
-              Telephone Number :
-              <br />
-              <a href="tel:08212971010" className="font-normal break-words text-sm md:text-lg">
-                0821 2971010
-              </a>{' '}
-              /{' '}
-              <a href="tel:8884300400" className="font-normal break-words text-sm md:text-lg">
-                8884300400
-              </a>
-            </h4>
-            <h4 className="font-semibold">
+          <h4 className="font-semibold">
               Admission Officer Name :
               <br />
               <span className="font-normal break-words text-sm md:text-lg tracking-wider">
                 Ms. Ranjitha
               </span>
             </h4>
+            
             <h4 className="font-semibold">
               Admission Officer E-mail address :
               <br />
@@ -70,13 +50,45 @@ const Address = () => {
               Admission Officer Mobile No :
               <br />
               <a href="tel:918884300400" className="font-normal break-words text-sm md:text-lg">
-                +91 888 4300 400
+                +91 8884 300 400
               </a>{' '}
               /{' '}
               <a href="tel:918277237785" className="font-normal break-words text-sm md:text-lg">
                 +91 8277 237 785
               </a>
             </h4>
+            <h4 className="font-semibold">
+              Accountant's Name :
+              <br />
+              <span className="font-normal break-words text-sm md:text-lg tracking-wider">
+                Mrs. Parameswari 
+              </span>
+            </h4>
+            <h4 className="font-semibold">
+              Accountant Email Address :
+              <br />
+              <span
+                onClick={() => handleEmailClick('accounts@mysoreinternationalschool.com')}
+                className="font-normal break-words text-sm md:text-lg tracking-wider cursor-pointer"
+              >
+                accounts@mysoreinternationalschool.com
+              </span>
+            </h4>
+          
+            <h4 className="font-semibold">
+              Telephone Number :
+              <br />
+              <a href="tel:08212971010" className="font-normal break-words text-sm md:text-lg">
+                0821 2971010
+              </a>{' '}
+              /{' '}
+              <a href="tel:8884414356" className="font-normal break-words text-sm md:text-lg">
+                8884 414 356
+              </a>
+            </h4>
+            
+            
+            
           </div>
         </div>
         <div className="px-10 py-10 ">
