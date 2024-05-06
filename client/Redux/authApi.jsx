@@ -7,7 +7,7 @@ const devUrl="http://localhost:4000/api/"
 export const myApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: devUrl,
+    baseUrl: productionUrl,
   }),
 //   tagTypes: ["Posts"],
   endpoints: (builder) => ({
@@ -15,6 +15,16 @@ export const myApi = createApi({
       query: (credentials) => ({
         url: "login",
         method: "POST",
+        body: credentials,
+        credentials:"include"
+
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
+    loadUser: builder.query({
+      query: (credentials) => ({
+        url: "me",
+        method: "GET",
         body: credentials,
         credentials:"include"
 
@@ -116,5 +126,6 @@ useParentsenrollMutation,
 useAdmissionQueryMutation,
 useScheduleMutation,
 useEventsUsersQuery,
-useNewsUsersQuery
+useNewsUsersQuery,
+useLoadUserQuery
 } = myApi;

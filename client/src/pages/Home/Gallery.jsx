@@ -32,7 +32,6 @@ const Gallery = () => {
     setData(galleryData);
   }, [galleryData]);
 
-  console.log(gallery);
 
   useEffect(() => {
     setGallery(singleGalleryData?.content);
@@ -102,6 +101,11 @@ const Gallery = () => {
     }
   };
 
+  
+  const fetchData=async()=>{
+     await refetch()
+  }
+
   return (
     <>
       <div className="bg-secondary py-12 md:px-12">
@@ -110,14 +114,15 @@ const Gallery = () => {
             <h2 className="text-4xl font-bold text-white font-title mb-4">Gallery</h2>
             {isAdmin && (
               <div className='flex items-center justify-center'>
-                <button onClick={() => refetch()} className="">
                   <button>
                     <IoAddOutline
                       className="w-full  font-semibold my-4 mx-1  text-[30px] tracking-wider text-white hover:text-white duration-200 transition-all hover:scale-105 active:scale-90 "
                       onClick={() => setIsModalOpen(true)}
                     />
                   </button>
+                  <button  className="">
                   <LuRefreshCcw
+                  onClick={fetchData}
                     className="w-full font-semibold my-4 text-[25px] tracking-wider text-white hover:text-white duration-200 transition-all hover:scale-105 active:scale-90  animate-spin "
                   />
                 </button>

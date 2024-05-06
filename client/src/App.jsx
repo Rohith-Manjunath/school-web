@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate, unstable_HistoryRouter } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import Home from "./pages/Home/Home";
 import Academics from "./pages/Academics/Academics";
@@ -29,9 +29,48 @@ import EarlyProgram from "./pages/Home/EarlyProgram";
 import KnowMore from "./pages/Home/KnowMore";
 import JoinOurTeam from "./pages/Ourteam/JoinOurTeam";
 import ScrollToTop from "./components/layouts/Common/ScrollToTop";
+import { useLoadUserQuery, useLogoutMutation } from "../Redux/authApi";
+import { useEffect } from "react";
+import { LogoutUser, setUser } from "../Redux/UserSlice";
+import { useDispatch } from "react-redux";
+import { useAlert } from "react-alert";
 
 
 const App = () => {
+
+  const {data:userData,isLoading:userLoading}=useLoadUserQuery()
+  const dispatch=useDispatch()
+  const [logout,{isLoading,isError,error,data,isSuccess}]=useLogoutMutation()
+  const alert=useAlert()
+
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (userData?.err.toUpperCase() === "PLEASE LOGIN TO ACCESS THIS RESOURCE") {
+        try {
+          const response = await logout().unwrap();
+          alert.success(response?.message);
+          dispatch(LogoutUser());
+          window.location.history = "/login";
+        } catch (error) {
+          alert.error(error?.data?.err);
+        }
+      } else {
+        dispatch(setUser(userData?.user));
+      }
+    };
+  
+    const intervalId = setInterval(fetchData, 20000); // Run fetchData every 10 seconds
+  
+    // Cleanup function to clear the interval when the component unmounts or dependencies change
+    return () => clearInterval(intervalId);
+  
+  }, [userData, dispatch, alert, logout]);
+  
+  
+
   return (
     <Router>
       <Navbar />
