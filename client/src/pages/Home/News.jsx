@@ -10,6 +10,7 @@ import { IoAddOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import Modal from "react-modal";
 import { useNewsUsersQuery } from "../../../Redux/authApi";
+import {LinearProgress, Stack } from "@mui/material";
 
 
 const News = () => {
@@ -25,7 +26,7 @@ const News = () => {
   const [title,setTitle]=useState("")
   const [image,setImage]=useState("")
   const [postNews,{isLoading:postLoading}]=usePostNewsMutation()
-  const { data: usersNews } = useNewsUsersQuery();
+  const { data: usersNews } = useNewsUsersQuery()
 
 
   
@@ -109,48 +110,69 @@ const News = () => {
     <div className="w-[80%] lg:w-[90%] py-20 mx-auto ">
      { isAdmin && <div className="flex items-center justify-end gap-2">
       <button onClick={fetchData} className="">
-        <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
+        <LuRefreshCcw title="Refetch Data" className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
       </button>
       <button>
-       <IoAddOutline className="w-full  font-semibold my-4 mx-1  text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
+       <IoAddOutline title="Add News" className="w-full  font-semibold my-4 mx-1  text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
       </button>
       </div>
 }
-      <Slider {...settings} className="">
-        {data?.news?.map((item) => {
-          return (
-            <div
-              className="p-6 bg-white rounded-md space-y-4 text-textSecondary font-semibold tracking-wide h-[400px]"
-              key={item?.title}
-            >
+
+<>
+  {data?.news ? data?.news?.length > 0 ? (
+    <Slider {...settings} className="">
+      {data?.news?.map((item) => {
+        return (
+          <div
+            className="p-6 bg-white rounded-md space-y-4 text-textSecondary font-semibold tracking-wide h-[400px]"
+            key={item?.title}
+          >
+            <div>
+              <img
+                src={item?.avatar?.url}
+                alt=""
+                className="w-full h-[220px] rounded-lg "
+              />
+            </div>
+            <div className="space-y-4 relative">
+              <span className="text-[12px]">{item?.date} {item?.time} </span>
+              {isAdmin && (
+                <>
+                  <MdDelete
+                    title="Delete News"
+                    onClick={() => handleDelete(item?._id)}
+                    className="text-red-600 absolute top-[-3px] text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
+                  />
+                  <FaPen
+                  title="Edit News"
+                    className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500"
+                  />
+                </>
+              )}
               <div>
-                <img
-                  src={item?.avatar?.url}
-                  alt=""
-                  className="w-full h-[220px] rounded-lg "
-                />
-              </div>
-              <div className="space-y-4 relative">
-                <span className="text-[12px]">{item?.date}  {item?.time} </span>
-                 {isAdmin && (
-                    <>
-                      <MdDelete
-                        onClick={() => handleDelete(item?._id)}
-                        className="text-red-600 absolute top-[-3px] text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
-                      />
-                      <FaPen
-                        className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500"
-                      />
-                    </>
-                  )}
-                <div>
-                  <h4>{item?.title}</h4>
-                </div>
+                <h4>{item?.title}</h4>
               </div>
             </div>
-          );
-        })}
-      </Slider>
+          </div>
+        );
+      })}
+    </Slider>
+  ) : (
+    <h2 className="text-center font-semibold tracking-wider text-[25px] text-gray-500 animate-bounce">No data yet &#58; &#40; </h2>
+  )
+:
+  <>
+  <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+  <LinearProgress color="secondary" />
+ 
+</Stack>
+  </>
+
+
+}
+</>
+
+
       <Modal
     isOpen={isModalOpen}
     shouldCloseOnOverlayClick={true}

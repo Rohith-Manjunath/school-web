@@ -11,6 +11,10 @@ import { IoAddOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useEventsUsersQuery, useNewsUsersQuery } from "../../../Redux/authApi";
+import Stack from '@mui/material/Stack';
+import LinearProgress from '@mui/material/LinearProgress';
+import { Button, IconButton, Snackbar } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 
 
@@ -19,7 +23,7 @@ const Events = () => {
   const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
   const [data, setData] = useState(null);
   const { isLoading: queryLoading, data: queryData ,refetch} = useEventsQuery();
-  const { data: usersEvents } = useEventsUsersQuery();
+  const { isLoading:usersQueryLoading,data: usersEvents } = useEventsUsersQuery();
   const [deletePostMutation] = useDeleteEventByIdMutation();
   const [postEvent,{isLoading:addNewEventLoading}]=usePostNewEventMutation()
   const alert = useAlert();
@@ -38,6 +42,7 @@ const Events = () => {
   })
   const [isEditModalOpen,setIsEditModalOpen]=useState(false)
   const [updateEvent,{isLoading:updateLoading}]=useUpdateEventMutation()
+
 
   useEffect(() => {
     setData(isAdmin ? queryData : usersEvents);
@@ -130,6 +135,9 @@ e.preventDefault()
 
   }
 
+ 
+
+
 
   return (
     <>
@@ -137,16 +145,19 @@ e.preventDefault()
       {
         isAdmin && <div className="flex items-center justify-center gap-4 absolute top-0 right-0">
         <button onClick={fetchData}>
-          <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
+          <LuRefreshCcw                         title="Refetch Data"
+ className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
         </button>
         <button>
-         <IoAddOutline className="w-full font-semibold my-4 text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
+         <IoAddOutline                         title="Add Event"
+ className="w-full font-semibold my-4 text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
         </button>
       </div>
       }
 
+
         <>
-          {data?.events?.length > 0 ? (
+          {data?.events ? data?.events?.length > 0 ? (
             <Slider {...settings} className="">
               {data?.events?.map((item) => (
                 <div className="text-center text-textSecondary rounded-md border m-auto mr-10 relative h-[400px]" key={item?._id}>
@@ -161,10 +172,13 @@ e.preventDefault()
                       <MdDelete
                         onClick={() => handleDelete(item?._id)}
                         className="text-red-600 absolute top-0 text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
+                        title="Delete Event"
                       />
                       <FaPen
                       onClick={()=>handleEditEvent(item?._id)}
                         className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500"
+                        title="Edit Event"
+
                       />
                     </>
                   )}
@@ -173,7 +187,17 @@ e.preventDefault()
             </Slider>
           ) : (
             <h2 className="text-center font-semibold tracking-wider text-[25px] text-gray-500 animate-bounce">No data yet &#58; &#40; </h2>
-          )}
+          )
+        :  <>
+        <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+        <LinearProgress color="secondary" />
+       
+      </Stack>
+     
+        </>
+
+
+        }
         </>
       
     </div>

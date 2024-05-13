@@ -8,6 +8,7 @@ import { useAlert } from 'react-alert';
 import { MdDelete } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 import { useSelector } from 'react-redux';
+import { LinearProgress, Stack } from '@mui/material';
 
 const Gallery = () => {
   const { data: galleryData, isLoading, refetch } = useGetAllGalleryQuery();
@@ -113,15 +114,17 @@ const Gallery = () => {
           <div className='flex items-center justify-between'>
             <h2 className="text-4xl font-bold text-white font-title mb-4">Gallery</h2>
             {isAdmin && (
-              <div className='flex items-center justify-center'>
+              <div className='flex items-center justify-center gap-2'>
                   <button>
                     <IoAddOutline
+                    title='Add Gallery Content'
                       className="w-full  font-semibold my-4 mx-1  text-[30px] tracking-wider text-white hover:text-white duration-200 transition-all hover:scale-105 active:scale-90 "
                       onClick={() => setIsModalOpen(true)}
                     />
                   </button>
                   <button  className="">
                   <LuRefreshCcw
+                  title='Refetch Gallery Content'
                   onClick={fetchData}
                     className="w-full font-semibold my-4 text-[25px] tracking-wider text-white hover:text-white duration-200 transition-all hover:scale-105 active:scale-90  animate-spin "
                   />
@@ -131,7 +134,7 @@ const Gallery = () => {
           </div>
           {data?.content?.length > 0 && <p className="text-white mb-8">Explore our stunning collection of images.</p>}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {data?.content?.length > 0 ? (
+             {data?.content ? data?.content?.length > 0 ? (
               data?.content?.map((image, index) => (
                 <a
                   key={index}
@@ -148,10 +151,12 @@ const Gallery = () => {
                   {isAdmin && (
                     <>
                       <MdDelete
+                      title='Delete Data'
                         onClick={() => handleDelete(image?._id)}
                         className="text-red-600 absolute top-[-3px] text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500 z-10"
                       />
                       <FaPen
+                      title='Update Data'
                         onClick={() => handleEditEvent(image?._id)}
                         className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500 z-10"
                       />
@@ -166,7 +171,18 @@ const Gallery = () => {
               <h2 className="text-center font-semibold tracking-wider text-[25px] text-white animate-bounce">
                 No data yet &#58; &#40;
               </h2>
-            )}
+            )
+          
+            :
+
+            <>
+  <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+  <LinearProgress color="secondary" />
+ 
+</Stack>
+  </>
+          
+          }
           </div>
         </div>
       </div>

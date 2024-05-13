@@ -9,6 +9,8 @@ import { FaPen } from "react-icons/fa";
 import {useNavigate} from 'react-router-dom'
 import Modal from 'react-modal'
 import { IoMdClose } from "react-icons/io";
+import { LinearProgress, Stack } from '@mui/material';
+import MetaData from '../../components/MetaData';
 
 const Awards = () => {
   const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
@@ -124,6 +126,7 @@ const Awards = () => {
 
   return (
 <>
+<MetaData title={"Awards"}/>
 <div className="bg-secondary py-12 md:px-12 mt-10">
 
 
@@ -143,7 +146,7 @@ const Awards = () => {
         <p className="text-white mb-8">Explore stunning collection of images of our Awards and Achievements</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {data?.awards?.length>0 ? data?.awards?.map((data, index) => (
+          {data?.awards ? data?.awards?.length>0 ? data?.awards?.map((data, index) => (
             <div
               key={index}
               className={`relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:cursor-pointer`}
@@ -171,7 +174,14 @@ const Awards = () => {
             </div>
           )) : (
             <h2 className="text-center font-semibold tracking-wider text-[25px] text-white animate-bounce">No data yet &#58; &#40; </h2>
-          )}
+          )
+        :<>
+  <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+  <LinearProgress color="secondary" />
+ 
+</Stack>
+  </>
+        }
         </div>
       </div>
     </div>
