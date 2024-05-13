@@ -6,7 +6,7 @@ const cors = require("cors");
 const cloudinary=require("cloudinary")
 const Razorpay=require("razorpay")
 const corsOptions = {
-  origin: ["http://localhost:5173","https://school-website-12.netlify.app","https://visionary-dieffenbachia-ee8240.netlify.app","https://www.mysoreinternationalschool.com"],
+  origin: ["http://localhost:5173","https://school-website-12.netlify.app","https://visionary-dieffenbachia-ee8240.netlify.app","https://www.mysoreinternationalschool.com","https://checkout.razorpay.com","https://api.razorpay.com"],
   credentials:true
 };
 const fileUpload = require("express-fileupload");
