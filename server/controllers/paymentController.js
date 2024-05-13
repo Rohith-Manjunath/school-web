@@ -8,7 +8,7 @@ exports.payment=catchAsyncError(async(req,res,next)=>{
 
 
       const options={
-            amount: Number(req.body.amount * 100),
+            amount: req.body.amount,
             currency:"INR",
       }
 
