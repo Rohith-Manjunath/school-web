@@ -34,6 +34,8 @@ const CBSEProg = React.lazy(() => import("./pages/Home/CBSEProg"));
 const EarlyProgram = React.lazy(() => import("./pages/Home/EarlyProgram"));
 const KnowMore = React.lazy(() => import("./pages/Home/KnowMore"));
 const JoinOurTeam = React.lazy(() => import("./pages/Ourteam/JoinOurTeam"));
+const Payment = React.lazy(() => import("./pages/Payment/Payment"));
+const PaymentSuccess = React.lazy(() => import("./pages/Payment/PaymentSuccess"));
 
 const ProtectedRoute = React.lazy(() => import("./components/layouts/ProtectedRoute"));
 
@@ -101,6 +103,8 @@ const App = () => {
           <Route path="/CBSEProg" element={<CBSEProg />} />
           <Route path="/EarlyProgram" element={<EarlyProgram />} />
           <Route path="/KnowMore" element={<KnowMore />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/paymentSuccess" element={<PaymentSuccess/>} />
         </Routes>
       </Suspense>
     </Router>

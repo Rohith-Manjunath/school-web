@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cookie = require("cookie-parser");
 const cors = require("cors");
 const cloudinary=require("cloudinary")
+const Razorpay=require("razorpay")
 const corsOptions = {
   origin: ["http://localhost:5173","https://school-website-12.netlify.app","https://visionary-dieffenbachia-ee8240.netlify.app","https://www.mysoreinternationalschool.com"],
   credentials:true
@@ -13,6 +14,7 @@ const dotenv = require("dotenv");
 const Enrollment = require("./routes/Enrollment");
 const UserRoute = require("./routes/UserRoute");
 const AdminRoute = require("./routes/adminRoutes");
+const PaymentRoute = require("./routes/paymentRoute");
 const { dbConnection } = require("./config/dbConnections");
 const error = require("./middlewares/error");
 
@@ -26,8 +28,6 @@ app.use(
   })
 );
 
-
-
 // File upload middleware
 app.use(fileUpload());
 app.use(express.json({
@@ -38,6 +38,7 @@ app.use(cors(corsOptions));
 app.use("/api", Enrollment);
 app.use("/api", UserRoute);
 app.use("/api/admin", AdminRoute);
+app.use("/api/payment", PaymentRoute);
 app.use(error);
 
 cloudinary.config({
@@ -45,6 +46,14 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+app.get("/api/getKey",(req,res)=>{
+
+  res.status(200).json({
+    key:process.env.RAZORPAY_API_KEY
+  })
+
+})
 
 // Database connection
 dbConnection(process.env.URI);
@@ -73,3 +82,4 @@ process.on("uncaughtException", (e) => {
     process.exit(1);
   });
 });
+
