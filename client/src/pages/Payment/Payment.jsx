@@ -35,7 +35,7 @@ const options = {
     "description": "Test Transaction",
     "image": "https://avatars.githubusercontent.com/u/130335161?v=4",
     "order_id": order?.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "callback_url": "hhttps://school-web-50fi.onrender.com/api/payment/paymentVerification",
+    "callback_url": "https://school-web-50fi.onrender.com/api/payment/paymentVerification",
     "prefill": {
         "name": "Gaurav Kumar",
         "email": "gaurav.kumar@example.com",
