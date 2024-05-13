@@ -6,6 +6,7 @@ import image from "../../assets/Images/FacilitiesImages/ivan-aleksic-PDRFeeDniCk
 import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
 import PaperTear2 from "../../components/layouts/PaperTear2";
 import FacilityCard from "../Facilities/amenities";
+import MetaData from "../../components/MetaData";
 
 const Facilities = () => {
   useEffect(() => {
@@ -28,6 +29,10 @@ const Facilities = () => {
   }, []);
 
   return (
+    <>
+    
+    <MetaData title={"Facilities"} />
+
     <div>
       <Hero
         image={image}
@@ -43,6 +48,7 @@ const Facilities = () => {
       <PaperTear2 />
       <Footer />
     </div>
+    </>
   );
 };
 

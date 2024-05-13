@@ -13,6 +13,7 @@ import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
 import PayNow from "./PayNow";
 import AdmissionProces from "./AdmissionProces";
 import Marquee from "./Marquee";
+import MetaData from '../../components/MetaData';
 
 const Admissions = () => {
   useEffect(() => {
@@ -35,7 +36,8 @@ const Admissions = () => {
   }, []); 
   return (
     <div className="h-[10vh]">
-      
+                <MetaData title={"Admissions"} />
+
       <Hero 
         text={"ADMISSION INFO"}
         image={image}

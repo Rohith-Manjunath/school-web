@@ -1,3 +1,5 @@
+import React from "react";
+import MetaData from "../../components/MetaData";
 import Hero from "../../components/layouts/Common/Hero";
 import Footer from "../../components/layouts/Footer";
 import Achievements from "./Achievements";
@@ -18,38 +20,38 @@ import PaperTear1 from "../../components/layouts/PaperTear1";
 import TeamCarousel from "./TeamCarousel";
 import SecretaryMessage from "./SecretaryMessage";
 
-
 const OurTeam = () => {
   return (
-    <div className="bg-white">
-      <Hero
-        image={image}
-        description={`Explore the dynamic and dedicated team at Mysore International School. Our educators and staff are committed to fostering a nurturing learning environment, where every student can thrive. With a passion for education, our team brings a wealth of experience and expertise to inspire and guide students on their educational journey. Get to know the individuals who make up our vibrant and collaborative community.`}
-        text={`Our Team`}
-        descriptionClassName="font-serif"
-      />
-      <BreadCrumb 
-      Currentlink={"our-team"}
-      Currentpage={"Our Team"}/>
-      <OurTeamDes />
-      <Achievements />
-      <PaperTear2 />
-      <Chairman />
-      <PaperTear1 />
-      <OurManagementPeople />
-      <PaperTear2/>
-      <PrincipalMessage />
-      <SecretaryMessage />
-      <PaperTear1 />
-      <TeamCarousel />
-      {/* <HOD />
-      <SupportTeam /> 
-      <Coordinators /> */}
-      <OurValues />
-      <JoinOurTeam />
-      <PaperTear2 />
-      <Footer />
-    </div>
+    <>
+      <MetaData title={"Our Team"} />
+      <div className="bg-white">
+        <Hero
+          image={image}
+          description={`Explore the dynamic and dedicated team at Mysore International School. Our educators and staff are committed to fostering a nurturing learning environment, where every student can thrive. With a passion for education, our team brings a wealth of experience and expertise to inspire and guide students on their educational journey. Get to know the individuals who make up our vibrant and collaborative community.`}
+          text={`Our Team`}
+          descriptionClassName="font-serif"
+        />
+        <BreadCrumb Currentlink={"our-team"} Currentpage={"Our Team"} />
+        <OurTeamDes />
+        <Achievements />
+        <PaperTear2 />
+        <Chairman />
+        <PaperTear1 />
+        <OurManagementPeople />
+        <PaperTear2 />
+        <PrincipalMessage />
+        <SecretaryMessage />
+        <PaperTear1 />
+        <TeamCarousel />
+        {/* <HOD /> */}
+        {/* <SupportTeam /> */}
+        {/* <Coordinators /> */}
+        <OurValues />
+        <JoinOurTeam />
+        <PaperTear2 />
+        <Footer />
+      </div>
+    </>
   );
 };
 

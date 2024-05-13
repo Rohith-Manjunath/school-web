@@ -12,6 +12,7 @@ import PaperTear2 from "../../components/layouts/PaperTear2";
 import OurVision from "./OurVision";
 import Testimonials from "./Testimonials";
 import Timelines  from "./Timelines";
+import MetaData from '../../components/MetaData';
 const Academics = () => {
   useEffect(() => {
     // Update document head with meta tags
@@ -33,6 +34,8 @@ const Academics = () => {
   }, []);
   return (
     <div className="">
+                <MetaData title={"Academics"} />
+
       <Hero
         text={"Academics"}
         image={image}

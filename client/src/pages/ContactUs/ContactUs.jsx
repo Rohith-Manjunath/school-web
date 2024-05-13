@@ -6,6 +6,7 @@ import Hero from '../../components/layouts/Common/Hero';
 import image from '../../assets/Images/ContactImages/philip-strong-iOBTE2xsYko-unsplash.jpg';
 import BreadCrumb from '../../components/layouts/Common/BreadCrumb';
 import PaperTear2 from '../../components/layouts/PaperTear2';
+import MetaData from '../../components/MetaData';
 
 const ContactUs = () => {
   useEffect(() => {
@@ -33,6 +34,8 @@ const ContactUs = () => {
 
   return (
     <div>
+          <MetaData title={"Contact Us"} />
+
       <Hero
         text={`Contact Us`}
         image={image}
