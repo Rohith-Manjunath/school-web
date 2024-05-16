@@ -142,7 +142,7 @@ e.preventDefault()
 
   return (
     <>
-    <div className="w-[80%] py-20 mx-auto tracking-wide font-semibold relative">
+    <div className="w-[90%] py-20 mx-auto tracking-wide font-semibold relative">
       {
         isAdmin && <div className="flex items-center justify-center gap-4 absolute top-0 right-0">
         <button onClick={fetchData}>

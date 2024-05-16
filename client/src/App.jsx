@@ -6,6 +6,7 @@ import { useLoadUserQuery, useLogoutMutation } from "../Redux/authApi";
 import { LogoutUser, setUser } from "../Redux/UserSlice";
 import { useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
+import PageLoader from "./components/layouts/PageLoader";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Academics = React.lazy(() => import("./pages/Academics/Academics"));
@@ -71,7 +72,7 @@ const App = () => {
     <Router>
       <Navbar />
       <ScrollToTop />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<PageLoader/>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/academics" element={<Academics />} />
