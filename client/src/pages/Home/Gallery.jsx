@@ -1,384 +1,317 @@
-import React, { useEffect, useState } from 'react';
-import { useDeleteGalleryMutation, useGetAllGalleryQuery, useGetSingleGalleryQuery, usePostGalleryMutation, useUpdateGalleryMutation } from '../../../Redux/adminAuth';
-import { LuRefreshCcw } from "react-icons/lu";
-import { IoAddOutline } from "react-icons/io5";
-import { IoMdClose } from "react-icons/io";
-import Modal from "react-modal";
-import { useAlert } from 'react-alert';
-import { MdDelete } from "react-icons/md";
-import { FaPen } from "react-icons/fa";
-import { useSelector } from 'react-redux';
-import { LinearProgress, Stack } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const Gallery = () => {
-  const { data: galleryData, isLoading, refetch } = useGetAllGalleryQuery();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [postGallery, { isLoading: postLoading }] = usePostGalleryMutation();
-  const [data, setData] = useState(null);
-  const [image, setImage] = useState("");
-  const [title, setTitle] = useState("");
-  const alert = useAlert();
-  const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
-  const [deleteGallery] = useDeleteGalleryMutation();
-  const [id, setId] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [updateGallery, { isLoading: updateLoading }] = useUpdateGalleryMutation();
-  const { data: singleGalleryData, refetch: singleGalleryRefetch } = useGetSingleGalleryQuery(id);
-  const [gallery, setGallery] = useState({
-    title: "",
-    image: ""
-  });
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [autoScroll, setAutoScroll] = useState(null);
+  const images = [
+    {
+      id: 1,
+      src: 'https://picsum.photos/id/1/800/600',
+      title: 'Image 1',
+      carousel: [
+        'https://picsum.photos/id/1/800/600',
+        'https://picsum.photos/id/11/800/600',
+        'https://picsum.photos/id/21/800/600',
+      ],
+    },
+    {
+      id: 2,
+      src: 'https://picsum.photos/id/2/800/600',
+      title: 'Image 2',
+      carousel: [
+        'https://picsum.photos/id/2/800/600',
+        'https://picsum.photos/id/12/800/600',
+        'https://picsum.photos/id/22/800/600',
+      ],
+    },
+    {
+      id: 3,
+      src: 'https://picsum.photos/id/3/800/600',
+      title: 'Image 3',
+      carousel: [
+        'https://picsum.photos/id/3/800/600',
+        'https://picsum.photos/id/13/800/600',
+        'https://picsum.photos/id/23/800/600',
+      ],
+    },
+    {
+      id: 4,
+      src: 'https://picsum.photos/id/4/800/600',
+      title: 'Image 4',
+      carousel: [
+        'https://picsum.photos/id/4/800/600',
+        'https://picsum.photos/id/14/800/600',
+        'https://picsum.photos/id/24/800/600',
+      ],
+    },
+    {
+      id: 5,
+      src: 'https://picsum.photos/id/5/800/600',
+      title: 'Image 5',
+      carousel: [
+        'https://picsum.photos/id/5/800/600',
+        'https://picsum.photos/id/15/800/600',
+        'https://picsum.photos/id/25/800/600',
+      ],
+    },
+    {
+      id: 6,
+      src: 'https://picsum.photos/id/6/800/600',
+      title: 'Image 6',
+      carousel: [
+        'https://picsum.photos/id/6/800/600',
+        'https://picsum.photos/id/16/800/600',
+        'https://picsum.photos/id/26/800/600',
+      ],
+    },
+    {
+      id: 7,
+      src: 'https://picsum.photos/id/7/800/600',
+      title: 'Image 7',
+      carousel: [
+        'https://picsum.photos/id/7/800/600',
+        'https://picsum.photos/id/17/800/600',
+        'https://picsum.photos/id/27/800/600',
+      ],
+    },
+    {
+      id: 8,
+      src: 'https://picsum.photos/id/8/800/600',
+      title: 'Image 8',
+      carousel: [
+        'https://picsum.photos/id/8/800/600',
+        'https://picsum.photos/id/18/800/600',
+        'https://picsum.photos/id/28/800/600',
+      ],
+    },
+    {
+      id: 9,
+      src: 'https://picsum.photos/id/9/800/600',
+      title: 'Image 9',
+      carousel: [
+        'https://picsum.photos/id/9/800/600',
+        'https://picsum.photos/id/19/800/600',
+        'https://picsum.photos/id/29/800/600',
+      ],
+    },
+    {
+      id: 10,
+      src: 'https://picsum.photos/id/10/800/600',
+      title: 'Image 10',
+      carousel: [
+        'https://picsum.photos/id/10/800/600',
+        'https://picsum.photos/id/20/800/600',
+        'https://picsum.photos/id/30/800/600',
+      ],
+    },
+    {
+      id: 11,
+      src: 'https://picsum.photos/id/11/800/600',
+      title: 'Image 11',
+      carousel: [
+        'https://picsum.photos/id/11/800/600',
+        'https://picsum.photos/id/21/800/600',
+        'https://picsum.photos/id/31/800/600',
+      ],
+    },
+    {
+      id: 12,
+      src: 'https://picsum.photos/id/12/800/600',
+      title: 'Image 12',
+      carousel: [
+        'https://picsum.photos/id/12/800/600',
+        'https://picsum.photos/id/22/800/600',
+        'https://picsum.photos/id/32/800/600',
+      ],
+    },
+  ];
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    setCurrentIndex(0);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedImage(null);
+    clearInterval(autoScroll);
+  };
+
+  const handlePrevImage = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0
+        ? selectedImage.carousel.length - 1
+        : prevIndex - 1
+    );
+  };
+
+  const handleNextImage = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === selectedImage.carousel.length - 1
+        ? 0
+        : prevIndex + 1
+    );
+  };
+
+  const handleOutsideClick = (event) => {
+    if (event.target.closest('.modal-content') === null) {
+      handleCloseModal();
+    }
+  };
 
   useEffect(() => {
-    setData(galleryData);
-  }, [galleryData]);
+    if (showModal) {
+      const interval = setInterval(() => {
+        handleNextImage();
+      }, 5000);
+      setAutoScroll(interval);
+    }
 
-
-  useEffect(() => {
-    setGallery(singleGalleryData?.content);
-  }, [singleGalleryData]);
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        const imageUrl = reader.result;
-        setImage(imageUrl);
-      }
+    return () => {
+      clearInterval(autoScroll);
     };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const data = await postGallery({ title, image }).unwrap();
-      alert.success(data?.message);
-      setIsModalOpen(false);
-      refetch();
-    } catch (e) {
-      alert.error(e?.data?.err);
-      return;
-    }
-  };
-
-  const handleEditEvent = (id) => {
-    setId(id);
-    setIsEditModalOpen(true);
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      if (window.confirm("Are you sure you want to delete this post?")) {
-        const data = await deleteGallery(id).unwrap();
-        alert.success(data?.message);
-        return;
-      }
-    } catch (e) {
-      alert.error(e?.data?.err);
-      return;
-    }
-  };
-
-  const handleEditSubmit = async (e) => {
-    const { title } = gallery;
-
-    e.preventDefault();
-
-    try {
-      const data = await updateGallery({ id, data: { image, title } }).unwrap();
-      alert.success(data?.message);
-      setIsEditModalOpen(false);
-      await singleGalleryRefetch();
-      setGallery({});
-    } catch (e) {
-      alert.error(e?.data?.err);
-    }
-  };
-
-
-  const fetchData=async()=>{
-     await refetch()
-  }
+  }, [showModal, selectedImage]);
 
   return (
-    <>
-      <div className="bg-secondary py-12 md:px-12">
-        <div className=" mx-auto px-8 ">
-          <div className='flex items-center justify-between'>
-            <h2 className="text-4xl font-bold text-white font-title mb-4">Gallery</h2>
-            {isAdmin && (
-              <div className='flex items-center justify-center gap-2'>
-                  <button>
-                    <IoAddOutline
-                    title='Add Gallery Content'
-                      className="w-full  font-semibold my-4 mx-1  text-[30px] tracking-wider text-white hover:text-white duration-200 transition-all hover:scale-105 active:scale-90 "
-                      onClick={() => setIsModalOpen(true)}
-                    />
-                  </button>
-                  <button  className="">
-                  <LuRefreshCcw
-                  title='Refetch Gallery Content'
-                  onClick={fetchData}
-                    className="w-full font-semibold my-4 text-[25px] tracking-wider text-white hover:text-white duration-200 transition-all hover:scale-105 active:scale-90  animate-spin "
-                  />
-                </button>
+    <div className="bg-secondary py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          initial={{ opacity: 0, x: -200 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          viewport={{ once: true }}
+          className="text-3xl font-extrabold text-white tracking-wider font-title mb-2"
+        >
+          Gallery
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, x: -200 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          viewport={{ once: true }}
+          className="text-lg text-white tracking-wider font-medium font-description mb-8"
+        >
+          Explore our collection of beautiful images. Click on any image to view more in the carousel.
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 200 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {images.map((image) => (
+            <div
+              key={image.id}
+              className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer group"
+              onClick={() => handleImageClick(image)}
+            >
+              <img
+                src={image.src}
+                alt={image.title}
+                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 border-4 rounded-2xl border-b-primary "
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity duration-300 flex items-center justify-center">
+                <h3 className="text-white text-xl font-medium font-serif tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {image.title}
+                </h3>
               </div>
-            )}
-          </div>
-          {data?.content?.length > 0 && <p className="text-white mb-8">Explore our stunning collection of images.</p>}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-             {data?.content ? data?.content?.length > 0 ? (
-              data?.content?.map((image, index) => (
-                <a
-                  key={index}
-                  href={image?.avatar?.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative overflow-hidden rounded-lg shadow-lg transition-all duration-300"
-                >
-                  <img
-                    src={image?.avatar?.url}
-                    alt={`Image ${index + 1}`}
-                    className="w-full h-60 object-cover" // Increased width and height
-                  />
-                  {isAdmin && (
-                    <>
-                      <MdDelete
-                      title='Delete Data'
-                        onClick={() => handleDelete(image?._id)}
-                        className="text-red-600 absolute top-[-3px] text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500 z-10"
-                      />
-                      <FaPen
-                      title='Update Data'
-                        onClick={() => handleEditEvent(image?._id)}
-                        className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500 z-10"
-                      />
-                    </>
-                  )}
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100 hover:cursor-pointer">
-                    <h3 className="text-white text-xl font-bold">{image?.title}</h3>
-                  </div>
-                </a>
-              ))
-            ) : (
-              <h2 className="text-center font-semibold tracking-wider text-[25px] text-white animate-bounce">
-                No data yet &#58; &#40;
-              </h2>
-            )
-
-            :
-
-            <>
-  <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
-  <LinearProgress color="secondary" />
-
-</Stack>
-  </>
-
-          }
-          </div>
-        </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        shouldCloseOnOverlayClick={true}
-        className=""
-        style={{
-          overlay: {
-            zIndex: 98,
-            backgroundColor: `rgba(0, 0, 0, 0.5)`,
-          },
-          content: {
-            width: '90%',
-            maxWidth: '600px',
-            height: '50vh',
-            margin: '0 auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            color: '#580B57',
-            overflowY: 'auto',
-            top: '50%',
-           left: '50%',
-           transform: 'translate(-50%, -50%)',
-           borderRadius: '10px',
-           border: 'none',
-           outline: 'none',
-         },
-       }}
-     >
-       <button
-         className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl"
-         onClick={() => setIsModalOpen(false)}
-       >
-         <IoMdClose />
-       </button>
-       <h2 className=" mb-5 md:mt-0 mt-[12rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px] tracking-wide ">
-         Add Gallery Content
-       </h2>
-
-       <form
-         className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6"
-         onSubmit={handleSubmit}
-       >
-         <div className="flex flex-col gap-2">
-           <label
-             className="text-black font-sans tracking-wide font-semibold"
-             htmlFor="title"
-           >
-             Title
-           </label>
-           <input
-             className="rounded-md outline-none border-slate-400 font-serif tracking-wide uppercase text-fuchsia-950 md:text-base"
-             type="text"
-             name="title"
-             id="title"
-             onChange={(e) => setTitle(e.target.value)}
-             placeholder="Ex : Something"
-           />
-         </div>
-
-         <div className="flex flex-col gap-2">
-           <label
-             className="text-black font-sans tracking-wide font-semibold"
-             htmlFor="image"
-           >
-             Image
-           </label>
-           <input
-             className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
-             type="file"
-             accept="image/*"
-             name="image"
-             id="image"
-             onChange={(e) => handleImageUpload(e)}
-           />
-         </div>
-
-         <div className="col-span-2 text-center">
-           <button
-             disabled={postLoading}
-             type="submit"
-             className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
-           >
-             {postLoading ? "Submitting..." : "Submit"}
-           </button>
-         </div>
-       </form>
-     </Modal>
-
-     <Modal
-       isOpen={isEditModalOpen}
-       shouldCloseOnOverlayClick={true}
-       className=""
-       style={{
-         overlay: {
-           zIndex: 98,
-           backgroundColor: `rgba(0, 0, 0, 0.5)`,
-         },
-         content: {
-           width: '90%',
-           maxWidth: '600px',
-           height: '50vh',
-           margin: '0 auto',
-           display: 'flex',
-           alignItems: 'center',
-           justifyContent: 'center',
-           flexDirection: 'column',
-           color: '#580B57',
-           overflowY: 'auto',
-           top: '50%',
-           left: '50%',
-           transform: 'translate(-50%, -50%)',
-           borderRadius: '10px',
-           border: 'none',
-           outline: 'none',
-         },
-       }}
-     >
-       <button
-         className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl"
-         onClick={() => setIsEditModalOpen(false)}
-       >
-         <IoMdClose />
-       </button>
-       <h2 className=" mb-5 md:mt-0 mt-[12rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px] tracking-wide ">
-         Edit Gallery Content
-       </h2>
-
-       <form
-         className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6"
-         onSubmit={handleEditSubmit}
-       >
-         <div className="flex flex-col gap-2">
-           <label
-             className="text-black font-sans tracking-wide font-semibold"
-             htmlFor="title"
-           >
-             Title
-           </label>
-           <input
-             className="rounded-md outline-none border-slate-400 font-sans uppercase tracking-wider text-fuchsia-950"
-             type="text"
-             name="title"
-             id="title"
-             placeholder="Ex : Something"
-             value={gallery?.title}
-             onChange={(e) =>
-               setGallery({ ...gallery, title: e.target.value })
-             }
-           />
-         </div>
-         <div className="flex flex-col gap-2">
-           <label
-             className="text-black font-sans tracking-wide font-semibold"
-             htmlFor="image"
-           >
-             Image
-           </label>
-           <input
-             className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
-             type="file"
-             accept="image/*"
-             name="image"
-             id="image"
-             onChange={(e) => {
-               handleImageUpload(e);
-             }}
-           />
-         </div>
-
-         <div className="flex items-center justify-center gap-2">
-           <span>Preview :</span>
-           <img
-             src={image ? image : gallery?.avatar?.url}
-             alt=""
-             className="w-10 h-10 rounded-md"
-           />
-         </div>
-
-         <div className="col-span-2 text-center">
-           <button
-             disabled={updateLoading}
-             type="submit"
-             className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
-           >
-             {updateLoading ? "Updating..." : "Update"}
-           </button>
-         </div>
-       </form>
-     </Modal>
-   </>
- );
+      {showModal && (
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center bg-black bg-opacity-50"
+          onClick={handleOutsideClick}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="modal-content bg-white rounded-lg shadow-lg max-w-7xl mx-auto relative p-4"
+          >
+            <button
+              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors duration-300"
+              onClick={handleCloseModal}
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <div className="relative">
+              <img
+                src={selectedImage.carousel[currentIndex]}
+                alt={selectedImage.title}
+                className="w-full h-auto rounded-lg"
+              />
+              <button
+                className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-300"
+                onClick={handlePrevImage}
+              >
+                <svg
+                  className="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <button
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-300"
+                onClick={handleNextImage}
+              >
+                <svg
+                  className="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center py-2">
+                {selectedImage.carousel.map((_, index) => (
+                  <span
+                    key={index}
+                    className={`mx-1 h-3 w-3 rounded-full bg-white ${
+                      index === currentIndex ? 'bg-fuchsia-950 h-4 w-4' : ''
+                    }`}
+                  ></span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Gallery;
