@@ -2,7 +2,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { GrClose } from "react-icons/gr";
 import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
-import logo from "../../assets/Images/LogoAndOthers/MIS_Main_logo-b9vQZsOZ.png"; // Adjust the path accordingly
+import logo from "../../assets/Images/LogoAndOthers/PrimaryLogo.png"; // Adjust the path accordingly
 import { motion } from "framer-motion";
 import UserOptions from "./UserOptions";
 import { useSelector } from "react-redux";

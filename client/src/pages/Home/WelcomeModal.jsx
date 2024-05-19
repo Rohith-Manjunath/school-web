@@ -7,11 +7,21 @@ import image4 from "../../assets/Images/HomeImages/WelcomeModal/flyer_MIS_3.jpeg
 const WelcomeModal = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [image1, image2, image3, image4]; // Include the fourth image
+  const images = [image1, image2, image3, image4];
   const modalRef = useRef(null);
 
   useEffect(() => {
-    setShowModal(true);
+    // Reset the localStorage value on page refresh
+    window.addEventListener('beforeunload', () => {
+      localStorage.removeItem('hasSeenModal');
+    });
+
+    const hasSeenModal = localStorage.getItem('hasSeenModal');
+    if (!hasSeenModal) {
+      setTimeout(() => {
+        setShowModal(true);
+      }, 3000); // Delay the modal by 3 seconds
+    }
   }, []);
 
   useEffect(() => {
@@ -59,10 +69,29 @@ const WelcomeModal = () => {
 
   return (
     <>
+     <noscript>
+        <div className="fixed z-50 inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black bg-opacity-75 backdrop-blur-sm"></div>
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 sm:mx-0 relative z-10 modal-container">
+            <img
+              src={images[currentImageIndex]}
+              alt={`Slide ${currentImageIndex + 1}`}
+              className="object-scale-down w-full h-full"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </noscript>
+      
       {showModal && (
         <div className="fixed z-50 inset-0 flex items-center justify-center">
           <div className="absolute inset-0 bg-black bg-opacity-75 backdrop-blur-sm"></div>
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 sm:mx-0 relative z-10 modal-container" ref={modalRef}>
+          <div
+            className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 sm:mx-0 relative z-10 modal-container"
+            ref={modalRef}
+            aria-modal="true"
+            role="dialog"
+          >
             <div className="absolute top-2 right-2 z-10">
               <button
                 className="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

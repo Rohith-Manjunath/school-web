@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { IoMdClose } from 'react-icons/io';
 import { Label, Checkbox } from 'flowbite-react';
 import file from '../../assets/Files/Terms_and_Conditions.pdf';
-import logo from '../../assets/Images/LogoAndOthers/hori-xnjhSTpu.png';
+import logo from '../../assets/Images/LogoAndOthers/SecondaryLogo.png';
 import { useEnrollMutation } from '../../../Redux/authApi';
 import { useAlert } from 'react-alert';
 

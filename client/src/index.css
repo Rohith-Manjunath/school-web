@@ -4,42 +4,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
   font-family: 'myfont';
-  src: url('../src/assets/Font/EBGaramond-VariableFont_wght.ttf') format('woff2'), /* WOFF2 format */
+  src: url('../src/assets/Font/EBGaramond-VariableFont_wght.ttf') format('woff2'); /* WOFF2 format */
 }
 
-*{
-    font-family: 'Poppins';
-  }
+* {
+  font-family: 'Poppins', sans-serif;
+}
 
-  body,
-  html {
-    overflow-x: hidden;
-    height: 100%;
-    width: 100%;
-    scroll-behavior: smooth;
-    background-color: rgb(211, 211, 211);
-    max-width: 1600px; /* Adjust the value according to the laptop width */
-    
-    margin: 0 auto; /* Center align the content */
-  }
+body,
+html {
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth;
+  background-color: rgb(211, 211, 211);
+  max-width: 1800px; /* Adjust the value according to the laptop width */
+  margin: 0 auto; /* Center align the content */
+}
 
+.active {
+  border-bottom: 3px solid purple;
+}
 
-  .active{
-    border-bottom: 3px solid purple ;
+@media (min-width: 800px) {
+  .slick-slide > div {
+    margin: 0 50px;
   }
-  @media (min-width: 800px) {
-    .slick-slide > div {
-      margin: 0 50px;
-    }
-  }
-  .custom-font {
-    font-family: 'Arial', sans-serif;
-  }
-  
+}
+
+.custom-font {
+  font-family: 'Arial', sans-serif;
+}
+

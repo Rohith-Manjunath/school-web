@@ -52,10 +52,15 @@ const Admissions = () => {
       Currentpage={"Admissions"}
       Currentlink={"admissions"}/>
       <AdmissionProcess />
+      <PaperTear2 />
       <PayNow />
+      <PaperTear1 />
       <ReasonToChoose />
+      <PaperTear2 />
       <RaiseATicket />
+      <PaperTear1 />
       <AdmissionProces />
+      <PaperTear2 />
       <Enroll />
       <PaperTear1 />
       <Marquee />

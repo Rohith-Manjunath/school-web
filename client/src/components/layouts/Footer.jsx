@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/Images/LogoAndOthers/logo-2-v2-6Ot8O22k.png"; // Adjust the path accordingly
+import logo from "../../assets/Images/LogoAndOthers/TeritaryLogo.png"; // Adjust the path accordingly
 import { useState } from "react";
 import Modal from 'react-modal';
 import { useAlert } from "react-alert";
