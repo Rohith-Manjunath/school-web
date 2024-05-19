@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -9,6 +10,11 @@ const corsOptions = {
   origin: ["http://localhost:5173","https://school-website-12.netlify.app","https://visionary-dieffenbachia-ee8240.netlify.app","https://www.mysoreinternationalschool.com","https://checkout.razorpay.com","https://api.razorpay.com"],
   credentials:true
 };
+
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+});
+
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 const Enrollment = require("./routes/Enrollment");
