@@ -1,6 +1,78 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+//Annual Day
+import AnnualDayThumbnail from '../../assets/Images/HomeImages/Gallery/AnnualDay2023/AnnualDay3.jpg';
+import AnnualDayEx1 from '../../assets/Images/HomeImages/Gallery/AnnualDay2023/AnnualDay2.jpg';
+import AnnualDayEx2 from '../../assets/Images/HomeImages/Gallery/AnnualDay2023/AnnualDay5.jpg';
+import AnnualDayEx3 from '../../assets/Images/HomeImages/Gallery/AnnualDay2023/AnnualDay4.jpg';
+import AnnualDayEx4 from '../../assets/Images/HomeImages/Gallery/AnnualDay2023/AnnualDay1.jpg';
+
+//Annual Sports Meet
+import AnnualSportsThumbnail from "../../assets/Images/HomeImages/Gallery/Annual sports meet/AnnualSports6.jpg";
+import AnnualSportsEx1 from "../../assets/Images/HomeImages/Gallery/Annual sports meet/AnnualSports1.jpg";
+import AnnualSportsEx2 from "../../assets/Images/HomeImages/Gallery/Annual sports meet/Annualsports2.jpg";
+import AnnualSportsEx3 from "../../assets/Images/HomeImages/Gallery/Annual sports meet/AnnualSports3.jpg";
+import AnnualSportsEx4 from "../../assets/Images/HomeImages/Gallery/Annual sports meet/AnnualSports4.jpg";
+import AnnualSportsEx5 from "../../assets/Images/HomeImages/Gallery/Annual sports meet/AnnualSports5.jpg";
+
+//Enviornment Day
+import EnvDayThumbnail from "../../assets/Images/HomeImages/Gallery/Environment day/EnvDay4.jpg"
+import EnvDayEx1 from "../../assets/Images/HomeImages/Gallery/Environment day/EnvDay.jpg"
+import EnvDayEx2 from "../../assets/Images/HomeImages/Gallery/Environment day/EnvDay1.jpg"
+import EnvDayEx3 from "../../assets/Images/HomeImages/Gallery/Environment day/EnvDay2.jpg"
+import EnvDayEx4 from "../../assets/Images/HomeImages/Gallery/Environment day/EnvDay3.jpg"
+import EnvDayEx5 from "../../assets/Images/HomeImages/Gallery/Environment day/EnvDay4.jpg"
+
+
+//Fun Fair
+import FunFairThumnail from "../../assets/Images/HomeImages/Gallery/Fun fair/FunFair.jpg";
+import FunFairEx1 from "../../assets/Images/HomeImages/Gallery/Fun fair/FunFair1.jpg";
+import FunFairEx2 from "../../assets/Images/HomeImages/Gallery/Fun fair/FunFair2.jpg";
+import FunFairEx3 from "../../assets/Images/HomeImages/Gallery/Fun fair/FunFair3.jpg";
+import FunFairEx4 from "../../assets/Images/HomeImages/Gallery/Fun fair/FunFair4.jpg";
+import FunFairEx5 from "../../assets/Images/HomeImages/Gallery/Fun fair/FunFair5.jpg";
+import FunFairEx6 from "../../assets/Images/HomeImages/Gallery/Fun fair/FunFair6.jpg";
+
+//G20 
+import G20Thumnail from "../../assets/Images/HomeImages/Gallery/G20/G202.jpg";
+import G20Ex1 from "../../assets/Images/HomeImages/Gallery/G20/G201.jpg";
+import G20Ex2 from "../../assets/Images/HomeImages/Gallery/G20/G205.jpg";
+import G20Ex3 from "../../assets/Images/HomeImages/Gallery/G20/G203.jpg";
+import G20Ex4 from "../../assets/Images/HomeImages/Gallery/G20/G204.jpg";
+
+//Teachers Day
+import TeachersDayThumnail from "../../assets/Images/HomeImages/Gallery/Teachers day/TeachDay3.jpg";
+import TeachersDayEx1 from "../../assets/Images/HomeImages/Gallery/Teachers day/TechDay1.jpg";
+import TeachersDayEx2 from "../../assets/Images/HomeImages/Gallery/Teachers day/Teachday2.jpg";
+import TeachersDayEx3 from "../../assets/Images/HomeImages/Gallery/Teachers day/TeachDay4.jpg";
+import TeachersDayEx4 from "../../assets/Images/HomeImages/Gallery/Teachers day/TeachDay5.jpg";
+import TeachersDayEx5 from "../../assets/Images/HomeImages/Gallery/Teachers day/TeachDay6.jpg";
+
+//Science Day 
+import SciDayThumnail from "../../assets/Images/HomeImages/Gallery/Science day/SciDay6.jpg";
+import SciDayEx1 from "../../assets/Images/HomeImages/Gallery/Science day/Sciday1.jpg";
+import SciDayEx2 from "../../assets/Images/HomeImages/Gallery/Science day/SciDay2.jpg";
+import SciDayEx3 from "../../assets/Images/HomeImages/Gallery/Science day/SciDay3.jpg";
+import SciDayEx4 from "../../assets/Images/HomeImages/Gallery/Science day/SciDay4.jpg";
+import SciDayEx5 from "../../assets/Images/HomeImages/Gallery/Science day/SciDay5.jpg";
+
+//Yoga Day
+import YogaDayThumnail from "../../assets/Images/HomeImages/Gallery/Yoga Day/YogaDay2.jpg";
+import YogaDayEx1 from "../../assets/Images/HomeImages/Gallery/Yoga Day/YogaDay1.jpg";
+import YogaDayEx2 from "../../assets/Images/HomeImages/Gallery/Yoga Day/YogaDay2.jpg";
+import YogaDayEx3 from "../../assets/Images/HomeImages/Gallery/Yoga Day/YogaDay3.jpg";
+
+//Science Exibition
+import SciExiThumnail from "../../assets/Images/HomeImages/Gallery/Science Exihibition/SciExi2.jpg";
+import SciExiEx1 from "../../assets/Images/HomeImages/Gallery/Science Exihibition/SciExi2.jpg";
+import SciExiEx2 from "../../assets/Images/HomeImages/Gallery/Science Exihibition/SciExi2.jpg";
+import SciExiEx3 from "../../assets/Images/HomeImages/Gallery/Science Exihibition/SciExi2.jpg";
+import SciExiEx4 from "../../assets/Images/HomeImages/Gallery/Science Exihibition/SciExi2.jpg";
+import SciExiEx5 from "../../assets/Images/HomeImages/Gallery/Science Exihibition/SciExi2.jpg";
+
+
+
 const Gallery = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -9,124 +81,139 @@ const Gallery = () => {
   const images = [
     {
       id: 1,
-      src: 'https://picsum.photos/id/1/800/600',
-      title: 'Image 1',
+      src: AnnualDayThumbnail,
+      title: 'Annual Day 2023',
       carousel: [
-        'https://picsum.photos/id/1/800/600',
-        'https://picsum.photos/id/11/800/600',
-        'https://picsum.photos/id/21/800/600',
+        AnnualDayEx1,
+        AnnualDayEx2,
+        AnnualDayEx3,
+        AnnualDayEx4,
       ],
     },
     {
       id: 2,
-      src: 'https://picsum.photos/id/2/800/600',
-      title: 'Image 2',
+      src: AnnualSportsThumbnail,
+      title: 'Annual Sports Meet',
       carousel: [
-        'https://picsum.photos/id/2/800/600',
-        'https://picsum.photos/id/12/800/600',
-        'https://picsum.photos/id/22/800/600',
+        AnnualSportsEx1,
+        AnnualSportsEx2,
+        AnnualSportsEx3,
+        AnnualSportsEx4,
+        AnnualSportsEx5,
       ],
     },
     {
       id: 3,
-      src: 'https://picsum.photos/id/3/800/600',
-      title: 'Image 3',
+      src: EnvDayThumbnail,
+      title: 'Enviornment Day',
       carousel: [
-        'https://picsum.photos/id/3/800/600',
-        'https://picsum.photos/id/13/800/600',
-        'https://picsum.photos/id/23/800/600',
+        EnvDayEx1,
+        EnvDayEx2,
+        EnvDayEx3,
+        EnvDayEx4,
+        EnvDayEx5,
       ],
     },
     {
       id: 4,
-      src: 'https://picsum.photos/id/4/800/600',
-      title: 'Image 4',
+      src: FunFairThumnail,
+      title: 'Fun Day',
       carousel: [
-        'https://picsum.photos/id/4/800/600',
-        'https://picsum.photos/id/14/800/600',
-        'https://picsum.photos/id/24/800/600',
+        FunFairEx2,
+        FunFairEx1,
+        FunFairEx3,
+        FunFairEx4,
+        FunFairEx5,
+        FunFairEx6,
       ],
     },
     {
       id: 5,
-      src: 'https://picsum.photos/id/5/800/600',
-      title: 'Image 5',
+      src: G20Thumnail,
+      title: 'G20',
       carousel: [
-        'https://picsum.photos/id/5/800/600',
-        'https://picsum.photos/id/15/800/600',
-        'https://picsum.photos/id/25/800/600',
+        G20Ex1,
+        G20Ex2,
+        G20Ex3,
+        G20Ex4,
       ],
     },
     {
       id: 6,
-      src: 'https://picsum.photos/id/6/800/600',
-      title: 'Image 6',
+      src: TeachersDayThumnail,
+      title: 'Teachers Day',
       carousel: [
-        'https://picsum.photos/id/6/800/600',
-        'https://picsum.photos/id/16/800/600',
-        'https://picsum.photos/id/26/800/600',
+        TeachersDayEx1,
+        TeachersDayEx2,
+        TeachersDayEx3,
+        TeachersDayEx4,
+        TeachersDayEx5,
       ],
     },
     {
       id: 7,
-      src: 'https://picsum.photos/id/7/800/600',
-      title: 'Image 7',
+      src: SciDayThumnail,
+      title: 'Science Day',
       carousel: [
-        'https://picsum.photos/id/7/800/600',
-        'https://picsum.photos/id/17/800/600',
-        'https://picsum.photos/id/27/800/600',
+        SciDayEx1,
+        SciDayEx2,
+        SciDayEx3,
+        SciDayEx4,
+        SciDayEx5,
       ],
     },
     {
       id: 8,
-      src: 'https://picsum.photos/id/8/800/600',
-      title: 'Image 8',
+      src: YogaDayThumnail,
+      title: 'Yoga Day',
       carousel: [
-        'https://picsum.photos/id/8/800/600',
-        'https://picsum.photos/id/18/800/600',
-        'https://picsum.photos/id/28/800/600',
+        YogaDayEx1,
+        YogaDayEx2,
+        YogaDayEx3,
       ],
     },
     {
       id: 9,
-      src: 'https://picsum.photos/id/9/800/600',
-      title: 'Image 9',
+      src: SciExiThumnail,
+      title: 'Science Exihibition',
       carousel: [
-        'https://picsum.photos/id/9/800/600',
-        'https://picsum.photos/id/19/800/600',
-        'https://picsum.photos/id/29/800/600',
+        SciExiEx1,
+        SciExiEx2,
+        SciExiEx3,
+        SciExiEx4,
+        SciExiEx5,
       ],
     },
-    {
-      id: 10,
-      src: 'https://picsum.photos/id/10/800/600',
-      title: 'Image 10',
-      carousel: [
-        'https://picsum.photos/id/10/800/600',
-        'https://picsum.photos/id/20/800/600',
-        'https://picsum.photos/id/30/800/600',
-      ],
-    },
-    {
-      id: 11,
-      src: 'https://picsum.photos/id/11/800/600',
-      title: 'Image 11',
-      carousel: [
-        'https://picsum.photos/id/11/800/600',
-        'https://picsum.photos/id/21/800/600',
-        'https://picsum.photos/id/31/800/600',
-      ],
-    },
-    {
-      id: 12,
-      src: 'https://picsum.photos/id/12/800/600',
-      title: 'Image 12',
-      carousel: [
-        'https://picsum.photos/id/12/800/600',
-        'https://picsum.photos/id/22/800/600',
-        'https://picsum.photos/id/32/800/600',
-      ],
-    },
+    // {
+    //   id: 10,
+    //   src: 'https://picsum.photos/id/10/800/600',
+    //   title: 'Image 10',
+    //   carousel: [
+    //     'https://picsum.photos/id/10/800/600',
+    //     'https://picsum.photos/id/20/800/600',
+    //     'https://picsum.photos/id/30/800/600',
+    //   ],
+    // },
+    // {
+    //   id: 11,
+    //   src: 'https://picsum.photos/id/11/800/600',
+    //   title: 'Image 11',
+    //   carousel: [
+    //     'https://picsum.photos/id/11/800/600',
+    //     'https://picsum.photos/id/21/800/600',
+    //     'https://picsum.photos/id/31/800/600',
+    //   ],
+    // },
+    // {
+    //   id: 12,
+    //   src: 'https://picsum.photos/id/12/800/600',
+    //   title: 'Image 12',
+    //   carousel: [
+    //     'https://picsum.photos/id/12/800/600',
+    //     'https://picsum.photos/id/22/800/600',
+    //     'https://picsum.photos/id/32/800/600',
+    //   ],
+    // },
   ];
 
   const handleImageClick = (image) => {
