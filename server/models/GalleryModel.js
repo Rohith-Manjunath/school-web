@@ -7,10 +7,10 @@ const GalleryImages=new mongoose.Schema({
         required: [true, "Please enter title"]
     },
 
-    avatar: {
+    avatar: [{
         public_id: { type: String, required: true },
         url: { type: String, required: true },
-      }
+      }]
 
 })
 

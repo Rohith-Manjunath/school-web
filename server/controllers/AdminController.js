@@ -369,42 +369,45 @@ exports.updateNews=catchAsyncError(async(req,res,next)=>{
 })
 
 
-exports.uploadGalleryImages=catchAsyncError(async(req,res,next)=>{
+exports.uploadGalleryImages = catchAsyncError(async (req, res, next) => {
+    const { title, images } = req.body; // Expecting `images` to be an array of base64 strings or image URLs
 
-const {title,image}=req.body;
-
-const myCloud = await cloudinary.v2.uploader.upload(image, {
-    folder: "school/gallery",
-    width: 700,
-    height: 700,
-    crop: "scale",
-  });
-
-  const isTitleExists=await Gallery.findOne({title})
-
-  if(isTitleExists){
-    return next (new ErrorHandler(`Content already exists with this title : ${title}`, 409))
-  }
-
-
-
-await Gallery.create({
-    title,
-    avatar:{
-        public_id:myCloud.public_id,
-        url:myCloud.secure_url
+    if (!Array.isArray(images) || images.length === 0) {
+        return next(new ErrorHandler("Please upload at least one image", 400));
     }
+
+    const isTitleExists = await Gallery.findOne({ title });
+
+    if (isTitleExists) {
+        return next(new ErrorHandler(`Content already exists with this title: ${title}`, 409));
+    }
+
+    let imageArray = [];
+    for (let image of images) {
+        const myCloud = await cloudinary.v2.uploader.upload(image, {
+            folder: "school/gallery",
+            width: 700,
+            height: 700,
+            crop: "scale",
+        });
+
+        imageArray.push({
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        });
+    }
+
+    await Gallery.create({
+        title,
+        avatar: imageArray
+    });
+
+    res.status(201).json({
+        success: true,
+        message: "Gallery content added successfully"
+    });
 });
 
-res.status(201).json({
-    success:true,
-    message:"Gallery content addedd successfully"
-})
-
-
-
-
-})
 
 exports.deleteGallery=catchAsyncError(async(req,res,next)=>{
     const {id}=req.params;
@@ -418,9 +421,12 @@ exports.deleteGallery=catchAsyncError(async(req,res,next)=>{
         return next(new ErrorHandler("No content found",404));
     }
 
-    const {public_id}=content.avatar
-    await cloudinary.v2.uploader.destroy(public_id);
+  for(let i=0;i<content?.avatar?.length;i++){
 
+    await cloudinary.v2.uploader.destroy(content?.avatar[i]?.public_id);
+
+
+  }
 
   await Gallery.deleteOne({_id:id})
 
@@ -433,50 +439,46 @@ exports.deleteGallery=catchAsyncError(async(req,res,next)=>{
 })
 
 
-exports.updateGallery=catchAsyncError(async(req,res,next)=>{
-
-    const {id}=req.params;
-
-    if(!id){
-        return next(new ErrorHandler("Invalid id",401));
+exports.updateGallery = catchAsyncError(async (req, res, next) => {
+    const { id } = req.params;
+    if (!id) {
+      return next(new ErrorHandler("Invalid id", 401));
     }
-
-    const content=await Gallery.findById(id)
-
-    
-
-    if(!content){
-        return next(new ErrorHandler("Content not found",404));
+  
+    const content = await Gallery.findById(id);
+    if (!content) {
+      return next(new ErrorHandler("Content not found", 404));
     }
-
-    const {title,image}=req.body;
-
-
-    const {public_id}=content.avatar
-    cloudinary.v2.uploader.destroy(public_id);
-
-    const myCloud = await cloudinary.v2.uploader.upload(image, {
+  
+    const { title, images } = req.body;
+  
+    // Delete old images from Cloudinary
+    for (const file of content?.avatar) {
+      await cloudinary.v2.uploader.destroy(file?.public_id);
+    }
+  
+    // Upload new images to Cloudinary
+    const imageArray = [];
+    for (const image of images) {
+      const result = await cloudinary.v2.uploader.upload(image, {
         folder: "school/gallery",
         width: 700,
         height: 700,
         crop: "scale",
       });
-
-
-
-    content.title=title;
-    content.avatar.public_id=myCloud?.public_id
-    content.avatar.url=myCloud?.secure_url
-
-    await content.save()
-    
+      imageArray.push({ public_id: result.public_id, url: result.secure_url });
+    }
+  
+    // Update the content with new title and images
+    content.title = title;
+    content.images = imageArray;
+    await content.save();
+  
     res.status(200).json({
-        success: true,
-        message:"Content updated successfully"
-    })
-
-
-})
+      success: true,
+      message: "Content updated successfully",
+    });
+  });
 
 
 exports.getAllGallery=catchAsyncError(async(req,res,next)=>{
