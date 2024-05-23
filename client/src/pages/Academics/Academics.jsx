@@ -12,30 +12,20 @@ import PaperTear2 from "../../components/layouts/PaperTear2";
 import OurVision from "./OurVision";
 import Testimonials from "./Testimonials";
 import Timelines  from "./Timelines";
-import MetaData from '../../components/MetaData';
+import { Helmet } from 'react-helmet-async';
+
 const Academics = () => {
-  useEffect(() => {
-    // Update document head with meta tags
-    const metaTitle = document.createElement('meta');
-    metaTitle.setAttribute('name', 'title');
-    metaTitle.content = 'Academics - Mysore International School';
-    document.head.appendChild(metaTitle);
-
-    const metaDescription = document.createElement('meta');
-    metaDescription.setAttribute('name', 'description');
-    metaDescription.content = 'Explore the academic programs at Mysore International School, focusing on holistic education and comprehensive learning experiences.';
-    document.head.appendChild(metaDescription);
-
-    return () => {
-      // Clean up added meta tags when component unmounts
-      document.head.removeChild(metaTitle);
-      document.head.removeChild(metaDescription);
-    };
-  }, []);
+ 
   return (
-    <div className="">
-                <MetaData title={"Academics"} />
+    <div >
+<Helmet>
+  <title>Academics | Mysore International School</title>
+  <meta
+    name="description"
+    content="Discover the exceptional academic programs at Mysore International School, designed to foster intellectual growth and excellence." />
+      <link rel="cannonical" href="/Academics" />
 
+</Helmet>
       <Hero
         text={"Academics"}
         image={image}

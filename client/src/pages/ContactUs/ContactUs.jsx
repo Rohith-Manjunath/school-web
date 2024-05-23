@@ -6,36 +6,22 @@ import Hero from '../../components/layouts/Common/Hero';
 import image from '../../assets/Images/ContactImages/philip-strong-iOBTE2xsYko-unsplash.jpg';
 import BreadCrumb from '../../components/layouts/Common/BreadCrumb';
 import PaperTear2 from '../../components/layouts/PaperTear2';
-import MetaData from '../../components/MetaData';
+import { Helmet } from 'react-helmet-async';
 
 const ContactUs = () => {
-  useEffect(() => {
-    // Update document head with meta tags
-    const metaTitle = document.createElement('meta');
-    metaTitle.setAttribute('name', 'title');
-    metaTitle.content = 'Contact Us - Mysore International School';
-    document.head.appendChild(metaTitle);
 
-    const metaDescription = document.createElement('meta');
-    metaDescription.setAttribute('name', 'description');
-    metaDescription.content =
-      'Get in touch with Mysore International School through our contact information and form. We are here to assist you!';
-    document.head.appendChild(metaDescription);
-
-    // Scroll to top on component mount
-    window.scrollTo(0, 0);
-
-    return () => {
-      // Clean up added meta tags when component unmounts
-      document.head.removeChild(metaTitle);
-      document.head.removeChild(metaDescription);
-    };
-  }, []);
 
   return (
-    <div>
-          <MetaData title={"Contact Us"} />
+  <div>
+    <Helmet>
+  <title>Contact Us | Mysore International School</title>
+  <meta
+    name="description"
+    content="Get in touch with Mysore International School. Find our contact information, including address, phone numbers, and email for inquiries."
+  />
+    <link rel="cannonical" href="/ContactUs" />
 
+</Helmet>
       <Hero
         text={`Contact Us`}
         image={image}

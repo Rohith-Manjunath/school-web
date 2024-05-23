@@ -19,10 +19,19 @@ import HOD from "./HOD";
 import PaperTear1 from "../../components/layouts/PaperTear1";
 import TeamCarousel from "./TeamCarousel";
 import SecretaryMessage from "./SecretaryMessage";
+import { Helmet } from "react-helmet";
 
 const OurTeam = () => {
   return (
     <>
+    <Helmet>
+      <title>Our Team | Mysore International School</title>
+      <meta
+        name="description"
+        content="Meet the dedicated educators and staff at Mysore International School, committed to fostering a nurturing learning environment for every student."
+      />
+      <link rel="cannonical" href="/OurTeam" />
+    </Helmet>
       <MetaData title={"Our Team"} />
       <div className="bg-white">
         <Hero

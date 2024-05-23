@@ -37,7 +37,7 @@ const Gallery = () => {
     title:"",
     images:"",
   })
-  const isAdmin=useSelector(state=>state.user.user.isAdmin ?? false)
+  const isAdmin=useSelector(state=>state?.user?.user?.isAdmin ?? false)
   const [isModalOpen,setIsModalOpen]=useState(false)
   const [title,setTitle]=useState("")
   const [postGallery,{isLoading:postLoading}]= usePostGalleryMutation()
@@ -267,7 +267,7 @@ if(currentIndex === 0 ){
           viewport={{ once: true }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-       {(galleryLoading || gallery) ? gallery.length > 0  ? gallery?.map((image, i) => (
+       {(galleryLoading || gallery) ? gallery?.length > 0  ? gallery?.map((image, i) => (
   <div
     key={image._id}
     className="relative flex items-center justify-center overflow-hidden rounded-lg shadow-lg cursor-pointer group"
@@ -339,14 +339,14 @@ if(currentIndex === 0 ){
 
       {showModal && (
         <div
-          className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center bg-black bg-opacity-50"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
           onClick={handleOutsideClick}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="modal-content bg-white rounded-lg shadow-lg max-w-xl mx-auto relative p-4"
+            className="modal-content bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto relative"
           >
             <button
               className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors duration-300"
@@ -475,7 +475,7 @@ if(currentIndex === 0 ){
           Title
         </label>
         <input
-          className="rounded-md outline-none border-slate-400 font-serif tracking-wide uppercase text-fuchsia-950 md:text-base"
+          className="rounded-md outline-none border-slate-400 font-serif tracking-wider text-fuchsia-950 md:text-base"
           type="text"
           name="title"
           id='title'
