@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { LuRefreshCcw } from "react-icons/lu";
 import { IoAddOutline } from "react-icons/io5";
@@ -9,14 +9,25 @@ import { FaPen } from "react-icons/fa";
 import {useNavigate} from 'react-router-dom'
 import Modal from 'react-modal'
 import { IoMdClose } from "react-icons/io";
-import { LinearProgress, Stack } from '@mui/material';
+import { LinearProgress, Slide, Stack } from '@mui/material';
 import MetaData from '../../components/MetaData';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const Awards = () => {
   const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
   const alert=useAlert()
   const {data,isLoading,refetch}= useGetAllAwardsQuery()
-  const [deleteAward]=useDeleteAwardMutation()
+  const [deleteAward,{isLoading:deleteLoading}]=useDeleteAwardMutation()
   const [image,setImage]=useState("")
   const navigate=useNavigate()
   const [id,setId]=useState(null)
@@ -28,7 +39,15 @@ const Awards = () => {
   })
   const [isModalOpen,setIsModalOpen]=useState(false)
   const [postAward,{isLoading:postLoading}]=usePostAwardMutation()
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
 
@@ -73,11 +92,10 @@ const Awards = () => {
 
   const handleDelete = async (id) => {
     try {
-      if (window.confirm("Are you sure you want to delete this award?")) {
         const data = await deleteAward(id).unwrap();
         alert.success(data?.message);
         return;
-      }
+      
     } catch (e) {
       alert.error(e?.data?.err);
       if(e?.data?.err?.toUpperCase() === "JWT EXPIRED"){
@@ -160,7 +178,8 @@ const Awards = () => {
                 {isAdmin && (
                     <>
                       <MdDelete
-                        onClick={() => handleDelete(data?._id)}
+                        onClick={() => {handleClickOpen();
+                          setId(data?._id)}}
                         className="text-red-600 absolute top-0 text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
                       />
                       <FaPen
@@ -336,6 +355,34 @@ const Awards = () => {
     </div>
   </form>
 </Modal>
+
+
+<>
+
+<Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogContent>
+          <DialogContentText style={{
+            color: "red",
+          }} id="alert-dialog-slide-description">
+            Are you sure you want to delete this content ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button disabled={deleteLoading} onClick={()=>handleDelete(id)} style={{
+            backgroundColor:"red",
+            color:"white"
+          }} startIcon={<DeleteIcon />}>
+        {deleteLoading ? "Deleting...":"Delete"}
+      </Button>        </DialogActions>
+      </Dialog>
+</>
 
 </>
 

@@ -10,8 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/styled": "^11.11.5",
     "@material/web": "^1.4.0",
     "@mui/icons-material": "^5.15.12",
     "@mui/lab": "^5.0.0-alpha.169",
@@ -21,7 +22,7 @@
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "flowbite-react": "^0.7.2",
-    "framer-motion": "^11.0.5",
+    "framer-motion": "^11.2.6",
     "razorpay": "^2.9.3",
     "react": "^18.2.0",
     "react-alert": "^7.0.3",

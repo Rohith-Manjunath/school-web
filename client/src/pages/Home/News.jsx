@@ -1,6 +1,6 @@
 import Slider from "react-slick";
 import { useDeleteNewsMutation, useGetAllNewsQuery, usePostNewsMutation } from "../../../Redux/adminAuth";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -10,16 +10,25 @@ import { IoAddOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import Modal from "react-modal";
 import { useNewsUsersQuery } from "../../../Redux/authApi";
-import {LinearProgress, Stack } from "@mui/material";
+import {LinearProgress, Slide, Stack } from "@mui/material";
 import NewsCard from "../../components/layouts/Cards/NewsCard";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DeleteIcon from '@mui/icons-material/Delete';
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const News = () => {
 
   const { isLoading: queryLoading, data: queryData ,refetch}=useGetAllNewsQuery()
   const [data, setData] = useState(null);
   const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
-    const [deleteNewsMutation] = useDeleteNewsMutation();
+    const [deleteNewsMutation,{isLoading:deleteLoading}] = useDeleteNewsMutation();
   const alert = useAlert();
   const [isModalOpen,setIsModalOpen]=useState(false)
   const [date,setDate]=useState("")
@@ -28,6 +37,16 @@ const News = () => {
   const [image,setImage]=useState("")
   const [postNews,{isLoading:postLoading}]=usePostNewsMutation()
   const { data: usersNews } = useNewsUsersQuery()
+  const [open, setOpen] = React.useState(false);
+  const [id,setId]=useState(null)
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
   
@@ -55,11 +74,11 @@ const News = () => {
   
   const handleDelete = async (id) => {
     try {
-      if (window.confirm("Are you sure you want to delete this news?")) {
         const data = await deleteNewsMutation(id).unwrap();
         alert.success(data?.message);
+        handleClose()
         return;
-      }
+      
     } catch (e) {
       alert.error(e?.data?.err);
       return;
@@ -108,6 +127,7 @@ const News = () => {
 
 
   return (
+  <>
     <div className="w-[80%] lg:w-[90%] py-20 mx-auto ">
      { isAdmin && <div className="flex items-center justify-end gap-2">
       <button onClick={fetchData} className="">
@@ -124,7 +144,7 @@ const News = () => {
     <Slider {...settings} className="">
       {data?.news?.map((item) => {
         return (
-        <NewsCard key={item?._id} handleDelete={handleDelete} item={item} isAdmin={isAdmin}/>
+        <NewsCard key={item?._id} handleDelete={()=>{handleClickOpen() ; setId(item?._id)}} item={item} isAdmin={isAdmin}/>
         );
       })}
     </Slider>
@@ -260,6 +280,35 @@ const News = () => {
     </form>
   </Modal>
     </div>
+
+<>
+
+<Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogContent>
+          <DialogContentText style={{
+            color: "red",
+          }} id="alert-dialog-slide-description">
+            Are you sure you want to delete this content ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button disabled={deleteLoading} onClick={()=>handleDelete(id)} style={{
+            backgroundColor:"red",
+            color:"white"
+          }} startIcon={<DeleteIcon />}>
+        {deleteLoading ? "Deleting...":"Delete"}
+      </Button>        </DialogActions>
+      </Dialog>
+</>
+
+  </>
   );
 };
 

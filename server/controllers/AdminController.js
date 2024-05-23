@@ -452,26 +452,38 @@ exports.updateGallery = catchAsyncError(async (req, res, next) => {
   
     const { title, images } = req.body;
   
+    if (!title || !images || !Array.isArray(images)) {
+      return next(new ErrorHandler("Invalid data provided", 400));
+    }
+  
     // Delete old images from Cloudinary
-    for (const file of content?.avatar) {
-      await cloudinary.v2.uploader.destroy(file?.public_id);
+    try {
+      if (content?.avatar?.length) {
+        await Promise.all(content.avatar.map(image => cloudinary.v2.uploader.destroy(image.public_id)));
+      }
+    } catch (error) {
+      return next(new ErrorHandler("Failed to delete old images", 500));
     }
   
     // Upload new images to Cloudinary
     const imageArray = [];
-    for (const image of images) {
-      const result = await cloudinary.v2.uploader.upload(image, {
-        folder: "school/gallery",
-        width: 700,
-        height: 700,
-        crop: "scale",
-      });
-      imageArray.push({ public_id: result.public_id, url: result.secure_url });
+    try {
+      for (let i = 0; i < images.length; i++) {
+        const result = await cloudinary.v2.uploader.upload(images[i], {
+          folder: "school/gallery",
+          width: 700,
+          height: 700,
+          crop: "scale",
+        });
+        imageArray.push({ public_id: result.public_id, url: result.secure_url });
+      }
+    } catch (error) {
+      return next(new ErrorHandler("Failed to upload new images", 500));
     }
   
     // Update the content with new title and images
     content.title = title;
-    content.images = imageArray;
+    content.avatar = imageArray;
     await content.save();
   
     res.status(200).json({

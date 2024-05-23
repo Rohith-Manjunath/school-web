@@ -1,6 +1,6 @@
 import Slider from "react-slick";
 import { MdDelete } from "react-icons/md";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { FaPen } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
@@ -13,19 +13,25 @@ import { useSelector } from "react-redux";
 import { useEventsUsersQuery, useNewsUsersQuery } from "../../../Redux/authApi";
 import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
-import { Button, IconButton, Snackbar } from "@mui/material";
+import { Button, IconButton, Slide, Snackbar } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import EventCard from "../../components/layouts/Cards/EventCard";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-
-
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const Events = () => {
   const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
   const [data, setData] = useState(null);
   const { isLoading: queryLoading, data: queryData ,refetch} = useEventsQuery();
   const { isLoading:usersQueryLoading,data: usersEvents } = useEventsUsersQuery();
-  const [deletePostMutation] = useDeleteEventByIdMutation();
+  const [deletePostMutation,{isLoading:deleteLoading}] = useDeleteEventByIdMutation();
   const [postEvent,{isLoading:addNewEventLoading}]=usePostNewEventMutation()
   const alert = useAlert();
   const [isModalOpen,setIsModalOpen]=useState(false)
@@ -43,7 +49,15 @@ const Events = () => {
   })
   const [isEditModalOpen,setIsEditModalOpen]=useState(false)
   const [updateEvent,{isLoading:updateLoading}]=useUpdateEventMutation()
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setData(isAdmin ? queryData : usersEvents);
@@ -56,11 +70,11 @@ const Events = () => {
 
   const handleDelete = async (id) => {
     try {
-      if (window.confirm("Are you sure you want to delete this post?")) {
         const data = await deletePostMutation(id).unwrap();
         alert.success(data?.message);
+        handleClose()
         return;
-      }
+      
     } catch (e) {
       alert.error(e?.data?.err);
       return;
@@ -115,7 +129,6 @@ const Events = () => {
 setId(id)
 setIsEditModalOpen(true)
 
-
   }
 
   const handleEditSubmit=async(e)=>{
@@ -161,7 +174,7 @@ e.preventDefault()
           {data?.events ? data?.events?.length > 0 ? (
             <Slider {...settings} className="">
               {data?.events?.map((item) => (
-                <EventCard key={item?._id} item={item} handleDelete={handleDelete} handleEditEvent={handleEditEvent} isAdmin={isAdmin} />
+                <EventCard key={item?._id} item={item} handleDelete={()=> {handleClickOpen() ; setId(item?._id)}} handleEditEvent={handleEditEvent} isAdmin={isAdmin} />
               ))}
             </Slider>
           ) : (
@@ -421,6 +434,34 @@ e.preventDefault()
       </div>
     </form>
   </Modal>
+
+  <>
+
+<Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogContent>
+          <DialogContentText style={{
+            color: "red",
+          }} id="alert-dialog-slide-description">
+            Are you sure you want to delete this content ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button disabled={deleteLoading} onClick={()=>handleDelete(id)} style={{
+            backgroundColor:"red",
+            color:"white"
+          }} startIcon={<DeleteIcon />}>
+        {deleteLoading ? "Deleting...":"Delete"}
+      </Button>        </DialogActions>
+      </Dialog>
+</>
+
     </>
   );
 }

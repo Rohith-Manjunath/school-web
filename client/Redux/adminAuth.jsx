@@ -8,7 +8,7 @@ export const adminApi = createApi({
 
   reducerPath: "admin",
   baseQuery: fetchBaseQuery({
-    baseUrl: productionUrl,
+    baseUrl: devUrl,
   }),
   tagTypes: ["Events","News","Gallery","Awards"],
   endpoints: (builder) => ({
@@ -123,7 +123,7 @@ getAllGallery: builder.query({
     method: "GET",
   }),
 
-  providesTags:["Gallery"]
+providesTags:["Gallery"]
 
 }),
 
@@ -152,27 +152,43 @@ getAllGallery: builder.query({
 
 }),
 
-  updateGallery: builder.mutation({
-    query: ({id,data}) => ({
-      url:`gallery/${id}`,
-      method: "PUT",
-      credentials:"include",
-      body:data
-    }),
+updateGallery: builder.mutation({
+  query: ({ id, data }) => ({
+    url: `gallery/${id}`,
+    method: "PUT",
+    credentials: "include",
+    body: data,
+  }),
+  invalidatesTags: ["Gallery"],
+  onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
+    try {
+      // Perform any additional operations before the mutation is executed
+      console.log('Gallery update started:', args);
 
-    invalidatesTags:["Gallery"]
+      // Wait for the mutation to complete
+      const { data } = await queryFulfilled;
+
+      // Perform any additional operations after the mutation is completed
+      console.log('Gallery update completed:', data);
+    } catch (error) {
+      // Handle any errors that occurred during the mutation
+      console.error('Gallery update error:', error);
+    }
+  },
+}),
+
+getSingleGallery: builder.query({
+  query: (id) => ({
+    url:`gallery/${id}`,
+    method: "GET",
+    credentials:"include",
+
+  }),
+
+  invalidatesTags:["Gallery"]
 
 }),
 
-  getSingleGallery: builder.query({
-    query: (id) => ({
-      url:`gallery/${id}`,
-      method: "GET",
-      credentials:"include",
-
-    }),
-
-}),
 
 getAllAwards: builder.query({
   query: () => ({
