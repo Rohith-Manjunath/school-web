@@ -3,7 +3,8 @@ const JoinOurTeam = () => {
     <div className="my-10 flex flex-col gap-5 items-start justify-center text-textSecondary w-full md:w-[90%] mx-auto">
       <h2 className="text-2xl font-semibold my-6 self-center">Join Our Team</h2>
       <div className="overflow-x-auto max-w-full p-4">
-        <table className="w-full border-collapse border ">
+        <div className="table-container">
+          <table className="w-full border-collapse border ">
           <thead className="bg-gray-200">
             <tr>
               <th className="border border-slate-300 p-4">Position</th>
@@ -96,7 +97,9 @@ const JoinOurTeam = () => {
               </td>
             </tr>
           </tbody>
-        </table>
+        
+          </table>
+        </div>
       </div>
       <div className="flex flex-col items-start justify-center gap-4 mt-4 px-3">
         <h2 className="text-2xl font-semibold">How to Apply</h2>

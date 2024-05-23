@@ -22,6 +22,8 @@ const NewsSchema=new mongoose.Schema({
         url: { type: String, required: true },
       },
 
+},{
+    timestamps:true
 })
 
 const News=mongoose.model("News",NewsSchema);

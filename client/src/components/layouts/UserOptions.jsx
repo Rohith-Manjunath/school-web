@@ -10,8 +10,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { useLogoutMutation } from "../../../Redux/authApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { LogoutUser } from "../../../Redux/userSlice";
 import avatar from "../../assets/Images/Server/Admin/Avatar.png"
+import { LogoutUser } from "../../../Redux/UserSlice";
 
 export default function UserOptions({ user }) {
   const [open, setOpen] = React.useState(false);

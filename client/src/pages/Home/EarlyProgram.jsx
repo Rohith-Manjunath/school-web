@@ -1,6 +1,8 @@
 import React from 'react';
 import HeroImage from '../../assets/Images/HomeImages/Holistic/image/5.jpg'; // Import your hero image
 import Footer from "../../components/layouts/Footer";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
 
 const EarlyProgram = () => {
   return (
@@ -12,7 +14,27 @@ const EarlyProgram = () => {
           alt="Hero Section Image"
         />
       </div>
-
+      <div className="max-w-4xl px-4 sm:px-6 lg:px-8 mb-8">
+      <Breadcrumbs aria-label="breadcrumb">
+  <Link
+    underline="hover"
+    color="inherit"
+    href="/"
+    className="hover:text-secondary transition-colors duration-300 hover:font-bold "
+  >
+    Home
+  </Link>
+  <Link
+    underline="hover"
+    color="text.primary"
+    href="/EarlyProgram"
+    aria-current="page"
+    className="hover:text-secondary transition-colors duration-300 hover:font-bold "
+  >
+    Early Program
+  </Link>
+</Breadcrumbs>
+</div>
       {/* Early Program Overview */}
       <section className="mb-12 text-center">
         <h2 className="text-3xl font-bold text-secondary font-tile mb-4">Early Program Overview</h2>

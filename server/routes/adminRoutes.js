@@ -1,5 +1,5 @@
 const express=require("express")
-const { postEvent, deleteEvent, getAllEvents, getUserDetails, updateUser, getAllUsers, deleteUser, updateEvent, getSingleEvent, getAllAdmissionQueries, postNews, getAllNews, deleteNews, getSingleNews, updateNews } = require("../controllers/AdminController")
+const { postEvent, deleteEvent, getAllEvents, getUserDetails, updateUser, getAllUsers, deleteUser, updateEvent, getSingleEvent, getAllAdmissionQueries, postNews, getAllNews, deleteNews, getSingleNews, updateNews, uploadGalleryImages, deleteGallery, updateGallery, getAllGallery, getSingleGalleryContent, getAllAwards, deleteAward, updateAward, getSingleAward, postAward } = require("../controllers/AdminController")
 const { isAuthenticatedUser, isAdmin } = require("../middlewares/isAuthenticated")
 const router=express.Router()
 
@@ -12,7 +12,12 @@ router.route("/queries").get(isAuthenticatedUser,isAdmin, getAllAdmissionQueries
 router.route("/postNews").post(isAuthenticatedUser,isAdmin,postNews)
 router.route("/news").get(isAuthenticatedUser,isAdmin,getAllNews)
 router.route("/news/:newsId").delete(isAuthenticatedUser,isAdmin, deleteNews).get(isAuthenticatedUser,isAdmin, getSingleNews).put(isAuthenticatedUser,isAdmin, updateNews)
-
+router.route("/gallery").get(getAllGallery)
+router.route("/gallery/addContent").post(isAuthenticatedUser,isAdmin, uploadGalleryImages)
+router.route("/gallery/:id").delete(isAuthenticatedUser,isAdmin, deleteGallery).put(isAuthenticatedUser,isAdmin, updateGallery).get(isAuthenticatedUser,isAdmin, getSingleGalleryContent)
+router.route("/awards").get(getAllAwards);
+router.route("/awards/:id").delete(isAuthenticatedUser,isAdmin, deleteAward).put(isAuthenticatedUser,isAdmin, updateAward).get(isAuthenticatedUser,isAdmin, getSingleAward)
+router.route("/awards/addAward").post(isAuthenticatedUser,isAdmin, postAward)
 
 
 module.exports = router

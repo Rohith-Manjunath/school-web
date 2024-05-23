@@ -1,9 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const productionUrl="https://school-web-50fi.onrender.com/api/"
+const devUrl="http://localhost:4000/api/"
+
+
 export const myApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://school-web-50fi.onrender.com/api/",
+    baseUrl: devUrl,
   }),
 //   tagTypes: ["Posts"],
   endpoints: (builder) => ({
@@ -17,12 +21,21 @@ export const myApi = createApi({
       }),
     //   invalidatesTags: ["Posts"],
     }),
+    loadUser: builder.query({
+      query: (credentials) => ({
+        url: "me",
+        method: "GET",
+        body: credentials,
+        credentials:"include"
+
+      }),
+    //   invalidatesTags: ["Posts"],
+    }),
     logout: builder.mutation({
       query: () => ({
         url: "logout",
         method: "POST",
         credentials:"include"
-
       }),
     }),
     register: builder.mutation({
@@ -113,5 +126,6 @@ useParentsenrollMutation,
 useAdmissionQueryMutation,
 useScheduleMutation,
 useEventsUsersQuery,
-useNewsUsersQuery
+useNewsUsersQuery,
+useLoadUserQuery
 } = myApi;

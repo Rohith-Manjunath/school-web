@@ -6,7 +6,8 @@ import { useLoginMutation } from '../../../Redux/authApi';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { useAlert } from 'react-alert';
-import { setUser } from '../../../Redux/userSlice';
+import { setUser } from '../../../Redux/UserSlice';
+
 
 
 const Login = () => {

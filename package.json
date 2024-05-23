@@ -3,5 +3,9 @@
     "prettier": "^3.2.5",
     "vite": "^5.1.4",
     "vite-plugin-svg": "^0.7.0"
+  },
+  "dependencies": {
+    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.4"
   }
 }

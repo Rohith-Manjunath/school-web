@@ -1,6 +1,6 @@
 import Slider from "react-slick";
 import { MdDelete } from "react-icons/md";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { FaPen } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
@@ -11,17 +11,27 @@ import { IoAddOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useEventsUsersQuery, useNewsUsersQuery } from "../../../Redux/authApi";
+import Stack from '@mui/material/Stack';
+import LinearProgress from '@mui/material/LinearProgress';
+import { Button, IconButton, Slide, Snackbar } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import EventCard from "../../components/layouts/Cards/EventCard";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-
-
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const Events = () => {
   const isAdmin = useSelector(state => state.user.user?.isAdmin ?? false);
-  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const { isLoading: queryLoading, data: queryData ,refetch} = useEventsQuery();
-  const { data: usersEvents } = useEventsUsersQuery();
-  const [deletePostMutation] = useDeleteEventByIdMutation();
+  const { isLoading:usersQueryLoading,data: usersEvents } = useEventsUsersQuery();
+  const [deletePostMutation,{isLoading:deleteLoading}] = useDeleteEventByIdMutation();
   const [postEvent,{isLoading:addNewEventLoading}]=usePostNewEventMutation()
   const alert = useAlert();
   const [isModalOpen,setIsModalOpen]=useState(false)
@@ -39,11 +49,19 @@ const Events = () => {
   })
   const [isEditModalOpen,setIsEditModalOpen]=useState(false)
   const [updateEvent,{isLoading:updateLoading}]=useUpdateEventMutation()
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
-    setIsLoading(queryLoading);
     setData(isAdmin ? queryData : usersEvents);
-  }, [queryLoading, queryData,usersEvents,isAdmin]);
+  }, [queryData,usersEvents,isAdmin]);
 
   useEffect(() => {
     setEvent(eventsData?.event);
@@ -52,21 +70,16 @@ const Events = () => {
 
   const handleDelete = async (id) => {
     try {
-      if (window.confirm("Are you sure you want to delete this post?")) {
         const data = await deletePostMutation(id).unwrap();
         alert.success(data?.message);
+        handleClose()
         return;
-      }
+      
     } catch (e) {
       alert.error(e?.data?.err);
       return;
     }
-  };
-
-  if (isLoading) {
-    return <h2>Loading....</h2>;
   }
-
 
   const settings = {
     dots: data?.events?.length > 3,
@@ -116,7 +129,6 @@ const Events = () => {
 setId(id)
 setIsEditModalOpen(true)
 
-
   }
 
   const handleEditSubmit=async(e)=>{
@@ -137,55 +149,49 @@ e.preventDefault()
 
   }
 
+ 
+
 
 
   return (
     <>
-    <div className="w-[80%] py-20 mx-auto tracking-wide font-semibold relative">
+    <div className="w-[90%] py-20 mx-auto tracking-wide font-semibold relative">
       {
         isAdmin && <div className="flex items-center justify-center gap-4 absolute top-0 right-0">
         <button onClick={fetchData}>
-          <LuRefreshCcw className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
+          <LuRefreshCcw                         title="Refetch Data"
+ className="w-full font-semibold my-4 text-[25px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
         </button>
         <button>
-         <IoAddOutline className="w-full font-semibold my-4 text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
+         <IoAddOutline                         title="Add Event"
+ className="w-full font-semibold my-4 text-[30px] tracking-wider text-blue-600 hover:text-blue-500 duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
         </button>
       </div>
       }
-      {isLoading ? (
-        <h2>Loading...</h2>
-      ) : (
+
+
         <>
-          {data?.events?.length > 0 ? (
+          {data?.events ? data?.events?.length > 0 ? (
             <Slider {...settings} className="">
               {data?.events?.map((item) => (
-                <div className="text-center text-textSecondary rounded-md border m-auto mr-10 relative" key={item?._id}>
-                  <div className="bg-white underline underline-offset-4 p-8 capitalize tracking-wider" >{item?.title}</div>
-                  <div className="py-14 bg-secondary text-white space-y-2">
-                    <span className="font-semibold uppercase">{item?.days}</span>
-                    <h2 className="font-semibold text-3xl md:text-4xl">{item?.date}</h2>
-                  </div>
-                  <div className="p-6 bg-white">Duration: {item?.duration}</div>
-                  {isAdmin && (
-                    <>
-                      <MdDelete
-                        onClick={() => handleDelete(item?._id)}
-                        className="text-red-600 absolute top-0 text-xl right-0 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-red-500"
-                      />
-                      <FaPen
-                      onClick={()=>handleEditEvent(item?._id)}
-                        className="text-blue-600 absolute top-0 text-md right-8 m-2 hover:cursor-pointer hover:scale-110 transition-all duration-200 hover:text-blue-500"
-                      />
-                    </>
-                  )}
-                </div>
+                <EventCard key={item?._id} item={item} handleDelete={()=> {handleClickOpen() ; setId(item?._id)}} handleEditEvent={handleEditEvent} isAdmin={isAdmin} />
               ))}
             </Slider>
           ) : (
             <h2 className="text-center font-semibold tracking-wider text-[25px] text-gray-500 animate-bounce">No data yet &#58; &#40; </h2>
-          )}
+          )
+        :  <>
+        <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+        <LinearProgress color="secondary" />
+       
+      </Stack>
+     
         </>
-      )}
+
+
+        }
+        </>
+      
     </div>
     <Modal
     isOpen={isModalOpen}
@@ -229,8 +235,8 @@ e.preventDefault()
 
 
     <form
-      className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6" onSubmit={handleSubmit}
-    >
+          className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6" onSubmit={handleSubmit}
+        >
       <div className="flex flex-col gap-2">
         <label className="text-black font-sans tracking-wide font-semibold" htmlFor="duration">
           Duration
@@ -429,10 +435,32 @@ e.preventDefault()
     </form>
   </Modal>
 
+  <>
 
-
-
-
+<Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogContent>
+          <DialogContentText style={{
+            color: "red",
+          }} id="alert-dialog-slide-description">
+            Are you sure you want to delete this content ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button disabled={deleteLoading} onClick={()=>handleDelete(id)} style={{
+            backgroundColor:"red",
+            color:"white"
+          }} startIcon={<DeleteIcon />}>
+        {deleteLoading ? "Deleting...":"Delete"}
+      </Button>        </DialogActions>
+      </Dialog>
+</>
 
     </>
   );

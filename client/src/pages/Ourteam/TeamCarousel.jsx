@@ -11,17 +11,17 @@ const TeamCarousel = () => {
     {
       image: image1,
       title: "HOD's of various departments",
-      description: ' Meet our dedicated HODs, leading their departments with expertise and passion. They guide our faculty and students, fostering innovation and academic excellence.',
+
     },
     {
       image: image2,
-      title: 'Support Team',
-      description: 'Meet our dedicated Support Team, committed to providing exceptional service and assistance to our community.',
+      title: 'Team MIS',
+
     },
     {
       image: image3,
       title: 'Our Coordinators Team',
-      description: 'Meet the dedicated coordinators who play a pivotal role in ensuring a smooth and enriching educational experience. From curriculum planning to extracurricular activities.',
+
     },
    
   ];
@@ -58,10 +58,10 @@ const TeamCarousel = () => {
             index === currentSlideIndex ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <img className="slide-image w-full h-full object-cover brightness-50" src={slide.image} alt={`Slide ${index + 1}`} />
-          <div className="flex flex-col slide-content items-center justify-center absolute mt-2 p-4 md:p-10 bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%]   text-center bg-white bg-opacity-70 rounded-xl ">
-            <h3 className="text-secondary text-xl md:text-2xl font-bold font-title tracking-wide  capitalize mb-0 md:mb-3">{slide.title}</h3>
-            <p className="text-secondary  font-medium tracking-wide text-l md:text-xl font-subtext ">{slide.description}</p>
+          <img className="slide-image w-full h-full object-scale-down " src={slide.image} alt={`Slide ${index + 1}`} />
+          <div className="flex flex-col slide-content items-center justify-center absolute mt-16 pb-4 md:px-5 bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%]  text-center bg-white  bg-opacity-70 md:bg-white md:bg-opacity-50 rounded-xl ">
+            <h3 className="text-secondary text-sm md:text-2xl font-bold font-title tracking-wide  capitalize mt-0 md:mt-4">{slide.title}</h3>
+            {/* <p className="text-secondary  font-medium tracking-wide text-l md:text-xl font-subtext ">{slide.description}</p> */}
           </div>
         
           <div className="slide-number-container absolute justify-center bottom-4 left-4 z-10 flex items-center gap-2 text-gray-300 font-medium tracking-wider">

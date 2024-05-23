@@ -21,7 +21,7 @@ const CarouselSlider = () => {
     },
     {
       image: image3,
-      title: 'Innovate. Inspire. Ignite.',
+      title: 'Empower. Excel. Educate',
       description: 'Ignite imagination, foster innovation. Join Mysore International School to inspire lifelong learners.',
     },
     {

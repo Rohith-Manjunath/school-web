@@ -1,4 +1,6 @@
+const Awards = require("../models/AwardsSchema");
 const Events = require("../models/EventsSchema");
+const Gallery = require("../models/GalleryModel");
 const News = require("../models/NewsSchema");
 const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
@@ -218,8 +220,8 @@ exports.postNews=catchAsyncError(async(req,res,next)=>{
 
     const myCloud = await cloudinary.v2.uploader.upload(image, {
         folder: "school/newsImages",
-        width: 250,
-        height: 250,
+        width: 700,
+        height: 700,
         crop: "scale",
       });
 
@@ -271,7 +273,7 @@ exports.getAllNews=catchAsyncError(async(req,res,next)=>{
 exports.deleteNews=catchAsyncError(async(req,res,next)=>{
     const {newsId}=req.params;
     if(!newsId){
-        return next(new ErrorHandler("Invalid id / id must be provided"))
+        return next(new ErrorHandler("Invalid id / id must be provided",404))
     }
 
     const news=await News.findById(newsId);
@@ -317,6 +319,8 @@ exports.getSingleNews=catchAsyncError(async(req,res,next)=>{
 })
 
 
+
+
 exports.updateNews=catchAsyncError(async(req,res,next)=>{
 
     const {newsId}=req.params;
@@ -341,8 +345,8 @@ exports.updateNews=catchAsyncError(async(req,res,next)=>{
 
     const myCloud = await cloudinary.v2.uploader.upload(image, {
         folder: "school/newsImages",
-        width: 250,
-        height: 250,
+        width: 700,
+        height: 700,
         crop: "scale",
       });
 
@@ -359,6 +363,314 @@ exports.updateNews=catchAsyncError(async(req,res,next)=>{
     res.status(200).json({
         success: true,
         message:"News updated successfully"
+    })
+
+
+})
+
+
+exports.uploadGalleryImages = catchAsyncError(async (req, res, next) => {
+    const { title, images } = req.body; // Expecting `images` to be an array of base64 strings or image URLs
+
+    if (!Array.isArray(images) || images.length === 0) {
+        return next(new ErrorHandler("Please upload at least one image", 400));
+    }
+
+    const isTitleExists = await Gallery.findOne({ title });
+
+    if (isTitleExists) {
+        return next(new ErrorHandler(`Content already exists with this title: ${title}`, 409));
+    }
+
+    let imageArray = [];
+    for (let image of images) {
+        const myCloud = await cloudinary.v2.uploader.upload(image, {
+            folder: "school/gallery",
+            width: 700,
+            height: 700,
+            crop: "scale",
+        });
+
+        imageArray.push({
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        });
+    }
+
+    await Gallery.create({
+        title,
+        avatar: imageArray
+    });
+
+    res.status(201).json({
+        success: true,
+        message: "Gallery content added successfully"
+    });
+});
+
+
+exports.deleteGallery=catchAsyncError(async(req,res,next)=>{
+    const {id}=req.params;
+    if(!id){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const content=await Gallery.findById(id);
+
+    if(!content){
+        return next(new ErrorHandler("No content found",404));
+    }
+
+  for(let i=0;i<content?.avatar?.length;i++){
+
+    await cloudinary.v2.uploader.destroy(content?.avatar[i]?.public_id);
+
+
+  }
+
+  await Gallery.deleteOne({_id:id})
+
+    res.status(200).json({
+        success:true,
+        message:"Content deleted successfully",
+     
+        
+    })
+})
+
+
+exports.updateGallery = catchAsyncError(async (req, res, next) => {
+    const { id } = req.params;
+    if (!id) {
+      return next(new ErrorHandler("Invalid id", 401));
+    }
+  
+    const content = await Gallery.findById(id);
+    if (!content) {
+      return next(new ErrorHandler("Content not found", 404));
+    }
+  
+    const { title, images } = req.body;
+  
+    if (!title || !images || !Array.isArray(images)) {
+      return next(new ErrorHandler("Invalid data provided", 400));
+    }
+  
+    // Delete old images from Cloudinary
+    try {
+      if (content?.avatar?.length) {
+        await Promise.all(content.avatar.map(image => cloudinary.v2.uploader.destroy(image.public_id)));
+      }
+    } catch (error) {
+      return next(new ErrorHandler("Failed to delete old images", 500));
+    }
+  
+    // Upload new images to Cloudinary
+    const imageArray = [];
+    try {
+      for (let i = 0; i < images.length; i++) {
+        const result = await cloudinary.v2.uploader.upload(images[i], {
+          folder: "school/gallery",
+          width: 700,
+          height: 700,
+          crop: "scale",
+        });
+        imageArray.push({ public_id: result.public_id, url: result.secure_url });
+      }
+    } catch (error) {
+      return next(new ErrorHandler("Failed to upload new images", 500));
+    }
+  
+    // Update the content with new title and images
+    content.title = title;
+    content.avatar = imageArray;
+    await content.save();
+  
+    res.status(200).json({
+      success: true,
+      message: "Content updated successfully",
+    });
+  });
+
+
+exports.getAllGallery=catchAsyncError(async(req,res,next)=>{
+
+    const content=await Gallery.find()
+    const totalContent=await Gallery.countDocuments()
+
+    res.status(200).json({
+
+        success:true,
+        content,
+        totalContent
+
+    })
+
+})
+
+
+exports.getSingleGalleryContent=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+    if(!id){
+        return next(new ErrorHandler("Invalid id / id must be provided"))
+    }
+
+    const content=await Gallery.findById(id);
+
+    if(!content){
+        return next(new ErrorHandler("No content found",404));
+    }
+
+    res.status(200).json({
+        success:true,
+        content
+        
+    })
+})
+
+exports.getAllAwards=catchAsyncError(async(req,res,next)=>{
+
+const awards=await Awards.find();
+
+const totalAwards=await Awards.countDocuments()
+
+res.status(200).json({
+    success:true,
+    awards,
+    totalAwards
+})
+
+
+})
+
+exports.getSingleAward=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+    if(!id){
+
+        return next(new ErrorHandler("Invalid id / id must be provided",404));
+
+    }
+
+    const award=await Awards.findById(id)
+
+    if(!award){
+        return next(new ErrorHandler("No data found for this id",404));
+
+    }
+
+    res.status(200).json({
+        success:true,
+        award
+    })
+
+})
+
+exports.postAward=catchAsyncError(async(req,res,next)=>{
+
+    try{
+     const {image}=req.body;
+ 
+     const myCloud = await cloudinary.v2.uploader.upload(image, {
+         folder: "school/awards",
+         width: 700,
+         height: 700,
+         crop: "scale",
+       });
+ 
+        await Awards.create({
+         avatar: {
+           public_id: myCloud?.public_id,
+           url: myCloud?.secure_url,
+         },
+
+       });
+ 
+       res.status(201).json({
+         success:true,
+         message:"New Award created successfully"
+ 
+       })
+ 
+ 
+    }catch(e){
+     return next(new ErrorHandler(e.message,500))
+    }
+ 
+ })
+ 
+
+
+ exports.deleteAward=catchAsyncError(async(req,res,next)=>{
+    const {id}=req.params;
+    if(!id){
+        return next(new ErrorHandler("Invalid id / id must be provided",404))
+    }
+
+    const award=await Awards.findById(id);
+
+    if(!award){
+        return next(new ErrorHandler("No award found",404));
+    }
+
+    const {public_id}=award.avatar
+    cloudinary.v2.uploader.destroy(public_id);
+
+
+  await Awards.deleteOne({_id:id})
+
+    res.status(200).json({
+        success:true,
+        message:"Award deleted successfully",
+     
+        
+    })
+})
+
+
+exports.updateAward=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+    if(!id){
+        return next(new ErrorHandler("Invalid id",401));
+    }
+
+    const award=await Awards.findById(id)
+
+    
+
+    if(!award){
+        return next(new ErrorHandler("News not found",404));
+    }
+
+    const {title,description,image}=req.body;
+
+
+    const {public_id}=award.avatar
+    cloudinary.v2.uploader.destroy(public_id);
+
+    const myCloud = await cloudinary.v2.uploader.upload(image, {
+        folder: "school/awards",
+        width: 700,
+        height: 700,
+        crop: "scale",
+      });
+
+
+
+    award.title=title;
+    award.description=description;
+    award.avatar.public_id=myCloud?.public_id
+    award.avatar.url=myCloud?.secure_url
+
+    await award.save()
+    
+    res.status(200).json({
+        success: true,
+        message:"Award updated successfully"
     })
 
 

@@ -1,6 +1,8 @@
 import React from "react";
 import heroimg from "../../assets/Images/HomeImages/Curriculum/cbse.jpg";
-import pdf from "../../assets/Images/HomeImages/Curriculum/CbseBooks.pdf"
+import pdf from "../../assets/Images/HomeImages/Curriculum/CbseBooks.pdf";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
 const CbseCurriculum = () => {
   // Function to handle download button click
   const handleDownload = () => {
@@ -18,7 +20,22 @@ const CbseCurriculum = () => {
           alt="Hero Section Image"
         />
       </div>
-
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" href="/">
+            Home
+          </Link>
+         
+          <Link
+            underline="hover"
+            color="text.primary"
+            href="/CbseCurriculum"
+            aria-current="page"
+          >
+            CBSE Curriculum
+          </Link>
+        </Breadcrumbs>
+      </div>
       {/* Main Content */}
       <div className="max-w w-full bg-white p-8 rounded-lg mx-4">
         <div className="flex justify-center items-center mb-2">
