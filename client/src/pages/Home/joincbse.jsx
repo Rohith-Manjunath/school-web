@@ -81,7 +81,7 @@ const JoinCbse = () => {
               <div className="col max-mb-60">
                 <div>
                   <div className="number"><span className="counter text-secondary text-2xl font-black font-Bnumber">{counters.schoolCount} +</span></div>
-                  <h6 className="font-description tracking-wide text-xl lg:text-2xl text-secondary ">SCHOOL GLOBALLY</h6>
+                  <h3 className="font-description tracking-wide text-xl lg:text-2xl text-secondary ">SCHOOL GLOBALLY</h3>
                 </div>
               </div>
               <div className="col max-mb-60" >

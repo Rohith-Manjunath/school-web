@@ -16,10 +16,10 @@ const VirtualTour = () => {
           <h2 className="text-3xl font-semibold md:text-3xl lg:text-5xl">
             Virtual School Tour
           </h2>
-          <h5 className="text-[15px] md:text-[18px] lg:text-xl font-semibold">
+          <h3 className="text-[15px] md:text-[18px] lg:text-xl font-semibold">
           Visit the Mysore International School, virtually! Now take a sneak peek inside our
           campus through our exclusive campus virtual tour.
-          </h5>
+          </h3>
         </div>
         <p className="text-left md:text-justify">
           Unlock the doors to Mysore International School by scanning the QR
