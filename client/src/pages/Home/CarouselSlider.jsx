@@ -70,7 +70,7 @@ const CarouselSlider = () => {
         >
           <img className="slide-image w-full h-full object-cover brightness-50" src={slide.image} alt={`Slide ${index + 1}`} />
           <div className="flex flex-col slide-content items-center justify-center absolute mt-2 p-4 md:p-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%]   text-center bg-white bg-opacity-70 rounded-xl ">
-            <h3 className="text-secondary text-xl md:text-2xl font-bold font-title tracking-wide  capitalize mb-0 md:mb-3">{slide.title}</h3>
+            <h2 className="text-secondary text-xl md:text-2xl font-bold font-title tracking-wide  capitalize mb-0 md:mb-3">{slide.title}</h2>
             <p className="text-secondary  font-medium tracking-wide text-l md:text-xl font-subtext ">{slide.description}</p>
           </div>
         

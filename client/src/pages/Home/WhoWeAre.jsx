@@ -23,13 +23,13 @@ const WhoWeAre = () => {
         className="space-y-4 md:space-y-6 col-span-1"
       >
         <div className="">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
             Who We Are?
-          </h2>
-          <h5 className="text-[15px] md:text-[17px] lg:text-xl  font-semibold text-left md:text-justify">
+          </h1>
+          <h2 className="text-[15px] md:text-[17px] lg:text-xl  font-semibold text-left md:text-justify">
             At Mysore International School, we are a vibrant community dedicated
             to fostering academic excellence and holistic development.
-          </h5>
+          </h2>
         </div>
         <p className="text-left md:text-justify">
           At the heart of Mysore International School is a belief in the

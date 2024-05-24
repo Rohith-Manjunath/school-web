@@ -13,30 +13,20 @@ import BreadCrumb from "../../components/layouts/Common/BreadCrumb";
 import PayNow from "./PayNow";
 import AdmissionProces from "./AdmissionProces";
 import Marquee from "./Marquee";
-import MetaData from '../../components/MetaData';
+import { Helmet } from 'react-helmet-async';
+
 
 const Admissions = () => {
-  useEffect(() => {
-    // Update document head with meta tags
-    const metaTitle = document.createElement('meta');
-    metaTitle.setAttribute('name', 'title');
-    metaTitle.content = 'Admissions - Mysore International School';
-    document.head.appendChild(metaTitle);
 
-    const metaDescription = document.createElement('meta');
-    metaDescription.setAttribute('name', 'description');
-    metaDescription.content = 'Discover the admissions process at Mysore International School and join us in shaping a brighter future.';
-    document.head.appendChild(metaDescription);
-
-    return () => {
-      // Clean up added meta tags when component unmounts
-      document.head.removeChild(metaTitle);
-      document.head.removeChild(metaDescription);
-    };
-  }, []); 
   return (
     <div className="h-[10vh]">
-                <MetaData title={"Admissions"} />
+      <Helmet>
+  <title>Admissions | Mysore International School</title>
+  <meta
+    name="description"
+    content="Explore the admissions process at Mysore International School. Find details on eligibility, application procedures, and how to enroll your child."
+  />
+</Helmet>
 
       <Hero 
         text={"ADMISSION INFO"}

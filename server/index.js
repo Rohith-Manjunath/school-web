@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cookie = require("cookie-parser");
 const cors = require("cors");
+
 const cloudinary=require("cloudinary")
 const Razorpay=require("razorpay")
 const corsOptions = {
@@ -41,6 +42,7 @@ app.use(express.json({
 }));
 app.use(cookie());
 app.use(cors(corsOptions));
+
 app.use("/api", Enrollment);
 app.use("/api", UserRoute);
 app.use("/api/admin", AdminRoute);
@@ -63,6 +65,7 @@ app.get("/api/getKey",(req,res)=>{
 
 // Database connection
 dbConnection(process.env.URI);
+
 // Start the server
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {
@@ -72,7 +75,6 @@ const server = app.listen(PORT, () => {
 // Handle unhandled rejections
 process.on("unhandledRejection", (promise, e, reason) => {
   console.error("Unhandled Rejection at:", promise, "reason:", reason);
-
   console.log(`Shutting down server due to unhandledRejection`);
   console.log(`${e.message}`);
   server.close(() => {
@@ -87,5 +89,6 @@ process.on("uncaughtException", (e) => {
   server.close(() => {
     process.exit(1);
   });
+
 });
 

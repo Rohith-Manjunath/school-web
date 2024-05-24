@@ -44,6 +44,7 @@ const WelcomeToMIS = () => {
 
   return (
     <>
+      
       <ToastContainer style={{ zIndex: 99 }} />
       <div
   className={`p-6 lg:px-20 lg:py-28 space-y-10 md:space-y-0 bg-secondary text-white md:grid md:grid-cols-2 tracking-wide`}>
@@ -56,12 +57,12 @@ const WelcomeToMIS = () => {
             viewport={{ once: true }}
             className="col-span-1 pb-5"
           >
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-title">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-title">
               Welcome to <span className="font-subtext">MIS</span>
-            </h2>
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-serif mt-[-8px]">
+            </h1>
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-serif mt-[-8px]">
               Empower. Excel. Educate
-            </h3>
+            </h2>
           </motion.div>
           <p className="text-justify font-sans tracking-wide font-normal mb-3">
             Welcome to Mysore International School, a place where every
