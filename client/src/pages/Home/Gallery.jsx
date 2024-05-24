@@ -346,14 +346,14 @@ if(currentIndex === 0 ){
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="modal-content bg-white rounded-lg shadow-lg p-6 max-w-5xl mx-auto relative"
+            className="modal-content bg-white rounded-lg shadow-lg p-2 md:p-4  max-w-5xl mx-auto relative"
           >
             <button
-              className="absolute top-0 right-2 text-gray-600 hover:text-gray-800 transition-colors duration-300"
+              className="absolute top-4 z-10 right-4 md:top-6 md:right-6 bg-white rounded-lg text-secondary border border-secondary hover:bg-secondary hover:text-white  transition-colors duration-300"
               onClick={handleCloseModal}
             >
               <svg
-                className="h-6 w-6"
+                className="h-4 w-4 md:h-6 md:w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -411,8 +411,8 @@ if(currentIndex === 0 ){
                  {singleContent?.avatar.map((_, index) => (
                   <span
                     key={index}
-                    className={`mx-1 h-3 w-3 rounded-full bg-white ${
-                      index === currentIndex ? 'bg-fuchsia-950 h-4 w-4' : ''
+                    className={`mx-1 h-2 w-2 md:h-4 md:w-4 rounded-full ${
+                      index === currentIndex ? 'bg-secondary h-2 w-3 md:h-4 md:w-7 ' : 'bg-white'
                     }`}
                   ></span>
                 ))} 
