@@ -346,10 +346,10 @@ if(currentIndex === 0 ){
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="modal-content bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto relative"
+            className="modal-content bg-white rounded-lg shadow-lg p-6 max-w-5xl mx-auto relative"
           >
             <button
-              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors duration-300"
+              className="absolute top-0 right-2 text-gray-600 hover:text-gray-800 transition-colors duration-300"
               onClick={handleCloseModal}
             >
               <svg
@@ -408,14 +408,14 @@ if(currentIndex === 0 ){
                 </svg>
               </button>
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center py-2">
-                {/* {selectedImage.carousel.map((_, index) => (
+                 {singleContent?.avatar.map((_, index) => (
                   <span
                     key={index}
                     className={`mx-1 h-3 w-3 rounded-full bg-white ${
                       index === currentIndex ? 'bg-fuchsia-950 h-4 w-4' : ''
                     }`}
                   ></span>
-                ))} */}
+                ))} 
               </div>
             </div>
           </motion.div>

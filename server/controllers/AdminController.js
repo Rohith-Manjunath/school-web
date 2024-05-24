@@ -386,8 +386,8 @@ exports.uploadGalleryImages = catchAsyncError(async (req, res, next) => {
     for (let image of images) {
         const myCloud = await cloudinary.v2.uploader.upload(image, {
             folder: "school/gallery",
-            width: 700,
-            height: 700,
+            width: 2736,
+            height: 1536,
             crop: "scale",
         });
 
