@@ -13,7 +13,7 @@ const CardComponent = ({ link, imageSrc, title, description }) => {
       <a href={link} className="block bg-white rounded-lg overflow-hidden shadow-md transition duration-300 transform hover:scale-105">
         <div className="p-4">
           <div className="mb-4">
-            <img src={imageSrc} alt={title} className="w-full h-[250px] object-cover" />
+            <img src={imageSrc} alt={title} loading="lazy"  className="w-full h-[250px] object-cover" />
           </div>
           <div>
             <h3 className="text-xl font-bold mb-2 tracking-wider">{title}</h3>

@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.mysoreinternationalschool.com/sitemap.xml
+
+User-agent: Googlebot
+Disallow:
+
+User-agent: *
+Disallow: /login/
+Disallow: /payment/
+Disallow: /admin/
