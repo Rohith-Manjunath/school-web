@@ -1,6 +1,7 @@
 import React from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { motion as Motion } from 'framer-motion'; // Assuming you need to rename it to avoid conflict
+import Modal from 'react-modal'
 
 const GalleryCarousel = ({
   handleOutsideClick,
@@ -16,11 +17,41 @@ const GalleryCarousel = ({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
       onClick={handleOutsideClick}
     >
-      <Motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
-        className="modal-content bg-white rounded-lg shadow-lg p-2 md:p-4 max-w-5xl mx-auto relative"
+      <Modal
+
+      isOpen={true}
+      shouldCloseOnOverlayClick={true}
+      className=""
+      style={{
+        overlay: {
+          zIndex: 98,
+          backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        },
+        content: {
+          width: '90%', // Adjust the width for small screens
+          maxWidth: '1000px',
+          height: '82vh', // Set height to auto for responsiveness
+          maxHeight: '90vh', // Ensuring the modal doesn't exceed the viewport height
+          margin: '0 auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          color: '#580B57',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          borderRadius: '10px',
+          border: '4px solid white',
+          outline: 'none',
+          backgroundColor: 'transparent',
+          padding: '0px',
+          zIndex:"200",
+          overflowY: 'auto', // Allow scrolling if content exceeds modal height
+        },
+      
+      }}
+
       >
         <button
           className="absolute top-4 z-10 right-4 md:top-6 md:right-6 bg-white rounded-lg text-secondary border border-secondary hover:bg-secondary hover:text-white transition-colors duration-300"
@@ -90,7 +121,7 @@ const GalleryCarousel = ({
             ))}
           </div>
         </div>
-      </Motion.div>
+      </Modal>
     </div>
   );
 };
