@@ -108,6 +108,15 @@ export const myApi = createApi({
     //   invalidatesTags: ["Posts"],
     }),
 
+    udpatePassword:builder.mutation({
+      query: (credentials) => ({
+        url: "updatePassword",
+        method: "PUT",
+        body: credentials,
+        credentials:"include"
+
+      }),
+    })
  
  
 
@@ -127,5 +136,6 @@ useAdmissionQueryMutation,
 useScheduleMutation,
 useEventsUsersQuery,
 useNewsUsersQuery,
-useLoadUserQuery
+useLoadUserQuery,
+useUdpatePasswordMutation
 } = myApi;

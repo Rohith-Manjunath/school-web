@@ -7,6 +7,7 @@ import { LogoutUser, setUser } from "../Redux/UserSlice";
 import { useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
 import PageLoader from "./components/layouts/PageLoader";
+import Profile from "./pages/Profile/Profile";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Academics = React.lazy(() => import("./pages/Academics/Academics"));
@@ -106,6 +107,7 @@ const App = () => {
           <Route path="/KnowMore" element={<KnowMore />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/paymentSuccess" element={<PaymentSuccess/>} />
+          <Route path="/profile" element={<Profile/>} />
         </Routes>
       </Suspense>
     </Router>
