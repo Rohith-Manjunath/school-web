@@ -10,6 +10,16 @@ const catchAsyncError = require("../utils/catchAsyncError");
 const { jwtToken } = require("../utils/jwtToken");
 const cloudinary = require("cloudinary");
 
+exports.Home = (req,res)=>{
+
+    res.status(200).json({
+
+        success:true,
+        message:"Welcome to Mysore International School"
+
+    })
+
+}
 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
     const { name, email, password, confirmPassword ,image} = req.body;
@@ -89,6 +99,28 @@ exports.me=catchAsyncError(async(req,res,next)=>{
     })
 
 })
+
+exports.updatePassword = catchAsyncError(async (req, res, next) => {
+    const { id } = req.user;
+    const user = await User.findById(id).select("+password");
+    const oldPassword = req.body.oldPassword;
+    const isPasswordCorrect = await user.comparePassword(oldPassword);
+    if (!isPasswordCorrect) {
+      return next(new ErrorHandler("Incorrect password", 401));
+    }
+    if (req.body.newPassword != req.body.confirmPassword) {
+      return next(
+        new ErrorHandler(
+          "New Password and confirm password are not the same",
+          400
+        )
+      );
+    }
+    user.password = req.body.newPassword;
+    await user.save();
+    jwtToken("successfully updated your password", 200, user, res);
+  });
+  
 
 exports.userQuery=catchAsyncError(async(req,res,next)=>{
 

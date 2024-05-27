@@ -43,8 +43,8 @@ app.use(express.json({
 app.use(cookie());
 app.use(cors(corsOptions));
 
-app.use("/api", Enrollment);
 app.use("/api", UserRoute);
+app.use("/api", Enrollment);
 app.use("/api/admin", AdminRoute);
 app.use("/api/payment", PaymentRoute);
 app.use(error);
