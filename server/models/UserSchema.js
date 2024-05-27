@@ -33,17 +33,17 @@ const userSchema = new mongoose.Schema({
  isAdmin:{
      type : Boolean,
     default:false,
- }
-//   avatar: {
-//     public_id: { type: String, required: true },
-//     url: { type: String, required: true },
-//   },
-//   resetPasswordToken: {
-//     type: String,
-//   },
-//   resetPasswordExpire: {
-//     type: Date,
-//   },
+ },
+  avatar: {
+    public_id: { type: String, required: true },
+    url: { type: String, required: true },
+  },
+  // resetPasswordToken: {
+  //   type: String,
+  // },
+  // resetPasswordExpire: {
+  //   type: Date,
+  // },
 
 },{
     timestamps:true

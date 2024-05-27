@@ -159,7 +159,7 @@ const Navbar = () => {
       </ul>
     </div>
     <div>
-{user &&    <UserOptions user={{...user,avatar:{url:"https://assets.vogue.in/photos/6544d4422e0410ae2777ca31/3:4/w_2560%2Cc_limit/GettyImages-1395062633.jpg"}}} />
+{user &&    <UserOptions user={user} />
 }
     </div>
     

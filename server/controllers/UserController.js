@@ -8,9 +8,11 @@ const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
 const { jwtToken } = require("../utils/jwtToken");
+const cloudinary = require("cloudinary");
+
 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, password, confirmPassword ,image} = req.body;
     const user = await User.findOne({ email });
 
     if (user) {
@@ -25,10 +27,21 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler("Passwords don't match", 400));
     }
 
+    const myCloud = await cloudinary.v2.uploader.upload(image, {
+        folder: "school/avatars",
+        width: 700,
+        height: 700,
+        crop: "scale",
+      });
+
     const newUser = await User.create({
         name,
         email,
         password,
+        avatar: {
+            public_id: myCloud?.public_id,
+            url: myCloud?.secure_url,
+          },
     });
 
     res.status(201).json({

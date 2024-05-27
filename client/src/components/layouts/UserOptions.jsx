@@ -6,11 +6,10 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useLogoutMutation } from "../../../Redux/authApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import avatar from "../../assets/Images/Server/Admin/Avatar.png"
 import { LogoutUser } from "../../../Redux/UserSlice";
 
 export default function UserOptions({ user }) {
@@ -93,7 +92,7 @@ export default function UserOptions({ user }) {
       {backdropOpen && <div className="backdrop" onClick={handleBackdropClick} />} {/* Render backdrop if open */}
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
-        icon={<img src={avatar} alt="" className="rounded-full w-full h-full" />}
+        icon={<img src={user?.avatar?.url} alt="" className="rounded-full w-full h-full" />}
         onClose={handleClose}
         onOpen={handleOpen}
         open={open}

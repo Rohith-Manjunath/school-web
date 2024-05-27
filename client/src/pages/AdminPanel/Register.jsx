@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdEmail, MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FaUser } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import image from '../../assets/Images/AdminPaneImages/TVSchool.jpg';
-import { ToastContainer } from 'react-toastify';
 import { useRegisterMutation } from '../../../Redux/authApi';
 import { useAlert } from 'react-alert';
 
@@ -18,6 +17,8 @@ const Register = () => {
   const [register,{isLoading,isError,error,isSuccess}] =useRegisterMutation();
   const navigate=useNavigate()
   const alert=useAlert()
+  const [userImage,setUserImage]=useState("")
+
 
 
 
@@ -26,7 +27,7 @@ const Register = () => {
 
     try{
 
-await register({email,password,name,confirmPassword}).unwrap()
+await register({email,password,name,confirmPassword,image:userImage}).unwrap()
 alert.success("Registered successfully")
 navigate("/login")
 
@@ -41,6 +42,22 @@ navigate("/login")
 
   const toggleShowReenterPassword = () => {
     setShowReenterPassword(prevState => !prevState);
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        const imageUrl = reader.result;
+        setUserImage(imageUrl);
+      }
+    };
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -99,6 +116,20 @@ navigate("/login")
                 {showReenterPassword ? <MdVisibilityOff className="text-white" /> : <MdVisibility className="text-white" />}
               </span>
             </div>
+            <div className="flex flex-col gap-2">
+          <label className="text-white font-sans tracking-wide font-semibold" htmlFor="image">
+            Choose Profile Picture
+          </label>
+          <input
+            className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-white"
+            type="file"
+            accept="image/*"
+            name="image"
+            id="image"
+            onChange={handleImageUpload}
+          />
+        </div>
+
             <button
               type="submit"
               className="btn w-full h-12 bg-white text-gray-800 rounded-full transition-all duration-300 ease-in-out hover:bg-secondary hover:text-white"
