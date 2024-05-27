@@ -4,7 +4,7 @@ const { isAuthenticatedUser, isAdmin } = require('../middlewares/isAuthenticated
 const router=express.Router();
 
 router.route("/register").post(registerUser)
-router.route("/login").post(loginUser,isAdmin)
+router.route("/login").post(isAdmin,loginUser)
 router.route("/me").get(isAuthenticatedUser,me)
 router.route("/logout").post(isAuthenticatedUser,logout)
 router.route("/query").post(userQuery)
