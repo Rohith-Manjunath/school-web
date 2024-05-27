@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
 import Footer from "../../components/layouts/Footer";
 import PaperTear1 from "../../components/layouts/PaperTear1";
 import PaperTear2 from "../../components/layouts/PaperTear2";
-import ReasonToPursue from "../ReasonToPursue";
 import CardListComponent from "./CardListComponent";
 import CarouselSlider from "./CarouselSlider";
 import Gallery from "./Gallery";
 import GetInTouch from "./GetInTouch";
 import JoinOurFramerwork from "./JoinOurFramework";
 import NewsAndEvents from "./NewsAndEvents";
+import ReasonToPursue from "./ReasonToPursue";
 import Schedule from "./Schedule";
 import VirtualTour from "./VIrtualTour";
 import WelcomeModal from "./WelcomeModal";

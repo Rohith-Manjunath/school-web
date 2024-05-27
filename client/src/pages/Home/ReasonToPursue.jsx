@@ -1,9 +1,11 @@
-import icon1 from "../assets/Images/HomeImages/Icons/acheivment.svg"; // Adjust the path accordingly
-import icon2 from "../assets/Images/HomeImages/Icons/leadership.svg"; // Adjust the path accordingly
-import icon3 from "../assets/Images/HomeImages/Icons/idea.svg"; // Adjust the path accordingly
-import icon4 from "../assets/Images/HomeImages/Icons/edu_1-8.png"; // Adjust the path accordingly
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+import icon1 from '../../assets/Images/HomeImages/Icons/acheivment.svg'; // Adjust the path accordingly
+import icon2 from '../../assets/Images/HomeImages/Icons/leadership.svg'; // Adjust the path accordingly
+import icon3 from '../../assets/Images/HomeImages/Icons/idea.svg'; // Adjust the path accordingly
+import icon4 from '../../assets/Images/HomeImages/Icons/edu_1-8.png'; // Adjust the path accordingly
+import ReasonToPursueCard from '../../components/layouts/Cards/ReasonToPursueCard';
 
 const ReasonToPursue = () => {
   const [data, setData] = useState([
@@ -42,7 +44,6 @@ const ReasonToPursue = () => {
   ]);
 
   const toggleExpanded = (id) => {
-    // Toggle the expanded state for the clicked item
     setData((prevData) =>
       prevData.map((item) =>
         item.id === id ? { ...item, expanded: !item.expanded } : item
@@ -73,31 +74,13 @@ const ReasonToPursue = () => {
         </motion.h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-        {data.map((item) => (
-          <motion.div
-            initial={{ opacity: 0, y: 0 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 2 }}
-            viewport={{ once: true }}
+        {data?.map((item) => (
+          <ReasonToPursueCard
             key={item.id}
-            className="space-y-5"
-          >
-            <img src={item.icon} alt="" className="w-[4rem] h-[4rem]" />
-            <h3 className="text-2xl font-semibold">{item.title}</h3>
-            <p
-              className={`text-left transition-all duration-400 ${
-                item.expanded ? "" : "line-clamp-4"
-              } `}
-            >
-              {item.description}
-            </p>
-            <button
-              className="font-semibold tracking-wider"
-              onClick={() => toggleExpanded(item.id)}
-            >
-              {item.expanded ? "Read less" : "Read more"}
-            </button>
-          </motion.div>
+            motion={motion}
+            item={item}
+            toggleExpanded={toggleExpanded}
+          />
         ))}
       </div>
     </div>
