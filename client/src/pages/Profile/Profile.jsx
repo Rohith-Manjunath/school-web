@@ -1,11 +1,15 @@
-import { useSelector } from "react-redux";
-import { FaEdit } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { FaCamera, FaEdit } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useAlert } from "react-alert";
-import { useUdpatePasswordMutation } from "../../../Redux/authApi";
+import { useUdpatePasswordMutation, useUdpateProfilePicMutation } from "../../../Redux/authApi";
 import Modal from 'react-modal';
 import { useState } from "react";
 import ProfilePasswordUpdateModal from "../../components/ProfileComponents/ProfileModals/ProfilePasswordUpdateModal";
+import { IoMdClose } from "react-icons/io";
+import { setUser } from "../../../Redux/UserSlice";
+import ProfilePicUpdateModal from "../../components/ProfileComponents/ProfileModals/ProfilePicUpdateModal";
+
 
 const Profile = () => {
   const user = useSelector((state) => state?.user?.user);
@@ -15,6 +19,11 @@ const Profile = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const alert = useAlert();
+  const [updateProfilePic,{isLoading:profilePicLoading}]=useUdpateProfilePicMutation()
+  const [isProfilePicModalOpen,setIsProfilePicModalOpen]=useState(false)
+  const [userImage,setUserImage]=useState(null)
+  const dispatch=useDispatch()
+  const [preview,setPreview]=useState(null)
 
   const handleClose = () => {
     setIsModalOpen(false);
@@ -43,12 +52,64 @@ const Profile = () => {
     }
   };
 
+  const handleProfilePicUpdateModalClose=()=>{
+
+    setIsProfilePicModalOpen(false)
+    setPreview("")
+    setUserImage(null)
+
+  }
+  const handleProfilePicUpdateModalOpen=()=>{
+
+    setIsProfilePicModalOpen(true)
+  }
+
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        const imageUrl = reader.result;
+        setUserImage(imageUrl);
+        setPreview(imageUrl)
+      }
+    };
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleImageUpdateSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission
+    try {
+    const data = await updateProfilePic({
+     image:userImage,
+     id:user?._id
+    }).unwrap();
+    alert.success(data?.message);
+   setUserImage(null)
+    handleProfilePicUpdateModalClose()
+    setPreview("")
+    dispatch(setUser(data?.user))
+
+  } catch (e) {
+    alert.error(e?.data?.err);
+  }
+};
+
+const removePreview=()=>{
+  setPreview("")
+}
+
   return (
     <>
       <div className="w-[100vw] h-[100vh] flex items-center justify-center">
         <div className="w-[80%] h-[80%] bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 h-full">
-            <div className="flex items-center justify-center p-4">
+            <div className="flex items-center justify-center p-4 relative">
               <img
                 src={user?.avatar?.url}
                 alt=""
@@ -71,10 +132,14 @@ const Profile = () => {
               <p className="text-textSecondary tracking-wide text-xl mb-4">
                 Joined: {new Date(user?.createdAt).toLocaleDateString()}
               </p>
-              <div className="flex items-center justify-start gap-4 mt-4">
+              <div className="flex items-center justify-start gap-2 mt-4">
                 <button className="flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300">
                   <FaEdit />
                   <span>Update Profile</span>
+                </button>
+                <button onClick={handleProfilePicUpdateModalOpen} className="flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300">
+                  <FaCamera />
+                  <span>Update Profile Pic</span>
                 </button>
                 <button
                   onClick={handleOpen}
@@ -89,7 +154,14 @@ const Profile = () => {
         </div>
       </div>
 
+{/* Password Update Modal */}
+
     <ProfilePasswordUpdateModal Modal={Modal} isModalOpen={isModalOpen} setConfirmPassword={setConfirmPassword} setNewPassword={setNewPassword} setOldPassword={setOldPassword} newPassword={newPassword} confirmPassword={confirmPassword} updateLoading={updateLoading} oldPassword={oldPassword} handleClose={handleClose} handleSubmit={handleSubmit}/>
+
+
+{/* Profile Pic Update Modal */}
+
+<ProfilePicUpdateModal Modal={Modal} isProfilePicModalOpen={isProfilePicModalOpen} handleImageUpdateSubmit={handleImageUpdateSubmit} preview={preview} handleProfilePicUpdateModalClose={handleProfilePicUpdateModalClose} profilePicLoading={profilePicLoading} removePreview={removePreview} handleImageUpload={handleImageUpload}/>
 
     </>
   );

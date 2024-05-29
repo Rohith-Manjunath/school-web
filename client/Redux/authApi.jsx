@@ -7,7 +7,7 @@ const devUrl="http://localhost:4000/api/"
 export const myApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: productionUrl,
+    baseUrl: devUrl,
   }),
 //   tagTypes: ["Posts"],
   endpoints: (builder) => ({
@@ -116,6 +116,15 @@ export const myApi = createApi({
         credentials:"include"
 
       }),
+    }),
+    udpateProfilePic:builder.mutation({
+      query: (data) => ({
+        url: "updateProfilePic",
+        method: "PUT",
+        body: data,
+        credentials:"include"
+
+      }),
     })
  
  
@@ -137,5 +146,6 @@ useScheduleMutation,
 useEventsUsersQuery,
 useNewsUsersQuery,
 useLoadUserQuery,
-useUdpatePasswordMutation
+useUdpatePasswordMutation,
+useUdpateProfilePicMutation
 } = myApi;
