@@ -10,12 +10,13 @@ const auth = new google.auth.GoogleAuth({
 });
 
 const analyticsDataClient = google.analyticsdata({
+  version: 'v1beta',
   auth: auth,
 });
 
 const getAnalyticsData = async (propertyId) => {
   try {
-    const response = await analyticsDataClient.runRealtimeReport({
+    const response = await analyticsDataClient.properties.runRealtimeReport({
       property: `properties/${propertyId}`,
       requestBody: {
         metrics: [

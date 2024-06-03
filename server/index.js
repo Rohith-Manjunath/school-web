@@ -24,6 +24,7 @@ const AdminRoute = require("./routes/adminRoutes");
 const PaymentRoute = require("./routes/paymentRoute");
 const { dbConnection } = require("./config/dbConnections");
 const error = require("./middlewares/error");
+const { getAnalyticsData } = require('./controllers/AnalyticsService');
 
 dotenv.config({ path: "./config/config.env" });
 
@@ -66,11 +67,13 @@ app.get("/api/getKey",(req,res)=>{
 // Database connection
 dbConnection(process.env.URI);
 
+
 // Start the server
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 
 // Handle unhandled rejections
 process.on("unhandledRejection", (promise, e, reason) => {

@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import image from "../../assets/Images/AdminPaneImages/TVSchool.jpg";
-import { useEffect, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { useState } from 'react';
 import { useLoginMutation } from '../../../Redux/authApi';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
@@ -68,9 +67,9 @@ navigate("/")
               <input type="checkbox" className="mr-2" />
               Remember me
             </label>
-            <a href="#" className="text-white hover:underline text-sm">
+            <Link to={"/forgotPassword"} className="text-white hover:underline text-sm">
                 Forgot Password?
-            </a>
+            </Link>
           </div>
           <button
             type="submit"

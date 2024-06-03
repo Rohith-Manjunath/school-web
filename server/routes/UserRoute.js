@@ -1,5 +1,5 @@
 const express=require('express');
-const { registerUser, loginUser, userQuery, admissionEnquiry, me, logout, parentsEnroll, scheduleVisit, getAllEventsForUsers, getAllNewsForUsers, updatePassword,Home, updateProfilePic } = require('../controllers/UserController');
+const { registerUser, loginUser, userQuery, admissionEnquiry, me, logout, parentsEnroll, scheduleVisit, getAllEventsForUsers, getAllNewsForUsers, updatePassword,Home, updateProfilePic, forgotPassword, resetPassword } = require('../controllers/UserController');
 const { isAuthenticatedUser, isAdmin } = require('../middlewares/isAuthenticated');
 const router=express.Router();
 
@@ -16,6 +16,8 @@ router.route("/news").get(getAllNewsForUsers);
 router.route("/schedule").post(scheduleVisit);
 router.route("/updatePassword").put(isAuthenticatedUser,isAdmin, updatePassword);
 router.route("/updateProfilePic").put(isAuthenticatedUser,isAdmin, updateProfilePic);
+router.route("/forgotPassword").put(forgotPassword);
+router.route("/resetPassword/:token").put(resetPassword);
 
 
 module.exports=router

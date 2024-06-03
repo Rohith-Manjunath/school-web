@@ -7,7 +7,7 @@ const devUrl="http://localhost:4000/api/"
 export const myApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: productionUrl,
+    baseUrl: devUrl,
   }),
 //   tagTypes: ["Posts"],
   endpoints: (builder) => ({
@@ -125,7 +125,27 @@ export const myApi = createApi({
         credentials:"include"
 
       }),
-    })
+    }),
+    resetPasswordMail:builder.mutation({
+      query: (email) => ({
+        url: "forgotPassword",
+        method: "PUT",
+        body: email,
+        credentials:"include"
+
+      }),
+    }),
+    resetPassword:builder.mutation({
+      query: (data) => ({
+        url: `resetPassword/${data?.token}`,
+        method: "PUT",
+        credentials:"include",
+        body:{password:data?.password,confirmPassword:data?.confirmPassword}
+
+      }),
+    }),
+
+    
  
  
 
@@ -147,5 +167,8 @@ useEventsUsersQuery,
 useNewsUsersQuery,
 useLoadUserQuery,
 useUdpatePasswordMutation,
-useUdpateProfilePicMutation
+useUdpateProfilePicMutation,
+useResetPasswordMailMutation,
+useResetPasswordMutation
+
 } = myApi;

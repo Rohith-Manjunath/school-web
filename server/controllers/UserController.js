@@ -9,6 +9,8 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
 const { jwtToken } = require("../utils/jwtToken");
 const cloudinary = require("cloudinary");
+const { sendEmail } = require("./sendEmail");
+const crypto=require("crypto")
 
 exports.Home = (req,res)=>{
 
@@ -119,6 +121,64 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
     user.password = req.body.newPassword;
     await user.save();
     jwtToken("successfully updated your password", 200, user, res);
+  });
+
+  exports.forgotPassword = catchAsyncError(async (req, res, next) => {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return next(new ErrorHandler("Email does not exist", 400));
+    }
+    const resetToken = user.getResetPasswordToken();
+    await user.save({ validateBeforeSave: false });
+  
+    const resetPasswordUrl = `http://localhost:5173/reset/password/${resetToken}`;
+  
+    const message = `Your password reset token :- \n\n ${resetPasswordUrl} \n\n If You have not requested it then ,please ignore it`;
+  
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: "Your Password Reset Token",
+        message,
+      });
+  
+      res.status(200).json({
+        success: true,
+        message: `A link to reset your password has been sent to ${user.email}. Please make sure to check your inbox and spam `,
+      });
+    } catch (e) {
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+      await user.save({ validateBeforeSave: false });
+      return next(new ErrorHandler(e.message, 500));
+    }
+  });
+
+  exports.resetPassword = catchAsyncError(async (req, res, next) => {
+    const resetPasswordToken = crypto
+      .createHash("sha256")
+      .update(req.params.token)
+      .digest("hex");
+  
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+    if (!user) {
+      return next(
+        new ErrorHandler("Invalid token or token has been expired", 400)
+      );
+    }
+  
+    if (req.body.password != req.body.confirmPassword) {
+      return next(new ErrorHandler("Password do not match", 400));
+    }
+  
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+    jwtToken("Successfully updated password", 200, user, res);
   });
 
   exports.updateProfilePic=catchAsyncError(async(req,res,next)=>{

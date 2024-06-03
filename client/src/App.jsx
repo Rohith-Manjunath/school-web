@@ -40,26 +40,10 @@ const Payment = React.lazy(() => import("./pages/Payment/Payment"));
 const PaymentSuccess = React.lazy(() => import("./pages/Payment/PaymentSuccess"));
 
 const ProtectedRoute = React.lazy(() => import("./components/layouts/ProtectedRoute"));
+const ResetPassword = React.lazy(() => import("./pages/ResetPassword"));
+const ForgotPassword = React.lazy(() => import("./pages/ForgotPassword"));
 
-const express = require('express');
-const app = express();
-const { getAnalyticsData } = require('./analyticsService');
 
-app.get('/api/analytics', async (req, res) => {
-  try {
-    const propertyId = '439342768';
-    const data = await getAnalyticsData(propertyId);
-    res.json(data);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to retrieve analytics data' });
-  }
-});
-
-// Start the server
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
-});
 
 const App = () => {
   const { data: userData } = useLoadUserQuery();
@@ -128,6 +112,8 @@ const App = () => {
           <Route path="/payment" element={<Payment />} />
           <Route path="/paymentSuccess" element={<PaymentSuccess/>} />
           <Route path="/profile" element={<Profile/>} />
+          <Route path="/reset/password/:token" element={<ResetPassword/>} />
+          <Route path="/forgotPassword" element={<ForgotPassword/>} />
         </Routes>
       </Suspense>
     </Router>
