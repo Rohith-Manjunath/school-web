@@ -6,7 +6,6 @@ import { useUdpatePasswordMutation, useUdpateProfilePicMutation } from "../../..
 import Modal from 'react-modal';
 import { useState } from "react";
 import ProfilePasswordUpdateModal from "../../components/ProfileComponents/ProfileModals/ProfilePasswordUpdateModal";
-import { IoMdClose } from "react-icons/io";
 import { setUser } from "../../../Redux/UserSlice";
 import ProfilePicUpdateModal from "../../components/ProfileComponents/ProfileModals/ProfilePicUpdateModal";
 
@@ -107,32 +106,32 @@ const removePreview=()=>{
   return (
     <>
       <div className="w-[100vw] h-[100vh] flex items-center justify-center">
-        <div className="w-[80%] h-[80%] bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="w-[80%] h-[90%] bg-white rounded-lg shadow-lg overflow-y-scroll overflow-x-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 h-full">
-            <div className="flex items-center justify-center p-4 relative">
+            <div className="flex items-center justify-center p-4">
               <img
                 src={user?.avatar?.url}
                 alt=""
-                className="w-1/2 h-1/2 border-none rounded-lg shadow-lg object-cover"
+                className="max-w-[250px] border-none rounded-lg shadow-lg"
               />
             </div>
             <div className="flex flex-col justify-center p-4">
-              <h2 className="font-semibold text-textSecondary tracking-wide text-3xl mb-4">
+              <h2 className="font-semibold text-textSecondary tracking-wide text-xl md:text-2xl lg:text-3xl mb-4">
                 Name: {user?.name}
               </h2>
               <span className="mb-2 text-gray-500 font-semibold text-[12px] tracking-wide">
                 User id : {user?._id}
               </span>
-              <p className="text-textSecondary tracking-wide text-xl mb-4">
+              <p className="text-textSecondary tracking-wide text-[12px] sm:text-[16px] md:text-[18px] font-semibold mb-4">
                 Email: {user?.email}
               </p>
-              <p className={`tracking-wide text-xl mb-4 text-textSecondary`}>
+              <p className={`tracking-wide text-[12px] sm:text-[16px] md:text-[18px] mb-4 text-textSecondary`}>
                 Role : <span className={`${user?.isAdmin ? 'text-green-500' : 'text-red-500'} font-semibold tracking-wider`}>{user?.isAdmin ? "Admin" : "User"}</span>
               </p>
-              <p className="text-textSecondary tracking-wide text-xl mb-4">
+              <p className= "text-textSecondary tracking-wide text-[12px] sm:text-[16px] md:text-[18px] mb-4">
                 Joined: {new Date(user?.createdAt).toLocaleDateString()}
               </p>
-              <div className="flex items-center justify-start gap-2 mt-4">
+              <div className=" space-y-4 lg:space-y-0 lg:flex items-center justify-start gap-2 mt-4">
                 <button className="flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300">
                   <FaEdit />
                   <span>Update Profile</span>

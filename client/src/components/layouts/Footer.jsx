@@ -6,6 +6,7 @@ import { useAlert } from "react-alert";
 import { FaEye } from "react-icons/fa";
 import { RiEyeCloseFill } from "react-icons/ri";
 import Partner from "../../assets/Images/Fotter/Partner1.jpg"
+import { IoMdClose } from "react-icons/io";
 
 
 
@@ -169,6 +170,13 @@ const Footer = () => {
     >
 
 <form action="" onSubmit={handleSubmit} className="flex items-center justify-center flex-col gap-5">
+<button
+title="Close"
+        className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl text-white"
+        onClick={() => setIsModalOpen(false)}
+      >
+        <IoMdClose />
+      </button>
 <h2 className="font-semibold tracking-wider text-white underline underline-offset-4 text-2xl">Admin Login</h2>
 <div className="flex items-center justify-center bg-white py-1 px-4 rounded-md">
 <input
@@ -183,7 +191,7 @@ const Footer = () => {
 />
 {!isSecretKeyVisible ? <RiEyeCloseFill onClick={()=>setIsSecretKeyVisible(!isSecretKeyVisible)} className="hover:cursor-pointer"/> :<FaEye onClick={()=>setIsSecretKeyVisible(!isSecretKeyVisible)} className="hover:cursor-pointer"/>}
 </div>
-<button className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800" type="submit">Submit</button>
+<button title="Submit" className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800" type="submit">Submit</button>
 
 </form>
 
