@@ -85,8 +85,21 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler("Invalid credentials", 401));
     }
 
+
     
     jwtToken("Login successful", 200, user, res);
+    const message = `You have successfully logged in to Mysore International School Website`;
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: "Login to Mysore International School Website",
+        message,
+      });
+  
+    
+    } catch (e) {
+      return next(new ErrorHandler(e.message, 500));
+    }
 });
 
 exports.me=catchAsyncError(async(req,res,next)=>{
@@ -131,7 +144,7 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });
   
-    const resetPasswordUrl = `http://localhost:5173/reset/password/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset/password/${resetToken}`;
   
     const message = `Your password reset token :- \n\n ${resetPasswordUrl} \n\n If You have not requested it then ,please ignore it`;
   
