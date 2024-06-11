@@ -11,7 +11,7 @@ const GalleryRefreshAndAdd = ({isAdmin,fetchData,setIsModalOpen}) => {
  className="w-full font-semibold my-4 text-[25px] tracking-wider text-white  duration-200 transition-all hover:scale-105 active:scale-90  animate-spin " />
         </button>
         <button >
-         <IoAddOutline                       title="Add Event"
+         <IoAddOutline                       title="Add Gallery"
  className="w-full font-semibold my-4 text-[30px] tracking-wider text-white duration-200 transition-all hover:scale-105 active:scale-90 " onClick={()=>setIsModalOpen(true)}/>
         </button>
       </div>

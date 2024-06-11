@@ -63,9 +63,10 @@ navigate("/login")
   return (
     <>
       <div className="flex items-center justify-center h-screen bg-cover" style={{ backgroundImage: `url(${image})` }}>
-        <div className="w-96 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-lg p-8 border">
+        <div className="mt-24 md:mt-10 md:w-[90%] lg:w-[70%] xl:w-[60%] w-full bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-lg p-8 border">
           <form className="flex flex-col items-center space-y-6" onSubmit={handleSubmit}>
             <h1 className="text-3xl text-white">Register</h1>
+            <div className="space-y-3 sm:space-y-0 sm:flex items-center justify-center gap-3 w-full">
             <div className="input-box relative w-full h-16">
               <input
                 type="text"
@@ -86,7 +87,9 @@ navigate("/login")
               />
               <FaUser className="bx bxs-user absolute right-8 top-1/2 transform -translate-y-1/2 text-2xl text-white"></FaUser>
             </div>
-            <div className="input-box relative w-full h-16">
+            </div>
+      <div className="space-y-3 sm:space-y-0 sm:flex items-center justify-center gap-3 w-full">
+      <div className="input-box relative w-full h-16">
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
@@ -116,7 +119,10 @@ navigate("/login")
                 {showReenterPassword ? <MdVisibilityOff className="text-white" /> : <MdVisibility className="text-white" />}
               </span>
             </div>
-            <div className="flex flex-col gap-2">
+      </div>
+   <div className="space-y-3 sm:space-y-0 sm:flex items-center justify-center gap-3 w-full">
+
+   <div className="flex flex-col gap-2">
           <label className="text-white font-sans tracking-wide font-semibold" htmlFor="image">
             Choose Profile Picture
           </label>
@@ -136,6 +142,8 @@ navigate("/login")
             >
             {isLoading ? "Registering...":"Register"}
             </button>
+    
+   </div>
             <div className="flex justify-between w-[100%] text-base text-center">
               <p className="text-white">Already have an account? </p>
               <Link to="/login" className="text-white hover:underline">

@@ -230,7 +230,7 @@ if(currentIndex === 0 ){
         </motion.h2>
        
 
-<GalleryRefreshAndAdd isAdmin={isAdmin} fetchData={fetchData} setIsModalOpen={setIsEditModalOpen}/>
+<GalleryRefreshAndAdd isAdmin={isAdmin} fetchData={fetchData} setIsModalOpen={setIsModalOpen}/>
 
         <motion.p
           initial={{ opacity: 0, x: -200 }}
