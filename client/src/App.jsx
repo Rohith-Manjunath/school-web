@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
 import PageLoader from "./components/layouts/PageLoader";
 import Profile from "./pages/Profile/Profile";
+import GalleryImagesPage from "./components/GalleryComponents/GalleryLayouts/GalleryImagesPage";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Academics = React.lazy(() => import("./pages/Academics/Academics"));
@@ -114,6 +115,7 @@ const App = () => {
           <Route path="/profile" element={<Profile/>} />
           <Route path="/reset/password/:token" element={<ResetPassword/>} />
           <Route path="/forgotPassword" element={<ForgotPassword/>} />
+          <Route path="/galleryImages" element={<GalleryImagesPage/>} />
         </Routes>
       </Suspense>
     </Router>

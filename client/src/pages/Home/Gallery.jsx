@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useDeleteGalleryMutation, useGetAllGalleryQuery, useGetSingleGalleryQuery, usePostGalleryMutation, useUpdateGalleryMutation } from '../../../Redux/adminAuth';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { LinearProgress, Stack } from '@mui/material';
 import GalleryDeleteModal from '../../components/GalleryComponents/GalleryModals/GalleryDeleteModal';
 import GalleryEditModal from '../../components/GalleryComponents/GalleryModals/GalleryEditModal';
 import GalleryAddContentModal from '../../components/GalleryComponents/GalleryModals/GalleryAddContentModal';
-import GalleryCarousel from '../../components/GalleryComponents/GalleryLayouts/GalleryCarousel';
 import GalleryCard from '../../components/GalleryComponents/GalleryCards/GalleryCard';
 import GalleryRefreshAndAdd from '../../components/GalleryComponents/GalleryLayouts/GalleryRefreshAndAdd';
+import { setGalleryImages } from '../../../Redux/GallerySlice';
 
 
 const Gallery = () => {
@@ -36,8 +36,7 @@ const Gallery = () => {
   const [isEditModalOpen,setIsEditModalOpen]=useState(false)
   const alert=useAlert()
   const [preview,setPreview]=useState([])
-
-
+  const dispatch=useDispatch()
 
   const [open, setOpen] = React.useState(false);
 
@@ -59,6 +58,7 @@ const Gallery = () => {
 
   },[singleGallery,id])
 
+
   useEffect(() => {
     setGalleryToUpdate(singleGallery?.content);
     setPreview(singleGallery?.content?.avatar)
@@ -71,35 +71,6 @@ const Gallery = () => {
 
   }
 
-  const handleNext=()=>{
-
-
-    if(currentIndex === singleContent?.avatar?.length-1){
-
-      setCurrentIndex(0)
-      return;
-
-    }
-
-    else{
-
-      setCurrentIndex(currentIndex+1)
-    }
-    
-    
-  }
-
-  const handlePrev=()=>{
-
-if(currentIndex === 0 ){
-  setCurrentIndex(singleContent?.avatar?.length - 1)
-
-}else{
-  setCurrentIndex(currentIndex-1)
-
-}
-   
-      }
 
 
   const handleCloseModal = () => {
@@ -108,14 +79,6 @@ if(currentIndex === 0 ){
     clearInterval(autoScroll);
   };
 
-  const handleOutsideClick = (event) => {
-    if (event.target.closest('.modal-content') === null) {
-      handleCloseModal();
-      setCurrentIndex(0)
-
-
-    }
-  };
 
   
   const handleImageUpload = (e) => {
@@ -215,6 +178,12 @@ if(currentIndex === 0 ){
       }
 
 
+
+      const SetGalleryImages=()=>{
+        dispatch(setGalleryImages(singleContent))
+      }
+
+
   return (
     <>    
     <div className="bg-secondary py-12">
@@ -239,7 +208,7 @@ if(currentIndex === 0 ){
           viewport={{ once: true }}
           className="text-lg text-white tracking-wider font-medium font-description mb-8"
         >
-          Explore our collection of beautiful images. Click on any image to view more in the carousel.
+          Explore our collection of beautiful images. Click on any image to view more images.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 200 }}
@@ -273,11 +242,11 @@ if(currentIndex === 0 ){
         </motion.div>
       </div>
 
-      {showModal && (
-    
-    <GalleryCarousel handleOutsideClick={handleOutsideClick} motion={motion} handleCloseModal={handleCloseModal} singleContent={singleContent} currentIndex={currentIndex} handlePrev={handlePrev} handleNext={handleNext}/>
-
-      )}
+      {showModal && 
+      
+     SetGalleryImages()
+      
+      }
     </div>
 
  {/* Add gallery modal */}

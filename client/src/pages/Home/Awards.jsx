@@ -17,6 +17,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Tilt from 'react-parallax-tilt'
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -165,8 +166,19 @@ const Awards = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {data?.awards ? data?.awards?.length>0 ? data?.awards?.map((data, index) => (
-            <div
-              key={index}
+          <Tilt 
+          
+          glareEnable={true}
+    glareMaxOpacity={0.8}
+    scale={1.05}
+    perspective={1000}
+    tiltMaxAngleX={10}
+    tiltMaxAngleY={10}
+    transitionSpeed={400}
+          key={index}
+>
+
+<div
               className={`relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:cursor-pointer`}
             >
               <img
@@ -191,6 +203,8 @@ const Awards = () => {
                   )}  
               
             </div>
+
+          </Tilt>
           )) : (
             <h2 className="text-center font-semibold tracking-wider text-[25px] text-white animate-bounce">No data yet &#58; &#40; </h2>
           )

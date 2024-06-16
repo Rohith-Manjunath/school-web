@@ -1,13 +1,37 @@
 import { CircularProgress, Stack } from '@mui/material';
 import { FaPen } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import Tilt from 'react-parallax-tilt'
 
 const GalleryCard = ({image,openModal,isAdmin,handleClickOpen,setId,handleEditEvent,singleGalleryLoading}) => {
+  
+  const navigate=useNavigate()
+  
   return (
-      <div
+    <Tilt
+    glareEnable={true}
+    glareMaxOpacity={0.8}
+    scale={1.05}
+    perspective={1000}
+    tiltMaxAngleX={20}
+    tiltMaxAngleY={20}
+    transitionSpeed={400}
+  >
+
+<div
     key={image._id}
     className="relative flex items-center justify-center overflow-hidden rounded-lg shadow-lg cursor-pointer group"
-    onClick={() => openModal(image?._id)}
+    onClick={
+      () =>{ openModal(image?._id);
+        setTimeout(()=>{
+          navigate("/galleryImages")
+
+        },1000)
+}
+
+
+    }
   >
     {isAdmin && (
       <>
@@ -52,6 +76,8 @@ const GalleryCard = ({image,openModal,isAdmin,handleClickOpen,setId,handleEditEv
       </h3>
     </div>
   </div>
+
+      </Tilt>
   )
 }
 
