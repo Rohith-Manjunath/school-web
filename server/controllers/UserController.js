@@ -10,7 +10,8 @@ const catchAsyncError = require("../utils/catchAsyncError");
 const { jwtToken } = require("../utils/jwtToken");
 const cloudinary = require("cloudinary");
 const { sendEmail } = require("./sendEmail");
-const crypto=require("crypto")
+const crypto=require("crypto");
+const Gallery = require("../models/GalleryModel");
 
 exports.Home = (req,res)=>{
 
@@ -321,4 +322,25 @@ exports.getAllEventsForUsers=catchAsyncError(async(req,res,next)=>{
 
     })
 
+})
+
+
+exports.getSingleGalleryContentUser=catchAsyncError(async(req,res,next)=>{
+
+  const {id}=req.params;
+  if(!id){
+      return next(new ErrorHandler("Invalid id / id must be provided"))
+  }
+
+  const content=await Gallery.findById(id);
+
+  if(!content){
+      return next(new ErrorHandler("No content found",404));
+  }
+
+  res.status(200).json({
+      success:true,
+      content
+      
+  })
 })

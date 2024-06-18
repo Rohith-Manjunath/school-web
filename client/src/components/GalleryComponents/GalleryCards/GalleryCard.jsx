@@ -15,7 +15,7 @@ const GalleryCard = ({image,openModal,isAdmin,handleClickOpen,setId,handleEditEv
     scale={1.05}
     perspective={1000}
     tiltMaxAngleX={20}
-    tiltMaxAngleY={20}
+    tiltMaxAngleY={20}a
     transitionSpeed={400}
   >
 
@@ -24,10 +24,10 @@ const GalleryCard = ({image,openModal,isAdmin,handleClickOpen,setId,handleEditEv
     className="relative flex items-center justify-center overflow-hidden rounded-lg shadow-lg cursor-pointer group"
     onClick={
       () =>{ openModal(image?._id);
-        setTimeout(()=>{
-          navigate("/galleryImages")
+       
+          navigate(`/galleryImages/${image?._id}`)
 
-        },1000)
+   
 }
 
 

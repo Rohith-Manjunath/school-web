@@ -115,7 +115,7 @@ const App = () => {
           <Route path="/profile" element={<Profile/>} />
           <Route path="/reset/password/:token" element={<ResetPassword/>} />
           <Route path="/forgotPassword" element={<ForgotPassword/>} />
-          <Route path="/galleryImages" element={<GalleryImagesPage/>} />
+          <Route path="/galleryImages/:id" element={<GalleryImagesPage/>} />
         </Routes>
       </Suspense>
     </Router>

@@ -14,7 +14,7 @@ router.route("/news").get(isAuthenticatedUser,isAdmin,getAllNews)
 router.route("/news/:newsId").delete(isAuthenticatedUser,isAdmin, deleteNews).get(isAuthenticatedUser,isAdmin, getSingleNews).put(isAuthenticatedUser,isAdmin, updateNews)
 router.route("/gallery").get(getAllGallery)
 router.route("/gallery/addContent").post(isAuthenticatedUser,isAdmin, uploadGalleryImages)
-router.route("/gallery/:id").delete(isAuthenticatedUser,isAdmin, deleteGallery).put(isAuthenticatedUser,isAdmin, updateGallery).get(isAuthenticatedUser,isAdmin, getSingleGalleryContent)
+router.route("/gallery/:id").delete(isAuthenticatedUser,isAdmin, deleteGallery).put(isAuthenticatedUser,isAdmin, updateGallery).get( getSingleGalleryContent)
 router.route("/awards").get(getAllAwards);
 router.route("/awards/:id").delete(isAuthenticatedUser,isAdmin, deleteAward).put(isAuthenticatedUser,isAdmin, updateAward).get(isAuthenticatedUser,isAdmin, getSingleAward)
 router.route("/awards/addAward").post(isAuthenticatedUser,isAdmin, postAward)

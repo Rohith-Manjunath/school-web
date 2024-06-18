@@ -144,6 +144,13 @@ export const myApi = createApi({
 
       }),
     }),
+    singleGallery:builder.query({
+      query:(id)=>({
+        url: `user/gallery/${id}`,
+        method: "GET",
+       
+      })
+    })
 
     
  
@@ -169,6 +176,7 @@ useLoadUserQuery,
 useUdpatePasswordMutation,
 useUdpateProfilePicMutation,
 useResetPasswordMailMutation,
-useResetPasswordMutation
+useResetPasswordMutation,
+useSingleGalleryQuery
 
 } = myApi;
