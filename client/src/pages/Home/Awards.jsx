@@ -95,6 +95,7 @@ const Awards = () => {
     try {
         const data = await deleteAward(id).unwrap();
         alert.success(data?.message);
+        handleClose()
         return;
       
     } catch (e) {

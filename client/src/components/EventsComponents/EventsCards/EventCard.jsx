@@ -12,7 +12,7 @@ const EventCard = ({isAdmin,item,handleDelete,handleEditEvent}) => {
         <span className="font-semibold uppercase">{item?.days}</span>
         <h2 className="font-semibold text-3xl md:text-4xl">{item?.date}</h2>
       </div>
-      <div className="p-6 bg-white h-1/3">Duration: {item?.duration}</div>
+      <div className="p-6 bg-white h-1/3 uppercase">Duration: {item?.duration}</div>
       {isAdmin && (
        <>
           <MdDelete

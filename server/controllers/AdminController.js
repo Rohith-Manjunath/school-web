@@ -101,7 +101,7 @@ exports.getSingleEvent=catchAsyncError(async(req,res,next)=>{
 
 exports.getAllEvents=catchAsyncError(async(req,res,next)=>{
 
-    const events=await Events.find();
+    const events=(await Events.find()).reverse();
     const totalEvents=await Events.countDocuments()
     res.status(200).json({
         success:true,
@@ -256,7 +256,7 @@ exports.postNews=catchAsyncError(async(req,res,next)=>{
 
 exports.getAllNews=catchAsyncError(async(req,res,next)=>{
 
-    const news=await News.find();
+    const news=(await News.find()).reverse();
 
     const totalNews = await News.countDocuments();
 
@@ -495,7 +495,7 @@ exports.updateGallery = catchAsyncError(async (req, res, next) => {
 
 exports.getAllGallery=catchAsyncError(async(req,res,next)=>{
 
-    const content=await Gallery.find()
+    const content=(await Gallery.find()).reverse()
     const totalContent=await Gallery.countDocuments()
 
     res.status(200).json({
@@ -531,7 +531,7 @@ exports.getSingleGalleryContent=catchAsyncError(async(req,res,next)=>{
 
 exports.getAllAwards=catchAsyncError(async(req,res,next)=>{
 
-const awards=await Awards.find();
+const awards=(await Awards.find()).reverse();
 
 const totalAwards=await Awards.countDocuments()
 
