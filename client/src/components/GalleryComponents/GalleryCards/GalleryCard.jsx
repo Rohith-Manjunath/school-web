@@ -71,7 +71,7 @@ const GalleryCard = ({image,openModal,isAdmin,handleClickOpen,setId,handleEditEv
   
   }
     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity duration-300 flex items-center justify-center">
-      <h3 className="text-white text-xl font-medium font-serif tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <h3 className="whitespace-nowrap text-ellipsis text-white text-[18px] font-medium font-serif tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         {image?.title}
       </h3>
     </div>

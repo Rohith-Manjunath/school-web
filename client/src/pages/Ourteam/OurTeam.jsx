@@ -23,7 +23,7 @@ import { Helmet } from "react-helmet";
 
 const OurTeam = () => {
   return (
-    <>
+    <div className="mt-20 sm:mt-0">
     <Helmet>
       <title>Our Team | Mysore International School</title>
       <meta
@@ -60,7 +60,7 @@ const OurTeam = () => {
         <PaperTear2 />
         <Footer />
       </div>
-    </>
+    </div>
   );
 };
 

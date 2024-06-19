@@ -1,6 +1,6 @@
 const JoinOurTeam = () => {
   return (
-    <div className="my-10 flex flex-col gap-5 items-start justify-center text-textSecondary w-full md:w-[90%] mx-auto">
+    <div className="my-10 flex flex-col gap-5 items-start justify-center text-textSecondary w-full md:w-[90%] mx-auto mt-20 ">
       <h2 className="text-2xl font-semibold my-6 self-center">Join Our Team</h2>
       <div className="overflow-x-auto max-w-full p-4">
         <div className="table-container">

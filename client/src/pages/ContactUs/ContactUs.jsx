@@ -12,7 +12,7 @@ const ContactUs = () => {
 
 
   return (
-  <div>
+  <div className='mt-20 sm:mt-0'>
     <Helmet>
   <title>Contact Us | Mysore International School</title>
   <meta

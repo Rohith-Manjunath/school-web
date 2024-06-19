@@ -209,7 +209,7 @@ const Awards = () => {
             <h2 className="text-center font-semibold tracking-wider text-[25px] text-white animate-bounce">No data yet &#58; &#40; </h2>
           )
         :<>
-  <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+  <Stack className='col-span-full' sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
   <LinearProgress color="secondary" />
  
 </Stack>

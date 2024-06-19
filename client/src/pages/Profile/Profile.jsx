@@ -105,14 +105,14 @@ const removePreview=()=>{
 
   return (
     <>
-      <div className="w-[100vw] h-[100vh] flex items-center justify-center">
+      <div className="w-[100vw] h-[100vh] flex items-center justify-center mt-20">
         <div className="w-[80%] h-[90%] bg-white rounded-lg shadow-lg overflow-y-scroll overflow-x-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 h-full">
             <div className="flex items-center justify-center p-4">
               <img
                 src={user?.avatar?.url}
                 alt=""
-                className="max-w-[250px] border-none rounded-lg shadow-lg"
+                className="w-[80%] max-w-[250px] border-none rounded-lg shadow-lg"
               />
             </div>
             <div className="flex flex-col justify-center p-4">
@@ -132,17 +132,17 @@ const removePreview=()=>{
                 Joined: {new Date(user?.createdAt).toLocaleDateString()}
               </p>
               <div className=" space-y-4 lg:space-y-0 lg:flex items-center justify-start gap-2 mt-4">
-                <button className="flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300">
+                <button className=" hover:-translate-y-2  flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-300">
                   <FaEdit />
                   <span>Update Profile</span>
                 </button>
-                <button onClick={handleProfilePicUpdateModalOpen} className="flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300">
+                <button onClick={handleProfilePicUpdateModalOpen} className="hover:-translate-y-2   flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-300">
                   <FaCamera />
                   <span>Update Profile Pic</span>
                 </button>
                 <button
                   onClick={handleOpen}
-                  className="flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300"
+                  className="hover:-translate-y-2   flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-all duration-300"
                 >
                   <RiLockPasswordLine />
                   <span>Update Password</span>

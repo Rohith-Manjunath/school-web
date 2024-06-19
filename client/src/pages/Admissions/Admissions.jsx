@@ -19,7 +19,7 @@ import { Helmet } from 'react-helmet-async';
 const Admissions = () => {
 
   return (
-    <div className="h-[10vh]">
+    <div className="h-[10vh] mt-20 sm:mt-0">
       <Helmet>
   <title>Admissions | Mysore International School</title>
   <meta

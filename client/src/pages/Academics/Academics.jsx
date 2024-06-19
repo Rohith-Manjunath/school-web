@@ -17,7 +17,7 @@ import { Helmet } from 'react-helmet-async';
 const Academics = () => {
  
   return (
-    <div >
+    <div className='mt-20 sm:mt-0'>
 <Helmet>
   <title>Academics | Mysore International School</title>
   <meta

@@ -10,7 +10,7 @@ const SportsAndHolisticGrowth = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen flex flex-col justify-center items-center py-15">
+    <div className="bg-white min-h-screen flex flex-col justify-center items-center py-15 mt-0 md:mt-4 lg:mt-16">
       {/* Hero Section */}
       <div className="w-full h-[500px] bg-cover bg-center mb-8">
         <img

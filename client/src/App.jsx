@@ -43,36 +43,10 @@ const PaymentSuccess = React.lazy(() => import("./pages/Payment/PaymentSuccess")
 const ProtectedRoute = React.lazy(() => import("./components/layouts/ProtectedRoute"));
 const ResetPassword = React.lazy(() => import("./pages/ResetPassword"));
 const ForgotPassword = React.lazy(() => import("./pages/ForgotPassword"));
-
+const NotFound = React.lazy(() => import("./components/NotFound"));
 
 
 const App = () => {
-  const { data: userData } = useLoadUserQuery();
-  const dispatch = useDispatch();
-  const [logout] = useLogoutMutation();
-  const alert = useAlert();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (userData?.err.toUpperCase() === "PLEASE LOGIN TO ACCESS THIS RESOURCE") {
-        try {
-          const response = await logout().unwrap();
-          alert.success(response?.message);
-          dispatch(LogoutUser());
-          window.location.history = "/login";
-        } catch (error) {
-          alert.error(error?.data?.err);
-        }
-      } else {
-        dispatch(setUser(userData?.user));
-      }
-    };
-
-    const intervalId = setInterval(fetchData, 20000); // Run fetchData every 20 seconds
-
-    return () => clearInterval(intervalId);
-
-  }, [userData, dispatch, alert, logout]);
 
   return (
     <Router>
@@ -116,6 +90,7 @@ const App = () => {
           <Route path="/reset/password/:token" element={<ResetPassword/>} />
           <Route path="/forgotPassword" element={<ForgotPassword/>} />
           <Route path="/galleryImages/:id" element={<GalleryImagesPage/>} />
+          <Route path="*" element={<NotFound/>} />
         </Routes>
       </Suspense>
     </Router>

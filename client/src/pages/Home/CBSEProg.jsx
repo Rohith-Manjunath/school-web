@@ -25,7 +25,7 @@ const CBSEProg = () => {
   }, []); // Run this effect only once on mount
 
  return (
-   <div className=" w-[100%]  pt-8 flex  flex-col">
+   <div className=" w-[100%] pt-8 flex  flex-col mt-[150px] md:mt-[30px] lg:mt-[100px]">
      {/* Hero Image */}
 
       {/* Hero Section */}
