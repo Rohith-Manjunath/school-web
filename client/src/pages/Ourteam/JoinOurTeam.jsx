@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const JoinOurTeam = () => {
   return (
     <div className="my-10 flex flex-col gap-5 items-start justify-center text-textSecondary w-full md:w-[90%] mx-auto mt-20 ">
@@ -103,7 +105,8 @@ const JoinOurTeam = () => {
       </div>
       <div className="flex flex-col items-start justify-center gap-4 mt-4 px-3">
         <h2 className="text-2xl font-semibold">How to Apply</h2>
-        <p>Mail your latest Resume / CV to zeeschoolmysore@gmail.com</p>
+        <p>Mail your latest Resume / CV to <a className="font-semibold tracking-wider" href="mailto:zeeschoolmysore@gmail.com">zeeschoolmysore@gmail.com</a>
+        </p>
         <p>Clearly mention the position you are applying for.</p>
       </div>
     </div>

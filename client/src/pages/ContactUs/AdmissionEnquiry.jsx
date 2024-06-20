@@ -67,7 +67,7 @@ const AdmissionEnquiry = () => {
             </label>
             <input
               
-              className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow outline-none border border-gray-200 appearance-none rounded w-full py-2 px-3  leading-tight focus:outline-none"
               id="firstName"
               type="text"
               name="firstname"
@@ -81,7 +81,7 @@ const AdmissionEnquiry = () => {
             </label>
             <input
               
-              className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow outline-none border border-gray-200 appearance-none rounded w-full py-2 px-3  leading-tight focus:outline-none"
               id="lastName"
               type="text"
               name="lastname"
@@ -97,7 +97,7 @@ const AdmissionEnquiry = () => {
             </label>
             <input
               
-              className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow outline-none border border-gray-200 appearance-none rounded w-full py-2 px-3  leading-tight focus:outline-none"
               id="dob"
               type="date"
               name="dob"
@@ -115,7 +115,7 @@ const AdmissionEnquiry = () => {
               Class
             </label>
             <select
-              className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow outline-none border border-gray-200 appearance-none rounded w-full py-2 px-3  leading-tight focus:outline-none"
               id="selectedClass"
               name="class"
               onChange={(e)=>setSelectedClass(e.target.value)}
@@ -138,7 +138,7 @@ const AdmissionEnquiry = () => {
             </label>
             <input
               
-              className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow outline-none border border-gray-200 appearance-none rounded w-full py-2 px-3  leading-tight focus:outline-none"
               id="previousSchoolName"
               type="text"
               name="previousSchool"
@@ -154,7 +154,7 @@ const AdmissionEnquiry = () => {
             </label>
             <input
               
-              className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow outline-none border border-gray-200 appearance-none rounded w-full py-2 px-3  leading-tight focus:outline-none"
               id="place"
               type="text"
               name="place"
@@ -173,7 +173,7 @@ const AdmissionEnquiry = () => {
             </label>
             <input
               
-              className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow outline-none border border-gray-200 appearance-none rounded w-full py-2 px-3  leading-tight focus:outline-none"
               id="phoneNumber"
               type="text"
               name="phone"
@@ -190,7 +190,7 @@ const AdmissionEnquiry = () => {
               Alternative Phone Number
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow outline-none border border-gray-200 appearance-none rounded w-full py-2 px-3  leading-tight focus:outline-none"
               id="altPhoneNumber"
               type="text"
               name="altPhone"
@@ -206,7 +206,7 @@ const AdmissionEnquiry = () => {
             </label>
             <input
               
-              className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow outline-none border border-gray-200 appearance-none rounded w-full py-2 px-3  leading-tight focus:outline-none"
               id="email"
               type="email"
               name="email"
@@ -218,7 +218,7 @@ const AdmissionEnquiry = () => {
         </div>
         <div className="flex items-center justify-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="w-1/3 bg-ctcPrimary hover:tracking-wider active:scale-90 hover:bg-ctcPrimaryLight hover:scale-105 transition-all duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none"
             type="submit"
           >
 {isLoading ? "Submitting..." : "Submit"}

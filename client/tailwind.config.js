@@ -15,6 +15,7 @@ export default {
         ctcSecondary: "#D3D3D3",
         textPrimary: "#ffffff",
         textSecondary: "#580B57",
+        ctcPrimaryLight:"#8a0b88"
       },
 
       fontFamily: {

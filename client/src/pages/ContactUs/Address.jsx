@@ -11,7 +11,7 @@ const Address = () => {
       <h1 className=" text-2xl sm:text-3xl uppercase text-center text-textSecondary font-semibold mt-16 font-title">
         Contact Us
       </h1>
-      <div className="md:grid space-y-12 md:space-y-0 grid-cols-2 w-[90%] mx-auto mt-8 text-textSecondary tracking-wide shadow-lg border-secondary shadow-secondary border pb-8 pt-4 rounded-lg bg-white">
+      <div className="md:grid space-y-12 md:space-y-0 grid-cols-2 w-[90%] mx-auto mt-8 text-textSecondary tracking-wide shadow-lg  shadow-secondary pb-8 pt-4 rounded-lg bg-white">
         <div className="space-y-4 px-2 md:px-10 md:py-10">
           <h2 className="text-3xl md:text-4xl text-textSecondary font-semibold font-title">
             Mysore International School

@@ -12,6 +12,8 @@ const GalleryImages=new mongoose.Schema({
         url: { type: String, required: true },
       }]
 
+},{
+    timestamps:true
 })
 
 const Gallery=mongoose.model("Gallery",GalleryImages);

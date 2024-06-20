@@ -57,7 +57,7 @@ const Navbar = () => {
           <NavLink to={"facilities"}>Facility</NavLink>
         </li>
         <li onClick={() => setShow(false)}>
-          <NavLink to={"OurTeam"}>Our Team</NavLink>
+          <NavLink to={"/our-team"}>Our Team</NavLink>
         </li>
         <li onClick={() => setShow(false)}>
           <NavLink to={"contact-us"}>Contact Us</NavLink>
@@ -137,7 +137,7 @@ const Navbar = () => {
           transition={{ duration: 1.8, delay: 0.4 }}
         >
           <NavLink
-            to={"/OurTeam"}
+            to={"/our-team"}
             className="after:bg-secondary after:scale-0 hover:after:scale-100 after:h-[2px] after:origin-center after:block after:transition-all after:duration-300  after:rounded-lg"
           >
             Our Team

@@ -12,7 +12,7 @@ const GalleryImageModal = ({Modal,Box,style,handleCloseModal,IoMdClose,image,isM
       
       <Box sx={style}>
       <button
-      className="absolute top-5 right-5 cursor-pointer font-semibold text-2xl text-white bg-secondary rounded-md transition-all duration-300 active:scale-90"
+      className="absolute top-3 right-3 cursor-pointer font-semibold text-2xl text-white bg-secondary rounded-md transition-all duration-300 active:scale-90"
       onClick={handleCloseModal}
     >
       <IoMdClose />

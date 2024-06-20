@@ -86,26 +86,26 @@ const Enroll = () => {
             name="parentname"
               type="text"
               placeholder="Parent's Name"
-              className="p-2 outline-none rounded-sm w-full border border-slate-400 focus:outline-textSecondary focus:border-none"
+              className="border-none p-2 outline-none rounded-sm w-full border border-gray-200 shadow-lg"
             />
             <input
               onChange={(e)=>setPhone(e.target.value)}
               type="text"
               name="phone"
               placeholder="Phone Number"
-              className="p-2 outline-none rounded-sm w-full border border-slate-400 focus:outline-textSecondary focus:border-none"
+              className="border-none p-2 outline-none rounded-sm w-full border border-gray-200 shadow-lg"
             />
             <input
               onChange={(e)=>setEmail(e.target.value)}
               type="email"
               placeholder="Email"
               name="email"
-              className="p-2 outline-none rounded-sm w-full border border-slate-400 focus:outline-textSecondary focus:border-none"
+              className="border-none p-2 outline-none rounded-sm w-full border border-gray-200 shadow-lg"
             />
           </div>
           <div className="col-span-full lg:col-span-1  mt-10 lg:m-0 lg:p-3">
             <textarea
-              className="w-full p-2 rounded-sm outline-none border border-slate-400 focus:outline-textSecondary focus:border-none"
+              className="border-none w-full p-2 rounded-sm outline-none border border-gray-200 shadow-lg"
               placeholder="Message"
               onChange={(e)=>setMessage(e.target.value)}
               name="message"

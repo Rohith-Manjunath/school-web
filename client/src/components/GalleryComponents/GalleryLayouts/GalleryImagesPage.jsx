@@ -33,11 +33,11 @@ const GalleryImagesPage = () => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '90%', // Adjust width for small screens
-    maxWidth: '600px', // Maximum width for larger screens
+    maxWidth: '900px', // Maximum width for larger screens
     maxHeight: '90vh', // Ensure it fits within the viewport height
     backgroundColor: '#fff', // Corrected property name
     boxShadow: '24px 24px 48px rgba(0,0,0,0.2)', // Updated for clarity
-    padding: '16px',
+    padding: '5px',
     borderRadius: '10px',
     outline: 'none',
     overflowY: 'auto' // Enable vertical scrolling if content overflows
