@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import {  useState } from "react";
+import { ToastContainer } from "react-toastify";
 import { useAdmissionQueryMutation } from "../../../Redux/authApi";
 import {useAlert} from 'react-alert'
 
@@ -218,6 +218,7 @@ const AdmissionEnquiry = () => {
         </div>
         <div className="flex items-center justify-center">
           <button
+          disabled={isLoading}
             className="w-1/3 bg-ctcPrimary hover:tracking-wider active:scale-90 hover:bg-ctcPrimaryLight hover:scale-105 transition-all duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none"
             type="submit"
           >

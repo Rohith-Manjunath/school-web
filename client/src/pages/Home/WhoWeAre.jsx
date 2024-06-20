@@ -41,12 +41,14 @@ const WhoWeAre = () => {
           for life's challenges.
         </p>
         <div className="">
-          <Link
-            to={"/KnowMore"}
-            className="w-full px-20 rounded-md shadow-sm shadow-white border p-2 font-semibold tracking-widest active:shadow-none active:translate-x-1 active:translate-y-1 transition-all duration-200 hover:scale-105 bg-ctcPrimary text-white"
+          <button
+            
+            className="w-full px-20 rounded-md shadow-sm shadow-white border p-2 font-semibold tracking-widest active:shadow-none active:translate-x-1 active:translate-y-1 bg-ctcPrimary hover:bg-ctcPrimaryLight transition-all duration-300 hover:scale-105 text-white"
           >
+            <Link to={"/KnowMore"}>
             Know More
-          </Link>{" "}
+            </Link>
+          </button>{" "}
         </div>
       </motion.div>
     </div>

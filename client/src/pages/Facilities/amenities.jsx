@@ -123,7 +123,7 @@ const FacilityCard = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
         viewport={{ once: true }}
-        className="text-center mx-auto max-w-2xl font-sans mb-10"
+        className="text-start mx-auto max-w-2xl font-sans mb-10 text-[16px] sm:text-[18px] sm:text-center px-4 tracking-wide"
       >
         Explore our exceptional amenities at Mysore International School, enhancing student life with a modern swimming pool for relaxation and fitness, and a state-of-the-art sports arena for diverse activities.
       </motion.p>
@@ -138,7 +138,7 @@ const FacilityCard = () => {
               <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
                 <Link
                   to={facility.link || '#'}
-                  className="text-white font-semibold py-2 px-4 rounded-md bg-secondary hover:bg-indigo-600 transition duration-300"
+                  className="text-white font-semibold py-2 px-4 rounded-md bg-secondary hover:bg-ctcPrimaryLight transition duration-300"
                 >
                   Know More
                 </Link>

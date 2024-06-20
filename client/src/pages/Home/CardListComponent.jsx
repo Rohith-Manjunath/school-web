@@ -1,28 +1,26 @@
 // CardListComponent.jsx
-import React from 'react';
 import CardComponent from './CardComponent'; // Adjust the path accordingly
 import image1 from '../../assets/Images/HomeImages/Cards/curriculum.png'
 import image2 from '../../assets/Images/HomeImages/Cards/beyond.png'
 import image3 from '../../assets/Images/HomeImages/Cards/awards.png'
-import CbseCurriculum from './CbseCurriculum';
-import HolisticEdu from './HolisticEdu';
-import awards from './Awards';
-
 const CardListComponent = () => {
   const cardsData = [
     {
+      id:1,
       link: 'CbseCurriculum',
       imageSrc: image1,
       title: 'Curriculum Overview',
       description: ' MIS curriculum blends academics, hands-on learning, and innovative teaching.',
     },
     {
+      id:2,
       link: 'HolisticEdu',
       imageSrc: image2,
       title: 'Holistic Education',
       description: 'It integrates academics with social, emotional, and physical development, fostering critical thinking and creativity.',
     },
     {
+      id:3,
       link: 'awards',
       imageSrc: image3,
       title: 'Awards and Achievements',
@@ -40,6 +38,7 @@ const CardListComponent = () => {
             imageSrc={card.imageSrc}
             title={card.title}
             description={card.description}
+            id={card.id}
           />
         ))}
       </div>

@@ -36,7 +36,6 @@ const Schedule = () => {
     }
 
     try{
-console.log(studentInfo)
  const data=await schedule(studentInfo).unwrap()
  alert.success(`${data?.message}, Thank you!`)
 

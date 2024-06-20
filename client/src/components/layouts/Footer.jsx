@@ -44,6 +44,7 @@ const Footer = () => {
     }else{
       alert.error(`Admin access denied`)
       setIsModalOpen(false)
+      return;
     }
 
   }
@@ -169,7 +170,7 @@ const Footer = () => {
 
     >
 
-<form action="" onSubmit={handleSubmit} className="flex items-center justify-center flex-col gap-5">
+<form onSubmit={handleSubmit} className="flex items-center justify-center flex-col gap-5">
 <button
 title="Close"
         className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl text-white"
