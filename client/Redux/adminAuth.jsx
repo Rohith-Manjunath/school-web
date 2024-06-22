@@ -10,7 +10,7 @@ export const adminApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: productionUrl,
   }),
-  tagTypes: ["Events","News","Gallery","Awards"],
+  tagTypes: ["Events","News","Gallery","Awards","Enrollments"],
   endpoints: (builder) => ({
     events: builder.query({
       query: () => ({
@@ -249,6 +249,17 @@ getSingleAward:builder.query({
 
   })
 }),
+enrollments: builder.query({
+  query: () => ({
+    url:`enrollments`,
+    method: "GET",
+    credentials:"include"
+    
+  }),
+
+  providesTags:["Enrollments"]
+
+}),
 
 
 
@@ -278,6 +289,7 @@ useGetAllAwardsQuery,
 useDeleteAwardMutation,
 useUpdateAwardMutation,
 useGetSingleAwardQuery,
-usePostAwardMutation
+usePostAwardMutation,
+useEnrollmentsQuery
 
 } = adminApi;

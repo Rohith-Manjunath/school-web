@@ -1,4 +1,5 @@
 const Awards = require("../models/AwardsSchema");
+const Enrollment = require("../models/EnrollmentSchema");
 const Events = require("../models/EventsSchema");
 const Gallery = require("../models/GalleryModel");
 const News = require("../models/NewsSchema");
@@ -673,5 +674,16 @@ exports.updateAward=catchAsyncError(async(req,res,next)=>{
         message:"Award updated successfully"
     })
 
+
+})
+
+exports.getAllHomeEnrollments=catchAsyncError(async(req,res,next)=>{
+
+    const enrollments=await Enrollment.find().sort({createdAt:-1})
+
+    res.status(200).json({
+        success:true,
+        data:enrollments
+    })
 
 })
