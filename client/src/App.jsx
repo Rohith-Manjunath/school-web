@@ -9,6 +9,13 @@ import { useAlert } from "react-alert";
 import PageLoader from "./components/layouts/PageLoader";
 import Profile from "./pages/Profile/Profile";
 import GalleryImagesPage from "./components/GalleryComponents/GalleryLayouts/GalleryImagesPage";
+import CommonLayout from "./components/AdminpanelComponents/CommonLayout";
+import AdminUsers from "./pages/AdminPanel/AdminUsers";
+import AdmissionQueriesAdmin from "./AdminPages/AdmissionQueriesAdmin";
+import HomeEnrollmentsAdmin from "./AdminPages/HomeEnrollmentsAdmin";
+import ParentsEnrollmentsAdmin from "./AdminPages/ParentsEnrollmentsAdmin";
+import AdminPayments from "./AdminPages/AdminPayments";
+import Statistics from "./AdminPages/Statistics";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Academics = React.lazy(() => import("./pages/Academics/Academics"));
@@ -63,9 +70,19 @@ const App = () => {
           <Route path="/Career" element={<JoinOurTeam />} />
           <Route path="/login" element={<Login />} />
             <Route path="/Register" element={<Register />} />
-          <Route element={<ProtectedRoute />}>
+         
+            <Route element={<ProtectedRoute />}>
             <Route path="/admin-login" element={<Login />} />
-            <Route path="/admin-panel" element={<AdminPanel />} />
+
+            <Route element={<CommonLayout />}>
+            <Route path="/admin-users" element={<AdminUsers />} />
+              <Route path="/admin-panel" element={<AdminPanel />} />
+              <Route path="/admission-queries" element={<AdmissionQueriesAdmin />} />
+              <Route path="/home-enrollments" element={<HomeEnrollmentsAdmin />} />
+              <Route path="/parents-enrollments" element={<ParentsEnrollmentsAdmin />} />
+              <Route path="/admin-payments" element={<AdminPayments />} />
+              <Route path="/admin-statistics" element={<Statistics />} />
+            </Route>
           </Route>
           <Route path="/TransportPage" element={<TransportPage />} />
           <Route path="/ComputerPage" element={<ComputerPage />} />
