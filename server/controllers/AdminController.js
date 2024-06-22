@@ -687,3 +687,40 @@ exports.getAllHomeEnrollments=catchAsyncError(async(req,res,next)=>{
     })
 
 })
+
+exports.getSingleHomeEnrollment=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+
+   const enrollment=await Enrollment.findById(id)
+
+   if(!enrollment){
+    return next(new ErrorHandler("Enrollment not found",404));
+   }
+
+    res.status(200).json({
+        success:true,
+        data:enrollment
+    })
+
+})
+exports.deleteHomeEnrollment=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+
+   const enrollment=await Enrollment.findById(id)
+
+   if(!enrollment){
+    return next(new ErrorHandler("Enrollment not found",404));
+   }
+
+   await Enrollment.deleteOne({_id:id})
+
+    res.status(200).json({
+        success:true,
+        message:"Enrollment data deleted successfully"
+    })
+
+})
