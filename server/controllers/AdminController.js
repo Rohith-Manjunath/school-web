@@ -115,7 +115,7 @@ exports.getAllEvents=catchAsyncError(async(req,res,next)=>{
 
 exports.getAllUsers=catchAsyncError(async(req,res,next)=>{
 
-    const users=await User.find();
+    const users=await User.find().sort({createdAt:-1});
     const totalUsers=await User.countDocuments()
 
 

@@ -10,7 +10,7 @@ export const adminApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: devUrl,
   }),
-  tagTypes: ["Events","News","Gallery","Awards","Enrollments","ParentsEnrollments"],
+  tagTypes: ["Events","News","Gallery","Awards","Enrollments","ParentsEnrollments","Users"],
   endpoints: (builder) => ({
     events: builder.query({
       query: () => ({
@@ -294,6 +294,29 @@ deleteParentsEnrollment: builder.mutation({
 
 }),
 
+users: builder.query({
+  query: () => ({
+    url:`users`,
+    method: "GET",
+    credentials:"include"
+    
+  }),
+
+  providesTags:["Users"]
+
+}),
+
+deleteUser: builder.mutation({
+  query: (id) => ({
+    url:`user/${id}`,
+    method: "DELETE",
+    credentials:"include",
+  }),
+
+  invalidatesTags:["Users"]
+
+}),
+
 
 
   }),
@@ -326,6 +349,8 @@ usePostAwardMutation,
 useEnrollmentsQuery,
 useDeleteEnrollmentMutation,
 useDeleteParentsEnrollmentMutation,
-useParentsEnrollmentsQuery
+useParentsEnrollmentsQuery,
+useUsersQuery,
+useDeleteUserMutation
 
 } = adminApi;

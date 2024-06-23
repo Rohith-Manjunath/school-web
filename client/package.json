@@ -19,6 +19,8 @@
     "@mui/material": "^5.15.12",
     "@mui/styled-engine-sc": "^6.0.0-alpha.17",
     "@reduxjs/toolkit": "^2.2.1",
+    "ag-grid-community": "^31.3.2",
+    "ag-grid-react": "^31.3.2",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "flowbite-react": "^0.7.2",
