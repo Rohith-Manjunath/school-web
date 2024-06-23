@@ -228,10 +228,10 @@ const WelcomeToMIS = () => {
               required
             >
               <option value="">Select category</option>
-              <option value="1">Pre-Primary-School</option>
-              <option value="2">Primary-School</option>
-              <option value="3">Middle-School</option>
-              <option value="4">High-School</option>
+              <option value="Pre-Primary-School">Pre-Primary-School</option>
+              <option value="Primary-School">Primary-School</option>
+              <option value="Middle-School">Middle-School</option>
+              <option value="High-School">High-School</option>
             </select>
           </div>
           <div className="flex flex-col gap-2 col-span-2">

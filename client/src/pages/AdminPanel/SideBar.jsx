@@ -52,7 +52,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function AdminPanel() {
+export default function SideBar() {
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [queriesOpen, setQueriesOpen] = React.useState(false);

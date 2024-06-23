@@ -261,6 +261,17 @@ enrollments: builder.query({
 
 }),
 
+deleteEnrollment: builder.mutation({
+  query: (id) => ({
+    url:`enrollment/${id}`,
+    method: "DELETE",
+    credentials:"include",
+  }),
+
+  invalidatesTags:["Enrollments"]
+
+}),
+
 
 
   }),
@@ -290,6 +301,7 @@ useDeleteAwardMutation,
 useUpdateAwardMutation,
 useGetSingleAwardQuery,
 usePostAwardMutation,
-useEnrollmentsQuery
+useEnrollmentsQuery,
+useDeleteEnrollmentMutation
 
 } = adminApi;

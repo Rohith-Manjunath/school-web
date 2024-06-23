@@ -1,21 +1,17 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import ScrollToTop from "./components/layouts/Common/ScrollToTop";
-import { useLoadUserQuery, useLogoutMutation } from "../Redux/authApi";
-import { LogoutUser, setUser } from "../Redux/UserSlice";
-import { useDispatch } from "react-redux";
-import { useAlert } from "react-alert";
 import PageLoader from "./components/layouts/PageLoader";
 import Profile from "./pages/Profile/Profile";
 import GalleryImagesPage from "./components/GalleryComponents/GalleryLayouts/GalleryImagesPage";
-import CommonLayout from "./components/AdminpanelComponents/CommonLayout";
 import AdminUsers from "./pages/AdminPanel/AdminUsers";
 import AdmissionQueriesAdmin from "./AdminPages/AdmissionQueriesAdmin";
 import HomeEnrollmentsAdmin from "./AdminPages/HomeEnrollmentsAdmin";
 import ParentsEnrollmentsAdmin from "./AdminPages/ParentsEnrollmentsAdmin";
 import AdminPayments from "./AdminPages/AdminPayments";
 import Statistics from "./AdminPages/Statistics";
+import CommonLayout from "./components/AdminpanelComponents/AdminLayouts/CommonLayout";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Academics = React.lazy(() => import("./pages/Academics/Academics"));
