@@ -8,9 +8,9 @@ export const adminApi = createApi({
 
   reducerPath: "admin",
   baseQuery: fetchBaseQuery({
-    baseUrl: productionUrl,
+    baseUrl: devUrl,
   }),
-  tagTypes: ["Events","News","Gallery","Awards","Enrollments"],
+  tagTypes: ["Events","News","Gallery","Awards","Enrollments","ParentsEnrollments"],
   endpoints: (builder) => ({
     events: builder.query({
       query: () => ({
@@ -271,6 +271,28 @@ deleteEnrollment: builder.mutation({
   invalidatesTags:["Enrollments"]
 
 }),
+parentsEnrollments: builder.query({
+  query: () => ({
+    url:`ParentsEnrollments`,
+    method: "GET",
+    credentials:"include"
+    
+  }),
+
+  providesTags:["ParentsEnrollments"]
+
+}),
+
+deleteParentsEnrollment: builder.mutation({
+  query: (id) => ({
+    url:`ParentsEnrollment/${id}`,
+    method: "DELETE",
+    credentials:"include",
+  }),
+
+  invalidatesTags:["ParentsEnrollments"]
+
+}),
 
 
 
@@ -302,6 +324,8 @@ useUpdateAwardMutation,
 useGetSingleAwardQuery,
 usePostAwardMutation,
 useEnrollmentsQuery,
-useDeleteEnrollmentMutation
+useDeleteEnrollmentMutation,
+useDeleteParentsEnrollmentMutation,
+useParentsEnrollmentsQuery
 
 } = adminApi;

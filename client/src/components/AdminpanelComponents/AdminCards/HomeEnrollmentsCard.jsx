@@ -1,9 +1,8 @@
 import React from 'react';
 import { FaBirthdayCake, FaPhone, FaMapMarkerAlt, FaIdCard, FaTrashAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
-const HomeEnrollmentsCard = ({ user , handleOpen}) => {
-
-  
+const HomeEnrollmentsCard = ({ user, index, handleOpen }) => {
   const getInitials = (name) => {
     return name
       ?.split(' ')
@@ -12,17 +11,21 @@ const HomeEnrollmentsCard = ({ user , handleOpen}) => {
       .toUpperCase();
   };
 
-  
-
   return (
-    <div className="relative hover:cursor-pointer bg-gradient-to-br from-white to-gray-100 shadow-lg rounded-xl p-4 sm:p-6 m-2 sm:m-4 w-full max-w-sm mx-auto hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-      
-        <FaTrashAlt         className="w-10 h-10 absolute top-2 right-2 p-2 text-red-500 hover:text-red-700 hover:scale-105 transition-all hover:cursor-pointer duration-200"
- onClick={(e) => {
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="relative hover:cursor-pointer bg-gradient-to-br from-white to-gray-100 shadow-lg rounded-xl p-4 sm:p-6 m-2 sm:m-4 w-full max-w-sm mx-auto hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+    >
+      <FaTrashAlt
+        className="w-10 h-10 absolute top-2 right-2 p-2 text-red-500 hover:text-red-700 hover:scale-105 transition-all hover:cursor-pointer duration-200"
+        onClick={(e) => {
           e.stopPropagation();
           handleOpen(user?._id);
-        }}  />
- 
+        }}
+      />
+
       <div className="text-center mb-4 sm:mb-6">
         <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full flex items-center justify-center mb-3 sm:mb-4 shadow-md">
           <span className="text-2xl sm:text-3xl font-bold text-white">
@@ -39,7 +42,7 @@ const HomeEnrollmentsCard = ({ user , handleOpen}) => {
         <InfoItem icon={<FaPhone className="text-yellow-500" />} label="Alt Phone" value={user?.altPhone} />
         <InfoItem icon={<FaMapMarkerAlt className="text-indigo-500" />} label="Address" value={user?.address} />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

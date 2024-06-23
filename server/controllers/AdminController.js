@@ -3,6 +3,7 @@ const Enrollment = require("../models/EnrollmentSchema");
 const Events = require("../models/EventsSchema");
 const Gallery = require("../models/GalleryModel");
 const News = require("../models/NewsSchema");
+const ParentsEnrollment = require("../models/ParentsEnrollment");
 const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
@@ -717,6 +718,37 @@ exports.deleteHomeEnrollment=catchAsyncError(async(req,res,next)=>{
    }
 
    await Enrollment.deleteOne({_id:id})
+
+    res.status(200).json({
+        success:true,
+        message:"Enrollment data deleted successfully"
+    })
+
+})
+
+exports.getAllParentsEnrollments=catchAsyncError(async(req,res,next)=>{
+
+    const enrollments=await ParentsEnrollment.find().sort({createdAt:-1})
+
+    res.status(200).json({
+        success:true,
+        data:enrollments
+    })
+
+})
+
+exports.deleteParentsEnrollment=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+
+   const enrollment=await ParentsEnrollment.findById(id)
+
+   if(!enrollment){
+    return next(new ErrorHandler("Enrollment not found",404));
+   }
+
+   await ParentsEnrollment.deleteOne({_id:id})
 
     res.status(200).json({
         success:true,

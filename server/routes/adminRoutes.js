@@ -1,5 +1,5 @@
 const express=require("express")
-const { postEvent, deleteEvent, getAllEvents, getUserDetails, updateUser, getAllUsers, deleteUser, updateEvent, getSingleEvent, getAllAdmissionQueries, postNews, getAllNews, deleteNews, getSingleNews, updateNews, uploadGalleryImages, deleteGallery, updateGallery, getAllGallery, getSingleGalleryContent, getAllAwards, deleteAward, updateAward, getSingleAward, postAward, getAllHomeEnrollments, getSingleHomeEnrollment, deleteHomeEnrollment } = require("../controllers/AdminController")
+const { postEvent, deleteEvent, getAllEvents, getUserDetails, updateUser, getAllUsers, deleteUser, updateEvent, getSingleEvent, getAllAdmissionQueries, postNews, getAllNews, deleteNews, getSingleNews, updateNews, uploadGalleryImages, deleteGallery, updateGallery, getAllGallery, getSingleGalleryContent, getAllAwards, deleteAward, updateAward, getSingleAward, postAward, getAllHomeEnrollments, getSingleHomeEnrollment, deleteHomeEnrollment, getAllParentsEnrollments, deleteParentsEnrollment } = require("../controllers/AdminController")
 const { isAuthenticatedUser, isAdmin } = require("../middlewares/isAuthenticated")
 const router=express.Router()
 
@@ -20,5 +20,7 @@ router.route("/awards/:id").delete(isAuthenticatedUser,isAdmin, deleteAward).put
 router.route("/awards/addAward").post(isAuthenticatedUser,isAdmin, postAward)
 router.route("/enrollments").get(isAuthenticatedUser,isAdmin, getAllHomeEnrollments)
 router.route("/enrollment/:id").get(isAuthenticatedUser,isAdmin, getSingleHomeEnrollment).delete(isAuthenticatedUser,isAdmin,deleteHomeEnrollment)
+router.route("/ParentsEnrollments").get(isAuthenticatedUser,isAdmin, getAllParentsEnrollments)
+router.route("/ParentsEnrollment/:id").delete(isAuthenticatedUser,isAdmin, deleteParentsEnrollment)
 
 module.exports = router
