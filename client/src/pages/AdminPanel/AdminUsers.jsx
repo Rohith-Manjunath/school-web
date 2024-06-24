@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useDeleteUserMutation, useUsersQuery } from "../../../Redux/adminAuth";
+import { useDeleteUserMutation, useUdpateUserRoleMutation, useUsersQuery } from "../../../Redux/adminAuth";
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
@@ -8,12 +8,16 @@ import styled from 'styled-components';
 import HomeEnrollmentDeleteModal from '../../components/AdminpanelComponents/AdminModals/DeleteModalCommon';
 import { Spinner } from 'flowbite-react';
 import { useAlert } from 'react-alert';
+import Modal from 'react-modal'
+import { IoMdClose } from 'react-icons/io';
+import { Select, MenuItem, FormControl, InputLabel, Button } from '@mui/material';
+
 
 const StyledGridContainer = styled.div`
   .ag-theme-material {
     --ag-header-height: 70px;
     --ag-header-foreground-color: #ffffff;
-    --ag-header-background-color: #4a148c;
+    --ag-header-background-color: #580B57;
     --ag-row-hover-color: #f3e5f5;
     --ag-selected-row-background-color: #e1bee7;
     --ag-odd-row-background-color: #fafafa;
@@ -106,15 +110,41 @@ const AdminUsers = () => {
   const { data, isLoading } = useUsersQuery();
 
   const [deleteUser, { isLoading: deleteLoading }] = useDeleteUserMutation();
+  const [updateUser, { isLoading: updateLoading }] = useUdpateUserRoleMutation();
   const [open, setOpen] = useState(false);
   const alert = useAlert();
   const [id, setId] = useState(null);
+  const [isEditModalOpen,setIsEditModalOpen]=useState(false)
+  const [isAdmin, setIsAdmin] = useState('');
+
+  const handleChange = (event) => {
+    setIsAdmin(event.target.value);
+  };
+
+  const handleOpenUpdateModal=(id)=>{
+
+    setId(id)
+    setIsEditModalOpen(true)
+
+  }
 
   const handleDelete = async (id) => {
     try {
       const data = await deleteUser(id).unwrap();
       alert.success(data?.message);
       setOpen(false);
+      return;
+    } catch (e) {
+      alert.error(e?.data?.err);
+      return;
+    }
+  };
+
+  const handleUpdateUser = async (id) => {
+    try {
+      const data = await updateUser({isAdmin,userId:id}).unwrap();
+      alert.success(data?.message);
+      setIsEditModalOpen(false);
       return;
     } catch (e) {
       alert.error(e?.data?.err);
@@ -161,6 +191,7 @@ const AdminUsers = () => {
           <button 
             className="action-button edit-button"
             title="Edit user"
+            onClick={()=>handleOpenUpdateModal(params?.data?._id)}
           >
             <FaEdit size={20} />
           </button>
@@ -196,8 +227,8 @@ const AdminUsers = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
-        <Spinner size="xl" color="purple" />
+      <div className="flex items-center justify-center h-screen bg-gradient-to-r from-blue-500 to-teal-400">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-white"></div>
       </div>
     );
   }
@@ -228,6 +259,106 @@ const AdminUsers = () => {
         id={id} 
         open={open}
       />
+
+
+
+<Modal
+  isOpen={isEditModalOpen}
+  shouldCloseOnOverlayClick={true}
+  className=""
+  style={{
+    overlay: {
+      zIndex: 98,
+      backgroundColor: `rgba(0, 0, 0, 0.5)`,
+    },
+    content: {
+      width: '90%', // Adjust the width for small screens
+      maxWidth: '600px',
+      height: '50vh', // Set height to auto for responsiveness
+      margin: '0 auto',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent:'center',
+      flexDirection: 'column',
+      color: '#580B57',
+      overflowY: 'auto', // Enable vertical scrolling
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      borderRadius: '10px',
+      border: 'none',
+      outline: 'none',
+    },
+  }}
+>
+    <button
+    className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl"
+    onClick={() => setIsEditModalOpen(false)}
+  >
+    <IoMdClose />
+  </button>
+  <h2 className=" mb-5 md:mt-0 mt-[12rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px] tracking-wide ">
+     Update User
+  </h2>
+
+
+
+  <form
+      className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6 w-full"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleUpdateUser(id);
+      }}
+    >
+      <FormControl fullWidth className="col-span-2 ">
+      <InputLabel
+        sx={{
+          color: '#580B57', // Set the desired color
+          '&.Mui-focused': {
+            color: '#580B57', // Ensure the color remains the same when focused
+          },
+        }}
+        id="isAdmin-label"
+      >
+        Is Admin
+      </InputLabel>
+        <Select
+  labelId="isAdmin-label"
+  id="isAdmin"
+  value={isAdmin}
+  label="Is Admin"
+  onChange={handleChange}
+  sx={{
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#580B57',
+      borderWidth: '2px',
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#580B57',
+    },
+    '.MuiOutlinedInput-notchedOutline': {
+      borderColor: '#580B57',
+    },
+  }}
+>
+  <MenuItem value="true">True</MenuItem>
+  <MenuItem value="false">False</MenuItem>
+</Select>
+      </FormControl>
+
+      <div className="col-span-2 text-center">
+      <button
+      disabled={updateLoading}
+        type="submit"
+        className="w-full bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
+      >
+       {updateLoading ? "Updating...":"Update"}
+      </button>
+    </div>
+    </form>
+</Modal>
+
+
     </>
   );
 };

@@ -38,8 +38,8 @@ const HomeEnrollmentsAdmin = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
-        <Spinner size="xl" color="purple" />
+      <div className="flex items-center justify-center h-screen bg-gradient-to-r from-blue-500 to-teal-400">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-white"></div>
       </div>
     );
   }
@@ -64,7 +64,7 @@ const HomeEnrollmentsAdmin = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Parent Enrollments
+        Home Enrollments
       </motion.h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:grid-cols-3 w-full">
         {data?.data?.map((user) => (

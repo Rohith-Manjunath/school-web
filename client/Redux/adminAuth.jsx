@@ -8,9 +8,9 @@ export const adminApi = createApi({
 
   reducerPath: "admin",
   baseQuery: fetchBaseQuery({
-    baseUrl: devUrl,
+    baseUrl: productionUrl,
   }),
-  tagTypes: ["Events","News","Gallery","Awards","Enrollments","ParentsEnrollments","Users"],
+  tagTypes: ["Events","News","Gallery","Awards","Enrollments","ParentsEnrollments","Users","AdmissionQueries"],
   endpoints: (builder) => ({
     events: builder.query({
       query: () => ({
@@ -316,6 +316,40 @@ deleteUser: builder.mutation({
   invalidatesTags:["Users"]
 
 }),
+udpateUserRole: builder.mutation({
+  query: ({isAdmin,userId}) => ({
+    url:`user/${userId}`,
+    method: "PUT",
+    credentials:"include",
+    body:{isAdmin}
+  }),
+
+  invalidatesTags:["Users"]
+
+}),
+
+admissionQueries: builder.query({
+  query: () => ({
+    url:`queries`,
+    method: "GET",
+    credentials:"include"
+    
+  }),
+
+  providesTags:["AdmissionQueries"]
+
+}),
+
+deleteAdmissionQuery: builder.mutation({
+  query: (id) => ({
+    url:`query/${id}`,
+    method: "DELETE",
+    credentials:"include",
+  }),
+
+  invalidatesTags:["AdmissionQueries"]
+
+}),
 
 
 
@@ -351,6 +385,9 @@ useDeleteEnrollmentMutation,
 useDeleteParentsEnrollmentMutation,
 useParentsEnrollmentsQuery,
 useUsersQuery,
-useDeleteUserMutation
+useDeleteUserMutation,
+useAdmissionQueriesQuery,
+useDeleteAdmissionQueryMutation,
+useUdpateUserRoleMutation
 
 } = adminApi;

@@ -1,3 +1,4 @@
+const AdmissionQuery = require("../models/AdmissionEnquiry");
 const Awards = require("../models/AwardsSchema");
 const Enrollment = require("../models/EnrollmentSchema");
 const Events = require("../models/EventsSchema");
@@ -204,7 +205,7 @@ exports.deleteUser=catchAsyncError(async(req,res,next)=>{
 
 exports.getAllAdmissionQueries=catchAsyncError(async(req,res,next)=>{
 
-    const queries=await AdmissionQuery.find();
+    const queries=await AdmissionQuery.find().sort({createdAt:-1});
     const totalQueries=await AdmissionQuery.countDocuments()
     res.status(200).json({
         success:true,
@@ -214,6 +215,29 @@ exports.getAllAdmissionQueries=catchAsyncError(async(req,res,next)=>{
 
 
 })
+
+
+exports.deleteAdmissionQuery=catchAsyncError(async(req,res,next)=>{
+
+    const {id}=req.params;
+
+
+   const query=await AdmissionQuery.findById(id)
+
+   if(!query){
+    return next(new ErrorHandler("Query not found",404));
+   }
+
+   await AdmissionQuery.deleteOne({_id:id})
+
+    res.status(200).json({
+        success:true,
+        message:"Query data deleted successfully"
+    })
+
+})
+
+
 
 exports.postNews=catchAsyncError(async(req,res,next)=>{
 
