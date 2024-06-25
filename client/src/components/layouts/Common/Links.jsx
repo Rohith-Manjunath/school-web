@@ -12,7 +12,7 @@ const Links = () => {
   };
 
   return (
-    <div className="fixed mt-[4rem] right-0 z-50 bg-primary rounded-bl-xl max-w-max border-2 border-b-secondary shadow-lg shadow-secondary border-l-secondary md:mt-[3.5rem] ">
+    <div className="fixed mt-[0rem]  right-0 z-50 bg-primary rounded-bl-xl max-w-max border-2 border-b-secondary shadow-lg shadow-secondary border-l-secondary md:mt-[3.5rem] ">
       <div className="flex justify-end ml-4">
         <button
           className="px-2 py-1  md:px-4 md:y-2 text-sm md:text-lg text-secondary rounded hover:text-secondary hover:scale-110 hover:font-bold"
