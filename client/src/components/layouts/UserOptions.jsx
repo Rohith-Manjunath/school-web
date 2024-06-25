@@ -85,7 +85,7 @@ export default function UserOptions({ user }) {
         position: "fixed",
         top: "5.5rem",
         right: "1.5rem",
-        zIndex: 100,
+        zIndex: 2000,
         height: open ? "auto" : "2rem",
       }}
     >

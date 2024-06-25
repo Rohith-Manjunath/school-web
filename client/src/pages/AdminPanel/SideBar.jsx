@@ -20,8 +20,13 @@ import { FaUsers, FaMessage } from 'react-icons/fa6';
 import { ImUserCheck } from 'react-icons/im';
 import { BsFillCreditCard2FrontFill } from 'react-icons/bs';
 import { FiLogOut } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { VscGraph } from "react-icons/vsc";
+import { useLogoutMutation } from '../../../Redux/authApi';
+import { useDispatch } from 'react-redux';
+import { LogoutUser } from '../../../Redux/UserSlice';
+import { useAlert } from 'react-alert';
+import { Button } from '@mui/material';
 
 
 const drawerWidth = 320;
@@ -57,6 +62,30 @@ export default function SideBar() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [queriesOpen, setQueriesOpen] = React.useState(false);
   const [enrollmentsOpen, setEnrollmentsOpen] = React.useState(false);
+  const [logout,{isLoading:logoutLoading}]=useLogoutMutation()
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
+  const alert=useAlert()
+
+
+  
+  const logoutUser=async()=>{
+
+    try{
+
+      const data=await logout().unwrap();
+      alert.success(data?.message)
+      dispatch(LogoutUser())
+      navigate("/login")
+
+
+    }catch(e){
+      alert.error(e?.data?.err);
+      return;
+    }
+
+  }
+
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
@@ -187,7 +216,7 @@ export default function SideBar() {
         <Divider />
 
         <List component="div" disablePadding>
-          <ListItem button component={Link} to="/signout">
+          <ListItem button component={Button} onClick={logoutUser} >
             <ListItemIcon>
               <FiLogOut className="text-2xl" style={{ color: 'white' }} />
             </ListItemIcon>
