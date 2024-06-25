@@ -1,5 +1,11 @@
 # Mysore International School
 
+![Website Screenshot](./client/src/assets/Images/WebsiteImages/new%20(1).png)
+![Website Screenshot](./client/src/assets/Images/WebsiteImages/new%20(2).png)
+![Website Screenshot](./client/src/assets/Images/WebsiteImages/new%20(3).png)
+![Website Screenshot](./client/src/assets/Images/WebsiteImages/new%20(4).png)
+![Website Screenshot](./client/src/assets/Images/WebsiteImages/new%20(5).png)
+![Website Screenshot](./client/src/assets/Images/WebsiteImages/new%20(6).png)
 ![Website Screenshot](./client/src/assets/Images/WebsiteImages/Screenshot1.png)
 ![Website Screenshot](./client/src/assets/Images/WebsiteImages/Screenshot2.png)
 ![Website Screenshot](./client/src/assets/Images/WebsiteImages/Screenshot3.png)

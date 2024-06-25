@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SecretaryMessage = () => {
   return (
     <div className="bg-secondary py-12 pb-32">
@@ -14,7 +12,7 @@ const SecretaryMessage = () => {
         </div>
         <div className="mt-10 text-primary space-y-6">
           <p>
-            Our ambition at SAIS is to cultivate a learning environment where students come to school with enthusiasm and a thirst for knowledge. Education is a continuous and fascinating journey, not just a destination. Our primary objective is to provide a sound formation based on the principles of Indian culture—physically, mentally, and socially—to young minds.
+            Our ambition at MIS is to cultivate a learning environment where students come to school with enthusiasm and a thirst for knowledge. Education is a continuous and fascinating journey, not just a destination. Our primary objective is to provide a sound formation based on the principles of Indian culture—physically, mentally, and socially—to young minds.
           </p>
           <p>
             As a team, SAIS is dedicated to preparing students to pave their paths to success both in and beyond school. We are committed to transforming young learners into responsible citizens of the country and guiding them in fulfilling their dreams.
