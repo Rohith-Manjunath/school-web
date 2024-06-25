@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet-async";
 
 const Facilities = () => {
   return (
-    <div className="mt-20 sm:mt-0">
+    <div className="mt-[4rem] sm:mt-0">
     <Helmet>
   <title>Facilities | Mysore International School</title>
   <meta

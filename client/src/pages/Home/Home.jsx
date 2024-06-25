@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
 
-    <div className="mt-20">
+    <div className="mt-36">
       <WelcomeModal />
       <CarouselSlider />
       <WelcomeToMIS />

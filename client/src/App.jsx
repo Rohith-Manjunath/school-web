@@ -12,6 +12,7 @@ import ParentsEnrollmentsAdmin from "./AdminPages/ParentsEnrollmentsAdmin";
 import AdminPayments from "./AdminPages/AdminPayments";
 import Statistics from "./AdminPages/Statistics";
 import CommonLayout from "./components/AdminpanelComponents/AdminLayouts/CommonLayout";
+import FilesContainer from "./components/layouts/Common/FilesContainer";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Academics = React.lazy(() => import("./pages/Academics/Academics"));
@@ -96,6 +97,7 @@ const App = () => {
           <Route path="/Awards" element={<Awards />} />
           <Route path="/CBSEProg" element={<CBSEProg />} />
           <Route path="/EarlyProgram" element={<EarlyProgram />} />
+          <Route path="/FilesContainer" element={<FilesContainer />} />
           <Route path="/KnowMore" element={<KnowMore />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/paymentSuccess" element={<PaymentSuccess/>} />
