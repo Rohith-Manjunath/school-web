@@ -10,7 +10,7 @@ import pdf8 from '../../../assets/Files/bMIS_Almanac_2024-25.pdf';
 import pdf9 from '../../../assets/Files/cSMC.pdf';
 import pdf10 from '../../../assets/Files/dPTA.pdf';
 import pdf11 from '../../../assets/Files/ere-2024_merged.pdf';
-import pdf12 from '../../../assets/Files/8.Water.pdf';
+import pdf12 from '../../../assets/Files/8.water.pdf';
 import pdf13 from '../../../assets/Files/7.GetSelfCertificationMISPdf.pdf';
 
 
