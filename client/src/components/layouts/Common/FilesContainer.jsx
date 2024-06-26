@@ -10,6 +10,9 @@ import pdf8 from '../../../assets/Files/bMIS_Almanac_2024-25.pdf';
 import pdf9 from '../../../assets/Files/cSMC.pdf';
 import pdf10 from '../../../assets/Files/dPTA.pdf';
 import pdf11 from '../../../assets/Files/ere-2024_merged.pdf';
+import pdf12 from '../../../assets/Files/8.Water.pdf';
+import pdf13 from '../../../assets/Files/7.GetSelfCertificationMISPdf.pdf';
+
 
 const PDFCard = ({ title, pdfUrl }) => {
   return (
@@ -40,6 +43,8 @@ const FilesContainer = () => {
     { title: "SMC", pdfUrl: pdf9 },
     { title: "PTA", pdfUrl: pdf10 },
     { title: "Merger", pdfUrl: pdf11 },
+    { title: "Water", pdfUrl: pdf12 },
+    { title: "Self Certification", pdfUrl: pdf13 },
   ];
 
   return (
