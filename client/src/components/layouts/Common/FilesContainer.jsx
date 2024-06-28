@@ -5,13 +5,14 @@ import pdf3 from '../../../assets/Files/3NOC_MIS.pdf';
 import pdf4 from '../../../assets/Files/4RTE.pdf';
 import pdf5 from '../../../assets/Files/5building.pdf';
 import pdf6 from '../../../assets/Files/6Fire.pdf';
-import pdf7 from '../../../assets/Files/aFee_structure.pdf';
 import pdf8 from '../../../assets/Files/bMIS_Almanac_2024-25.pdf';
 import pdf9 from '../../../assets/Files/cSMC.pdf';
-import pdf10 from '../../../assets/Files/dPTA.pdf';
+import pdf10 from '../../../assets/Files/PTA1.pdf';
 import pdf11 from '../../../assets/Files/ere-2024_merged.pdf';
 import pdf12 from '../../../assets/Files/8.water.pdf';
 import pdf13 from '../../../assets/Files/7.GetSelfCertificationMISPdf.pdf';
+import pdf14 from '../../../assets/Files/Fees.pdf';
+
 
 
 const PDFCard = ({ title, pdfUrl }) => {
@@ -38,13 +39,13 @@ const FilesContainer = () => {
     { title: "RTE", pdfUrl: pdf4 },
     { title: "Building", pdfUrl: pdf5 },
     { title: "Fire", pdfUrl: pdf6 },
-    { title: "Fee Structure", pdfUrl: pdf7 },
     { title: "MIS Almanac", pdfUrl: pdf8 },
     { title: "SMC", pdfUrl: pdf9 },
     { title: "PTA", pdfUrl: pdf10 },
     { title: "Merger", pdfUrl: pdf11 },
     { title: "Water", pdfUrl: pdf12 },
     { title: "Self Certification", pdfUrl: pdf13 },
+    { title: "Fees", pdfUrl: pdf14 },
   ];
 
   return (
