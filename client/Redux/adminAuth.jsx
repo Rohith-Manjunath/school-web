@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const productionUrl="https://school-web-50fi.onrender.com/api/admin/"
+const productionUrl="https://school-web-wpxn.onrender.com/api/admin/"
 const devUrl="http://localhost:4000/api/admin/"
 
 export const adminApi = createApi({
@@ -10,7 +10,7 @@ export const adminApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: productionUrl,
   }),
-  tagTypes: ["Events","News","Gallery","Awards","Enrollments","ParentsEnrollments","Users","AdmissionQueries"],
+  tagTypes: ["Events","News","Gallery","Awards","Enrollments","ParentsEnrollments","Users","AdmissionQueries","Payments"],
   endpoints: (builder) => ({
     events: builder.query({
       query: () => ({
@@ -351,6 +351,17 @@ deleteAdmissionQuery: builder.mutation({
 
 }),
 
+getAllPayments:builder.query({
+  query: () => ({
+    url:`/Payments`,
+    method: "GET",
+    credentials:"include",
+  }),
+
+  providesTags:["Payments"]
+
+}),
+
 
 
   }),
@@ -388,6 +399,7 @@ useUsersQuery,
 useDeleteUserMutation,
 useAdmissionQueriesQuery,
 useDeleteAdmissionQueryMutation,
-useUdpateUserRoleMutation
+useUdpateUserRoleMutation,
+useGetAllPaymentsQuery
 
 } = adminApi;

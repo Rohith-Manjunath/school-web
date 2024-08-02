@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const productionUrl="https://school-web-50fi.onrender.com/api/"
+const productionUrl="https://school-web-wpxn.onrender.com/api/"
 const devUrl="http://localhost:4000/api/"
 
 

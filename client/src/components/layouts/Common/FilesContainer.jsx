@@ -1,4 +1,3 @@
-import React from 'react';
 import pdf1 from '../../../assets/Files/1MIS_Affiliation.pdf';
 import pdf2 from '../../../assets/Files/2Trust_Registration.pdf';
 import pdf3 from '../../../assets/Files/3NOC_MIS.pdf';
@@ -9,7 +8,7 @@ import pdf8 from '../../../assets/Files/bMIS_Almanac_2024-25.pdf';
 import pdf9 from '../../../assets/Files/cSMC.pdf';
 import pdf10 from '../../../assets/Files/PTA1.pdf';
 import pdf11 from '../../../assets/Files/ere-2024_merged.pdf';
-import pdf12 from '../../../assets/Files/8.water.pdf';
+import pdf12 from '../../../assets/Files/8.Water.pdf';
 import pdf13 from '../../../assets/Files/7.GetSelfCertificationMISPdf.pdf';
 import pdf14 from '../../../assets/Files/Fees.pdf';
 

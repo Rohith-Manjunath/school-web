@@ -5,6 +5,7 @@ const Events = require("../models/EventsSchema");
 const Gallery = require("../models/GalleryModel");
 const News = require("../models/NewsSchema");
 const ParentsEnrollment = require("../models/ParentsEnrollment");
+const Payment = require("../models/PaymentSchema");
 const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
@@ -777,6 +778,16 @@ exports.deleteParentsEnrollment=catchAsyncError(async(req,res,next)=>{
     res.status(200).json({
         success:true,
         message:"Enrollment data deleted successfully"
+    })
+
+})
+
+exports.getAllPaymentsInfo=catchAsyncError(async(req,res,next)=>{
+
+    const payments=(await Payment.find()).reverse()
+    res.status(200).json({
+        success:true,
+        data:payments
     })
 
 })
