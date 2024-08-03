@@ -1,109 +1,144 @@
-import React from 'react'
-import { IoMdClose } from 'react-icons/io'
-import Modal from 'react-modal'
+import React from 'react';
+import Modal from 'react-modal';
+import { X, Upload, Image } from 'lucide-react';
 
-
-const GalleryEditModal = ({isEditModalOpen,setIsEditModalOpen,setPreview,singleGallery,handleEditSubmit,galleryToUpdate,setGalleryToUpdate,handleImageUpload,preview,updateLoading}) => {
+const GalleryEditModal = ({
+  isEditModalOpen,
+  setIsEditModalOpen,
+  setPreview,
+  singleGallery,
+  handleEditSubmit,
+  galleryToUpdate,
+  setGalleryToUpdate,
+  handleImageUpload,
+  preview,
+  updateLoading
+}) => {
   return (
-      <Modal
+    <Modal
       isOpen={isEditModalOpen}
-      shouldCloseOnOverlayClick={true}
-      className=""
-      style={{
-        overlay: {
-          zIndex: 98,
-          backgroundColor: `rgba(0, 0, 0, 0.5)`,
-        },
-        content: {
-          width: '90%', // Adjust the width for small screens
-          maxWidth: '600px',
-          height: '50vh', // Set height to auto for responsiveness
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent:'center',
-          flexDirection: 'column',
-          color: '#580B57',
-          overflowY: 'auto', // Enable vertical scrolling
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          borderRadius: '10px',
-          border: 'none',
-          outline: 'none',
-        },
+      onRequestClose={() => {
+        setIsEditModalOpen(false);
+        setPreview(singleGallery?.content?.avatar);
       }}
+      className="fixed inset-0 flex items-center justify-center p-4 sm:p-0 mt-[120px]"
+      overlayClassName="fixed inset-0 bg-black bg-opacity-75"
     >
-        <button
-        className="absolute top-5 right-5 cursor-pointer font-semibold text-3xl"
-        onClick={() => {setIsEditModalOpen(false) ,     setPreview(singleGallery?.content?.avatar) }     }
-      >
-        <IoMdClose/>
-      </button>
-      <h2 className=" mb-5 md:mt-0 mt-[12rem] text-center font-semibold capitalize text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px] tracking-wide ">
-         Edit Event
-      </h2>
-  
-  
-  
-      <form
-        className="md:grid grid-cols-2 gap-6 space-y-5 md:space-y-0 px-6" onSubmit={handleEditSubmit}
-      >
-        <div className="flex flex-col gap-2">
-          <label className="text-black font-sans tracking-wide font-semibold" htmlFor="duration">
-            Duration
-          </label>
-          <input
-            className="rounded-md outline-none border-slate-400 font-serif tracking-wide uppercase text-fuchsia-950 md:text-base"
-            type="text"
-            name="title"
-            id='title'
-            placeholder="Ex : Something"
-            value={galleryToUpdate?.title}
-            onChange={(e)=>setGalleryToUpdate({...galleryToUpdate,title:e.target.value})}
-            
-          />
-        </div>
-  
-        <div className="flex flex-col gap-2">
-    <label className="text-black font-sans tracking-wide font-semibold" htmlFor="image">
-      Image
-    </label>
-    <input
-    className="rounded-md outline-none border-slate-400 font-sans tracking-wide uppercase text-fuchsia-950"
-    type="file"
-    accept="image/*"
-    name="image"
-    id="image"
-    onChange={(e) => {handleImageUpload(e)}}
-    multiple
-  />
-  </div>
-       
-  <div className='flex items-center justify-center gap-3 col-span-full'>
-    <span className='font-semibold tracking-wide : '>Preview : </span>
-    {
-      preview && preview.map((p) => (
-        <img key={p.id} src={p.url} alt="" className='w-12 h-12 border border-gray-400 rounded-md' />
-      ))
-    }
-  </div>
-  
-        <div className="col-span-2 text-center">
+      <div className="bg-white w-full max-w-md mx-auto rounded-lg shadow-lg overflow-hidden">
+        <div className="flex justify-between items-center p-4 bg-secondary">
+          <h2 className="text-xl font-bold text-white">Edit Event</h2>
           <button
-          disabled={updateLoading}
-            type="submit"
-            className="bg-ctcPrimary text-white px-4 py-2 rounded-full font-semibold tracking-wide transition-all ease-in-out duration-800"
+            onClick={() => {
+              setIsEditModalOpen(false);
+              setPreview(singleGallery?.content?.avatar);
+            }}
+            className="text-white hover:text-gray-200 transition-colors"
           >
-           {updateLoading ? "Updating...":"Update"}
+            <X size={24} />
           </button>
         </div>
-  
-  
-  
-      </form>
-    </Modal>
-  )
-}
 
-export default GalleryEditModal
+        <form onSubmit={handleEditSubmit} className="p-4 space-y-4 overflow-auto max-h-[75vh]">
+          <div>
+            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+              Duration
+            </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={galleryToUpdate?.title}
+              onChange={(e) => setGalleryToUpdate({ ...galleryToUpdate, title: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+              placeholder="Ex: Something"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
+              Image
+            </label>
+            <div className="mt-1 flex justify-center px-6 py-2 border-2 border-gray-300 border-dashed rounded-md">
+              <div className="space-y-1 text-center">
+                <Upload className="mx-auto h-12 w-12 text-gray-400" />
+                <div className="flex text-sm text-gray-600">
+                  <label
+                    htmlFor="image"
+                    className="relative cursor-pointer bg-white rounded-md font-medium text-teal-600 hover:text-teal-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal-500"
+                  >
+                    <span>Upload files</span>
+                    <input
+                      id="image"
+                      name="image"
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="sr-only"
+                      onChange={handleImageUpload}
+                    />
+                  </label>
+                  <p className="pl-1">or drag and drop</p>
+                </div>
+                <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+              </div>
+            </div>
+          </div>
+
+          {preview && preview.length > 0 && (
+            <div>
+              <h3 className="text-sm font-medium text-gray-700 mb-2">Preview</h3>
+              <div className="flex flex-wrap gap-2">
+                {preview.map((p) => (
+                  <img
+                    key={p.id}
+                    src={p.url}
+                    alt=""
+                    className="w-16 h-16 object-cover rounded-md border border-gray-300"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              disabled={updateLoading}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-ctcPrimary to bg-ctcPrimaryLight hover:bg-ctcPrimaryLight disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {updateLoading ? (
+                <>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Updating...
+                </>
+              ) : (
+                'Update'
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </Modal>
+  );
+};
+
+export default GalleryEditModal;

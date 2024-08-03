@@ -26,6 +26,7 @@
     "flowbite-react": "^0.7.2",
     "framer-motion": "^11.2.6",
     "googleapis": "^137.1.0",
+    "lucide-react": "^0.424.0",
     "razorpay": "^2.9.3",
     "react": "^18.2.0",
     "react-alert": "^7.0.3",
