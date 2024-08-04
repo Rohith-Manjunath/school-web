@@ -1,6 +1,6 @@
 import React from 'react';
-import HeroImage from '../../assets/Images/FacilitiesImages/Amenities/transport.jpg';
-import Spacious from '../../assets/Images/FacilitiesImages/Amenities/Classroom.jpg';
+import HeroImage from '../../assets/Images/FacilitiesImages/Amenities/New/lib1.jpg';
+import Spacious from '../../assets/Images/FacilitiesImages/Amenities/New/Classroom.jpg';
 import Learning from '../../assets/Images/FacilitiesImages/Amenities/HandsOn.jpg';
 import SmartClass from '../../assets/Images/FacilitiesImages/Amenities/SmartClass.jpg';
 import Environment from '../../assets/Images/FacilitiesImages/Amenities/Environment.jpg';
@@ -10,7 +10,7 @@ import Footer from "../../components/layouts/Footer";
 
 const Library = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col pt-11 md:pt-0">
       {/* Hero Section */}
       <div className="relative h-[330px] lg:h-[550px]">
         <img

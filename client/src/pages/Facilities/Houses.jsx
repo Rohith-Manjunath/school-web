@@ -8,7 +8,7 @@ import Footer from "../../components/layouts/Footer";
 
 const Houses = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col pt-11 md:pt-0">
       {/* Hero Section */}
       <div className="relative h-[330px] lg:h-[550px]">
         <img
