@@ -24,7 +24,7 @@ html {
   width: 100%;
   scroll-behavior: smooth;
   background-color: rgb(211, 211, 211);
-  max-width: 1800px; /* Adjust the value according to the laptop width */
+  max-width: 2100px; /* Adjust the value according to the laptop width */
   margin: 0 auto; /* Center align the content */
 }
 

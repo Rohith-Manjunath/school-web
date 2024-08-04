@@ -1,16 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import image1 from "../../assets/Images/FacilitiesImages/Amenities/transport.jpg";
-import image2 from "../../assets/Images/FacilitiesImages/Amenities/library.jpg";
+import image2 from "../../assets/Images/FacilitiesImages/Amenities/New/Library.jpg";
 import image3 from "../../assets/Images/FacilitiesImages/Amenities/SportsGround.jpg";
-import image4 from "../../assets/Images/FacilitiesImages/Amenities/chemistrylab.jpg";
+import image4 from "../../assets/Images/FacilitiesImages/Amenities/New/Chemistry.jpg";
 import image5 from "../../assets/Images/FacilitiesImages/Amenities/sportsarea.jpg";
 import image6 from "../../assets/Images/FacilitiesImages/Amenities/ComputerLab.jpg"
-import image7 from "../../assets/Images/FacilitiesImages/Amenities/Classroom.jpg";
+import image7 from "../../assets/Images/FacilitiesImages/Amenities/New/Classroom.jpg";
 import image8 from "../../assets/Images/FacilitiesImages/Amenities/security.jpg";
 import image9 from "../../assets/Images/FacilitiesImages/Amenities/music.jpg";
 import image10 from "../../assets/Images/FacilitiesImages/Amenities/art.jpg";
-import image11 from "../../assets/Images/FacilitiesImages/Amenities/math.jpg";
+import image11 from "../../assets/Images/FacilitiesImages/Amenities/New/Math.jpg";
 import image12 from "../../assets/Images/FacilitiesImages/Amenities/scouts.jpg";
 import { Link } from "react-router-dom";
 
