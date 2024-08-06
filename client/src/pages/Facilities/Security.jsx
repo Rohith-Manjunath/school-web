@@ -1,6 +1,6 @@
 import React from 'react';
 import HeroImage from '../../assets/Images/FacilitiesImages/Amenities/transport.jpg';
-import Spacious from '../../assets/Images/FacilitiesImages/Amenities/Classroom.jpg';
+import Spacious from '../../assets/Images/FacilitiesImages/Amenities/SmartClass.jpg';
 import Learning from '../../assets/Images/FacilitiesImages/Amenities/HandsOn.jpg';
 import SmartClass from '../../assets/Images/FacilitiesImages/Amenities/SmartClass.jpg';
 import Environment from '../../assets/Images/FacilitiesImages/Amenities/Environment.jpg';
