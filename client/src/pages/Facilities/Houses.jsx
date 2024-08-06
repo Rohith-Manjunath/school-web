@@ -86,17 +86,17 @@ const Houses = () => {
                 </p>
               </div>
             </li>
-            <li className="bg-green-400 rounded-lg shadow-lg overflow-hidden cursor-pointer">
+            <li className="bg-orange-500 rounded-lg shadow-lg overflow-hidden cursor-pointer">
               <img
                 src={GandhiEmblem}
                 alt="Gandhi Emblem"
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 md:p-6">
-                <h3 className="text-lg md:text-xl font-bold text-secondary mb-2">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-2">
                   Gandhi (Green House)
                 </h3>
-                <p className="text-secondary text-sm md:text-base">
+                <p className="text-white text-sm md:text-base">
                   The green emblem reflects growth and harmony. Green represents balance, development, and a commitment to nurturing the environment and each other.
                 </p>
               </div>
