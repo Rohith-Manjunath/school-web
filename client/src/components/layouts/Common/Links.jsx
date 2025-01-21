@@ -1,5 +1,5 @@
 import React from 'react';
-import cbse from '../../../assets/Files/MYSORE INTERNATIONAL SCHOOL.pdf';
+import cbse from '../../../assets/Files/Merged CBSE.pdf';
 import others from '../../../assets/Files/MIS Annual Calendar.pdf';
 
 const Links = () => {
