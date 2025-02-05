@@ -7,10 +7,6 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -28,71 +24,38 @@ import { LogoutUser } from '../../../Redux/UserSlice';
 import { useAlert } from 'react-alert';
 import { Button } from '@mui/material';
 
-
-const drawerWidth = 320;
+const drawerWidth = 200;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
+})(({ theme }) => ({
+  width: `calc(100% - ${drawerWidth}px)`,
+  marginLeft: `${drawerWidth}px`,
   transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
+    easing: theme.transitions.easing.easeOut,
+    duration: theme.transitions.duration.enteringScreen,
   }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
 }));
 
 export default function SideBar() {
   const theme = useTheme();
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [queriesOpen, setQueriesOpen] = React.useState(false);
   const [enrollmentsOpen, setEnrollmentsOpen] = React.useState(false);
-  const [logout,{isLoading:logoutLoading}]=useLogoutMutation()
-  const dispatch=useDispatch()
-  const navigate=useNavigate()
-  const alert=useAlert()
+  const [logout, { isLoading: logoutLoading }] = useLogoutMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const alert = useAlert();
 
-
-  
-  const logoutUser=async()=>{
-
-    try{
-
-      const data=await logout().unwrap();
-      alert.success(data?.message)
-      dispatch(LogoutUser())
-      navigate("/login")
-
-
-    }catch(e){
+  const logoutUser = async () => {
+    try {
+      const data = await logout().unwrap();
+      alert.success(data?.message);
+      dispatch(LogoutUser());
+      navigate("/login");
+    } catch (e) {
       alert.error(e?.data?.err);
       return;
     }
-
-  }
-
-
-  const handleDrawerOpen = () => {
-    setDrawerOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setDrawerOpen(false);
   };
 
   const handleQueriesClick = () => {
@@ -108,26 +71,13 @@ export default function SideBar() {
       <CssBaseline />
       <AppBar
         position="fixed"
-        open={drawerOpen}
         style={{
-          left: '0px',
-          top: '120px',
           backgroundColor: 'transparent',
           color: 'black',
           boxShadow: 'none',
         }}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(drawerOpen && { display: 'none' }) }}
-          >
-            <MenuIcon className='text-secondary' />
-          </IconButton>
-        </Toolbar>
+        <Toolbar />
       </AppBar>
       <Drawer
         sx={{
@@ -136,21 +86,14 @@ export default function SideBar() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            backgroundColor:"#580B57",
-            color:"white"
-
+            backgroundColor: "#580B57",
+            color: "white"
           },
         }}
-        variant="persistent"
+        variant="permanent"
         anchor="left"
-        open={drawerOpen}
+        open={true}
       >
-        <DrawerHeader>
-          <IconButton sx={{color:"white"}} onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
         <List component="nav">
           <ListItem button component={Link} to="/admin-users">
             <ListItemIcon>
@@ -203,27 +146,25 @@ export default function SideBar() {
               <ListItemText primary="Payments" />
             </ListItem>
           </List>
+          <Divider />
+          <List component="div" disablePadding>
+            <ListItem button component={Link} to="/admin-statistics">
+              <ListItemIcon>
+                <VscGraph className="text-2xl" style={{ color: 'white' }} />
+              </ListItemIcon>
+              <ListItemText primary="Statistics" />
+            </ListItem>
+          </List>
+          <Divider />
+          <List component="div" disablePadding>
+            <ListItem button component={Button} onClick={logoutUser}>
+              <ListItemIcon>
+                <FiLogOut className="text-2xl" style={{ color: 'white' }} />
+              </ListItemIcon>
+              <ListItemText primary="Sign Out" />
+            </ListItem>
+          </List>
         </List>
-        <Divider />
-        <List component="div" disablePadding>
-          <ListItem button component={Link} to="/admin-statistics">
-            <ListItemIcon>
-              <VscGraph className="text-2xl" style={{ color: 'white' }} />
-            </ListItemIcon>
-            <ListItemText primary="Statistics" />
-          </ListItem>
-        </List>
-        <Divider />
-
-        <List component="div" disablePadding>
-          <ListItem button component={Button} onClick={logoutUser} >
-            <ListItemIcon>
-              <FiLogOut className="text-2xl" style={{ color: 'white' }} />
-            </ListItemIcon>
-            <ListItemText primary="Sign Out" />
-          </ListItem>
-        </List>
-       
       </Drawer>
     </Box>
   );

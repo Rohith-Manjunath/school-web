@@ -4,74 +4,65 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 import styled from 'styled-components';
-import { FaCheckCircle } from 'react-icons/fa';
+import { CheckCircle } from 'lucide-react';
 
 const StyledGridContainer = styled.div`
   .ag-theme-material {
-    --ag-header-height: 70px;
-    --ag-header-foreground-color: #ffffff;
-    --ag-header-background-color: #4a0e4a;
-    --ag-row-hover-color: #f0e6f0;
-    --ag-selected-row-background-color: #e0c6e0;
-    --ag-odd-row-background-color: #fafafa;
-    --ag-even-row-background-color: #ffffff;
-    --ag-font-size: 16px;
-    --ag-font-family: 'Montserrat', sans-serif;
-    border-radius: 12px;
+    --ag-header-height: 60px;
+    --ag-header-foreground-color: #1f2937;
+    --ag-header-background-color: #f9fafb;
+    --ag-row-hover-color: #f3f4f6;
+    --ag-selected-row-background-color: #eff6ff;
+    --ag-odd-row-background-color: #ffffff;
+    --ag-even-row-background-color: #f9fafb;
+    --ag-font-size: 14px;
+    --ag-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   }
 
   .ag-header-cell {
     padding: 0 16px;
-    transition: color 0.3s ease;
-  }
-
-  .ag-header-cell:hover .ag-header-cell-text {
-    color: #8a2be2;
   }
 
   .ag-header-cell-label {
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    transition: color 0.3s ease;
+    font-weight: 600;
+    color: #1f2937;
+    letter-spacing: 0.025em;
   }
 
   .ag-cell {
     display: flex;
     align-items: center;
-    padding: 16px;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f3f4f6;
   }
 
   .ag-row {
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
 
   .ag-row-hover {
-    background-color: #f0e6f0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+    background-color: #f3f4f6;
+    transform: translateY(-1px);
   }
 
   .ag-paging-panel {
-    font-weight: 600;
-    color: #4a0e4a;
-    background-color: #f0e6f0;
-    border-top: 2px solid #4a0e4a;
+    font-weight: 500;
+    color: #4b5563;
+    background-color: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    padding: 12px;
   }
+`;
 
-  @media (max-width: 768px) {
-    .ag-theme-material {
-      --ag-header-height: 60px;
-      --ag-cell-horizontal-padding: 12px;
-      --ag-font-size: 14px;
-    }
-  }
+const CardContainer = styled.div`
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  padding: 24px;
+  margin: 24px;
 `;
 
 const AdminPayments = () => {
@@ -83,7 +74,7 @@ const AdminPayments = () => {
       headerName: 'Order ID', 
       flex: 1.5,
       cellRenderer: (params) => (
-        <div style={{ fontWeight: '600', color: '#4a0e4a' }}>{params?.value}</div>
+        <div style={{ fontWeight: '500', color: '#111827' }}>{params?.value}</div>
       )
     },
     { 
@@ -91,40 +82,47 @@ const AdminPayments = () => {
       headerName: 'Payment ID', 
       flex: 1.5,
       cellRenderer: (params) => (
-        <div style={{ color: '#555', fontStyle: 'italic' }}>{params?.value}</div>
+        <div style={{ color: '#4b5563', fontFamily: 'monospace' }}>{params?.value}</div>
       )
     },
-   { 
-  field: 'razorpay_signature', 
-  headerName: 'Signature', 
-  flex: 1.5,
-  cellRenderer: (params) => (
-    <div style={{ 
-      color: '#777', 
-      fontSize: '0.9em', 
-      whiteSpace: 'nowrap', 
-      overflow: 'hidden', 
-      textOverflow: 'ellipsis' 
-    }}>
-      {params?.value}
-    </div>
-  )
-}
-,
+    { 
+      field: 'razorpay_signature', 
+      headerName: 'Signature', 
+      flex: 1.5,
+      cellRenderer: (params) => (
+        <div style={{ 
+          color: '#6b7280', 
+          fontFamily: 'monospace',
+          fontSize: '0.875rem',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
+        }}>
+          {params?.value}
+        </div>
+      )
+    },
     {
       field: '_id',
       headerName: 'Transaction ID',
       flex: 1.5,
       cellRenderer: (params) => (
-        <div style={{ color: '#4a0e4a', fontWeight: '600' }}>{params?.value}</div>
+        <div style={{ color: '#4f46e5', fontWeight: '500' }}>{params?.value}</div>
       )
     },
     {
       headerName: 'Status',
       flex: 1,
       cellRenderer: () => (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <FaCheckCircle style={{ color: '#4caf50', fontSize: '24px' }} />
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          background: '#ecfdf5',
+          padding: '8px',
+          borderRadius: '50%'
+        }}>
+          <CheckCircle style={{ color: '#059669', width: '20px', height: '20px' }} />
         </div>
       )
     }
@@ -140,30 +138,36 @@ const AdminPayments = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gradient-to-r from-purple-500 to-pink-500">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-white"></div>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+        <div className="h-16 w-16 animate-spin rounded-full border-4 border-indigo-600 border-t-transparent" />
       </div>
     );
   }
 
   return (
-    <StyledGridContainer>
-      <div className="ag-theme-material" style={{ height: '650px', width: '100%', margin: '20px 0' }}>
-        <h2 className='font-semibold tracking-wide text-3xl text-center my-4 text-purple-800 uppercase'>Payment Transactions</h2>
-        <AgGridReact
-          columnDefs={columnDefs}
-          rowData={data?.data}
-          defaultColDef={defaultColDef}
-          pagination={true}
-          paginationPageSize={10}
-          animateRows={true}
-          domLayout="autoHeight"
-          rowHeight={70}
-          headerHeight={70}
-          rowClass={'custom-row'}
-        />
-      </div>
-    </StyledGridContainer>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-8">
+      <CardContainer>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
+          Payment Transactions
+        </h2>
+        <StyledGridContainer>
+          <div className="ag-theme-material" style={{ height: '650px', width: '100%' }}>
+            <AgGridReact
+              columnDefs={columnDefs}
+              rowData={data?.data}
+              defaultColDef={defaultColDef}
+              pagination={true}
+              paginationPageSize={10}
+              animateRows={true}
+              domLayout="autoHeight"
+              rowHeight={60}
+              headerHeight={60}
+              suppressCellFocus={true}
+            />
+          </div>
+        </StyledGridContainer>
+      </CardContainer>
+    </div>
   );
 };
 

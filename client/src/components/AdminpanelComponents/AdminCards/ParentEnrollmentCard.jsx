@@ -1,39 +1,58 @@
-import { FaComment, FaEnvelope, FaPhone, FaTrashAlt, FaUser, FaUserCircle } from "react-icons/fa";
+import React from 'react';
+import { 
+  FaUser, 
+  FaEnvelope, 
+  FaPhone, 
+  FaComment
+} from 'react-icons/fa';
 
-const ParentEnrollmentCard = ({ enrollment, index, onDelete,InfoItem,motion,handleOpenModal }) => (
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 relative"
-      >
-        <div className="p-6 space-y-6">
-          
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full p-2">
-                <FaUserCircle className="w-12 h-12 text-white" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800">{enrollment?.parentname}</h2>
-                <span className="text-sm font-medium text-indigo-500 bg-indigo-100 px-3 py-1 rounded-full">
-                  Parent
-                </span>
-              </div>
-            </div>
-            <button
-              onClick={()=>{handleOpenModal(enrollment?._id)}}
-              className="text-red-500 hover:text-red-700 transition-colors duration-200"
-            >
-              <FaTrashAlt className="w-5 h-5" />
-            </button>
-          </div>
-          <InfoItem icon={<FaUser />} label="Name" value={enrollment?.parentname} />
-          <InfoItem icon={<FaEnvelope />} label="Email" value={enrollment?.email} />
-          <InfoItem icon={<FaPhone />} label="Phone" value={enrollment?.phone} />
-          <InfoItem icon={<FaComment />} label="Message" value={enrollment?.message} />
-        </div>
-      </motion.div>
-    );
+const InfoItem = ({ icon, label, value }) => (
+  <div className="flex items-start space-y-1 mb-4">
+    <div className="text-[#4A0057] w-6 h-6 mt-1">
+      {icon}
+    </div>
+    <div className="ml-3 flex-1">
+      <p className="text-gray-500 text-sm">{label}</p>
+      <p className="text-gray-800 font-medium">{value}</p>
+    </div>
+  </div>
+);
 
-export default ParentEnrollmentCard
+const ParentEnrollmentCard = ({ enrollment, handleOpenModal }) => (
+  <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div className="space-y-2">
+      <InfoItem
+        icon={<FaUser />}
+        label="Name"
+        value={enrollment?.parentname}
+      />
+      
+      <InfoItem
+        icon={<FaEnvelope />}
+        label="Email"
+        value={enrollment?.email}
+      />
+      
+      <InfoItem
+        icon={<FaPhone />}
+        label="Phone"
+        value={enrollment?.phone}
+      />
+      
+      <InfoItem
+        icon={<FaComment />}
+        label="Message"
+        value={enrollment?.message}
+      />
+    </div>
+    
+    <button 
+      onClick={() => handleOpenModal(enrollment?._id)}
+      className="w-full mt-6 bg-[#4A0057] hover:bg-[#3A0044] text-white py-3 px-4 rounded-md transition-colors duration-200"
+    >
+      Delete Query
+    </button>
+  </div>
+);
+
+export default ParentEnrollmentCard;
