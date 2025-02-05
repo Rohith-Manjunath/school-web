@@ -1,39 +1,71 @@
-import { FaBirthdayCake, FaEnvelope, FaGraduationCap, FaMapMarkerAlt, FaPhone, FaSchool, FaTrashAlt, FaUser } from "react-icons/fa"
+import { FaUser, FaEnvelope, FaPhone, FaGraduationCap, FaCalendarAlt, FaBuilding, FaRegBuilding } from "react-icons/fa";
 
-const AdmissionQueriesCard = ({QueryItem,query,handleOpen}) => {
+const AdmissionQueriesCard = ({ QueryItem, query, handleOpen }) => {
+  console.log('querrry', query)
   return (
-      <div className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
-      <div className="bg-gradient-to-r from-blue-500 to-teal-400 p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <div className="bg-white text-blue-500 rounded-full p-3">
-              <FaUser className="text-xl" />
-            </div>
-            <h2 className="ml-3 text-xl font-semibold text-white">{`${query?.firstname} ${query?.lastname}`}</h2>
-          </div>
-          <div className="flex items-center">
-            <span className="text-sm text-white opacity-75 mr-4">{new Date(query?.createdAt).toLocaleDateString()}</span>
-            <button
-            onClick={()=>handleOpen(query?._id)}
-              className="text-white hover:text-red-500 transition-colors duration-200"
-              title="Delete query"
-            >
-              <FaTrashAlt />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="p-6">
-        <QueryItem icon={<FaEnvelope />} label="Email" value={query?.email} />
-        <QueryItem icon={<FaPhone />} label="Phone" value={query?.phone} />
-        <QueryItem icon={<FaPhone />} label="Alt Phone" value={query?.altPhone} />
-        <QueryItem icon={<FaBirthdayCake />} label="DOB" value={new Date(query?.dob).toLocaleDateString()} />
-        <QueryItem icon={<FaMapMarkerAlt />} label="Place" value={query?.place} />
-        <QueryItem icon={<FaSchool />} label="Previous School" value={query?.previousSchool} />
-        <QueryItem icon={<FaGraduationCap />} label="Class" value={query?.class} />
+    <div className="bg-white rounded-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 ease-in-out hover:-translate-y-1 p-6">
+      <div className="space-y-4">
+        <QueryItem 
+          icon={<FaUser className="text-secondary text-xl transform group-hover:scale-110 transition-transform duration-200" />}
+          label="Name"
+          value={query?.name || `${query?.firstname} ${query?.lastname}`}
+        />
+        
+        <QueryItem 
+          icon={<FaEnvelope className="text-secondary text-xl transform group-hover:scale-110 transition-transform duration-200" />}
+          label="Email"
+          value={query?.email}
+        />
+        
+        <QueryItem 
+          icon={<FaPhone className="text-secondary text-xl transform group-hover:scale-110 transition-transform duration-200" />}
+          label="Phone"
+          value={query?.phone}
+        />
+        
+        <QueryItem 
+          icon={<FaGraduationCap className="text-secondary text-xl transform group-hover:scale-110 transition-transform duration-200" />}
+          label="Class"
+          value={query?.class}
+        />
+
+        <QueryItem 
+          icon={<FaRegBuilding className="text-secondary text-xl transform group-hover:scale-110 transition-transform duration-200" />}
+          label="Place"
+          value={query?.place}
+        />
+
+        <QueryItem 
+          icon={<FaBuilding className="text-secondary text-xl transform group-hover:scale-110 transition-transform duration-200" />}
+          label="Previous"
+          value={query?.previousSchool}
+        />
+        
+        <QueryItem 
+          icon={<FaCalendarAlt className="text-secondary text-xl transform group-hover:scale-110 transition-transform duration-200" />}
+          label="Date"
+          value={new Date(query?.createdAt).toLocaleDateString()}
+        />
+
+        <button
+          onClick={() => handleOpen(query?._id)}
+          className="w-full mt-4 py-2 bg-secondary text-white rounded hover:bg-ctcPrimaryLight transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 text-center"
+        >
+          Delete Query
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AdmissionQueriesCard
+const QueryItem = ({ icon, label, value }) => (
+  <div className="flex items-center group">
+    <span className="mr-3">{icon}</span>
+    <div className="flex flex-col">
+      <span className="text-sm text-secondary font-medium">{label}</span>
+      <span className="text-gray-700">{value}</span>
+    </div>
+  </div>
+);
+
+export default AdmissionQueriesCard;

@@ -60,7 +60,7 @@ const ParentsEnrollmentsAdmin = () => {
   }
 
   return (
-    <div className="p-6 lg:p-12 bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen">
+    <div className="p-6 lg:p-12 bg-gradient-to-br min-h-screen">
       <motion.h1
         className="text-3xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600"
         initial={{ opacity: 0, y: -50 }}
@@ -69,7 +69,7 @@ const ParentsEnrollmentsAdmin = () => {
       >
         Parent Enrollments
       </motion.h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-10">
         {data?.data?.map((enrollment, index) => (
           <ParentEnrollmentCard
             key={enrollment?._id}

@@ -12,7 +12,7 @@ const AdmissionQueriesAdmin = () => {
   const [open, setOpen] = useState(false);
   const alert = useAlert();
   const [id, setId] = useState(null);
-
+  
   const handleDelete = async (id) => {
     try {
       const data = await deleteQuery(id).unwrap();
@@ -58,7 +58,7 @@ const AdmissionQueriesAdmin = () => {
 
   return (
   <>
-    <div className="bg-gradient-to-br from-blue-50 to-teal-50 min-h-screen">
+    <div className="bg-gradient-to-br  min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-16">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-teal-500">

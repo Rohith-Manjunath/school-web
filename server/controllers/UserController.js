@@ -9,7 +9,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
 const { jwtToken } = require("../utils/jwtToken");
 const cloudinary = require("cloudinary");
-const { sendEmail } = require("./sendEmail");
+const { sendEmail, sendMailOnSubmit } = require("./sendEmail");
 const crypto=require("crypto");
 const Gallery = require("../models/GalleryModel");
 
@@ -74,7 +74,7 @@ exports.logout=catchAsyncError(async(req,res,next)=>{
 
 exports.loginUser = catchAsyncError(async (req, res, next) => {
     const { password, email } = req.body;
-
+    
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
         return next(new ErrorHandler("User not found", 401));
@@ -243,8 +243,14 @@ exports.userQuery=catchAsyncError(async(req,res,next)=>{
     const {name,email,message}=req.body;
 
     
+    const messages = `new email related to the query `;
 
     await Query.create(req.body);
+    await sendMailOnSubmit({
+      formData:req.body,
+      subject:"New Query from School",
+      
+    })
     res.status(200).json({
         success:true,
         message:"Query submitted successfully"
@@ -256,9 +262,12 @@ exports.parentsEnroll=catchAsyncError(async(req,res,next)=>{
 
     const {parentname,email,message,phone}=req.body;
 
-    
 
     await ParentsEnrollment.create(req.body);
+    await sendMailOnSubmit({
+      formData:req.body,
+      subject:"New Enrollment from Parents",
+    })
     res.status(200).json({
         success:true,
         message:"Query submitted successfully"
@@ -271,12 +280,16 @@ exports.admissionEnquiry=catchAsyncError(async(req,res,next)=>{
     const {firstname,lastname,email,phone,altPhone,dob,Class,place,previousSchool}=req.body;
 
     const user = await AdmissionQuery.findOne({ email });
-
+  
     if (user) {
         return next(new ErrorHandler("We have already received information for this email", 400));
     }
 
     await AdmissionQuery.create(req.body)
+    await sendMailOnSubmit({
+      formData:req.body,
+      subject:"New Admission Enquiry from Parents",
+    })
     res.status(200).json({
         success:true,
         message:"Query submitted successfully",
@@ -287,7 +300,10 @@ exports.admissionEnquiry=catchAsyncError(async(req,res,next)=>{
 exports.scheduleVisit=catchAsyncError(async(req,res,next)=>{
 
     await ScheduleVisit.create(req.body)
-
+    await sendMailOnSubmit({
+      formData:req.body,
+      subject:"New Visit Schedule from Parents",
+    })
     res.status(201).json({
         success:true,
         message:"Your visit has been scheduled successfully",

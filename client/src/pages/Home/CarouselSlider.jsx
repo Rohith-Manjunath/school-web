@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import image1 from "../../assets/Images/HomeImages/CarouselImages/children_outing.jpg"
-import image2 from "../../assets/Images/HomeImages/CarouselImages/school1.jpg"
+
+import image2 from "../../assets/Images/HomeImages/CarouselImages/teachersImage.jpg"
 import image3 from "../../assets/Images/HomeImages/CarouselImages/school2.jpg"
 import image4 from "../../assets/Images/HomeImages/CarouselImages/children_kannada_rajostsava.jpg"
 import image5 from "../../assets/Images/HomeImages/CarouselImages/principle_and_children.jpg"

@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
+import UserOptions from './components/layouts/UserOptions'
 import ScrollToTop from "./components/layouts/Common/ScrollToTop";
 import PageLoader from "./components/layouts/PageLoader";
 import Profile from "./pages/Profile/Profile";
@@ -13,7 +14,7 @@ import AdminPayments from "./AdminPages/AdminPayments";
 import Statistics from "./AdminPages/Statistics";
 import CommonLayout from "./components/AdminpanelComponents/AdminLayouts/CommonLayout";
 import FilesContainer from "./components/layouts/Common/FilesContainer";
-
+import { useSelector } from "react-redux";
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Academics = React.lazy(() => import("./pages/Academics/Academics"));
 const Admissions = React.lazy(() => import("./pages/Admissions/Admissions"));
@@ -49,12 +50,38 @@ const ResetPassword = React.lazy(() => import("./pages/ResetPassword"));
 const ForgotPassword = React.lazy(() => import("./pages/ForgotPassword"));
 const NotFound = React.lazy(() => import("./components/NotFound"));
 
+const AppLayout = ({ children }) => {
+  const location = useLocation();
+  const { user } = useSelector(state => state?.user);
+  // List of admin routes where navbar shouldn't appear
+  const adminRoutes = [
+    '/admin-users',
+    '/admin-panel',
+    '/admission-queries',
+    '/home-enrollments',
+    '/parents-enrollments',
+    '/admin-payments',
+    '/admin-statistics',
+    '/admin-login'
+  ];
 
+  // Check if current path is an admin route
+  const isAdminRoute = adminRoutes.some(route => location.pathname === route);
+
+  return (
+    <>
+      {!isAdminRoute && <Navbar />}
+      {user && <UserOptions user={user} />}
+      <ScrollToTop />
+      {children}
+    </>
+  );
+};
 const App = () => {
 
   return (
     <Router>
-      <Navbar />
+      <AppLayout>
       <ScrollToTop />
       <Suspense fallback={<PageLoader/>}>
         <Routes>
@@ -108,6 +135,7 @@ const App = () => {
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </Suspense>
+      </AppLayout>
     </Router>
   );
 };

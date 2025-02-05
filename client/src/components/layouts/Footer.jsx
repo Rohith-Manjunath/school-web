@@ -33,6 +33,7 @@ const Footer = () => {
   const [isSecretKeyVisible,setIsSecretKeyVisible]=useState(false)
 
   const handleSubmit=(e)=>{
+    console.log('admin-login')
     e.preventDefault()
 
     if(secretKey.toLocaleLowerCase() === process.env.AdminSecretKey.toLocaleLowerCase()){
