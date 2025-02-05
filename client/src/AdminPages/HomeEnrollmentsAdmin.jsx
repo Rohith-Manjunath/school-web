@@ -66,7 +66,7 @@ const HomeEnrollmentsAdmin = () => {
       >
         Home Enrollments
       </motion.h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:grid-cols-3 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:grid-cols-3 w-full p-10">
         {data?.data?.map((user) => (
           <HomeEnrollmentsCard  key={user?._id} user={user} handleOpen={handleOpen} handleClose={handleClose} />
         ))}

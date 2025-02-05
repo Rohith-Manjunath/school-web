@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from '../../components/layouts/Slider';
 import LazyLoadImage from '../../components/layouts/Common/LazyLoader';
-import image1 from '../../assets/Images/Ourteamslide/ourteam3.jpg';
+import image1 from '../../assets/Images/Ourteamslide/ourteam2.jpg';
 import image2 from '../../assets/Images/Ourteamslide/ourteam3.jpg';
 import image4 from '../../assets/Images/Ourteamslide/image4.jpg';
 

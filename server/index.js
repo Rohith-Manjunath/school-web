@@ -27,7 +27,7 @@ const error = require("./middlewares/error");
 const { getAnalyticsData } = require('./controllers/AnalyticsService');
 
 dotenv.config({ path: "./config/config.env" });
-
+//vtiq ajsx vfzx uelg
 // Add middleware
 // Body parser middleware
 app.use(

@@ -1,62 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-
+import userIcon from '../../assets/Images/Others/PNG/user-icon.png'
 const testimonials = [
   {
     id: 1,
     name: 'Srikant',
     quote: 'Excellent.. Great management team, great facilities.. One of the best CBSE school in Mysore..',
     // company: 'Company A',
-    image: 'https://via.placeholder.com/150',
+    image: userIcon,
   },
   {
     id: 2,
     name: 'Harsha',
     quote: 'Children are given individual attention and excellent teaching faculty.',
     company: 'Company B',
-    image: 'https://via.placeholder.com/150',
+    image: userIcon,
   },
   {
     id: 3,
     name: 'B V Nagesh',
     quote: 'Infrastructure is good for school kids to learn with the latest technology. My LKG kid has 2 teachers teaching him in the class. Keep up the good work management.',
     company: 'Company C',
-    image: 'https://via.placeholder.com/150',
+    image: userIcon,
   },
   {
     id: 4,
     name: 'M R Nagaraj',
     quote: 'Focuses on academics and co-curricular activities. Good school..',
     company: 'Company B',
-    image: 'https://via.placeholder.com/150',
+    image: userIcon,
   },
   {
     id: 5,
     name: 'Sunil Rao',
     quote: 'Fantastic School, Great Campus, Great Teachers ..... We are extremely happy.',
     company: 'Company C',
-    image: 'https://via.placeholder.com/150',
+    image: userIcon,
   },
   {
     id: 6,
     name: 'Mrs. Shashi Rekha',
     quote: 'Good school with good teachers and children are taught well.',
     company: 'Company C',
-    image: 'https://via.placeholder.com/150',
+    image: userIcon,
   },
   {
     id: 7,
     name: 'Srinivasa',
     quote: 'Excellent school with good teaching staff and non-teaching staff.',
     company: 'Company B',
-    image: 'https://via.placeholder.com/150',
+    image: userIcon,
   },
   {
     id: 8,
     name: 'Chandu',
     quote: 'My daughter was studying in Chrisalis in Bangalore and we got transferred to Mysore I decided to take admission in Mount litera. Even Chrisalis does not have Smartclass but here they have Smart Class.',
     company: 'Company C',
-    image: 'https://via.placeholder.com/150',
+    image: userIcon,
   },
 ];
 
