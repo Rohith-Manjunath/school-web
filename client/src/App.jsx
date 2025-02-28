@@ -14,6 +14,7 @@ import AdminPayments from "./AdminPages/AdminPayments";
 import Statistics from "./AdminPages/Statistics";
 import CommonLayout from "./components/AdminpanelComponents/AdminLayouts/CommonLayout";
 import FilesContainer from "./components/layouts/Common/FilesContainer";
+import MarketingCampaigns from "./AdminPages/MarketingCampaigns"
 import { useSelector } from "react-redux";
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Academics = React.lazy(() => import("./pages/Academics/Academics"));
@@ -62,6 +63,7 @@ const AppLayout = ({ children }) => {
     '/parents-enrollments',
     '/admin-payments',
     '/admin-statistics',
+    '/admin-marketingCampaigns',
     '/admin-login'
   ];
 
@@ -106,6 +108,7 @@ const App = () => {
               <Route path="/parents-enrollments" element={<ParentsEnrollmentsAdmin />} />
               <Route path="/admin-payments" element={<AdminPayments />} />
               <Route path="/admin-statistics" element={<Statistics />} />
+              <Route path="/admin-marketingCampaigns" element={<MarketingCampaigns />} />
             </Route>
           </Route>
           <Route path="/TransportPage" element={<TransportPage />} />

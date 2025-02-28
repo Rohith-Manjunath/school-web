@@ -24,5 +24,5 @@ router.route("/enrollment/:id").get(isAuthenticatedUser,isAdmin, getSingleHomeEn
 router.route("/ParentsEnrollments").get(isAuthenticatedUser,isAdmin, getAllParentsEnrollments)
 router.route("/ParentsEnrollment/:id").delete(isAuthenticatedUser,isAdmin, deleteParentsEnrollment)
 router.route("/Payments").get(isAuthenticatedUser,isAdmin, getAllPaymentsInfo)
-
+router.route("/queries").get(isAuthenticatedUser,isAdmin, getAllAdmissionQueries)
 module.exports = router

@@ -10,6 +10,7 @@ const User = require("../models/UserSchema");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../utils/catchAsyncError");
 const cloudinary = require("cloudinary");
+const NewAdmissionEnquiry = require("../models/NewAdmissionEnquiry");
 
 
 exports.postEvent=catchAsyncError(async(req,res,next)=>{
@@ -791,3 +792,12 @@ exports.getAllPaymentsInfo=catchAsyncError(async(req,res,next)=>{
     })
 
 })
+
+exports.getAllAdmissionQueries = catchAsyncError(async (req, res, next) => {
+    const queries = await NewAdmissionEnquiry.find().sort({ createdAt: -1 });
+    console.log(queries);
+    res.status(200).json({
+      success: true,
+      data: queries,
+    });
+  });
