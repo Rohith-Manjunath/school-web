@@ -22,6 +22,7 @@ const Enrollment = require("./routes/Enrollment");
 const UserRoute = require("./routes/UserRoute");
 const AdminRoute = require("./routes/adminRoutes");
 const PaymentRoute = require("./routes/paymentRoute");
+const newAdmissionEnquiryRoutes = require("./routes/newAdmissionEnquiryRoutes");
 const { dbConnection } = require("./config/dbConnections");
 const error = require("./middlewares/error");
 const { getAnalyticsData } = require('./controllers/AnalyticsService');
@@ -48,6 +49,7 @@ app.use("/api", UserRoute);
 app.use("/api", Enrollment);
 app.use("/api/admin", AdminRoute);
 app.use("/api/payment", PaymentRoute);
+app.use("/api/new-admission-query",newAdmissionEnquiryRoutes);
 app.use(error);
 
 cloudinary.config({

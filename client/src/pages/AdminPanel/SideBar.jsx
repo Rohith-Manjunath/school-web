@@ -17,7 +17,7 @@ import { ImUserCheck } from 'react-icons/im';
 import { BsFillCreditCard2FrontFill } from 'react-icons/bs';
 import { FiLogOut } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
-import { VscGraph } from "react-icons/vsc";
+import { VscGraph,VscDashboard } from "react-icons/vsc";
 import { useLogoutMutation } from '../../../Redux/authApi';
 import { useDispatch } from 'react-redux';
 import { LogoutUser } from '../../../Redux/UserSlice';
@@ -153,6 +153,15 @@ export default function SideBar() {
                 <VscGraph className="text-2xl" style={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="Statistics" />
+            </ListItem>
+          </List>
+          <Divider />
+          <List component="div" disablePadding>
+            <ListItem button component={Link} to="/admin-marketingCampaigns">
+              <ListItemIcon>
+                <VscDashboard className="text-2xl" style={{ color: 'white' }} />
+              </ListItemIcon>
+              <ListItemText primary="Marketing Campaign" />
             </ListItem>
           </List>
           <Divider />
