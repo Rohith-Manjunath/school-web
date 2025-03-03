@@ -33,6 +33,10 @@ const NewAdmissionEnquiry = new mongoose.Schema({
     required:true,
     unique:true
 
+  },
+  childName:{
+    type:String,
+    required:true
   }
 }, { timestamps: true });
 

@@ -64,7 +64,7 @@ exports.sendMailOnSubmit = async (options)=>{
   }
 }
 exports.sendAdmissionQuery = async (parentDetails)=>{
-  const { parentName, email, phone, grade,referenceNumber } = parentDetails;
+  const { parentName, email, phone, grade,referenceNumber,childName } = parentDetails;
   const transporter  = nodemailer.createTransport ({
     host: process.env.SMTP,
     port: 587,
@@ -141,6 +141,7 @@ exports.sendAdmissionQuery = async (parentDetails)=>{
           <li><strong>Email:</strong> ${email}</li>
           <li><strong>Phone:</strong> ${phone}</li>
           <li><strong>Grade Applying For:</strong> ${grade}</li>
+          <li><strong>Children Name:</strong> ${childName}</li>
           <li><strong>Your reference number:</strong> ${referenceNumber}</li>
         </ul>
         
@@ -185,7 +186,7 @@ try {
 }
 }
 exports.notifyAdmissionsTeam = async (parentDetails)=>{
-  const { parentName, email, phone, grade,referenceNumber } = parentDetails;
+  const { parentName, email, phone, grade,referenceNumber ,childName} = parentDetails;
   const transporter  = nodemailer.createTransport ({
     host: process.env.SMTP,
     port: 587,
@@ -223,6 +224,10 @@ exports.notifyAdmissionsTeam = async (parentDetails)=>{
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Reference number</strong></td>
             <td style="padding: 8px; border: 1px solid #ddd;">${referenceNumber}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Child name</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${childName}</td>
           </tr>
           <tr style="background-color: #f2f2f2;">
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Submission Time</strong></td>

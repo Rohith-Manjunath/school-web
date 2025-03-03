@@ -4,7 +4,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const { sendAdmissionQuery, notifyAdmissionsTeam } = require("./sendEmail");
 
 exports.submitForm = catchAsyncError(async (req,res,next)=>{
-    const {parentName,email,phone,grade,referenceNumber} = req.body;
+    const {parentName,email,phone,grade,referenceNumber,childName} = req.body;
     const user = await NewAdmissionEnquiry.findOne({email});
     if(user){
         return next(new ErrorHandler("We've already your email we will later contact to you Thank You",400));
@@ -15,7 +15,8 @@ exports.submitForm = catchAsyncError(async (req,res,next)=>{
         email,
         phone,
         grade,
-        referenceNumber
+        referenceNumber,
+        childName
     }
     sendAdmissionQuery(parentDetails);
     notifyAdmissionsTeam(parentDetails);
