@@ -1,6 +1,6 @@
 // adminService.js
 const devUrl = "http://localhost:4000/api/admin/";
-const prodUrl = "https://school-web-wpxn.onrender.com/api/"
+const prodUrl = "https://school-web-wpxn.onrender.com/api/admin/"
 const adminService = {
   // Get all admission queries
   getLeads: async () => {
