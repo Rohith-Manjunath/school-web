@@ -1,32 +1,28 @@
 const nodemailer = require("nodemailer");
 
-
-
-exports.sendEmail = async (options) => {
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP,
-    port: 587,
-    service: process.env.SMTP_SERVICE, // Corrected typo in SMTP_SERVICE
-    auth: {
-      user: process.env.SMTP_EMAIL, // Corrected typo in SMTP_EMAIL
-      pass: process.env.SMTP_PASSWORD, // Corrected typo in SMTP_PASSWORD
-    },
-  });
-
-  const mailOptions = {
-    from: process.env.SMTP_EMAIL,
-    to: options.email,
-    subject: options.subject,
-    text: options.message,
-  };
-
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log(`Message sent successfully: ${info.messageId}`);
-  } catch (error) {
-    console.log(`Error sending message: ${error}`);
+// Direct email configuration object - no .env file needed
+const emailConfig = {
+  // Primary configuration - Hostinger SMTP
+  host: "smtp.hostinger.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "admissions@mysoreinternationalschool.com",
+    pass: "Mis@mys984",
+  },
+  // You can add a backup configuration if the primary fails
+  backupService: null, // Set to 'gmail' if you want to use Gmail as backup
+  backupAuth: {
+    user: null, // Your backup email
+    pass: null  // Your backup password
   }
 };
+
+/**
+ * Generate formatted email content from form data
+ * @param {Object} data - Form data to format
+ * @returns {String} - Formatted email content
+ */
 const generateEmailContent = (data) => {
   // Convert data object to formatted string
   const formattedContent = Object.entries(data)
@@ -40,28 +36,73 @@ ${formattedContent}
 
 This is an automated message.`;
 };
-exports.sendMailOnSubmit = async (options)=>{
-  const teansporter  = nodemailer.createTransport ({
-    host: process.env.SMTP,
-    port: 587,
-    service: process.env.SMTP_SERVICE, // Corrected typo in SMTP_SERVICE
+
+/**
+ * Create a standardized transporter with proper configuration
+ * @returns {Object} - Nodemailer transporter
+ */
+const createTransporter = () => {
+  // Create and return the transporter with direct configuration
+  return nodemailer.createTransport({
+    host: emailConfig.host,
+    port: emailConfig.port,
+    secure: emailConfig.secure,
     auth: {
-      user: process.env.SMTP_EMAIL, // Corrected typo in SMTP_EMAIL
-      pass: process.env.SMTP_PASSWORD, // Corrected typo in SMTP_PASSWORD
+      user: emailConfig.auth.user,
+      pass: emailConfig.auth.pass,
     },
-  })
+  });
+};
+
+/**
+ * Generic email sending function
+ * @param {Object} options - Email options
+ * @returns {Promise} - Resolves with email info
+ */
+exports.sendEmail = async (options) => {
+  const transporter = createTransporter();
+
   const mailOptions = {
-    from: process.env.SMTP_EMAIL,
+    from: emailConfig.auth.user,
+    to: options.email,
+    subject: options.subject,
+    text: options.message,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`Message sent successfully: ${info.messageId}`);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error(`Error sending message:`, error);
+    return { success: false, error: error.message };
+  }
+};
+
+/**
+ * Send email on form submission
+ * @param {Object} options - Email options
+ * @returns {Promise} - Resolves with email info
+ */
+exports.sendMailOnSubmit = async (options) => {
+  const transporter = createTransporter(); // Fixed typo in variable name
+
+  const mailOptions = {
+    from: emailConfig.auth.user,
     to: 'principal@mysoreinternationalschool.com',
     subject: options.subject,
     text: generateEmailContent(options.formData),
   };
+
   try {
-    const info = await teansporter.sendMail(mailOptions);
-    console.log(`Message sent successfully on principal@mysoreinternationalschool.com: ${info.messageId}`);
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`Message sent successfully to principal@mysoreinternationalschool.com: ${info.messageId}`);
+    return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.log(`Error sending message: ${error}`);
+    console.error(`Error sending message:`, error);
+    return { success: false, error: error.message };
   }
+
 }
 exports.sendAdmissionQuery = async (parentDetails)=>{
   const { parentName, email, phone, grade,referenceNumber,childName } = parentDetails;
@@ -74,6 +115,19 @@ exports.sendAdmissionQuery = async (parentDetails)=>{
       pass: process.env.SMTP_PASSWORD, // Corrected typo in SMTP_PASSWORD
     },
   });
+=======
+};
+
+/**
+ * Send admission query confirmation to parent
+ * @param {Object} parentDetails - Parent details
+ * @returns {Promise} - Resolves with email info
+ */
+exports.sendAdmissionQuery = async (parentDetails) => {
+  const { parentName, email, phone, grade, referenceNumber } = parentDetails;
+  const transporter = createTransporter();
+
+
   const htmlContent = `
   <!DOCTYPE html>
   <html>
@@ -147,8 +201,6 @@ exports.sendAdmissionQuery = async (parentDetails)=>{
         
         <p>We're excited to connect with you and discuss how Mysore International School can provide an exceptional educational experience for your child.</p>
         
-        
-        
         <div class="contact-info">
           <p><strong>For any immediate inquiries, please contact us:</strong></p>
           <p>Phone: 0821 2971010 | +91 8884 300 400</p>
@@ -164,16 +216,27 @@ exports.sendAdmissionQuery = async (parentDetails)=>{
     </div>
   </body>
   </html>
-`;
+  `;
 
-// Email options
-const mailOptions = {
-  from: `"Mysore International School" <${process.env.SMTP_EMAIL}>`,
-  to: email,
-  subject: 'Thank You for Your Admission Inquiry - Mysore International School',
-  html: htmlContent,
-  
+  // Email options
+  const mailOptions = {
+    from: `"Mysore International School" <${emailConfig.auth.user}>`,
+    to: email,
+    subject: 'Thank You for Your Admission Inquiry - Mysore International School',
+    html: htmlContent,
+  };
+
+  try {
+    // Send email
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return { success: false, error: error.message };
+  }
 };
+
 
 try {
   // Send email
@@ -191,14 +254,45 @@ exports.notifyAdmissionsTeam = async (parentDetails)=>{
     host: process.env.SMTP,
     port: 587,
     service: process.env.SMTP_SERVICE, // Corrected typo in SMTP_SERVICE
+=======
+/**
+ * Notify admissions team about new inquiry
+ * @param {Object} parentDetails - Parent details
+ * @returns {Promise} - Resolves with email info
+ */
+exports.notifyAdmissionsTeam = async (parentDetails) => {
+  const { parentName, email, phone, grade, referenceNumber } = parentDetails;
+  
+  // Create a dedicated transporter specifically for admissions notifications
+  const transporter = nodemailer.createTransport({
+    host: emailConfig.host,
+    port: emailConfig.port,
+    secure: emailConfig.secure,
+
     auth: {
-      user: process.env.SMTP_EMAIL, // Corrected typo in SMTP_EMAIL
-      pass: process.env.SMTP_PASSWORD, // Corrected typo in SMTP_PASSWORD
+      user: emailConfig.auth.user,
+      pass: emailConfig.auth.pass,
     },
+    // These settings can help with debugging
+    debug: true, 
+    logger: true
   });
+
+  // Log connection attempt before sending
+  console.log("Attempting to connect to SMTP server for admissions notification...");
+  
+  // Verify connection before sending
+  try {
+    await transporter.verify();
+    console.log("SMTP connection verified successfully");
+  } catch (error) {
+    console.error("SMTP connection verification failed:", error);
+    return { success: false, error: error.message };
+  }
+
   const mailOptions = {
-    from: `"Admissions Portal" <${process.env.SMTP_EMAIL}>`,
-    to:  'vk8942422@gmail.com',
+    from: `"Admissions Portal" <${emailConfig.auth.user}>`,
+    to: 'vk8942422@gmail.com', // Change to desired recipient
     subject: 'New Admission Inquiry Received',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -242,10 +336,9 @@ exports.notifyAdmissionsTeam = async (parentDetails)=>{
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log('Notification email sent to admissions team:', info.messageId);
-    return { success: true };
+    return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error('Error sending notification to admissions team:', error);
-    // We don't throw here to prevent affecting the parent's experience
     return { success: false, error: error.message };
   }
-}
+};

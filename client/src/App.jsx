@@ -16,6 +16,7 @@ import CommonLayout from "./components/AdminpanelComponents/AdminLayouts/CommonL
 import FilesContainer from "./components/layouts/Common/FilesContainer";
 import MarketingCampaigns from "./AdminPages/MarketingCampaigns"
 import { useSelector } from "react-redux";
+import MarketingPage from "./pages/MarketingPage/MarketingPage";
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Academics = React.lazy(() => import("./pages/Academics/Academics"));
 const Admissions = React.lazy(() => import("./pages/Admissions/Admissions"));
@@ -45,6 +46,8 @@ const KnowMore = React.lazy(() => import("./pages/Home/KnowMore"));
 const JoinOurTeam = React.lazy(() => import("./pages/Ourteam/JoinOurTeam"));
 const Payment = React.lazy(() => import("./pages/Payment/Payment"));
 const PaymentSuccess = React.lazy(() => import("./pages/Payment/PaymentSuccess"));
+const ThankYou = React.lazy(() => import("./components/MarketingComponets/ThankYou"));
+
 
 const ProtectedRoute = React.lazy(() => import("./components/layouts/ProtectedRoute"));
 const ResetPassword = React.lazy(() => import("./pages/ResetPassword"));
@@ -95,6 +98,8 @@ const App = () => {
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/Career" element={<JoinOurTeam />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/Admissions-open-2025" element={<MarketingPage />} />
+        <Route path="/Thankyou" element={<ThankYou />} />
             <Route path="/Register" element={<Register />} />
          
             <Route element={<ProtectedRoute />}>
