@@ -102,6 +102,20 @@ exports.sendMailOnSubmit = async (options) => {
     console.error(`Error sending message:`, error);
     return { success: false, error: error.message };
   }
+
+}
+exports.sendAdmissionQuery = async (parentDetails)=>{
+  const { parentName, email, phone, grade,referenceNumber,childName } = parentDetails;
+  const transporter  = nodemailer.createTransport ({
+    host: process.env.SMTP,
+    port: 587,
+    service: process.env.SMTP_SERVICE, // Corrected typo in SMTP_SERVICE
+    auth: {
+      user: process.env.SMTP_EMAIL, // Corrected typo in SMTP_EMAIL
+      pass: process.env.SMTP_PASSWORD, // Corrected typo in SMTP_PASSWORD
+    },
+  });
+=======
 };
 
 /**
@@ -112,6 +126,7 @@ exports.sendMailOnSubmit = async (options) => {
 exports.sendAdmissionQuery = async (parentDetails) => {
   const { parentName, email, phone, grade, referenceNumber } = parentDetails;
   const transporter = createTransporter();
+
 
   const htmlContent = `
   <!DOCTYPE html>
@@ -180,6 +195,7 @@ exports.sendAdmissionQuery = async (parentDetails) => {
           <li><strong>Email:</strong> ${email}</li>
           <li><strong>Phone:</strong> ${phone}</li>
           <li><strong>Grade Applying For:</strong> ${grade}</li>
+          <li><strong>Children Name:</strong> ${childName}</li>
           <li><strong>Your reference number:</strong> ${referenceNumber}</li>
         </ul>
         
@@ -221,6 +237,24 @@ exports.sendAdmissionQuery = async (parentDetails) => {
   }
 };
 
+
+try {
+  // Send email
+  const info = await transporter.sendMail(mailOptions);
+  console.log('Email sent successfully:', info.messageId);
+  return { success: true, messageId: info.messageId };
+} catch (error) {
+  console.error('Error sending email:', error);
+  throw error;
+}
+}
+exports.notifyAdmissionsTeam = async (parentDetails)=>{
+  const { parentName, email, phone, grade,referenceNumber ,childName} = parentDetails;
+  const transporter  = nodemailer.createTransport ({
+    host: process.env.SMTP,
+    port: 587,
+    service: process.env.SMTP_SERVICE, // Corrected typo in SMTP_SERVICE
+=======
 /**
  * Notify admissions team about new inquiry
  * @param {Object} parentDetails - Parent details
@@ -234,6 +268,7 @@ exports.notifyAdmissionsTeam = async (parentDetails) => {
     host: emailConfig.host,
     port: emailConfig.port,
     secure: emailConfig.secure,
+
     auth: {
       user: emailConfig.auth.user,
       pass: emailConfig.auth.pass,
@@ -283,6 +318,10 @@ exports.notifyAdmissionsTeam = async (parentDetails) => {
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Reference number</strong></td>
             <td style="padding: 8px; border: 1px solid #ddd;">${referenceNumber}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Child name</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${childName}</td>
           </tr>
           <tr style="background-color: #f2f2f2;">
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Submission Time</strong></td>
