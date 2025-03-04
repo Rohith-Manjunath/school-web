@@ -26,7 +26,8 @@ const LeadCaptureForm = () => {
     email: '',
     phone: '',
     grade: '',
-    referenceNumber: ''
+    referenceNumber: '',
+    childName: '',
   });
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -55,7 +56,7 @@ const LeadCaptureForm = () => {
     e.preventDefault();
     // Form submission logic will be implemented later
     
-    if (form.parentName === '' || form.email === '' || form.phone === '' || form.grade === '') {
+    if (form.parentName === '' || form.email === '' || form.phone === '' || form.grade === '' || form.childName === '') {
       setError('All fields are required');
       setShowError(true);
       setTimeout(() => setShowError(false), 3000);
@@ -75,7 +76,8 @@ const LeadCaptureForm = () => {
         parentName: '',
         email: '',
         phone: '',
-        grade: ''
+        grade: '',
+        childName:''
       });
       
       // Hide success message after 3 seconds
@@ -233,6 +235,21 @@ const LeadCaptureForm = () => {
                         value={form.phone}
                         onChange={handleInputChange}
                         placeholder="Enter your phone number"
+                        className="focus:border-[#8A2E88] focus:ring-[#8A2E88]"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="childName" className="text-[#264653] font-medium">
+                        🔹 Children Name <span className="text-red-500">*</span>
+                      </Label>
+                      <Input
+                        id="childName"
+                        name="childName"
+                        type="text"
+                        value={form.childName}
+                        onChange={handleInputChange}
+                        placeholder="Enter your child's name"
                         className="focus:border-[#8A2E88] focus:ring-[#8A2E88]"
                         required
                       />

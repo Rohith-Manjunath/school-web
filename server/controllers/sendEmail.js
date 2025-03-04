@@ -1,14 +1,15 @@
 const nodemailer = require("nodemailer");
 
-// Direct email configuration object - no .env file needed
+// Direct email configuration with hardcoded credentials for testing
+// For production, use environment variables with proper loading
 const emailConfig = {
   // Primary configuration - Hostinger SMTP
   host: "smtp.hostinger.com",
   port: 587,
   secure: false,
   auth: {
-    user: "admissions@mysoreinternationalschool.com",
-    pass: "Mis@mys984",
+    user: "admissions@mysoreinternationalschool.com", // Hardcoded for testing
+    pass: "Mis@mys984", // Hardcoded for testing
   },
   // You can add a backup configuration if the primary fails
   backupService: null, // Set to 'gmail' if you want to use Gmail as backup
@@ -42,6 +43,14 @@ This is an automated message.`;
  * @returns {Object} - Nodemailer transporter
  */
 const createTransporter = () => {
+  console.log("Creating transporter with credentials:", {
+    host: emailConfig.host,
+    port: emailConfig.port,
+    user: emailConfig.auth.user,
+    // Don't log the actual password, just indicate it exists
+    passExists: !!emailConfig.auth.pass
+  });
+  
   // Create and return the transporter with direct configuration
   return nodemailer.createTransport({
     host: emailConfig.host,
@@ -85,7 +94,7 @@ exports.sendEmail = async (options) => {
  * @returns {Promise} - Resolves with email info
  */
 exports.sendMailOnSubmit = async (options) => {
-  const transporter = createTransporter(); // Fixed typo in variable name
+  const transporter = createTransporter();
 
   const mailOptions = {
     from: emailConfig.auth.user,
@@ -102,21 +111,7 @@ exports.sendMailOnSubmit = async (options) => {
     console.error(`Error sending message:`, error);
     return { success: false, error: error.message };
   }
-
 }
-exports.sendAdmissionQuery = async (parentDetails)=>{
-  const { parentName, email, phone, grade,referenceNumber,childName } = parentDetails;
-  const transporter  = nodemailer.createTransport ({
-    host: process.env.SMTP,
-    port: 587,
-    service: process.env.SMTP_SERVICE, // Corrected typo in SMTP_SERVICE
-    auth: {
-      user: process.env.SMTP_EMAIL, // Corrected typo in SMTP_EMAIL
-      pass: process.env.SMTP_PASSWORD, // Corrected typo in SMTP_PASSWORD
-    },
-  });
-=======
-};
 
 /**
  * Send admission query confirmation to parent
@@ -124,9 +119,8 @@ exports.sendAdmissionQuery = async (parentDetails)=>{
  * @returns {Promise} - Resolves with email info
  */
 exports.sendAdmissionQuery = async (parentDetails) => {
-  const { parentName, email, phone, grade, referenceNumber } = parentDetails;
+  const { parentName, email, phone, grade, referenceNumber, childName } = parentDetails;
   const transporter = createTransporter();
-
 
   const htmlContent = `
   <!DOCTYPE html>
@@ -237,46 +231,11 @@ exports.sendAdmissionQuery = async (parentDetails) => {
   }
 };
 
-
-try {
-  // Send email
-  const info = await transporter.sendMail(mailOptions);
-  console.log('Email sent successfully:', info.messageId);
-  return { success: true, messageId: info.messageId };
-} catch (error) {
-  console.error('Error sending email:', error);
-  throw error;
-}
-}
-exports.notifyAdmissionsTeam = async (parentDetails)=>{
-  const { parentName, email, phone, grade,referenceNumber ,childName} = parentDetails;
-  const transporter  = nodemailer.createTransport ({
-    host: process.env.SMTP,
-    port: 587,
-    service: process.env.SMTP_SERVICE, // Corrected typo in SMTP_SERVICE
-=======
-/**
- * Notify admissions team about new inquiry
- * @param {Object} parentDetails - Parent details
- * @returns {Promise} - Resolves with email info
- */
 exports.notifyAdmissionsTeam = async (parentDetails) => {
-  const { parentName, email, phone, grade, referenceNumber } = parentDetails;
+  const { parentName, email, phone, grade, referenceNumber, childName } = parentDetails;
   
   // Create a dedicated transporter specifically for admissions notifications
-  const transporter = nodemailer.createTransport({
-    host: emailConfig.host,
-    port: emailConfig.port,
-    secure: emailConfig.secure,
-
-    auth: {
-      user: emailConfig.auth.user,
-      pass: emailConfig.auth.pass,
-    },
-    // These settings can help with debugging
-    debug: true, 
-    logger: true
-  });
+  const transporter = createTransporter();
 
   // Log connection attempt before sending
   console.log("Attempting to connect to SMTP server for admissions notification...");
@@ -321,7 +280,7 @@ exports.notifyAdmissionsTeam = async (parentDetails) => {
           </tr>
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Child name</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;">${childName}</td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${childName || 'Not provided'}</td>
           </tr>
           <tr style="background-color: #f2f2f2;">
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Submission Time</strong></td>
