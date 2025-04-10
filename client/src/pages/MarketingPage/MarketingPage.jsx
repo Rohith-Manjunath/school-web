@@ -1,4 +1,3 @@
-// MarketingPage.jsx
 import React from 'react';
 import Header from "../../components/MarketingComponets/Header"
 import HeroSection from '../../components/MarketingComponets/HeroSection';
@@ -10,48 +9,51 @@ import CampusTour from '../../components/MarketingComponets/CampusTour';
 import LeadCaptureForm from '../../components/MarketingComponets/LeadCaptureForm';
 import Footer from '../../components/MarketingComponets/Footer';
 import StickyAdmission from '../../components/MarketingComponets/StickyAdmission';
+import AppointioForm from './AppointioForm'; // Import the new component
 
 const MarketingPage = () => {
   return (
-    <div >
+    <div>
       {/* Sticky Admission Notice */}
       <StickyAdmission />
 
       {/* Main Content */}
-      <div >
+      <div>
         <section id="header">
           <Header />
         </section>
 
-        <section id="hero" >
+        <section id="hero">
           <HeroSection />
         </section>
 
-        <section id="why-choose-us" >
+        <section id="why-choose-us">
           <WhyChooseUs />
         </section>
 
-
-        <section id="awards" >
+        <section id="awards">
           <AwardsSection />
         </section>
 
-        <section id="testimonials" >
+        <section id="testimonials">
           <TestimonialsSection />
         </section>
 
-        <section id="sports" >
-        <SportsSection />
+        <section id="sports">
+          <SportsSection />
         </section>
 
-        <section id="campus-tour" >
+        <section id="campus-tour">
           <CampusTour />
         </section>
 
-        <section id="lead-capture" >
-          <LeadCaptureForm />
+        <section id="lead-capture">
+          {/* You can choose to keep or remove your original LeadCaptureForm */}
+          {/* <LeadCaptureForm /> */}
+          
+          {/* Add the Appointio form component */}
+          <AppointioForm />
         </section>
-       
       </div>
 
       {/* Footer */}
