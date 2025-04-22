@@ -127,7 +127,7 @@ const LeadCaptureForm = () => {
   };
 
   return (
-    <section id="lead-capture" className="bg-white py-20 relative">
+    <section  className="bg-white py-20 relative">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-gray-50 to-white"></div>
       
@@ -145,7 +145,7 @@ const LeadCaptureForm = () => {
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold text-[#264653]">
-            Secure Your Child's Spot at<br />Mysore International School!
+            Secure Your Child's Spot at<br />Mysore International School (An initiative of Santo educational Trust)!
           </h2>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -388,7 +388,7 @@ const LeadCaptureForm = () => {
                   <div className="bg-white/10 p-2 rounded-full">
                     <UserCheck className="w-5 h-5" />
                   </div>
-                  <CardTitle className="text-xl">Why Choose Mysore International School?</CardTitle>
+                  <CardTitle className="text-xl">Why Choose Mysore International School (An initiative of Santo educational Trust)?</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="pb-6">
@@ -435,7 +435,7 @@ const LeadCaptureForm = () => {
                     allowFullScreen="" 
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Mysore International School Google Map"
+                    title=" Mysore International School (An initiative of Santo educational Trust) Google Map"
                     className="w-full h-full"
                   ></iframe>
                 </div>

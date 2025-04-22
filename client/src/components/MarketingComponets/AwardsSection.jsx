@@ -162,7 +162,7 @@ const AwardsSection = () => {
                     <span className="absolute left-0 bottom-0 w-full h-1 bg-[#F4A261]"></span>
                   </h3>
                   <p className="text-gray-200 mt-6 text-lg leading-relaxed">
-                    Mysore International School has been recognized for its exceptional contributions to education, with leadership awards for both the Chairman and Principal. These accolades highlight our commitment to educational excellence and innovative teaching methodologies.
+                  Mysore International School (An initiative of Santo educational Trust) has been recognized for its exceptional contributions to education, with leadership awards for both the Chairman and Principal. These accolades highlight our commitment to educational excellence and innovative teaching methodologies.
                   </p>
                 </div>
                 

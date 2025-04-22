@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="space-y-4">
             <img 
               src={logo}
-              alt="Mysore International School" 
+              alt="Mysore International School (An initiative of Santo educational Trust)" 
               className="h-28 w-auto"
             />
             <p className="text-gray-300">
@@ -38,7 +38,7 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#F4A261] flex-shrink-0" />
                 <p className="text-gray-300">
-                Mysore International School # 92/1-5,<br />
+                Mysore International School (An initiative of Santo educational Trust) # 92/1-5,<br />
                    HD Kote Road, Rayanakere Post, SH 33, Karnataka 570008
                 </p>
               </div>
@@ -70,7 +70,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 pt-6 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-300 text-sm">
-              © {currentYear} Mysore International School. All rights reserved.
+              © {currentYear} Mysore International School (An initiative of Santo educational Trust). All rights reserved.
             </p>
             <div className="flex gap-4 text-sm text-gray-300">
               <a href="#privacy" className="hover:text-white transition-colors">
