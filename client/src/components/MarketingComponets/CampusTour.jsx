@@ -206,7 +206,7 @@ const CampusTour = () => {
                   <div className="bg-[#8A2E88]/10 p-3 rounded-full">
                     <MapPin className="w-6 h-6 text-[#8A2E88]" />
                   </div>
-                  <span className="text-gray-700">Mysore International School Campus</span>
+                  <span className="text-gray-700">Mysore International School (An initiative of Santo educational Trust) Campus</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="bg-[#8A2E88]/10 p-3 rounded-full">

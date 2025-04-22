@@ -10,18 +10,32 @@ const HeroSection = () => {
     email: '',
     phone: '',
     grade: '',
-    referenceNumber:'',
-    childName:''
+    referenceNumber: '',
+    childName: ''
   });
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState('');
   const [showAppointio, setShowAppointio] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
   
   useEffect(() => {
-    // Load Appointio script
+    // Clean up any existing Appointio iframes that might be causing conflicts
+    const appointioIframes = document.querySelectorAll('iframe[src*="appointio.co"]:not([data-managed="true"])');
+    appointioIframes.forEach(iframe => {
+      if (iframe.parentNode && iframe !== document.getElementById('managed-appointio-iframe')) {
+        iframe.parentNode.removeChild(iframe);
+      }
+    });
+    
+    // Set component as loaded after a short delay to ensure smooth rendering
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+    
+    // Load Appointio script only when component is mounted
     const appointioScript = document.createElement('script');
     appointioScript.src = 'https://link.appointio.co/js/form_embed.js';
     appointioScript.async = true;
@@ -46,7 +60,7 @@ const HeroSection = () => {
     e.preventDefault();
     
     // Form validation
-    if (form.parentName === '' || form.email === '' || form.phone === '' || form.grade === ''|| form.childName === '') {
+    if (form.parentName === '' || form.email === '' || form.phone === '' || form.grade === '' || form.childName === '') {
       setError('All fields are required');
       setShowError(true);
       setTimeout(() => setShowError(false), 3000);
@@ -69,15 +83,18 @@ const HeroSection = () => {
         email: '',
         phone: '',
         grade: '',
-        childName:'',
-        referenceNumber:''
+        childName: '',
+        referenceNumber: ''
       });
       
-      // Hide success message after 3 seconds
-      setTimeout(() => setShowSuccess(false), 1000);
-      navigate('/Thankyou', { 
-        state: { referenceNumber }
-      });
+      // Hide success message after a short delay
+      setTimeout(() => {
+        setShowSuccess(false);
+        // Navigate after the success message disappears to ensure smooth transition
+        navigate('/Thankyou', { 
+          state: { referenceNumber }
+        });
+      }, 1000);
     } catch (err) {
       // Handle error
       setError(err.response?.data?.err || 'Failed to submit form. Please try again.');
@@ -121,8 +138,17 @@ const HeroSection = () => {
     { id: 4, size: 'w-12 h-12', color: 'bg-white', opacity: 'opacity-10', initialPosition: 'bottom-20 right-1/3', animate: { x: [0, -15, 0], y: [0, 25, 0], rotate: [0, -8, 0] } },
   ];
 
+  // Show a loading placeholder while the component initializes
+  if (!isLoaded) {
+    return (
+      <div className="bg-secondary flex justify-center items-center py-32 sm:py-48 lg:py-60 overflow-hidden relative">
+        <div className="animate-spin w-10 h-10 border-4 border-[#E76F51] border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
+
   return (
-    <section className="bg-secondary py-10 sm:py-16 lg:py-24 overflow-hidden relative">
+    <section id="lead-capture" className="bg-secondary py-10 sm:py-16 lg:py-24 overflow-hidden relative">
       {/* Floating background elements */}
       {floatingElements.map((element) => (
         <motion.div
@@ -157,7 +183,10 @@ const HeroSection = () => {
               variants={itemVariants}
               className="mt-4 text-4xl font-bold text-white lg:mt-8 sm:text-6xl xl:text-7xl"
             >
-              Mysore International School
+              Mysore International School 
+              <span className="block text-lg sm:text-xl font-medium mt-2 text-yellow-100">
+                (An initiative of Santo Educational Trust)
+              </span>
             </motion.h1>
             
             <motion.p 
@@ -202,29 +231,31 @@ const HeroSection = () => {
               <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-[#8A2E88] opacity-15"></div>
               
               <div className="relative z-10">
-
                 {showAppointio ? (
                   <>
                     <h2 className="text-[#8A2E88] text-2xl font-bold mb-2">Detailed Admission Application</h2>
                     <p className="text-gray-600 mb-6">Complete the form below for a comprehensive application</p>
                     
                     {/* Appointio Form */}
-                    <iframe
-                      src="https://link.appointio.co/widget/form/JJgfh0PMwBxRHUhuJRU8"
-                      style={{width:'100%', height:'500px', border:'none', borderRadius:'3px'}}
-                      id="inline-JJgfh0PMwBxRHUhuJRU8" 
-                      data-layout="{'id':'INLINE'}"
-                      data-trigger-type="alwaysShow"
-                      data-trigger-value=""
-                      data-activation-type="alwaysActivated"
-                      data-activation-value=""
-                      data-deactivation-type="neverDeactivate"
-                      data-deactivation-value=""
-                      data-form-name="Landing Page form - MIS"
-                      data-layout-iframe-id="inline-JJgfh0PMwBxRHUhuJRU8"
-                      data-form-id="JJgfh0PMwBxRHUhuJRU8"
-                      title="Landing Page form - MIS"
-                    ></iframe>
+                    <div className="appointio-container">
+                      <iframe
+                        src="https://link.appointio.co/widget/form/JJgfh0PMwBxRHUhuJRU8"
+                        style={{width:'100%', height:'500px', border:'none', borderRadius:'3px'}}
+                        id="managed-appointio-iframe" 
+                        data-managed="true"
+                        data-layout="{'id':'INLINE'}"
+                        data-trigger-type="alwaysShow"
+                        data-trigger-value=""
+                        data-activation-type="alwaysActivated"
+                        data-activation-value=""
+                        data-deactivation-type="neverDeactivate"
+                        data-deactivation-value=""
+                        data-form-name="Landing Page form - MIS"
+                        data-layout-iframe-id="inline-JJgfh0PMwBxRHUhuJRU8"
+                        data-form-id="JJgfh0PMwBxRHUhuJRU8"
+                        title="Landing Page form - MIS"
+                      ></iframe>
+                    </div>
                   </>
                 ) : (
                   <>
@@ -243,132 +274,6 @@ const HeroSection = () => {
                       <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
                         {error}
                       </div>
-
-                <h2 className="text-[#8A2E88] text-2xl font-bold mb-2">Admission Enquiry</h2>
-                <p className="text-gray-600 mb-6">Limited seats available for Academic Year 2025-26</p>
-                
-                {/* Success Message */}
-                {showSuccess && (
-                  <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
-                    Thank you! Your admission inquiry has been submitted successfully. Our team will contact you soon.
-                  </div>
-                )}
-                
-                {/* Error Message */}
-                {showError && (
-                  <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-                    {error}
-                  </div>
-                )}
-                
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-4">
-                    <label className="block text-gray-700 mb-2 flex items-center">
-                      <div className="w-2 h-2 bg-[#E76F51] rounded-full mr-2"></div>
-                      Parent's Name <span className="text-red-500">*</span>
-                    </label>
-                    <input 
-                      name="parentName"
-                      onChange={handleChange}
-                      value={form.parentName}
-                      type="text" 
-                      placeholder="Enter your full name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2E88]" 
-                    />
-                  </div>
-                  
-                  <div className="mb-4">
-                    <label className="block text-gray-700 mb-2 flex items-center">
-                      <div className="w-2 h-2 bg-[#E76F51] rounded-full mr-2"></div>
-                      Email Address <span className="text-red-500">*</span>
-                    </label>
-                    <input 
-                      name="email"
-                      onChange={handleChange}
-                      value={form.email}
-                      type="email" 
-                      placeholder="Enter your email address"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2E88]" 
-                    />
-                  </div>
-                  
-                  <div className="mb-4">
-                    <label className="block text-gray-700 mb-2 flex items-center">
-                      <div className="w-2 h-2 bg-[#E76F51] rounded-full mr-2"></div>
-                      Phone Number <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      name="phone"
-                      onChange={handleChange}
-                      value={form.phone} 
-                      type="tel" 
-                      placeholder="Enter your phone number"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2E88]" 
-                    />
-                  </div>
-                  
-                  
-                  <div className="mb-4">
-                    <label className="block text-gray-700 mb-2 flex items-center">
-                      <div className="w-2 h-2 bg-[#E76F51] rounded-full mr-2"></div>
-                      Children Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      name="childName"
-                      onChange={handleChange}
-                      value={form.childName} 
-                      type="text" 
-                      placeholder="Enter yourchildren name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2E88]" 
-                    />
-                  </div>
-                  
-                  <div className="mb-6">
-                    <label className="block text-gray-700 mb-2 flex items-center">
-                      <div className="w-2 h-2 bg-[#E76F51] rounded-full mr-2"></div>
-                      Child's Grade Applying For <span className="text-red-500">*</span>
-                    </label>
-                    <select 
-                      name="grade"
-                      onChange={handleChange}
-                      value={form.grade}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2E88] appearance-none bg-white relative"
-                    >
-                      <option value="" disabled>Select grade</option>
-                      <option value="Pre-Kindergarten">Pre-Kindergarten</option>
-                      <option value="Kindergarten">Kindergarten</option>
-                      <option value="1">Grade 1</option>
-                      <option value="2">Grade 2</option>
-                      <option value="3">Grade 3</option>
-                      <option value="4">Grade 4</option>
-                      <option value="5">Grade 5</option>
-                      <option value="6">Grade 6</option>
-                      <option value="7">Grade 7</option>
-                      <option value="8">Grade 8</option>
-                      <option value="9">Grade 9</option>
-                      <option value="10">Grade 10</option>
-                    </select>
-                  </div>
-                  
-                  <button 
-                    type="submit" 
-                    disabled={loading}
-                    className={`w-full ${loading ? 'bg-gray-400' : 'bg-[#E76F51] hover:bg-[#E76F51]/90 hover:shadow-lg hover:shadow-purple-700'} text-white py-4 px-6 rounded-full font-semibold flex items-center justify-center transition-all duration-200`}
-                  >
-                    {loading ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Processing...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5 mr-2" />
-                        Submit & Get More Info
-                      </>
-
                     )}
                     
                     <form onSubmit={handleSubmit}>
@@ -413,6 +318,21 @@ const HeroSection = () => {
                           value={form.phone} 
                           type="tel" 
                           placeholder="Enter your phone number"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2E88]" 
+                        />
+                      </div>
+                      
+                      <div className="mb-4">
+                        <label className="block text-gray-700 mb-2 flex items-center">
+                          <div className="w-2 h-2 bg-[#E76F51] rounded-full mr-2"></div>
+                          Children's Name <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          name="childName"
+                          onChange={handleChange}
+                          value={form.childName} 
+                          type="text" 
+                          placeholder="Enter your children's name"
                           className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2E88]" 
                         />
                       </div>

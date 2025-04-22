@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import UserOptions from './components/layouts/UserOptions'
@@ -48,15 +48,44 @@ const Payment = React.lazy(() => import("./pages/Payment/Payment"));
 const PaymentSuccess = React.lazy(() => import("./pages/Payment/PaymentSuccess"));
 const ThankYou = React.lazy(() => import("./components/MarketingComponets/ThankYou"));
 
-
 const ProtectedRoute = React.lazy(() => import("./components/layouts/ProtectedRoute"));
 const ResetPassword = React.lazy(() => import("./pages/ResetPassword"));
 const ForgotPassword = React.lazy(() => import("./pages/ForgotPassword"));
 const NotFound = React.lazy(() => import("./components/NotFound"));
 
+// Function to clean up any standalone Appointio iframes
+const cleanupAppointioIframes = () => {
+  // Find any standalone Appointio iframes that might be causing conflicts
+  const appointioIframes = document.querySelectorAll('iframe[src*="appointio.co"]:not([data-managed="true"])');
+  appointioIframes.forEach(iframe => {
+    if (iframe.parentNode && iframe !== document.getElementById('managed-appointio-iframe')) {
+      iframe.style.display = 'none'; // Hide them first
+      setTimeout(() => {
+        if (iframe.parentNode) {
+          iframe.parentNode.removeChild(iframe); // Then remove them
+        }
+      }, 50);
+    }
+  });
+};
+
 const AppLayout = ({ children }) => {
   const location = useLocation();
   const { user } = useSelector(state => state?.user);
+  
+  useEffect(() => {
+    // Clean up any rogue Appointio iframes when the layout mounts
+    cleanupAppointioIframes();
+    
+    // Re-run this cleanup when route changes
+    return () => {
+      if (location.pathname === '/Thankyou') {
+        // Extra cleanup when navigating to ThankYou page
+        setTimeout(cleanupAppointioIframes, 100);
+      }
+    };
+  }, [location.pathname]);
+  
   // List of admin routes where navbar shouldn't appear
   const adminRoutes = [
     '/admin-users',
@@ -82,67 +111,72 @@ const AppLayout = ({ children }) => {
     </>
   );
 };
+
 const App = () => {
+  // Initial cleanup on app load
+  useEffect(() => {
+    cleanupAppointioIframes();
+  }, []);
 
   return (
     <Router>
       <AppLayout>
-      <ScrollToTop />
-      <Suspense fallback={<PageLoader/>}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/academics" element={<Academics />} />
-          <Route path="/admissions" element={<Admissions />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/our-team" element={<OurTeam />} />
-          <Route path="/facilities" element={<Facilities />} />
-          <Route path="/Career" element={<JoinOurTeam />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/Admissions-open-2025" element={<MarketingPage />} />
-        <Route path="/Thankyou" element={<ThankYou />} />
+        <ScrollToTop />
+        <Suspense fallback={<PageLoader/>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/academics" element={<Academics />} />
+            <Route path="/admissions" element={<Admissions />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/our-team" element={<OurTeam />} />
+            <Route path="/facilities" element={<Facilities />} />
+            <Route path="/Career" element={<JoinOurTeam />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/Admissions-open-2025" element={<MarketingPage />} />
+            <Route path="/Thankyou" element={<ThankYou />} />
             <Route path="/Register" element={<Register />} />
-         
+            
             <Route element={<ProtectedRoute />}>
-            <Route path="/admin-login" element={<Login />} />
+              <Route path="/admin-login" element={<Login />} />
 
-            <Route element={<CommonLayout />}>
-            <Route path="/admin-users" element={<AdminUsers />} />
-              <Route path="/admin-panel" element={<AdminPanel />} />
-              <Route path="/admission-queries" element={<AdmissionQueriesAdmin />} />
-              <Route path="/home-enrollments" element={<HomeEnrollmentsAdmin />} />
-              <Route path="/parents-enrollments" element={<ParentsEnrollmentsAdmin />} />
-              <Route path="/admin-payments" element={<AdminPayments />} />
-              <Route path="/admin-statistics" element={<Statistics />} />
-              <Route path="/admin-marketingCampaigns" element={<MarketingCampaigns />} />
+              <Route element={<CommonLayout />}>
+                <Route path="/admin-users" element={<AdminUsers />} />
+                <Route path="/admin-panel" element={<AdminPanel />} />
+                <Route path="/admission-queries" element={<AdmissionQueriesAdmin />} />
+                <Route path="/home-enrollments" element={<HomeEnrollmentsAdmin />} />
+                <Route path="/parents-enrollments" element={<ParentsEnrollmentsAdmin />} />
+                <Route path="/admin-payments" element={<AdminPayments />} />
+                <Route path="/admin-statistics" element={<Statistics />} />
+                <Route path="/admin-marketingCampaigns" element={<MarketingCampaigns />} />
+              </Route>
             </Route>
-          </Route>
-          <Route path="/TransportPage" element={<TransportPage />} />
-          <Route path="/ComputerPage" element={<ComputerPage />} />
-          <Route path="/Sports" element={<Sports />} />
-          <Route path="/Houses" element={<Houses />} />
-          <Route path="/Classroom" element={<Classroom />} />
-          <Route path="/ScienceLab" element={<ScienceLab />} />
-          <Route path="/Security" element={<Security />} />
-          <Route path="/Library" element={<Library />} />
-          <Route path="/Music" element={<Music />} />
-          <Route path="/Art" element={<Art />} />
-          <Route path="/CbseCurriculum" element={<CbseCurriculum />} />
-          <Route path="/HolisticEdu" element={<HolisticEdu />} />
-          <Route path="/ScoutsAndGuide" element={<ScoutsAndGuide />} />
-          <Route path="/Awards" element={<Awards />} />
-          <Route path="/CBSEProg" element={<CBSEProg />} />
-          <Route path="/EarlyProgram" element={<EarlyProgram />} />
-          <Route path="/FilesContainer" element={<FilesContainer />} />
-          <Route path="/KnowMore" element={<KnowMore />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/paymentSuccess" element={<PaymentSuccess/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/reset/password/:token" element={<ResetPassword/>} />
-          <Route path="/forgotPassword" element={<ForgotPassword/>} />
-          <Route path="/galleryImages/:id" element={<GalleryImagesPage/>} />
-          <Route path="*" element={<NotFound/>} />
-        </Routes>
-      </Suspense>
+            <Route path="/TransportPage" element={<TransportPage />} />
+            <Route path="/ComputerPage" element={<ComputerPage />} />
+            <Route path="/Sports" element={<Sports />} />
+            <Route path="/Houses" element={<Houses />} />
+            <Route path="/Classroom" element={<Classroom />} />
+            <Route path="/ScienceLab" element={<ScienceLab />} />
+            <Route path="/Security" element={<Security />} />
+            <Route path="/Library" element={<Library />} />
+            <Route path="/Music" element={<Music />} />
+            <Route path="/Art" element={<Art />} />
+            <Route path="/CbseCurriculum" element={<CbseCurriculum />} />
+            <Route path="/HolisticEdu" element={<HolisticEdu />} />
+            <Route path="/ScoutsAndGuide" element={<ScoutsAndGuide />} />
+            <Route path="/Awards" element={<Awards />} />
+            <Route path="/CBSEProg" element={<CBSEProg />} />
+            <Route path="/EarlyProgram" element={<EarlyProgram />} />
+            <Route path="/FilesContainer" element={<FilesContainer />} />
+            <Route path="/KnowMore" element={<KnowMore />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/paymentSuccess" element={<PaymentSuccess/>} />
+            <Route path="/profile" element={<Profile/>} />
+            <Route path="/reset/password/:token" element={<ResetPassword/>} />
+            <Route path="/forgotPassword" element={<ForgotPassword/>} />
+            <Route path="/galleryImages/:id" element={<GalleryImagesPage/>} />
+            <Route path="*" element={<NotFound/>} />
+          </Routes>
+        </Suspense>
       </AppLayout>
     </Router>
   );

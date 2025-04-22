@@ -55,7 +55,7 @@ const Header = () => {
             >
               <img
                 src={logo}
-                alt="Mysore International School Logo"
+                alt="Mysore International School (An initiative of Santo educational Trust) Logo"
                 className="h-20 w-auto"
               />
             </motion.div>
@@ -157,7 +157,7 @@ const Header = () => {
               variants={itemVariants}
               className="text-center text-gray-500 text-sm mt-auto"
             >
-              © {currentYear} Mysore International School. All rights reserved.
+              © {currentYear} Mysore International School (An initiative of Santo educational Trust). All rights reserved.
             </motion.div>
           </motion.div>
         )}
